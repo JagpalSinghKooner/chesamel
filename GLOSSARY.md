@@ -43,7 +43,7 @@ A private, temporary copy of the site showing a proposed change before it goes l
 _Avoid_: Staging, draft site
 
 **Approval**:
-The Requester confirming that a Preview is correct, which is what lets the change go live.
+The Requester explicitly confirming that a Preview is correct, which is what lets the change go live. A reaction or a casual "looks good" is not Approval.
 _Avoid_: Sign-off, merge
 
 ## Team
@@ -51,6 +51,10 @@ _Avoid_: Sign-off, merge
 **Role**:
 A Site Agent's job: what it does, what it must never touch, and how it knows it is done. Only the Project Manager can create or change a Role.
 _Avoid_: Persona, agent type
+
+**Coordinator**:
+The Role that takes in Change Requests, asks Requesters clarifying questions, splits each request into tickets for the other Roles, tracks them, confirms the finished whole matches the Requester's original words, and collects their Approval.
+_Avoid_: Manager, dispatcher, triager
 
 **Content Writer**:
 The Role that turns a Requester's material into Insights and page copy.
@@ -66,7 +70,7 @@ _Avoid_: Builder, engineer
 The Role that owns URLs, redirects and search metadata.
 
 **Reviewer**:
-The Role that checks another Site Agent's work against the Design Brief, brand and ADRs before the Requester sees the Preview.
+The Role that checks the quality of each ticket's work against the Design Brief, brand and ADRs. Whether the whole Change Request matches what was asked is the Coordinator's check, not the Reviewer's.
 _Avoid_: QA, tester
 
 ## Brain
