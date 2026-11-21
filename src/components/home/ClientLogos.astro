@@ -1,0 +1,26 @@
+---
+// Client logo strip under the homepage hero. The live site scrolls it as a
+// marquee; here it wraps, so nothing moves.
+const clients = [
+  { name: 'Nepremacy', src: '/images/clients/nepremacy.svg' },
+  { name: 'Systango', src: '/images/clients/systango.png' },
+  { name: 'Wilson James', src: '/images/clients/wilson-james.svg' },
+  { name: 'Comgest', src: '/images/clients/comgest.svg' },
+  { name: 'Google', src: '/images/clients/google.svg' },
+  { name: 'eBay', src: '/images/clients/ebay.svg' },
+  { name: 'Malomatia', src: '/images/clients/malomatia.png' },
+  { name: 'Ancoris', src: '/images/clients/ancoris.svg' },
+];
+---
+
+<section aria-label="Clients" class="border-b border-light-grey bg-off-white">
+  <ul class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-6 px-4 py-8 sm:px-6">
+    {
+      clients.map((c) => (
+        <li>
+          <img src={c.src} alt={c.name} class="h-8 w-auto max-w-32 object-contain" loading="lazy" />
+        </li>
+      ))
+    }
+  </ul>
+</section>

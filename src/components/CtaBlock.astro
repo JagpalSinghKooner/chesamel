@@ -1,0 +1,26 @@
+---
+// Call-to-action Component: a dark band with a heading, a line of text and
+// buttons. The live band has an Indigo brandmark watermark; Indigo on Black is
+// not a permitted brandmark pairing (guidelines page 9), so it is left out.
+import Button from './Button.astro';
+import type { ButtonAction } from './button';
+
+interface Props {
+  heading: string;
+  text?: string;
+  headingLevel?: 'h2' | 'h3';
+  actions: ButtonAction[];
+}
+
+const { heading, text, headingLevel: Heading = 'h2', actions } = Astro.props;
+---
+
+<section class="bg-black" data-component="cta">
+  <div class="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
+    <Heading class="type-heading-2 text-white">{heading}</Heading>
+    {text && <p class="mt-6 font-subheading text-lg text-off-white">{text}</p>}
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      {actions.map((a) => <Button href={a.href} tone={a.tone}>{a.label}</Button>)}
+    </div>
+  </div>
+</section>

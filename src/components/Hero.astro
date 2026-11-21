@@ -1,0 +1,41 @@
+---
+// Hero Component: full-width image with a heading and buttons, as at the top
+// of the live homepage. `highlight` is the word set on an Indigo marker,
+// standing in for the live site's orange word: secondary colours are for
+// small accents only (ADR-0002).
+//
+// The live hero plays a 7.5 MB video; this shows a still frame from it.
+import Button from './Button.astro';
+import type { ButtonAction } from './button';
+
+interface Props {
+  before?: string;
+  highlight: string;
+  after?: string;
+  headingLevel?: 'h1' | 'h2';
+  image: { src: string; srcset?: string };
+  actions: ButtonAction[];
+}
+
+const { before, highlight, after, headingLevel: Heading = 'h1', image, actions } = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden bg-black" data-component="hero">
+  <img
+    src={image.src}
+    srcset={image.srcset}
+    sizes="100vw"
+    alt=""
+    class="absolute inset-0 -z-10 size-full object-cover"
+    fetchpriority="high"
+  />
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/20"></div>
+  <div class="mx-auto flex min-h-[28rem] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[36rem] sm:px-6">
+    <Heading class="type-heading-1 max-w-3xl text-white sm:text-7xl">
+      {before && <>{before} </>}<span class="bg-indigo px-2 box-decoration-clone">{highlight}</span>{after && <> {after}</>}
+    </Heading>
+    <div class="mt-10 flex flex-wrap gap-3">
+      {actions.map((a) => <Button href={a.href} tone={a.tone}>{a.label}</Button>)}
+    </div>
+  </div>
+</section>

@@ -82,3 +82,31 @@ test('body text is Dark Grey', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('body')).toHaveCSS('color', toRgb('#3C464D'));
 });
+
+test('style-guide page shows every logo in each permitted colour with its clear space', async ({ page }) => {
+  await page.goto('/style-guide/');
+  // Clear space at 48px tall, worked out by hand from the guidelines:
+  // wordmark: height of "c"; lockups: width of "ch"; brandmark: page 9's corner circles.
+  const expected = {
+    wordmark: { colours: ['white', 'black'], padding: '36px' },
+    lockup: { colours: ['white', 'black'], padding: '27px' },
+    'tagline-lockup': { colours: ['white', 'black'], padding: '27px' },
+    brandmark: { colours: ['white', 'black', 'indigo'], padding: '11px' },
+  };
+  const section = page.locator('[data-style-guide="logos"]');
+  for (const [variant, { colours, padding }] of Object.entries(expected)) {
+    const shown = section.locator(`[data-logo="${variant}"]`);
+    expect((await shown.evaluateAll((els) => els.map((e) => e.getAttribute('data-logo-colour')))).sort()).toEqual([...colours].sort());
+    await expect(shown.first()).toHaveCSS('padding-top', padding);
+  }
+});
+
+test('style-guide page shows the header, footer, hero, Pillar cards and CTA Components', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const components = page.locator('[data-style-guide="components"]');
+  await expect(components.locator('[data-header]')).toBeVisible();
+  await expect(components.locator('footer')).toBeVisible();
+  for (const name of ['hero', 'pillar-cards', 'cta']) {
+    await expect(components.locator(`[data-component="${name}"]`)).toBeVisible();
+  }
+});

@@ -1,0 +1,54 @@
+---
+// The Chesamel logo, from Chesamel-Brand-Guidelines.pdf pages 8-11.
+//
+// Every variant draws with currentColor, so colour comes only from the
+// `colour` prop, which allows only the guidelines' permitted colours:
+//   wordmark, lockup, tagline lockup: white (on Indigo or Black) or black (on white)
+//   brandmark: black or Indigo (on white), white (on Indigo or Black)
+// Choosing a background that suits the colour is the caller's job.
+//
+// The clear space each variant needs is built in as padding, so wherever the
+// logo goes it keeps its safe area:
+//   wordmark: the height of its "c"
+//   lockup and tagline lockup: the width of "ch"
+//   brandmark: the corner circles on page 9, about 0.225 of its height
+// The factors are those sizes measured in each SVG's own units, divided by
+// the SVG's height.
+//
+// The wordmark, lockup and brandmark paths come from the live site's
+// chesamel-logo-white.svg and chesamel-c.svg. The live site has no tagline
+// lockup, so its tagline is "Believe it’s possible" outlined in Figtree Light
+// Italic and placed as on page 11.
+import Wordmark from './logos/wordmark.svg';
+import Brandmark from './logos/brandmark.svg';
+import Lockup from './logos/lockup.svg';
+import TaglineLockup from './logos/tagline-lockup.svg';
+
+type Props =
+  | { variant: 'wordmark' | 'lockup' | 'tagline-lockup'; colour: 'white' | 'black'; height: number }
+  | { variant: 'brandmark'; colour: 'white' | 'black' | 'indigo'; height: number };
+
+const variants = {
+  wordmark: { Svg: Wordmark, clearSpace: 13.276 / 17.933 },
+  lockup: { Svg: Lockup, clearSpace: 25.661 / 46.258 },
+  'tagline-lockup': { Svg: TaglineLockup, clearSpace: 25.661 / 46.258 },
+  brandmark: { Svg: Brandmark, clearSpace: 0.225 },
+};
+
+const colours = { white: 'text-white', black: 'text-black', indigo: 'text-indigo' };
+
+const { variant, colour, height } = Astro.props;
+const { Svg, clearSpace } = variants[variant];
+const padding = Math.round(clearSpace * height);
+---
+
+<span
+  class:list={['inline-block leading-none', colours[colour]]}
+  style={`padding: ${padding}px`}
+  data-logo={variant}
+  data-logo-colour={colour}
+  data-clear-space={padding}
+>
+  {/* Decorative: wherever the logo links home, the link carries the name. */}
+  <Svg aria-hidden="true" class="block" style={`height: ${height}px`} />
+</span>

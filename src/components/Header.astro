@@ -1,0 +1,149 @@
+---
+// Site header Component: logo, main navigation with one disclosure menu per
+// section, the Qatar link and "Let’s Talk". One nav serves every width: below
+// lg it collapses behind a Menu button.
+//
+// `idPrefix` keeps ids unique when the header is shown twice on a page (the
+// style-guide page).
+//
+// The live site also has a search button; site search arrives with #13.
+import Logo from '../design-system/Logo.astro';
+import { mainNav, contactLink, qatarLink } from '../data/site';
+
+interface Props {
+  idPrefix?: string;
+}
+
+const { idPrefix = 'site' } = Astro.props;
+const menuId = `${idPrefix}-menu`;
+---
+
+<header class="relative z-20 bg-black text-white" data-header>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+    <a href="/" aria-label="Chesamel home" class="-ml-2 shrink-0 rounded focus-visible:outline-2 focus-visible:outline-white">
+      <Logo variant="lockup" colour="white" height={32} />
+    </a>
+
+    <button
+      type="button"
+      class="rounded border border-white/40 px-3 py-2 text-sm font-semibold lg:hidden"
+      aria-expanded="false"
+      aria-controls={menuId}
+      data-menu-toggle
+    >
+      Menu
+    </button>
+
+    <div
+      id={menuId}
+      class="absolute inset-x-0 top-full hidden max-h-[calc(100vh-5rem)] overflow-y-auto bg-black px-4 pb-6 sm:px-6 lg:static lg:flex lg:max-h-none lg:flex-1 lg:items-center lg:justify-between lg:overflow-visible lg:p-0"
+      data-menu
+    >
+      <nav aria-label="Main" class="lg:mx-auto">
+        <ul class="flex flex-col lg:flex-row lg:gap-2">
+          {
+            mainNav.map((section, i) => {
+              const panelId = `${idPrefix}-nav-${i}`;
+              return (
+                <li class="relative border-b border-white/10 lg:border-0">
+                  <button
+                    type="button"
+                    class="flex w-full items-center justify-between gap-1 py-4 text-sm font-semibold lg:w-auto lg:px-3"
+                    aria-expanded="false"
+                    aria-controls={panelId}
+                    data-nav-toggle
+                  >
+                    {section.label}
+                    <svg aria-hidden="true" viewBox="0 0 10 6" class="h-1.5 w-2.5 fill-current">
+                      <path d="M0 0h10L5 6z" />
+                    </svg>
+                  </button>
+                  <ul
+                    id={panelId}
+                    hidden
+                    class="pb-4 lg:absolute lg:left-0 lg:top-full lg:min-w-64 lg:rounded-lg lg:bg-white lg:p-3 lg:shadow-xl"
+                  >
+                    {section.links.map((link) => (
+                      <li>
+                        <a
+                          href={link.href}
+                          class="block rounded px-3 py-2 text-sm text-off-white hover:bg-white/10 lg:text-dark-grey lg:hover:bg-off-white"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+
+      <div class="mt-6 flex items-center gap-3 lg:mt-0">
+        <a
+          href={qatarLink.href}
+          hreflang="ar"
+          class="flex items-center gap-2 rounded bg-white/10 px-4 py-2.5 text-sm font-semibold hover:bg-white/20"
+        >
+          {qatarLink.label}
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={contactLink.href}
+          class="rounded bg-indigo px-4 py-2.5 text-sm font-semibold text-white hover:bg-white hover:text-black"
+        >
+          {contactLink.label}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Disclosure menus: a button toggles the panel named by aria-controls.
+  // Opening one section closes the others. Escape or a click outside closes
+  // them all.
+  for (const header of document.querySelectorAll<HTMLElement>('[data-header]')) {
+    const menuToggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
+    const menu = header.querySelector<HTMLElement>('[data-menu]')!;
+    const navToggles = [...header.querySelectorAll<HTMLButtonElement>('[data-nav-toggle]')];
+
+    const setOpen = (button: HTMLButtonElement, open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      document.getElementById(button.getAttribute('aria-controls')!)!.hidden = !open;
+    };
+
+    const closeSections = (except?: HTMLButtonElement) => {
+      for (const b of navToggles) if (b !== except) setOpen(b, false);
+    };
+
+    menuToggle.addEventListener('click', () => {
+      const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('hidden', !open);
+      if (!open) closeSections();
+    });
+
+    for (const button of navToggles) {
+      button.addEventListener('click', () => {
+        closeSections(button);
+        setOpen(button, button.getAttribute('aria-expanded') !== 'true');
+      });
+    }
+
+    header.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      const open = navToggles.find((b) => b.getAttribute('aria-expanded') === 'true');
+      if (open) {
+        setOpen(open, false);
+        open.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!header.contains(event.target as Node)) closeSections();
+    });
+  }
+</script>
