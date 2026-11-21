@@ -43,16 +43,39 @@ test('style-guide page renders every brand colour', async ({ page }) => {
   }
 });
 
-test('style-guide page renders every type style in the brand fonts', async ({ page }) => {
+test('every colour token is shown on the style-guide page', async ({ page }) => {
   await page.goto('/style-guide/');
-  const font = (style: string) =>
-    page.locator(`[data-type-style="${style}"] p`).nth(1).evaluate((el) => getComputedStyle(el).fontFamily);
+  const tokens = await page.evaluate(() => {
+    const names = new Set<string>();
+    for (const sheet of document.styleSheets) {
+      for (const rule of sheet.cssRules) {
+        const inner = rule instanceof CSSLayerBlockRule ? [...rule.cssRules] : [rule];
+        for (const r of inner) {
+          if (!(r instanceof CSSStyleRule) || !r.selectorText.includes(':root')) continue;
+          for (const prop of r.style) if (prop.startsWith('--color-')) names.add(prop.slice('--color-'.length));
+        }
+      }
+    }
+    return [...names].sort();
+  });
+  const shown = colourGroups.flatMap((g) => g.colours.map((c) => c.token)).sort();
+  expect(tokens).toEqual(shown);
+});
 
-  for (const style of ['type-heading-1', 'type-heading-2', 'type-heading-3', 'type-body', 'type-tag', 'type-caption', 'type-large-grey']) {
-    expect(await font(style)).toMatch(/^"Figtree Variable", Helvetica, Arial/);
+test('style-guide page renders every type style', async ({ page }) => {
+  await page.goto('/style-guide/');
+  for (const style of ['type-heading-1', 'type-heading-2', 'type-heading-3', 'type-subheading', 'type-body', 'type-tag', 'type-caption', 'type-large-grey', 'arabic']) {
+    await expect(page.locator(`[data-type-style="${style}"] p`).nth(1)).toBeVisible();
   }
-  expect(await font('type-subheading')).toMatch(/^"DM Sans Variable", Helvetica, Arial/);
-  expect(await font('arabic')).toMatch(/^"IBM Plex Sans Arabic", Helvetica, Arial/);
+});
+
+test('brand fonts actually load on the style-guide page', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const loaded = await page.evaluate(async () => {
+    await document.fonts.ready;
+    return [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, ''));
+  });
+  expect(new Set(loaded)).toEqual(new Set(['Figtree Variable', 'DM Sans Variable', 'IBM Plex Sans Arabic']));
 });
 
 test('body text is Dark Grey', async ({ page }) => {

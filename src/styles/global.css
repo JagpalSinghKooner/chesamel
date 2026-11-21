@@ -6,6 +6,7 @@
 @import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 
 /*
   Design System tokens, from Chesamel-Brand-Guidelines.pdf (pages 13-16).
@@ -45,10 +46,15 @@
   /* Accent, limited use only. */
   --color-lime: #c3f00f;
 
+  /*
+    IBM Plex Sans Arabic is loaded with an Arabic-only unicode-range, so putting
+    it second in every stack gives Arabic characters the Arabic face and keeps
+    Latin characters (digits, brand names) in the brand font, whatever the
+    element's lang or utility classes.
+  */
   --font-*: initial;
-  --font-sans: "Figtree Variable", Helvetica, Arial, sans-serif;
-  --font-subheading: "DM Sans Variable", Helvetica, Arial, sans-serif;
-  --font-arabic: "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
+  --font-sans: "Figtree Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
+  --font-subheading: "DM Sans Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
 }
 
 /*
@@ -61,10 +67,6 @@
     font-family: var(--font-sans);
     color: var(--color-dark-grey);
     line-height: 1.45;
-  }
-
-  [lang|="ar"] {
-    font-family: var(--font-arabic);
   }
 }
 
