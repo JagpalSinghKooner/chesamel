@@ -30,7 +30,7 @@ function mismatch(entry: InventoryEntry, observed: Observed, url: string): strin
 
   // Only permanent redirects carry search ranking over to the new address.
   const permanent = observed.status === 301 || observed.status === 308;
-  const landed = observed.location ? display(observed.location, url) : null;
+  const landed = observed.location ? targetOf(observed.location, url) : null;
   if (permanent && landed === entry.to) return null;
   const got = landed ? `${observed.status} to ${landed}` : `${observed.status}`;
   return `expected a permanent redirect to ${entry.to}, got ${got}`;
@@ -38,7 +38,7 @@ function mismatch(entry: InventoryEntry, observed: Observed, url: string): strin
 
 // Same-site targets are inventoried as paths, so they match on any host
 // (production or a Preview); off-site targets stay full addresses.
-function display(location: string, requested: string): string {
+function targetOf(location: string, requested: string): string {
   const target = new URL(location, requested);
   if (target.origin !== new URL(requested).origin) return target.href;
   return decodeURI(target.pathname) + target.search;

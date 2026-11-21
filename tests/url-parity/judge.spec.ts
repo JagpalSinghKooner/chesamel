@@ -2,14 +2,14 @@ import { test, expect } from '@playwright/test';
 import { judge, type InventoryEntry } from './parity';
 
 const page: InventoryEntry = { path: '/about-us/', expect: 'page', source: 'sitemap' };
-const live = { pending: false, url: 'https://example.pages.dev/about-us/' };
+const migrated = { pending: false, url: 'https://example.pages.dev/about-us/' };
 
 test('a migrated page that serves 200 passes', () => {
-  expect(judge(page, { status: 200, location: null }, live)).toBeNull();
+  expect(judge(page, { status: 200, location: null }, migrated)).toBeNull();
 });
 
 test('a migrated page that returns 404 fails', () => {
-  expect(judge(page, { status: 404, location: null }, live)).toBe('expected a page, got 404');
+  expect(judge(page, { status: 404, location: null }, migrated)).toBe('expected a page, got 404');
 });
 
 const redirect: InventoryEntry = {

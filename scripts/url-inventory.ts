@@ -1,7 +1,7 @@
 // Builds urls/inventory.json from the live chesamel.com: every address in the
 // Yoast sitemap plus every internal link a crawl of those pages turns up.
 //
-//   node scripts/url-inventory.ts
+//   npm run inventory   (takes about 8 minutes; the live site is slow)
 //
 // Re-running rewrites the inventory from the live site. Addresses that are new
 // to the inventory are added to urls/pending.json so the parity check stays
@@ -111,7 +111,7 @@ async function main() {
     for (let path = queue.shift(); path !== undefined; path = queue.shift()) {
       const source = sitemapPaths.has(path) ? 'sitemap' : 'crawl';
       const result = await visit(path);
-      if (seen.size - queue.length) process.stderr.write(`\r${seen.size - queue.length}/${seen.size}`);
+      process.stderr.write(`\r${seen.size - queue.length}/${seen.size} addresses`);
       if (result.kind === 'skip') {
         skipped.push(`${path} (${source}): ${result.reason}`);
         continue;
