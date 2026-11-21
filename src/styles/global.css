@@ -1,1 +1,133 @@
 @import "tailwindcss";
+
+/* Self-hosted, so no request goes to Google before cookie consent. */
+@import "@fontsource-variable/figtree";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
+
+/*
+  Design System tokens, from Chesamel-Brand-Guidelines.pdf (pages 13-16).
+  Tailwind's default palette and fonts are cleared, so only brand values exist
+  as utilities (bg-indigo, text-dark-grey, font-subheading, ...).
+
+  Hex values follow the PDF's RGB values. Dark Grey is #3C464D and Medium Grey
+  is #B5BBBE; earlier docs had #3C404D and #B5B8BE by mistake.
+
+  Every hex here must also be listed in src/design-system/colours.ts, which the
+  style-guide page and its test read.
+
+  "static" keeps every token as a CSS variable even when no utility uses it.
+*/
+@theme static {
+  --color-*: initial;
+
+  /* Primary */
+  --color-indigo: #7342ff;
+
+  /* Black, greys and off-whites */
+  --color-black: #141e25;
+  --color-dark-grey: #3c464d;
+  --color-grey: #7f848c;
+  --color-medium-grey: #b5bbbe;
+  --color-light-grey: #d9dbde;
+  --color-white: #ffffff;
+  --color-off-white: #eceded;
+
+  /* Secondary, limited use only: small accents such as tags and icons. */
+  --color-fuchsia: #df73f0;
+  --color-mint: #1cb280;
+  --color-tiger: #ff8a54;
+  --color-rose: #ff4a7d;
+  --color-sky: #24adeb;
+
+  /* Accent, limited use only. */
+  --color-lime: #c3f00f;
+
+  /*
+    IBM Plex Sans Arabic is loaded with an Arabic-only unicode-range, so putting
+    it second in every stack gives Arabic characters the Arabic face and keeps
+    Latin characters (digits, brand names) in the brand font, whatever the
+    element's lang or utility classes.
+  */
+  --font-*: initial;
+  --font-sans: "Figtree Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
+  --font-subheading: "DM Sans Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
+}
+
+/*
+  Body text is Dark Grey, not the guidelines' Grey: ADR-0002.
+  Grey fails WCAG AA below 24px (18.7px bold), so it is only for large text.
+  Small tags and captions use Dark Grey.
+*/
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-dark-grey);
+    line-height: 1.45;
+  }
+}
+
+/* Type styles, from the type hierarchy on page 14 of the guidelines. */
+@utility type-heading-1 {
+  font-weight: 500;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+@utility type-heading-2 {
+  font-weight: 500;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+@utility type-heading-3 {
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+@utility type-subheading {
+  font-family: var(--font-subheading);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: var(--color-indigo);
+}
+
+@utility type-body {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--color-dark-grey);
+}
+
+/* "Optical kerning 40" in the guidelines is 40/1000 em of tracking. */
+@utility type-tag {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-dark-grey);
+}
+
+@utility type-caption {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--color-dark-grey);
+}
+
+/* Grey is allowed here because the text is large enough to pass AA. */
+@utility type-large-grey {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.45;
+  color: var(--color-grey);
+}
