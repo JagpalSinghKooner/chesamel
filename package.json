@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "playwright test"
+    "test": "playwright test",
+    "inventory": "node scripts/url-inventory.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.5",

@@ -24,7 +24,7 @@ Each ticket runs in a fresh context window. Starting or finishing a ticket: foll
 
 - One branch and one pull request per ticket. Name the branch `<issue number>-<short-slug>` and reference the issue in the pull request.
 - Never commit or push to `main` directly. `main` changes only by merging a pull request.
-- Merge only when CI (the `Build and test` check) and the Cloudflare Pages Preview are both green, and, for a Change Request, the Requester has given Approval.
+- Merge only when CI (the `Build and test` and `URL parity on Preview` checks) and the Cloudflare Pages Preview are all green, and, for a Change Request, the Requester has given Approval.
 - When you add a page, add its path to `tests/pages.ts` so the smoke and accessibility tests cover it.
 
 ## Commit rules

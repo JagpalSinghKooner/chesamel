@@ -1,0 +1,2374 @@
+[
+  {
+    "path": "/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/10-social-media-management-tools/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/14-key-skills-you-need-to-be-a-successful-digital-project-manager-dpm/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/2019s-digital-skills-gap/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/3-tips-ensure-customer-first-experience/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/3-ways-to-prevent-a-high-candidate-drop-off-rate/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/4-benefits-of-outsourcing-recruitment-talent-discovery/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/5-steps-to-changing-career/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/a-marketers-guide-to-cloud-security-compliance-in-2024/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/a-quick-guide-to-managing-your-time-more-effectively/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/a-small-round-up-for-entrepreneurs-closing-the-digital-skills-gap/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/a-winning-start-to-your-business-day/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/acceptable-use-policy/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ace-your-gmb-listing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ai-content-review-agent/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ai-in-marketing-beyond-the-hype-and-whats-next/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ai-upskilling-fatigue-why-training-isnt-sticking/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/allow-flexible-working-hours-employees/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/analysing-your-social-media-success/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/applying-workforce-planning-techniques/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/apps-you-need-to-know-about-for-a-better-work-life-balance-in-a-digital-world/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ar/ai-content-review-agent/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/big-business-small-thinking-project-everest/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/ai-driven-biomedicine/",
+    "expect": "redirect",
+    "to": "/case-studies/ai-driven-biomedicine/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/augmenting-cybersecurity-with-ai/",
+    "expect": "redirect",
+    "to": "/case-studies/augmenting-cybersecurity-with-ai/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/b2b-marketing-for-ebay/",
+    "expect": "redirect",
+    "to": "/case-studies/b2b-marketing-for-ebay/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/boosting-customer-experience-with-chatbots/",
+    "expect": "redirect",
+    "to": "/case-studies/boosting-customer-experience-with-chatbots/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/building-a-global-team-for-strategic-impact/",
+    "expect": "redirect",
+    "to": "/case-studies/building-a-global-team-for-strategic-impact/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/business-intelligence-in-finance/",
+    "expect": "redirect",
+    "to": "/case-studies/business-intelligence-in-finance/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/elevating-fan-experiences-at-the-brits/",
+    "expect": "redirect",
+    "to": "/case-studies/elevating-fan-experiences-at-the-brits/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/enabling-predictive-maintenance/",
+    "expect": "redirect",
+    "to": "/case-studies/enabling-predictive-maintenance/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/end-to-end-event-support/",
+    "expect": "redirect",
+    "to": "/case-studies/end-to-end-event-support/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/event-steerco-with-google-cloud-uki/",
+    "expect": "redirect",
+    "to": "/case-studies/event-steerco-with-google-cloud-uki/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/financial-services-community-inaugural-event/",
+    "expect": "redirect",
+    "to": "/case-studies/financial-services-community-inaugural-event/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/genai-at-work-partner-event-series/",
+    "expect": "redirect",
+    "to": "/case-studies/genai-at-work-partner-event-series/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/google-clouds-london-partner-receptions/",
+    "expect": "redirect",
+    "to": "/case-studies/google-clouds-london-partner-receptions/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/google-digital-garage/",
+    "expect": "redirect",
+    "to": "/case-studies/google-digital-garage/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/google-financial-services-series/",
+    "expect": "redirect",
+    "to": "/case-studies/google-financial-services-series/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/google-partnership-kickstart-2026-wembley/",
+    "expect": "redirect",
+    "to": "/case-studies/google-partnership-kickstart-2026-wembley/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/google-sales-blitz/",
+    "expect": "redirect",
+    "to": "/case-studies/google-sales-blitz/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/growing-youtubes-social-engagements/",
+    "expect": "redirect",
+    "to": "/case-studies/growing-youtubes-social-engagements/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/hackathons-for-google-cloud/",
+    "expect": "redirect",
+    "to": "/case-studies/hackathons-for-google-cloud/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/influencer-engagement-on-youtube-shorts/",
+    "expect": "redirect",
+    "to": "/case-studies/influencer-engagement-on-youtube-shorts/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/on-site-teams-at-google/",
+    "expect": "redirect",
+    "to": "/case-studies/on-site-teams-at-google/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/predicting-energy-output-with-ml/",
+    "expect": "redirect",
+    "to": "/case-studies/predicting-energy-output-with-ml/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/simplifying-healthcare-processing/",
+    "expect": "redirect",
+    "to": "/case-studies/simplifying-healthcare-processing/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/smart-grid-ai/",
+    "expect": "redirect",
+    "to": "/case-studies/smart-grid-ai/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/the-founders-story-for-google-cloud/",
+    "expect": "redirect",
+    "to": "/case-studies/the-founders-story-for-google-cloud/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/case-studies/visualising-data-in-real-time/",
+    "expect": "redirect",
+    "to": "/case-studies/visualising-data-in-real-time/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/digital-transformation-for-smes-achieving-more-with-less/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/flex-index-flexible-workforce-planning/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/growth-with-a-backbone/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/how-businesses-can-adapt-to-the-new-future-of-travel-tourism/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/how-mature-is-your-esg-strategy/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/hyperscaler-skills-gap-reskilling-roadmap/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/industries/energy/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/industries/finance/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/industries/healthcare/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/industries/hospitality/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/industries/technology/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/insights-ai-pilot-to-production-agentic-operations/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/insights-leap-ksa-growth-talent-differentiation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/making-sense-of-agility-in-business-transformation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/marketing-resolutions-for-2025-building-trust-in-a-distracted-world/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/marketing-transformation-in-healthcare/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/partner-enablement-risk-first/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/ai-solutions-implementations/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/ai-strategy-advisory/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/foundation-enablement/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/advanced-analytics-enablement/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/solutions-insights/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/strategy-foundation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/digital-evolution/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ar/services/digital-transformation/digital-experience-customer-engagement/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/digital-transformation/digital-strategy-and-transformation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/digital-transformation/emerging-technologies-innovation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/hr-transformation-technology/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/leadership-development-coaching/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/talent-strategy-organisational-development/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/environmental-sustainability/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/social-governance/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/strategy-integration/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/marketing-engine/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/marketing-engine/customer-experience-engagement/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/marketing-engine/digital-marketing-analytics/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/services/marketing-engine/marketing-strategy-planning/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/shaping-a-responsible-tech-strategy-avoiding-innovation-for-innovations-sake/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/specialists-or-generalists-effective-marketing-teams-in-2025/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/sustainable-marketing-how-green-is-your-brands-marketing-strategy/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/the-booming-health-wellness-industry-and-improving-your-employer-branding/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/the-intersection-of-ai-and-fintech-a-marketing-renaissance/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/the-marketing-say-do-gap-the-2026-state-of-ai-in-b2b-marketing/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/transparency-pays-off-heres-why/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/who-we-are",
+    "expect": "redirect",
+    "to": "/ar/who-we-are/",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/who-we-are/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ar/why-personalisation-remains-fintechs-marketing-success-formula-in-2024/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/ar/المملكة-العربية-السعودية/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/artificial-intelligence-concept-self-learning/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/augmented-reality-bridging-imagination-with-the-everyday/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/back-to-basics-social-media-posting-101/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/benefits-of-diverse-teams/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/best-paractice-for-managing-remote-teams/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/big-business-small-thinking-agentforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/big-business-small-thinking-project-everest/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/building-a-culture-of-continuous-learning-for-a-future-ready-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/building-sustainable-supply-chains-strategies-and-best-practices/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/burnout-isnt-the-benchmark-choose-passion-community-play/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/business-strategy-responding-to-social-media-feedback/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/campaigns-that-stuck/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/can-ai-and-the-demand-for-soft-skills-evolve-together/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/can-you-say-no-when-you-need-to-at-work/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/career-skill/account-management/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/career-skill/client-relations/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/career-skill/social-media-marketing/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/career-skill/stakeholder-management/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/careers/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/careers/account-based-marketing-manager-abm/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/careers/account-director/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/careers/client-services-social-media-programme-manager/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/careers/social-media-project-manager-emea/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/ai-driven-biomedicine/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/ai-for-intelligent-recommendations/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/ai-powered-asset-management/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/amplifying-brand-presence-in-the-google-cloud-space/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/augmenting-cybersecurity-with-ai/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/b2b-marketing-for-ebay/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/boosting-customer-experience-with-chatbots/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/bringing-sustainability-to-life-for-google-cloud/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/building-a-global-team-for-strategic-impact/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/building-a-pipeline-for-google-cloud/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/business-intelligence-in-finance/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/data-centralisation-with-looker/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/elevating-fan-experiences-at-the-brits/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/enabling-predictive-maintenance/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/end-to-end-event-support/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/enhancing-messaging-with-ai/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/event-steerco-with-google-cloud-uki/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/financial-services-community-inaugural-event/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/genai-at-work-partner-event-series/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/google-clouds-london-partner-receptions/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/google-digital-garage/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/google-financial-services-series/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/google-home/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/google-partnership-kickstart-2026-wembley/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/google-sales-blitz/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/growing-youtubes-social-engagements/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/hackathons-for-google-cloud/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/increasing-informed-decisions/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/influencer-engagement-on-youtube-shorts/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/inventory-intelligence/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/launching-a-product-in-a-new-region/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/on-site-teams-at-google/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/optimising-e-commerce-campaigns/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/optimising-employee-and-visitor-transport-management/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/predicting-energy-output-with-ml/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/simplifying-healthcare-processing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/smart-grid-ai/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/streamlining-processes-with-hubspot/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/swatch-mtv-playground/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/targeted-marketing-for-cloudscene/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/the-founders-story-for-google-cloud/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/visualising-data-in-real-time/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/vogue-visionaries/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/case-studies/youtubes-running-yoodle/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/ces-2026/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/change-organisational-culture-digital-age/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/changing-business-cultures-for-learning-and-development/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/closing-the-gender-divide-exploring-the-role-of-technology-in-the-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/cmos-its-time-to-step-off-the-sidelines/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/common-seo-mistakes/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/common-social-media-mistakes-for-small-businesses/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/consumer-driven-sustainability-how-marketing-can-lead-the-change-2/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/consumer-driven-sustainability-how-marketing-can-lead-the-change/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/contact-us/",
+    "expect": "redirect",
+    "to": "/contact/",
+    "source": "crawl"
+  },
+  {
+    "path": "/contact/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/creating-a-positive-attractive-workspace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/creating-campaigns-that-last-a-comprehensive-four-step-strategy-for-2024/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/creating-positive-productive-workplace-habits/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/culture-add-why-you-shouldnt-be-ignoring-this-phrase-when-recruiting/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/culture-careers/careers/",
+    "expect": "redirect",
+    "to": "/careers/",
+    "source": "crawl"
+  },
+  {
+    "path": "/culture-careers/culture/",
+    "expect": "redirect",
+    "to": "/culture/",
+    "source": "crawl"
+  },
+  {
+    "path": "/culture/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/davos-2026/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/debunking-myths-of-digital-advertising/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/digital-fluency-is-the-new-competitive-edge/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/digital-skills-for-the-future-of-work/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/digital-skills-to-nurture-business-growth/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/digital-skills-training-to-try-in-2019/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/digital-transformation-and-your-people/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/digital-transformation-for-smes-achieving-more-with-less/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/earth-day-2025-what-sustainable-workplace-transformation-is-and-what-its-not/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/easy-ways-to-incorporate-wellbeing-into-your-work-space/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/email-marketing-tips-ready-for-your-summer-campaigns/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/embedded-talent-solutions/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/",
+    "source": "crawl"
+  },
+  {
+    "path": "/embracing-sustainability-the-intersection-of-nature-finance-and-innovation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/emotional-marketing-and-the-rise-of-visual-platforms/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/employee-engagement-igniting-a-productive-workforce-in-the-current-workplace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/engaging-growth-marketing-specialists/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/enterprise-ai-production-gulf/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/esgs-competence-conundrum-what-you-need-to-know/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/finding-the-funny-bone-in-your-workplace-management/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/five-ways-big-data-can-enhance-sustainability-efforts-for-smaller-brands/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/flex-index-flexible-workforce-planning/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/focus-growth-hacking/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/global-business-growth-a-roadmap-for-success-in-a-changing-world/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/going-digital-and-embracing-your-e-commerce-business/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/good-management-listens-to-their-employees-is-that-you/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/google-cloud-next-2025-digital-transformation-is-a-non-negotiable/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/google-cloud-next-24-the-exciting-future-of-ai-in-las-vegas/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/growth-with-a-backbone/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/highlights-from-world-summit-ai-qatar-2025-driving-ai-leadership-in-the-region/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/hire-externally-or-promote-internally/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-ai-is-reshaping-the-future-of-business-strategy-and-operations/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-authentic-is-your-marketing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-businesses-can-adapt-to-the-new-future-of-travel-tourism/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-can-brands-make-the-most-out-of-video-content-marketing-on-social-media/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-digital-media-training-courses-help-careers/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-do-we-close-the-skills-gap-in-the-workplace-stemsteamday/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-mature-is-your-esg-strategy/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-address-stress-ampwellbeing-at-work-to-support-your-employees-and-yourself/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-decide-which-digital-marketing-training-courses-are-right-for-you/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-demonstrate-competence-in-your-esg-reporting/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-develop-a-strong-workforce-a-step-by-step-guide/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-grow-your-personal-brand-online/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-manage-employee-wellbeing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-navigate-the-uks-new-esg-legislation/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/how-to-optimise-marketing-teams-for-the-new-normal/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-overcome-skills-mismatch-in-the-modern-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-recognise-if-your-colleagues-are-struggling-and-how-to-help-total-workforce-management/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/how-to-run-a-basic-technical-website-health-check-to-improve-site-performance-in-search-engine-results-pages/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-spot-digital-trends-and-act-on-them/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-tackle-and-prevent-workplace-bullying-in-your-business/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-tell-stories-with-instagram/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/how-to-write-click-worthy-meta-descriptions/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/hyperscaler-skills-gap-reskilling-roadmap/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/impact-driven-business-intelligence-chesamels-approach-to-data-analytics/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/importance-predictive-analytics-human-resources/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/industries/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/industries/energy/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/industries/finance/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/industries/healthcare/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/industries/hospitality/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/industries/technology/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights-ai-pilot-to-production-agentic-operations/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights-leap-ksa-growth-talent-differentiation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights/blog/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights/our-work/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights/podcasts/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights/reports/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/insights/webinars/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/intuition-still-matters-in-an-ai-powered-world/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/is-marketing-leadership-shifting-from-growth-oriented-to-brand-centric/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/is-your-website-really-user-friendly/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/iwd-2025-the-future-belongs-to-the-bold/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/key-insights-from-mwc-2025-where-connectivity-meets-ai-innovation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/leading-in-a-era-of-constant-organisational-change/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/learn-with-chesamel/",
+    "expect": "redirect",
+    "to": "/",
+    "source": "crawl"
+  },
+  {
+    "path": "/learning-zone/",
+    "expect": "redirect",
+    "to": "/",
+    "source": "crawl"
+  },
+  {
+    "path": "/lunch-break-tips-to-clear-your-mind-workforce-planning-methods/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/making-an-innovative-idea-global/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/making-sense-of-agility-in-business-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/managing-a-loss-of-momentum-in-your-team/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/managing-millennial-workplace-onboarding-retention/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/marketing-resolutions-for-2025-building-trust-in-a-distracted-world/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/marketing-strategies-brand-loyalty/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/marketing-strategy-demand-generation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/marketing-transformation-in-healthcare/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/marketing-trends-measuring-sentiment-analysis/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/marketing-when-discovery-has-changed-the-shift-from-volume-to-relevance/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/maximise-your-b2b-content-stack-dismantle-silos-build-ecosystems/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/mental-health-at-work/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/mental-health-in-the-workplace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/modern-slavery-statement/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/more-women-in-tech-could-mean-a-big-boost-for-european-gdp/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/navigating-ai-bias-privacy-in-modern-business-practices/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/neurodiversity-in-business-and-healthcare-hiring-for-a-more-inclusive-future/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/announcement-cgi-x-chesamel-partner-to-enhance-esg-and-csr/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/augmented-reality-bridging-imagination-with-the-everyday/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/business-resilience-in-qatar-chesamel-roundtable/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/chesamel-and-systango-announce-strategic-partnership-to-deliver-human-first-digital-transformation-at-speed-and-scale/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/chesamel-joins-anthropic-claude-partner-network/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/closing-the-steam-skills-gap-in-the-workplace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/embracing-the-cloud-revolution-insights-from-saudi-arabias-latest-cloud-region-launch/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/lgbtqia2-industry-leaders-who-have-paved-the-way-for-an-inclusive-future/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/mental-health-in-the-workplace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/qatar-at-the-forefront-shaping-the-energy-transition/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/news/qatar-the-dawning-oasis-of-global-innovation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/nominets-research-shows-generational-gap-digital-capability/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/operational-transformation-the-backbone-of-digital-success/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/our-work/",
+    "expect": "redirect",
+    "to": "/insights/our-work/",
+    "source": "crawl"
+  },
+  {
+    "path": "/over-communicated-and-under-connected/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/pain-points-of-being-a-social-media-wallflower-part-1/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/partner-enablement-risk-first/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/pioneering-women-in-digital/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/playing-it-safe-is-the-riskiest-move-you-can-make/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/business-beyond-borders-transatlantic-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/celebrating-unique-minds-in-business/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/demystifying-ai-tips-and-tricks/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/driving-sustainable-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/inspire-inclusion-transforming-organisational-culture/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/mastering-the-art-of-confident-communication/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/reshaping-the-modern-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/shaping-digital-transformation-across-industries/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/stress-awareness-at-work/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/podcasts/tech-humanity-bridging-the-gap/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/preparing-for-business-growth/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/product-category/courses/page/2/",
+    "expect": "redirect",
+    "to": "/page/2/",
+    "source": "crawl"
+  },
+  {
+    "path": "/product/chesamel-digital-transformation-report/",
+    "expect": "redirect",
+    "to": "/reports/digital-transformation-report/",
+    "source": "crawl"
+  },
+  {
+    "path": "/proud-to-build-inclusive-workplaces-every-day/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reimagining-innovation-reflections-from-the-aws-summit-2025/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reports/agile-marketing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reports/confused-about-agile-working-heres-everything-you-need-to-know/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reports/digital-transformation-report/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reports/embedded-talent-solutions/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reports/financial-services-the-age-of-gamification/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/reports/ir35-how-to-stay-compliant-still-retain-your-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/robust-sustainability-three-pillars-of-a-future-proof-esg-strategy/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/ai-machine-learning/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/ai-machine-learning/ai-solutions-implementations/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/ai-machine-learning/ai-strategy-advisory/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/ai-machine-learning/foundation-enablement/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/bi-data-analytics/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/bi-data-analytics/advanced-analytics-enablement/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/bi-data-analytics/solutions-insights/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/bi-data-analytics/strategy-foundation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/business-intelligence-data-analytics/",
+    "expect": "redirect",
+    "to": "/services/bi-data-analytics/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/business-transformation/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/digital-evolution/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/digital-evolution/digital-experience-customer-engagement/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/digital-experience-customer-engagement/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/digital-evolution/digital-strategy-and-transformation/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/digital-strategy-and-transformation/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/digital-evolution/emerging-technologies-innovation/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/emerging-technologies-innovation/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/digital-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/digital-transformation/digital-experience-customer-engagement/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/digital-transformation/digital-strategy-and-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/digital-transformation/digital-strategy-and-transformation/digital-strategy-and-transformation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/digital-transformation/emerging-technologies-innovation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/discover/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/esg-solutions/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/esg-solutions/environmental-sustainability/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/environmental-sustainability/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/esg-solutions/social-governance/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/social-governance/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/esg-solutions/strategy-integration/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/strategy-integration/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/hybrid-workforce",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/hybrid-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/hybrid-workforce/hr-transformation-technology/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/hybrid-workforce/leadership-development-coaching/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/hybrid-workforce/talent-strategy-organisational-development/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/investment-impact-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/investment-impact-transformation/environmental-sustainability/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/investment-impact-transformation/environmental-sustainability/environmental-sustainability/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/investment-impact-transformation/social-governance/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/investment-impact-transformation/strategy-integration/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/marketing-engine/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/marketing-engine/customer-experience-engagement/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/marketing-engine/digital-marketing-analytics/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/marketing-engine/marketing-strategy-planning/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/services/marketing-experience/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/marketing-experience/customer-experience-engagement/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/customer-experience-engagement/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/marketing-experience/digital-marketing-analytics/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/digital-marketing-analytics/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/marketing-experience/marketing-strategy-planning/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/marketing-strategy-planning/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/marketing-transformation/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/people-performance/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/people-performance/hr-transformation-technology/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/hr-transformation-technology/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/people-performance/leadership-development-coaching/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/leadership-development-coaching/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/people-performance/talent-strategy-organisational-development/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/talent-strategy-organisational-development/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/workforce-solutions/",
+    "expect": "redirect",
+    "to": "/what-we-do/",
+    "source": "crawl"
+  },
+  {
+    "path": "/services/workforce-transformation/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/",
+    "source": "crawl"
+  },
+  {
+    "path": "/shaping-a-responsible-tech-strategy-avoiding-innovation-for-innovations-sake/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/sourcing-innovation-in-your-content-marketing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/sovereign-ai-at-web-summit-qatar-2026-building-in-a-fragmented-world/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/specialists-or-generalists-effective-marketing-teams-in-2025/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/staff-retention-is-an-art-master-it/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/strategic-workforce-planning/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/sustainable-future-world-environment-day/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/sustainable-marketing-how-green-is-your-brands-marketing-strategy/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/systango-partnership/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/tag/ai-workflow-automation/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/business-growth/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/digital-transformation/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/health-and-wellness/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/idea-innovation/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/management/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/marketing-engine/",
+    "expect": "page",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/marketing/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/wellbeing/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/workforce-management/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/workforce-planning/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/tag/workplace-wellbeing/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/the-algorithmic-trap-why-your-ai-strategy-is-making-your-brand-invisible/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-analogue-world-is-gone-for-good/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-anatomy-of-workplace-stress/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-basics-of-implementing-strategic-planning/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-booming-health-wellness-industry-and-improving-your-employer-branding/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-changing-role-of-the-cmo-steering-through-modern-marketing-challenges/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-digital-evolution-how-not-to-fall-behind/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-dos-and-donts-of-using-business-intelligence-in-your-business/",
+    "expect": "redirect",
+    "to": "/wp-content/uploads/2024/10/The-Dos-and-Donts-of-Using-Business-Intelligence-in-Your-Business.png",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-essential-traits-of-a-good-leader/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-evolution-of-digital-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-future-of-cloud-whats-next-after-26-years-of-google/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-future-of-leadership-building-an-agile-and-resilient-team-structure/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-future-of-marketing-is-personal-but-at-what-cost/",
+    "expect": "redirect",
+    "to": "/wp-content/uploads/2024/11/The-Future-of-Marketing-Is-Personal-But-at-What-Cost.png",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-future-of-marketing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-future-of-the-workforce-trends-shaping-the-next-decade/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-groundbreaking-role-of-edge-computing-in-digital-transformation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-importance-of-relevant-experience-in-the-workplace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-intersection-of-ai-and-fintech-a-marketing-renaissance/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-journey-to-equality-diversity/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-marketing-say-do-gap-the-2026-state-of-ai-in-b2b-marketing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-post-funnel-playbook-rebuilding-for-the-signal-cloud/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-power-of-ai-and-personalisation-at-scale/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-power-of-introverts-in-todays-teams/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-rise-of-the-side-hustle/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-science-of-social/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-surprising-link-between-capex-opex-and-success-in-people-focused-businesses/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/the-use-of-ai-for-business-governance-at-the-board-level/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/thinking-differently-is-the-heart-of-innovation/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/transparency-one-of-your-strongest-tools-in-marketing-management/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/transparency-pays-off-heres-why/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/trust-in-the-age-of-digital-finance-building-credibility-in-fintech-marketing/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/two-jobs-one-salary-2025s-unexpected-workplace-trend/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/understanding-neurodiversity-in-the-workplace/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/utilising-feedback-for-business-growth/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/we-need-to-talk-about-the-digital-skills-gap/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/webinars/chesamel-in-discussion-cloud-predictions-for-a-transitioning-year/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/webinars/sovereign-ai-building-technology-in-a-fragmented-world-web-summit-qatar-2026/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/webinars/the-role-of-finance-technology-innovations-ahead-of-cop28/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/webinars/wd-2023-closing-the-gender-divide-exploring-the-role-of-technology-in-the-workforce/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/webinars/what-does-cop27-mean-for-your-business/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/what-about-equal-pay/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/what-can-programmatic-marketing-do-for-your-business/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/what-if-marketing-lost-its-budget-a-thought-experiment/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/what-to-automate-and-what-to-leave-alone/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/what-to-look-for-in-a-digital-skills-training-course/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/what-we-do/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/when-marketing-leads-markets-shift/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/when-work-doesnt-scale-its-a-design-issue/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/who-we-are/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/who-we-are/network/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/who-we-are/our-team/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-investing-in-your-human-capital-is-an-intangible-asset-you-should-be-focusing-on/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-learning-the-basics-of-coding-is-a-good-idea/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-marketers-should-focus-on-employer-branding/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-now-is-the-time-for-sustainability-consulting/",
+    "expect": "redirect",
+    "to": "/wp-content/uploads/2024/11/Why-Now-is-the-Time-for-Sustainability-Consulting.png",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-personalisation-remains-fintechs-marketing-success-formula-in-2024/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-we-need-praise-in-the-workplace-for-business-growth/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-we-should-all-be-taking-notes-on-intelligent-changes-email-strategy/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-workforce-planning-works-well-for-everyone/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-working-as-a-team-is-important-for-business/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-you-should-be-building-your-own-growth-marketing-team/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/why-your-internal-customers-are-just-as-valuable-as-your-external-customers/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "source": "crawl"
+  },
+  {
+    "path": "/women-in-business-a-journey-towards-equity-and-empowerment/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/work/",
+    "expect": "redirect",
+    "to": "/workforce-planning-model-empower-employees/",
+    "source": "crawl"
+  },
+  {
+    "path": "/workforce-planning-model-empower-employees/",
+    "expect": "page",
+    "source": "sitemap"
+  },
+  {
+    "path": "/your-future-proofing-now-esg-investment/",
+    "expect": "page",
+    "source": "sitemap"
+  }
+]
