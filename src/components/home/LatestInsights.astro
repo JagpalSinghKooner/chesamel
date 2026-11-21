@@ -11,7 +11,7 @@ const filters = [
   { label: 'News', href: '/insights/news/' },
 ];
 
-const posts = [
+const insights = [
   { pillar: 'Marketing Engine', title: 'The Marketing Say-Do Gap: The 2026 State of AI in B2B Marketing', date: '2026-10-22', minutes: 2, href: '/the-marketing-say-do-gap-the-2026-state-of-ai-in-b2b-marketing/' },
   { pillar: 'Marketing Engine', title: 'Partner Enablement: The Risk-First Engine', date: '2026-10-15', minutes: 2, href: '/partner-enablement-risk-first/' },
   { pillar: 'Hybrid Workforce', title: 'The Flex Index: A Working Tool for Workforce Composition', date: '2026-10-01', minutes: 2, href: '/flex-index-flexible-workforce-planning/' },
@@ -32,11 +32,11 @@ const formatDate = (iso: string) =>
     </div>
     <ul class="mt-12 grid gap-4 md:grid-cols-3">
       {
-        posts.map((p) => (
+        insights.map((p) => (
           <li>
             <a href={p.href} class="group flex h-full min-h-64 flex-col border border-light-grey bg-white/40 p-5 hover:border-indigo hover:bg-white">
-              <span class="type-tag self-start border border-light-grey px-3 py-1 text-xs normal-case tracking-normal">{p.pillar}</span>
-              <h3 class="mt-6 text-lg font-semibold text-black group-hover:underline">{p.title}</h3>
+              <span class="type-tag self-start border border-light-grey px-3 py-1">{p.pillar}</span>
+              <h3 class="type-heading-3 mt-6 text-xl leading-tight group-hover:underline">{p.title}</h3>
               <p class="type-caption mt-auto flex justify-between pt-6">
                 <time datetime={p.date}>{formatDate(p.date)}</time>
                 <span>{p.minutes} min read</span>

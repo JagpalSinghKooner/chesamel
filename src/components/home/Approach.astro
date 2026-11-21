@@ -1,11 +1,15 @@
 ---
 // "What's holding your business back?" with the three numbered steps.
+// The live site colours each step's last words in secondary colours; here
+// they are white with an Indigo underline, since secondary colours are for
+// small accents only (ADR-0002).
 import Button from '../Button.astro';
+import { contactLink } from '../../data/site';
 
 const steps = [
-  { tag: '/ change', lead: 'Evolving the', accent: 'way you work', colour: 'text-sky', text: 'We get to know your business in depth, so we can plan your unique transformation.' },
-  { tag: '/ innovate', lead: 'Going beyond the', accent: 'status quo', colour: 'text-mint', text: 'We help you think outside your current limitations, and show you how to overcome these.' },
-  { tag: '/ improve', lead: 'Finding the right', accent: 'solution', colour: 'text-fuchsia', text: 'We optimise our solutions in real-time, growing our offering as your business grows.' },
+  { tag: '/ change', lead: 'Evolving the', accent: 'way you work', text: 'We get to know your business in depth, so we can plan your unique transformation.' },
+  { tag: '/ innovate', lead: 'Going beyond the', accent: 'status quo', text: 'We help you think outside your current limitations, and show you how to overcome these.' },
+  { tag: '/ improve', lead: 'Finding the right', accent: 'solution', text: 'We optimise our solutions in real-time, growing our offering as your business grows.' },
 ];
 ---
 
@@ -13,7 +17,7 @@ const steps = [
   <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_2fr] lg:items-center">
     <div>
       <h2 class="type-heading-2 text-white">What’s holding your business back?</h2>
-      <div class="mt-8"><Button href="/contact/" tone="outline">Let’s Talk</Button></div>
+      <div class="mt-8"><Button href={contactLink.href} tone="outline">{contactLink.label}</Button></div>
     </div>
     <ol class="grid gap-4 sm:grid-cols-3">
       {
@@ -23,8 +27,8 @@ const steps = [
               {String(i + 1).padStart(2, '0')}
             </span>
             <p class="text-sm text-medium-grey">{s.tag}</p>
-            <h3 class="mt-2 text-xl font-medium text-white">
-              {s.lead} <span class={s.colour}>{s.accent}</span>
+            <h3 class="type-heading-3 mt-2 text-off-white">
+              {s.lead} <span class="text-white underline decoration-indigo decoration-4 underline-offset-4">{s.accent}</span>
             </h3>
             <p class="mt-3 text-sm text-off-white">{s.text}</p>
           </li>

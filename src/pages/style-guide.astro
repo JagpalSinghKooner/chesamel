@@ -14,8 +14,8 @@ import CtaBlock from '../components/CtaBlock.astro';
 // it. The dashed outline shows the clear space built into the Component.
 const logoExamples = [
   { variant: 'wordmark', title: 'Wordmark', note: 'Clear space: the height of its “c”.' },
-  { variant: 'lockup', title: 'Lockup', note: 'Clear space: the width of “ch”. Used in the header and footer.' },
-  { variant: 'tagline-lockup', title: 'Logo with tagline', note: 'Clear space: the width of “ch”.' },
+  { variant: 'lockup', title: 'Lockup', note: 'Clear space: the width of “ch”. Used in the header.' },
+  { variant: 'tagline-lockup', title: 'Logo with tagline', note: 'Clear space: the width of “ch”. Used in the footer.' },
 ] as const;
 
 const typeStyles = [
@@ -147,7 +147,7 @@ const typeStyles = [
       heading="Want to transform your business?"
       text="Accelerate your business growth into a new age"
       actions={[
-        { label: 'What We Do', href: '/what-we-do/', tone: 'lime' },
+        { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
         { label: 'Let’s Talk', href: '/contact/', tone: 'outline' },
       ]}
     />

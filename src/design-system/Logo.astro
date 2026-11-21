@@ -25,8 +25,8 @@ import Lockup from './logos/lockup.svg';
 import TaglineLockup from './logos/tagline-lockup.svg';
 
 type Props =
-  | { variant: 'wordmark' | 'lockup' | 'tagline-lockup'; colour: 'white' | 'black'; height: number; label?: string }
-  | { variant: 'brandmark'; colour: 'white' | 'black' | 'indigo'; height: number; label?: string };
+  | { variant: 'wordmark' | 'lockup' | 'tagline-lockup'; colour: 'white' | 'black'; height: number }
+  | { variant: 'brandmark'; colour: 'white' | 'black' | 'indigo'; height: number };
 
 const variants = {
   wordmark: { Svg: Wordmark, clearSpace: 13.276 / 17.933 },
@@ -37,7 +37,7 @@ const variants = {
 
 const colours = { white: 'text-white', black: 'text-black', indigo: 'text-indigo' };
 
-const { variant, colour, height, label } = Astro.props;
+const { variant, colour, height } = Astro.props;
 const { Svg, clearSpace } = variants[variant];
 const padding = Math.round(clearSpace * height);
 ---
@@ -49,11 +49,6 @@ const padding = Math.round(clearSpace * height);
   data-logo-colour={colour}
   data-clear-space={padding}
 >
-  {
-    label ? (
-      <Svg role="img" aria-label={label} class="block" style={`height: ${height}px`} />
-    ) : (
-      <Svg aria-hidden="true" class="block" style={`height: ${height}px`} />
-    )
-  }
+  {/* Decorative: wherever the logo links home, the link carries the name. */}
+  <Svg aria-hidden="true" class="block" style={`height: ${height}px`} />
 </span>

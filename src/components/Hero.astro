@@ -6,6 +6,7 @@
 //
 // The live hero plays a 7.5 MB video; this shows a still frame from it.
 import Button from './Button.astro';
+import type { ButtonAction } from './button';
 
 interface Props {
   before?: string;
@@ -13,7 +14,7 @@ interface Props {
   after?: string;
   headingLevel?: 'h1' | 'h2';
   image: { src: string; srcset?: string };
-  actions: { label: string; href: string; tone: 'dark' | 'indigo' | 'lime' | 'outline' }[];
+  actions: ButtonAction[];
 }
 
 const { before, highlight, after, headingLevel: Heading = 'h1', image, actions } = Astro.props;
@@ -30,7 +31,7 @@ const { before, highlight, after, headingLevel: Heading = 'h1', image, actions }
   />
   <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/20"></div>
   <div class="mx-auto flex min-h-[28rem] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[36rem] sm:px-6">
-    <Heading class="max-w-3xl text-5xl leading-none font-medium text-white sm:text-7xl">
+    <Heading class="type-heading-1 max-w-3xl text-white sm:text-7xl">
       {before && <>{before} </>}<span class="bg-indigo px-2 box-decoration-clone">{highlight}</span>{after && <> {after}</>}
     </Heading>
     <div class="mt-10 flex flex-wrap gap-3">

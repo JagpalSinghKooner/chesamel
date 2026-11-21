@@ -5,7 +5,7 @@
 // USA and UK to addresses that 404; those links are gone (#6).
 // The map is the live site's inline SVG, redrawn as circles (674 KB to 112 KB).
 import Button from '../Button.astro';
-import { qatarLink } from '../../data/site';
+import { qatarLink, contactLink } from '../../data/site';
 
 const countries = ['USA', 'UK', 'Portugal', 'Sweden', 'Saudi Arabia'];
 ---
@@ -16,7 +16,7 @@ const countries = ['USA', 'UK', 'Portugal', 'Sweden', 'Saudi Arabia'];
       <div>
         <h2 class="type-heading-2 text-white">Where<br />we are</h2>
         <p class="mt-6 max-w-xs text-medium-grey">Explore our global presence and office locations.</p>
-        <div class="mt-6"><Button href="/contact/" tone="indigo">Get in Touch</Button></div>
+        <div class="mt-6"><Button href={contactLink.href} tone="indigo">Get in Touch</Button></div>
       </div>
       <ul class="flex flex-wrap content-start gap-2 lg:max-w-md lg:justify-end">
         {countries.map((c) => <li class="border border-white/15 px-3 py-1.5 text-sm text-off-white">{c}</li>)}

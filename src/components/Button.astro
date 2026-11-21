@@ -2,11 +2,13 @@
 // Link styled as the live site's square button with a ↗ arrow.
 // `tone` picks a pairing that passes WCAG AA contrast:
 //   dark: Black on light backgrounds    light: white with a border, on light backgrounds
-//   indigo: Indigo with white text       lime: Lime with Black text, on dark backgrounds
-//   outline: white text with a border, on dark backgrounds
+//   indigo: Indigo with white text       outline: white text with a border, on dark backgrounds
+// The live site's Lime buttons are Indigo here: Lime is for small accents only.
+import type { ButtonTone } from './button';
+
 interface Props {
   href: string;
-  tone?: 'dark' | 'light' | 'indigo' | 'lime' | 'outline';
+  tone?: ButtonTone;
 }
 
 const { href, tone = 'dark' } = Astro.props;
@@ -15,7 +17,6 @@ const tones = {
   dark: 'bg-black text-white hover:bg-dark-grey',
   light: 'border border-light-grey bg-white text-black hover:border-dark-grey',
   indigo: 'bg-indigo text-white hover:bg-black',
-  lime: 'bg-lime text-black hover:bg-white',
   outline: 'border border-white/40 text-white hover:bg-white hover:text-black',
 };
 ---

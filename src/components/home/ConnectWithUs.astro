@@ -2,6 +2,7 @@
 // Newsletter band. The live sign-up form posts to HubSpot; that form arrives
 // with #11, so for now the band links to the contact page.
 import Button from '../Button.astro';
+import { contactLink } from '../../data/site';
 ---
 
 <section class="relative isolate overflow-hidden bg-indigo">
@@ -10,6 +11,6 @@ import Button from '../Button.astro';
       <p class="font-subheading text-white">/ get the latest industry news, straight to your inbox</p>
       <h2 class="type-heading-2 mt-3 text-white">Connect with us</h2>
     </div>
-    <Button href="/contact/" tone="dark">Get in Touch</Button>
+    <Button href={contactLink.href} tone="dark">Get in Touch</Button>
   </div>
 </section>

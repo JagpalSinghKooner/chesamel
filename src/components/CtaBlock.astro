@@ -1,24 +1,21 @@
 ---
-// Call-to-action Component: a dark band with a heading, a line of text, two
-// buttons and the brandmark's arcs as a large Indigo watermark (page 9 of the
-// brand guidelines allows the brandmark at large scale as a background).
-import Logo from '../design-system/Logo.astro';
+// Call-to-action Component: a dark band with a heading, a line of text and
+// buttons. The live band has an Indigo brandmark watermark; Indigo on Black is
+// not a permitted brandmark pairing (guidelines page 9), so it is left out.
 import Button from './Button.astro';
+import type { ButtonAction } from './button';
 
 interface Props {
   heading: string;
   text?: string;
   headingLevel?: 'h2' | 'h3';
-  actions: { label: string; href: string; tone: 'dark' | 'indigo' | 'lime' | 'outline' }[];
+  actions: ButtonAction[];
 }
 
 const { heading, text, headingLevel: Heading = 'h2', actions } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-black" data-component="cta">
-  <div aria-hidden="true" class="absolute -right-24 -bottom-40 -z-10 opacity-90 sm:-bottom-24">
-    <Logo variant="brandmark" colour="indigo" height={360} />
-  </div>
+<section class="bg-black" data-component="cta">
   <div class="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
     <Heading class="type-heading-2 text-white">{heading}</Heading>
     {text && <p class="mt-6 font-subheading text-lg text-off-white">{text}</p>}

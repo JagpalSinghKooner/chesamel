@@ -9,6 +9,7 @@ import Approach from '../components/home/Approach.astro';
 import LatestInsights from '../components/home/LatestInsights.astro';
 import ConnectWithUs from '../components/home/ConnectWithUs.astro';
 import WhereWeAre from '../components/home/WhereWeAre.astro';
+import { contactLink } from '../data/site';
 ---
 
 <Base title="Chesamel | Global Business Transformation">
@@ -39,8 +40,8 @@ import WhereWeAre from '../components/home/WhereWeAre.astro';
     heading="Want to transform your business?"
     text="Accelerate your business growth into a new age"
     actions={[
-      { label: 'What We Do', href: '/what-we-do/', tone: 'lime' },
-      { label: 'Let’s Talk', href: '/contact/', tone: 'outline' },
+      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+      { ...contactLink, tone: 'outline' },
     ]}
   />
   <LatestInsights />
