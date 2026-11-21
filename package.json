@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "playwright test",
-    "inventory": "node scripts/url-inventory.ts"
+    "inventory": "node scripts/url-inventory.ts",
+    "import": "node scripts/import-wordpress/index.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",
@@ -27,6 +28,10 @@
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.65.1",
     "@types/node": "^24.19.2",
+    "@types/turndown": "^5.0.6",
+    "fast-xml-parser": "^5.12.1",
+    "turndown": "^7.2.5",
+    "turndown-plugin-gfm": "^1.0.2",
     "typescript": "^6.0.3"
   }
 }

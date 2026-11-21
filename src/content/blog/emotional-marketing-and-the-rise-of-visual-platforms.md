@@ -1,0 +1,23 @@
+---
+title: "Emotional Marketing and The Rise Of Visual Platforms."
+date: "2019-07-12T14:13:43Z"
+author: "seoworks"
+hero: {"src":"/wp-content/uploads/2024/11/ipet-photo-bQaAJCbNq3g-unsplash.jpg","alt":""}
+pillars: ["marketing-engine"]
+industries: []
+description: "How has emotional marketing evolved to create the perfect landscapre for purely visual platfoms and how do these platforms now aid emotional marketing?"
+---
+
+Visual platforms have boomed, blossomed and bewitched us over the past ten years.  Not only us as individuals but the brands who reach out to us, have all been dominated and influenced by the visual platforms within our smartphones and tablets, namely, Instagram, Snapchat, Pinterest and Youtube. And they're making it easier for emotional marketing to reach out and effect! So why are we so drawn to these platforms? Well obviously eye-catching aesthetics are a simple way to capture an audience and that’s nothing new to marketers; imagery, whether seen in magazines, on billboards, or TV, still images or video clips, is proven to engage audiences but why are they so effective and how has this made room for such a dominating breed of social media platform? Largely, we’re open to being marketed to even though we’re now savvy enough to know that we’re really only a number.  Imagery helps markers to get us to take notice. Just take a moment to think of the emotional feeling that comes with your favourite Ad, the one that resonates with you still. The Coca Cola Christmas advert maybe, or any of Coca Cola’s campaigns for that matter, or perhaps Nike’s Just Do IT campaign - there are so many iconic campaigns that tap into an emotion, often happiness or inspiration but sometimes sadness or even fear.  Although there are other factors now more prominently at play such as health, honesty, and social and [environmental responsibility](/sustainable-future-world-environment-day/) which can perhaps undercut the impact of emotional ties to brands, we’re still forever connecting with brands on an emotional level. Yes, words can be captivating, and give the campaign depth and context, however, when using the craft of diction, words need to be pitched at the correct level, in the right tone and even language.  A picture is worth a thousand words. It's only natural that as technology develops, and our need and demand for speed and instantaneous results should pair with the emotion-establishing imagery and give us whole platforms which allow a two-way expression and communication, deepening emotional relationships between brands and consumers. 
+
+> *An excellent example: [Mastercard](https://www.socialmediatoday.com/news/why-pinterest-could-be-hidden-social-media-marketing-gem-for-your-brand/517666/) engaged their Pinterest followers (and gained a few thousand more along the way) encouraging them to share why '#AcceptanceMatters' to them; users pinned to Mastercard's board, filling it with words of inspiration, motivation and support - emotionally rousing stuff, and a great use of a visual platform to make the emotional connections with Pinterest users!* 
+
+![emotional marketing](/wp-content/uploads/2024/11/hybrid-uGP_6CAD-14-unsplash-1024x683.jpg) The evolution of all of these things has made way for these platforms, and these platforms require arguably less impactful imagery each time as the images and videos are more fleeting.  ‘Stories’ have a lifespan and feeds, ever-renewing, so while the quantity and quality need to stay consistently high, the once dramatic, striking image that needed to convey the marketing message and the emotion, ‘the’ image that was to go to print is no longer of such vitalness.  This opens even more doors to marketing, as we can more easily introduce a series to the marketing campaign and responsively keep brand messages current and up to date.  Can we take interaction as emotion? Measuring marketing results can come in too many forms, however, with social media platforms, it is relatively easy to measure, even on a very basic level how or if you are invoking an emotional response at all. If your imagery has had no impact, your engagement will typically remain low, however (even though Instagram likes are down across the board) if your post has inspired, shocked, injected joy or sympathy, this can be reflected by consumers in their ability to now communicate directly with your company on any of these visual platforms!
+
+##### Successful Emotional Marketing Using Visual Platforms:
+
+- Quality visuals
+- A clear strategy for the response you want to evoke
+- A message to match your visuals
+- Interact and react to consumers’ engagement - strengthening the bond
+- Monitor your emotional marketing success and emulate

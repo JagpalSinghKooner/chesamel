@@ -1,0 +1,61 @@
+---
+// Blog Posts at their original addresses: /<slug>/, and /news/<slug>/ for
+// posts of WordPress's former `news` type. Later tickets that serve other content at root-level
+// addresses add their collections to getStaticPaths here.
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getBlogPosts, addressOf, formatDate, primaryPillar, readingMinutes, type BlogPost } from '../content/blog';
+import { pillarLabels } from '../data/taxonomy';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ params: { slug: addressOf(post).slice(1, -1) }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: BlogPost };
+const { title, date, hero, pillars, description } = post.data;
+const { Content } = await render(post);
+---
+
+<Base title={`${title} | Chesamel`} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <nav aria-label="Breadcrumb" class="type-caption">
+      <ol class="flex flex-wrap gap-2">
+        <li><a href="/" class="underline">Home</a> /</li>
+        <li><a href="/insights/" class="underline">Insights</a> /</li>
+        <li><a href="/insights/blog/" class="underline">News</a></li>
+      </ol>
+    </nav>
+    <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
+    <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
+    <p class="type-caption mt-6 flex gap-6">
+      <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+      <span>{readingMinutes(post.body ?? '')} min read</span>
+    </p>
+    {
+      hero && (
+        <figure class="mt-10" data-hero>
+          <img src={hero.src} alt={hero.alt} class="w-full" fetchpriority="high" />
+        </figure>
+      )
+    }
+    <div class="blog-body mt-10" data-blog-body>
+      <Content />
+    </div>
+    <aside aria-labelledby="services-provided" class="mt-16 border-t border-light-grey pt-8">
+      <h2 id="services-provided" class="type-tag">Services provided</h2>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+        {
+          pillars.map((slug) => (
+            <li>
+              <a href={`/services/${slug}/`} class="flex items-center justify-between border border-light-grey px-4 py-5 font-semibold text-black hover:bg-off-white">
+                {pillarLabels[slug]}
+                <span class="type-caption">Explore service <span aria-hidden="true">↗</span></span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+  </article>
+</Base>

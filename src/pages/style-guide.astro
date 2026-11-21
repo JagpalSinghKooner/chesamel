@@ -9,6 +9,11 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import PillarCards from '../components/PillarCards.astro';
 import CtaBlock from '../components/CtaBlock.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import BlogPostListing from '../components/BlogPostListing.astro';
+import { getBlogPosts, summarise } from '../content/blog';
+
+const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarise);
 
 // Each logo in each colour the guidelines permit, on a background that suits
 // it. The dashed outline shows the clear space built into the Component.
@@ -151,6 +156,15 @@ const typeStyles = [
         { label: 'Let’s Talk', href: '/contact/', tone: 'outline' },
       ]}
     />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Blog Post card</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="max-w-sm"><BlogPostCard post={newestPosts[0]} headingLevel="h4" /></div>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Blog Post listing</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body mb-6 max-w-2xl">Pillar and Industry filters over Blog Post cards, as on News. Shown here with the six newest posts.</p>
+      <BlogPostListing posts={newestPosts} headingLevel="h4" />
+    </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
   </section>

@@ -1,50 +1,32 @@
 ---
-// Latest Insights on the homepage. These three are the live site's latest on
-// 21 Nov 2026, written in by hand; #7 replaces them with the newest Blog Posts.
+// Latest Insights on the homepage: the three newest Blog Posts.
 import Button from '../Button.astro';
+import BlogPostCard from '../BlogPostCard.astro';
+import { getBlogPosts, summarise } from '../../content/blog';
 
+// The live site also links /insights/news/, which returns 404 there; News is
+// served at /insights/blog/, so it is listed once, as News.
 const filters = [
-  { label: 'Blog', href: '/insights/blog/' },
+  { label: 'News', href: '/insights/blog/' },
   { label: 'Podcasts', href: '/insights/podcasts/' },
   { label: 'Reports', href: '/insights/reports/' },
   { label: 'Webinar', href: '/insights/webinars/' },
-  { label: 'News', href: '/insights/news/' },
 ];
 
-const insights = [
-  { pillar: 'Marketing Engine', title: 'The Marketing Say-Do Gap: The 2026 State of AI in B2B Marketing', date: '2026-10-22', minutes: 2, href: '/the-marketing-say-do-gap-the-2026-state-of-ai-in-b2b-marketing/' },
-  { pillar: 'Marketing Engine', title: 'Partner Enablement: The Risk-First Engine', date: '2026-10-15', minutes: 2, href: '/partner-enablement-risk-first/' },
-  { pillar: 'Hybrid Workforce', title: 'The Flex Index: A Working Tool for Workforce Composition', date: '2026-10-01', minutes: 2, href: '/flex-index-flexible-workforce-planning/' },
-];
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const insights = (await getBlogPosts()).slice(0, 3).map(summarise);
 ---
 
-<section class="bg-off-white">
+<section class="bg-off-white" aria-labelledby="latest-insights">
   <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-      <h2 class="type-heading-2">Latest Insights</h2>
+      <h2 id="latest-insights" class="type-heading-2">Latest Insights</h2>
       <ul class="flex flex-wrap gap-2">
         {filters.map((f) => <li><a href={f.href} class="block border border-light-grey px-3 py-2 text-sm font-semibold hover:border-dark-grey">{f.label}</a></li>)}
         <li><Button href="/insights/" tone="light">All Insights</Button></li>
       </ul>
     </div>
     <ul class="mt-12 grid gap-4 md:grid-cols-3">
-      {
-        insights.map((p) => (
-          <li>
-            <a href={p.href} class="group flex h-full min-h-64 flex-col border border-light-grey bg-white/40 p-5 hover:border-indigo hover:bg-white">
-              <span class="type-tag self-start border border-light-grey px-3 py-1">{p.pillar}</span>
-              <h3 class="type-heading-3 mt-6 text-xl leading-tight group-hover:underline">{p.title}</h3>
-              <p class="type-caption mt-auto flex justify-between pt-6">
-                <time datetime={p.date}>{formatDate(p.date)}</time>
-                <span>{p.minutes} min read</span>
-              </p>
-            </a>
-          </li>
-        ))
-      }
+      {insights.map((post) => <li><BlogPostCard post={post} /></li>)}
     </ul>
   </div>
 </section>
