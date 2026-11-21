@@ -23,27 +23,29 @@ const localPaths = (url: string) => {
   return { served: `${SERVED}${path}`, oversized: `${OVERSIZED}${path}` };
 };
 
+const inRepo = async (url: string) => {
+  const { served, oversized } = localPaths(url);
+  return (await exists(served)) || (await exists(oversized));
+};
+
 // URLs with no copy in the repo, which pages therefore can't show.
 export async function notInRepo(urls: string[]): Promise<Set<string>> {
   const missing = new Set<string>();
-  for (const url of new Set(urls)) {
-    const { served, oversized } = localPaths(url);
-    if (!(await exists(served)) && !(await exists(oversized))) missing.add(url);
-  }
+  for (const url of new Set(urls)) if (!(await inRepo(url))) missing.add(url);
   return missing;
 }
 
 // Downloads each URL unless a copy is already in the repo. Returns the URLs
 // that failed, with the reason, so a re-run can pick them up.
-export async function downloadMedia(urls: string[], log = console.log): Promise<string[]> {
+export async function downloadMedia(urls: string[]): Promise<string[]> {
   const queue = [...new Set(urls)];
   const failures: string[] = [];
   let done = 0;
 
   async function worker() {
     for (let url = queue.shift(); url; url = queue.shift()) {
+      if (await inRepo(url)) continue;
       const { served, oversized } = localPaths(url);
-      if ((await exists(served)) || (await exists(oversized))) continue;
       try {
         const res = await fetch(url, { headers: { 'user-agent': 'chesamel-importer' } });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -51,7 +53,7 @@ export async function downloadMedia(urls: string[], log = console.log): Promise<
         const target = bytes.byteLength > MAX_SERVED_BYTES ? oversized : served;
         await mkdir(dirname(target), { recursive: true });
         await writeFile(target, bytes);
-        if (++done % 50 === 0) log(`  downloaded ${done}`);
+        if (++done % 50 === 0) console.log(`  downloaded ${done}`);
       } catch (err) {
         failures.push(`${url}: ${(err as Error).message}`);
       }

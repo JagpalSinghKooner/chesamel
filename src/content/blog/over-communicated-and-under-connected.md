@@ -3,7 +3,7 @@ title: "Over-Communicated and Under-Connected?"
 date: "2025-10-28T14:25:09Z"
 author: "juan"
 hero: {"src":"/wp-content/uploads/2025/10/jardel-vieira-HPUgWtdgzZ4-unsplash-scaled.png","alt":""}
-pillars: ["hybrid-workforce","marketing-engine"]
+pillars: ["marketing-engine","hybrid-workforce"]
 industries: []
 ---
 

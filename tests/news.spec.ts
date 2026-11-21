@@ -88,7 +88,7 @@ test.describe('Blog Post page', () => {
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Flex Index/);
   });
 
-  test('a former news item is served under /news/', async ({ page }) => {
+  test('a post of the former news type is served under /news/', async ({ page }) => {
     const res = await page.goto('/news/qatar-the-dawning-oasis-of-global-innovation/');
     expect(res?.status()).toBe(200);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Qatar: The Dawning Oasis of Global Innovation');

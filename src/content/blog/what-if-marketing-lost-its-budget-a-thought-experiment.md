@@ -3,7 +3,7 @@ title: "What If Marketing Lost Its Budget: A Thought Experiment"
 date: "2025-11-24T15:16:08Z"
 author: "juan"
 hero: {"src":"/wp-content/uploads/2025/11/nigel-hoare-WnSQPg8MIbQ-unsplash-scaled.png","alt":""}
-pillars: ["hybrid-workforce","marketing-engine"]
+pillars: ["marketing-engine","hybrid-workforce"]
 industries: []
 ---
 

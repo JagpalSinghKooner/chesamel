@@ -4,7 +4,7 @@ export const pages = [
   '/',
   '/404',
   '/style-guide/',
-  // News and two Blog Posts: one post, one former news item.
+  // News and two Blog Posts: one post, one of the former news type.
   '/insights/blog/',
   '/flex-index-flexible-workforce-planning/',
   '/news/qatar-the-dawning-oasis-of-global-innovation/',

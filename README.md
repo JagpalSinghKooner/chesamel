@@ -56,7 +56,7 @@ npm run import -- --no-media
 
 The importer (`scripts/import-wordpress/`) reads the newest `*.WordPress.*.xml` export in the repo root. The export contains personal data, so it is gitignored and must never be committed. It writes:
 
-- Blog Posts to `src/content/blog/` (former news items to `src/content/blog/news/`). A file's path is its address.
+- Blog Posts to `src/content/blog/` (posts of WordPress's former `news` type to `src/content/blog/news/`). A file's path is its address.
 - Media to `public/wp-content/uploads/`, at the same paths as on the live site. Files over Cloudflare's 25 MiB limit go to `media-oversized/` instead, which is kept but not served.
 - `docs/content-team/blog-posts-without-industry.md`, the posts the content team still needs to give an Industry.
 - `urls/pending.json`, minus every address it migrated.

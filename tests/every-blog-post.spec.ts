@@ -13,7 +13,9 @@ test.describe.configure({ mode: 'parallel' });
 
 for (const address of addresses) {
   test(`${address} is accessible and its images load`, async ({ page, request }) => {
-    expect((await page.goto(address))?.status()).toBe(200);
+    // Only the DOM is needed: images are fetched directly below, and waiting for
+    // the full load would tie the test to YouTube's servers on embed posts.
+    expect((await page.goto(address, { waitUntil: 'domcontentloaded' }))?.status()).toBe(200);
 
     const sources = await page.locator('main img').evaluateAll((imgs) => imgs.map((i) => i.getAttribute('src')!));
     const broken: string[] = [];

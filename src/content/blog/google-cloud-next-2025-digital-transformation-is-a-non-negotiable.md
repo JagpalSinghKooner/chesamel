@@ -3,7 +3,7 @@ title: "Google Cloud NEXT 2025: Digital Transformation is a Non-Negotiable"
 date: "2025-04-29T11:00:52Z"
 author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/04/GC-Next.png","alt":""}
-pillars: ["ai-machine-learning","digital-transformation"]
+pillars: ["digital-transformation","ai-machine-learning"]
 industries: []
 description: "AI is transforming business fast. Chesamel's CEO shares why digital transformation is urgent—and how to prepare for a future that won’t wait."
 ---

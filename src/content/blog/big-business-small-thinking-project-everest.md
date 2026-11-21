@@ -3,7 +3,7 @@ title: "Big Business, Small Thinking: Project Everest"
 date: "2025-12-02T08:00:00Z"
 author: "juan"
 hero: {"src":"/wp-content/uploads/2025/12/ftcms_08ad8f50-23ea-4067-b831-3674d67c0682.avif","alt":""}
-pillars: ["digital-transformation","hybrid-workforce"]
+pillars: ["hybrid-workforce","digital-transformation"]
 industries: ["finance"]
 ---
 

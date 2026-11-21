@@ -1,10 +1,10 @@
 ---
 // Blog Posts at their original addresses: /<slug>/, and /news/<slug>/ for
-// former news items. Later tickets that serve other content at root-level
+// posts of WordPress's former `news` type. Later tickets that serve other content at root-level
 // addresses add their collections to getStaticPaths here.
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { getBlogPosts, addressOf, formatDate, readingMinutes, type BlogPost } from '../content/blog';
+import { getBlogPosts, addressOf, formatDate, primaryPillar, readingMinutes, type BlogPost } from '../content/blog';
 import { pillarLabels } from '../data/taxonomy';
 
 export async function getStaticPaths() {
@@ -26,7 +26,7 @@ const { Content } = await render(post);
         <li><a href="/insights/blog/" class="underline">News</a></li>
       </ol>
     </nav>
-    <p class="type-tag mt-8">{pillarLabels[pillars[0]]}</p>
+    <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
     <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
     <p class="type-caption mt-6 flex gap-6">
       <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>

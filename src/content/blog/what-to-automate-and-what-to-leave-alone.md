@@ -3,7 +3,7 @@ title: "What to Automate \nand What to Leave Alone"
 date: "2025-08-13T10:47:43Z"
 author: "juan"
 hero: {"src":"/wp-content/uploads/2024/11/uRNLzKCjSBetV6aFFviXQRfapQaAKvJilopZ_kKeYjGkFXmQsfBopob0EVkioFLKVvKeERxhXRRLsi306zk2FBDr0Z66P44xbTUYMM2VanL9Jn9lx0Uv_zrpnFZEuFg_-xcXfVAaks9495PoMlDiLlo.png","alt":""}
-pillars: ["ai-machine-learning","digital-transformation"]
+pillars: ["digital-transformation","ai-machine-learning"]
 industries: ["technology"]
 ---
 

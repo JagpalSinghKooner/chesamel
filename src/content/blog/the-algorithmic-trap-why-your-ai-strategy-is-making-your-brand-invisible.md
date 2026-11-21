@@ -3,7 +3,7 @@ title: "The Algorithmic Trap: Why Your AI Strategy is Making Your Brand Invisibl
 date: "2026-06-25T13:55:26Z"
 author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/06/Chesamel-The-Algorithmic-Trap-1-1-scaled.jpg","alt":"AI Marketing Strategy and Brand Visibility"}
-pillars: ["digital-transformation","marketing-engine"]
+pillars: ["marketing-engine","digital-transformation"]
 industries: ["technology"]
 ---
 

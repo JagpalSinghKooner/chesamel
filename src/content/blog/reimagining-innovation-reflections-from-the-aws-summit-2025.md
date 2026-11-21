@@ -3,7 +3,7 @@ title: "Reimagining Innovation: Reflections from the AWS Summit 2025"
 date: "2025-05-13T14:01:32Z"
 author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/05/AWS-Summit.png","alt":""}
-pillars: ["ai-machine-learning","digital-transformation"]
+pillars: ["digital-transformation","ai-machine-learning"]
 industries: ["technology"]
 description: "Explore key takeaways from AWS Summit 2025 and what they mean for businesses adopting AI and cloud at scale. Insights from Chesamel’s Roberto Sanha."
 ---

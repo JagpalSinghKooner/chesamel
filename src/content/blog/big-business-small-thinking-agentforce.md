@@ -3,7 +3,7 @@ title: "Big Business, Small Thinking: Agentforce"
 date: "2025-11-17T10:00:00Z"
 author: "juan"
 hero: {"src":"/wp-content/uploads/2025/11/85909172-4bb9-43c5-ae62-c8a52fb8c143.jpg","alt":""}
-pillars: ["ai-machine-learning","hybrid-workforce"]
+pillars: ["hybrid-workforce","ai-machine-learning"]
 industries: []
 ---
 

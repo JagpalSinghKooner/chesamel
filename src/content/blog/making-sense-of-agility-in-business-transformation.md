@@ -3,7 +3,7 @@ title: "Making Sense of Agility in Business Transformation"
 date: "2024-12-24T11:02:21Z"
 author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/12/Making-Sense-of-Agility-in-Business-Transformation.png","alt":""}
-pillars: ["digital-transformation","hybrid-workforce","marketing-engine"]
+pillars: ["digital-transformation","marketing-engine","hybrid-workforce"]
 industries: []
 description: "Learn how strategic agility enables businesses to adapt amidst constant change. Find key principles for successful transformation. Get in touch with us, today."
 ---

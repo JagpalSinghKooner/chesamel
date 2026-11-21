@@ -3,7 +3,7 @@ title: "Earth Day 2025: What Sustainable Workplace Transformation Is & What It�
 date: "2025-04-22T10:12:30Z"
 author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/04/Earth-Day.png","alt":""}
-pillars: ["hybrid-workforce","investment-impact-transformation"]
+pillars: ["investment-impact-transformation","hybrid-workforce"]
 industries: []
 description: "Discover what sustainable workplace transformation really means—and what it doesn't—this Earth Day 2025. Learn why true change starts with your people."
 ---

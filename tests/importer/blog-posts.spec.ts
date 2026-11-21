@@ -48,7 +48,7 @@ test('drafts, trashed items and other post types are skipped', () => {
   expect(posts.map((p) => p.address)).toEqual(['/live/']);
 });
 
-test('a former news item becomes a Blog Post under /news/', () => {
+test('a WordPress news-type post becomes a Blog Post under /news/', () => {
   const { posts } = importBlogPosts(
     wxr([{ id: 1, type: 'news', slug: 'qatar-oasis', link: 'https://chesamel.com/news/qatar-oasis/' }]),
   );
@@ -56,14 +56,14 @@ test('a former news item becomes a Blog Post under /news/', () => {
   expect(posts[0].file).toBe('src/content/blog/news/qatar-oasis.md');
 });
 
-test('Pillars come from the service field: sub-services count as their parent, unknown IDs are dropped', () => {
+test('Pillars come from the service field in WordPress order: sub-services count as their parent, unknown IDs are dropped', () => {
   const { posts } = importBlogPosts(
     wxr([
       { id: 1, meta: { service: ids(365, 349, 4834), industry: ids(451, 455) } },
       { id: 2, meta: { service: 'ESG', industry: 'a:0:{}' } },
     ]),
   );
-  expect(posts[0].data.pillars).toEqual(['ai-machine-learning', 'marketing-engine']);
+  expect(posts[0].data.pillars).toEqual(['marketing-engine', 'ai-machine-learning']);
   expect(posts[0].data.industries).toEqual(['finance', 'technology']);
   expect(posts[1].data.pillars).toEqual(['investment-impact-transformation']);
   expect(posts[1].data.industries).toEqual([]);

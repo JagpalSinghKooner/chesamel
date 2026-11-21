@@ -7,7 +7,7 @@
 // A post with no Industry is shown while no Industry is chosen and hidden
 // once one is.
 import BlogPostCard from './BlogPostCard.astro';
-import type { BlogPostSummary } from '../content/blog';
+import { blogPostCount, type BlogPostSummary } from '../content/blog';
 import { pillarLabels, industryLabels } from '../data/taxonomy';
 
 interface Props {
@@ -20,7 +20,6 @@ const groups = [
   { key: 'pillar', label: 'Pillar', options: Object.entries(pillarLabels) },
   { key: 'industry', label: 'Industry', options: Object.entries(industryLabels) },
 ];
-const countText = (n: number) => `${n} Blog Post${n === 1 ? '' : 's'}`;
 ---
 
 <div data-component="blog-post-listing" data-blog-listing>
@@ -45,7 +44,7 @@ const countText = (n: number) => `${n} Blog Post${n === 1 ? '' : 's'}`;
       ))
     }
   </div>
-  <p role="status" class="type-caption mt-8" data-count>{countText(posts.length)}</p>
+  <p role="status" class="type-caption mt-8" data-count>{blogPostCount(posts.length)}</p>
   <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {
       posts.map((post) => (

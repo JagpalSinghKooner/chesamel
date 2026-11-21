@@ -45,5 +45,10 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
 }
 
+// The first label is the post's main Pillar, the one cards and headers show.
+export const primaryPillar = (post: { pillars: PillarSlug[] }) => post.pillars[0];
+
+export const blogPostCount = (n: number) => `${n} Blog Post${n === 1 ? '' : 's'}`;
+
 export const formatDate = (date: Date) =>
   date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });

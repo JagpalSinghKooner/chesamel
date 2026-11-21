@@ -1,6 +1,6 @@
-// Turns WordPress posts and news items into Blog Post files.
+// Turns WordPress posts (both the post and the former news type) into Blog Post files.
 
-import { parseWxr, serialisedIds, decodeEntities, type Wxr, type WxrItem } from './wxr.ts';
+import { parseWxr, serialisedIds, decodeEntities, type Wxr } from './wxr.ts';
 import { toMarkdown, localiseUrls, mediaUrls } from './html.ts';
 import { pillarSlugs, industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
 
@@ -63,8 +63,8 @@ export function importBlogPosts(xml: string, { missingMedia = new Set() }: Impor
         date: item.dateGmt.replace(' ', 'T') + 'Z',
         author: wxr.authors.get(item.creator) ?? item.creator,
         ...(hero && { hero }),
-        pillars: labels(wxr, item.meta.service, 'services', pillarSlugs),
-        industries: labels(wxr, item.meta.industry, 'industries', industrySlugs),
+        pillars: pillarsOf(wxr, item.meta.service),
+        industries: linkedSlugs(wxr, item.meta.industry, 'industries', industrySlugs),
         ...(description && { description }),
       },
       body: withoutMissingImages(toMarkdown(item.content), missingMedia, (image, alt) =>
@@ -96,18 +96,22 @@ function withoutMissingImages(markdown: string, missing: Set<string>, report: (i
 // live site redirects the old ESG service to Investment & Impact Transformation.
 const LEGACY_SERVICE_NAMES: Record<string, PillarSlug> = { ESG: 'investment-impact-transformation' };
 
+function pillarsOf(wxr: Wxr, value: string | undefined): PillarSlug[] {
+  const legacy = LEGACY_SERVICE_NAMES[value ?? ''];
+  return legacy ? [legacy] : linkedSlugs(wxr, value, 'services', pillarSlugs);
+}
+
 // Maps ACF relationship IDs to label slugs via the linked post's address:
 // /services/<slug>/… or /industries/<slug>/. Sub-services count as their
-// parent service; IDs of deleted or Arabic posts are dropped.
-function labels<T extends string>(wxr: Wxr, value: string | undefined, section: string, allowed: readonly T[]): T[] {
+// parent service; IDs of deleted or Arabic posts are dropped. WordPress order
+// is kept, because the first label is the one cards show.
+function linkedSlugs<T extends string>(wxr: Wxr, value: string | undefined, section: string, allowed: readonly T[]): T[] {
   const found = new Set<T>();
-  const legacy = LEGACY_SERVICE_NAMES[value ?? ''];
-  if (section === 'services' && legacy) found.add(legacy as unknown as T);
   for (const id of serialisedIds(value)) {
-    const linked: WxrItem | undefined = wxr.byId.get(id);
+    const linked = wxr.byId.get(id);
     if (!linked) continue;
     const [first, slug] = new URL(linked.link).pathname.split('/').filter(Boolean);
     if (first === section && (allowed as readonly string[]).includes(slug)) found.add(slug as T);
   }
-  return [...found].sort();
+  return [...found];
 }

@@ -3,7 +3,7 @@ title: "Marketing Specialists vs. Generalists: Building Effective Marketing Team
 date: "2025-01-22T16:00:35Z"
 author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/01/Balancing-Generalists-and-Specialists-Building-an-Effective-Marketing-Team-for-2025.png","alt":""}
-pillars: ["hybrid-workforce","marketing-engine"]
+pillars: ["marketing-engine","hybrid-workforce"]
 industries: []
 description: "Should marketing teams focus on specialists or generalists in 2025? The pros and cons of each approach to build a performing team."
 ---

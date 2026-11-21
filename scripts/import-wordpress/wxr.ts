@@ -9,8 +9,6 @@ export interface WxrItem {
   status: string;
   title: string;
   link: string;
-  slug: string;
-  parent: string;
   // GMT, as WordPress writes it: "2024-12-10 12:20:12".
   dateGmt: string;
   creator: string;
@@ -55,8 +53,6 @@ export function parseWxr(xml: string): Wxr {
       status: str(i['wp:status']),
       title: str(i.title),
       link: str(i.link),
-      slug: str(i['wp:post_name']),
-      parent: str(i['wp:post_parent']),
       dateGmt: str(i['wp:post_date_gmt']),
       creator: str(i['dc:creator']),
       content: i['content:encoded'] === undefined ? '' : String(i['content:encoded']),

@@ -3,7 +3,7 @@ title: "Why Most Enterprise AI Plans in the Gulf Never Reach Production, and How
 date: "2026-07-15T14:25:58Z"
 author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/07/Untitled-design-1.png","alt":""}
-pillars: ["bi-data-analytics","digital-transformation"]
+pillars: ["digital-transformation","bi-data-analytics"]
 industries: ["technology"]
 description: "Most enterprise AI plans in Saudi Arabia and Qatar never reach production. The four reasons why, and the delivery model that closes the gap."
 ---
