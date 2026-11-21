@@ -1,10 +1,49 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import PillarCards from '../components/PillarCards.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import Button from '../components/Button.astro';
+import ClientLogos from '../components/home/ClientLogos.astro';
+import Approach from '../components/home/Approach.astro';
+import LatestInsights from '../components/home/LatestInsights.astro';
+import ConnectWithUs from '../components/home/ConnectWithUs.astro';
+import WhereWeAre from '../components/home/WhereWeAre.astro';
 ---
 
-<Base title="Chesamel">
-  <main class="mx-auto max-w-3xl px-6 py-24">
-    <h1 class="type-heading-1">Chesamel</h1>
-    <p class="mt-4">Business transformation consultancy. New site coming soon.</p>
-  </main>
+<Base title="Chesamel | Global Business Transformation">
+  <Hero
+    before="Global"
+    highlight="Business"
+    after="Transformation"
+    image={{ src: '/images/hero.webp', srcset: '/images/hero-960.webp 960w, /images/hero.webp 1920w' }}
+    actions={[
+      { label: 'What We Do', href: '/what-we-do/', tone: 'dark' },
+      { label: 'Our Work', href: '/insights/our-work/', tone: 'indigo' },
+    ]}
+  />
+  <ClientLogos />
+  <Approach />
+  <PillarCards>
+    <h2 class="type-heading-2">How we add value</h2>
+    <p class="mt-6 max-w-md">
+      We’re a Business Transformation Consultancy providing end-to-end solutions through human ingenuity and advanced
+      technology to drive positive change for a better future.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <Button href="/what-we-do/" tone="dark">Find out more</Button>
+      <Button href="/insights/" tone="light">Our Insights</Button>
+    </div>
+  </PillarCards>
+  <CtaBlock
+    heading="Want to transform your business?"
+    text="Accelerate your business growth into a new age"
+    actions={[
+      { label: 'What We Do', href: '/what-we-do/', tone: 'lime' },
+      { label: 'Let’s Talk', href: '/contact/', tone: 'outline' },
+    ]}
+  />
+  <LatestInsights />
+  <ConnectWithUs />
+  <WhereWeAre />
 </Base>

@@ -1,0 +1,32 @@
+---
+// "Where we are": the offices' countries and the dotted world map.
+// Only Qatar has its own page. The live site also listed France, Spain,
+// Netherlands, Bulgaria, Turkey, UAE and Japan with links to "#", and linked
+// USA and UK to addresses that 404; those links are gone (#6).
+// The map is the live site's inline SVG, redrawn as circles (674 KB to 112 KB).
+import Button from '../Button.astro';
+import { qatarLink } from '../../data/site';
+
+const countries = ['USA', 'UK', 'Portugal', 'Sweden', 'Saudi Arabia'];
+---
+
+<section class="bg-black">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="flex flex-col gap-8 lg:flex-row lg:justify-between">
+      <div>
+        <h2 class="type-heading-2 text-white">Where<br />we are</h2>
+        <p class="mt-6 max-w-xs text-medium-grey">Explore our global presence and office locations.</p>
+        <div class="mt-6"><Button href="/contact/" tone="indigo">Get in Touch</Button></div>
+      </div>
+      <ul class="flex flex-wrap content-start gap-2 lg:max-w-md lg:justify-end">
+        {countries.map((c) => <li class="border border-white/15 px-3 py-1.5 text-sm text-off-white">{c}</li>)}
+        <li>
+          <a href={qatarLink.href} hreflang="ar" class="block border border-white/40 px-3 py-1.5 text-sm font-semibold text-white hover:bg-white hover:text-black">
+            {qatarLink.label} <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <img src="/images/world-map.svg" alt="" width="1082" height="624" class="mt-12 h-auto w-full" loading="lazy" />
+  </div>
+</section>

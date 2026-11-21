@@ -1,0 +1,36 @@
+---
+// Pillar cards Component: the four Pillars as linked cards, beside an
+// optional introduction (the live homepage's "How we add value").
+import { pillars } from '../data/pillars';
+
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { headingLevel: Heading = 'h2' } = Astro.props;
+const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
+---
+
+<section class="bg-off-white" data-component="pillar-cards">
+  <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[3fr_2fr] lg:items-center">
+    <ul aria-label="Pillars" class="grid gap-4 sm:grid-cols-2">
+      {
+        pillars.map((p) => (
+          <li>
+            <a
+              href={p.href}
+              class="group flex h-full flex-col items-center justify-center gap-4 border border-light-grey bg-white/40 px-6 py-12 text-center transition-colors hover:border-indigo hover:bg-white"
+            >
+              <img src={p.icon} alt="" width="56" height="56" loading="lazy" />
+              <CardHeading class="font-semibold text-black">{p.label}</CardHeading>
+              <p class="type-caption">{p.summary}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div>
+      <slot />
+    </div>
+  </div>
+</section>

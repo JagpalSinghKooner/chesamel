@@ -3,6 +3,20 @@
 // at. Hidden from search engines and the sitemap through src/noindex.mjs.
 import Base from '../layouts/Base.astro';
 import { colourGroups } from '../design-system/colours';
+import Logo from '../design-system/Logo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import PillarCards from '../components/PillarCards.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+
+// Each logo in each colour the guidelines permit, on a background that suits
+// it. The dashed outline shows the clear space built into the Component.
+const logoExamples = [
+  { variant: 'wordmark', title: 'Wordmark', note: 'Clear space: the height of its “c”.' },
+  { variant: 'lockup', title: 'Lockup', note: 'Clear space: the width of “ch”. Used in the header and footer.' },
+  { variant: 'tagline-lockup', title: 'Logo with tagline', note: 'Clear space: the width of “ch”.' },
+] as const;
 
 const typeStyles = [
   { cls: 'type-heading-1', spec: 'Heading 1: Figtree Medium, 56px, leading 100%, Black', sample: 'Believe it’s possible' },
@@ -17,7 +31,7 @@ const typeStyles = [
 ---
 
 <Base title="Style guide | Chesamel">
-  <main class="mx-auto max-w-5xl px-6 py-16">
+  <div class="mx-auto max-w-5xl px-6 py-16">
     <h1 class="type-heading-1">Style guide</h1>
     <p class="type-subheading mt-4">Every colour and type style in the Chesamel Design System.</p>
 
@@ -50,6 +64,35 @@ const typeStyles = [
       }
     </section>
 
+    <section aria-labelledby="logos" class="mt-20" data-style-guide="logos">
+      <h2 id="logos" class="type-heading-2">Logo</h2>
+      <p class="type-body mt-3 max-w-2xl">
+        <code>Logo</code> Component. White on Indigo or Black, Black on white; the brandmark may also be Indigo on white.
+        Clear space is built in, so never add your own margin to squeeze it.
+      </p>
+      {
+        logoExamples.map((l) => (
+          <div class="mt-10">
+            <h3 class="type-heading-3">{l.title}</h3>
+            <p class="type-caption mt-2">{l.note}</p>
+            <div class="mt-4 flex flex-wrap gap-4">
+              <div class="rounded-lg bg-black p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant={l.variant} colour="white" height={48} /></span></div>
+              <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant={l.variant} colour="black" height={48} /></span></div>
+            </div>
+          </div>
+        ))
+      }
+      <div class="mt-10">
+        <h3 class="type-heading-3">Brandmark</h3>
+        <p class="type-caption mt-2">Clear space: the corner circles on page 9 of the guidelines, about a quarter of its height.</p>
+        <div class="mt-4 flex flex-wrap gap-4">
+          <div class="rounded-lg bg-indigo p-4"><span class="block outline-1 outline-dashed outline-white"><Logo variant="brandmark" colour="white" height={48} /></span></div>
+          <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant="brandmark" colour="black" height={48} /></span></div>
+          <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant="brandmark" colour="indigo" height={48} /></span></div>
+        </div>
+      </div>
+    </section>
+
     <section aria-labelledby="typography" class="mt-20">
       <h2 id="typography" class="type-heading-2">Typography</h2>
       <p class="type-body mt-3 max-w-2xl">
@@ -73,5 +116,42 @@ const typeStyles = [
         </li>
       </ul>
     </section>
-  </main>
+  </div>
+
+  <section aria-labelledby="components" class="mt-20" data-style-guide="components">
+    <div class="mx-auto max-w-5xl px-6">
+      <h2 id="components" class="type-heading-2">Components</h2>
+      <p class="type-body mt-3 max-w-2xl">Shown full width, as they appear on the site.</p>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Header</h3>
+    <Header idPrefix="style-guide" />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Hero</h3>
+    <Hero
+      headingLevel="h2"
+      before="Global"
+      highlight="Business"
+      after="Transformation"
+      image={{ src: '/images/hero-960.webp' }}
+      actions={[
+        { label: 'What We Do', href: '/what-we-do/', tone: 'dark' },
+        { label: 'Our Work', href: '/insights/our-work/', tone: 'indigo' },
+      ]}
+    />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Pillar cards</h3>
+    <PillarCards headingLevel="h3">
+      <p class="type-body max-w-md">The slot beside the cards takes any introduction, such as “How we add value”.</p>
+    </PillarCards>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Call to action</h3>
+    <CtaBlock
+      headingLevel="h3"
+      heading="Want to transform your business?"
+      text="Accelerate your business growth into a new age"
+      actions={[
+        { label: 'What We Do', href: '/what-we-do/', tone: 'lime' },
+        { label: 'Let’s Talk', href: '/contact/', tone: 'outline' },
+      ]}
+    />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
+    <Footer />
+  </section>
 </Base>

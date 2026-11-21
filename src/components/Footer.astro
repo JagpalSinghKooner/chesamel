@@ -1,0 +1,64 @@
+---
+// Site footer Component: logo, office cities, links, social icons,
+// accreditations, copyright and legal links. Laid out as on the live site.
+import Logo from '../design-system/Logo.astro';
+import { officeCities, footerLinks, legalLinks, socialLinks, accreditations } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-black text-off-white">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <a href="/" aria-label="Chesamel home" class="-ml-4 inline-block rounded focus-visible:outline-2 focus-visible:outline-white">
+      <Logo variant="lockup" colour="white" height={32} />
+    </a>
+
+    <div class="mt-6 border-t border-white/10 pt-6">
+      <h2 class="type-tag flex items-center gap-2 text-medium-grey">
+        <span aria-hidden="true" class="inline-block size-1.5 rounded-full bg-lime"></span>
+        Global offices
+      </h2>
+      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-semibold text-white">
+        {officeCities.map((city) => <li>{city}</li>)}
+      </ul>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-6 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <nav aria-label="Footer">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {footerLinks.map((link) => <li><a href={link.href} class="hover:text-white hover:underline">{link.label}</a></li>)}
+        </ul>
+      </nav>
+      <ul class="flex gap-3">
+        {
+          socialLinks.map((s) => (
+            <li>
+              <a href={s.href} aria-label={s.label} class="flex size-8 items-center justify-center rounded bg-white/10 hover:bg-white/20">
+                <img src={s.icon} alt="" width="16" height="16" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <ul class="mt-6 flex flex-wrap items-center gap-x-10 gap-y-4">
+      {
+        accreditations.map((a) => (
+          <li>
+            <a href={a.href} aria-label={a.label} class="block opacity-70 hover:opacity-100">
+              <img src={a.image} alt="" width={a.width} height={a.height} class="h-10 w-auto" loading="lazy" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs lg:flex-row lg:justify-between">
+      <p>© {year} Chesamel Group Ltd. All rights reserved.</p>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
+        {legalLinks.map((link) => <li><a href={link.href} class="hover:text-white hover:underline">{link.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</footer>
