@@ -4,7 +4,7 @@ The public website of Chesamel Group, rebuilt as an [Astro](https://astro.build)
 
 ## Requirements
 
-- Node.js 24 (the exact major is in `.node-version`; Astro needs at least 22.12)
+- Node.js, at the version in `.node-version`
 - npm
 
 ## Run the site locally
