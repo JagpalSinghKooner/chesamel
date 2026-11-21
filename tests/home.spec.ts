@@ -94,7 +94,7 @@ test.describe('homepage', () => {
     await expect(main.getByRole('heading', { name: 'Latest Insights' })).toBeVisible();
     await expect(main.getByRole('heading', { name: 'Connect with us' })).toBeVisible();
     await expect(main.getByRole('heading', { name: 'Where we are' })).toBeVisible();
-    await expect(main.getByRole('link', { name: 'Qatar' })).toHaveAttribute('href', '/ar/who-we-are/');
+    await expect(main.getByRole('link', { name: 'Qatar', exact: true })).toHaveAttribute('href', '/ar/who-we-are/');
   });
 
   test('does not list the countries whose links went nowhere', async ({ page }) => {

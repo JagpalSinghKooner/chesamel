@@ -109,6 +109,7 @@ _Avoid_: Block, widget, module, section
 **Pillar**:
 One of Chesamel's four service areas: Marketing Engine, Digital Transformation, Hybrid Workforce, Investment & Impact Transformation.
 _Avoid_: Service line, division
+_Note_: Blog Posts can also carry two further service areas from the current site, AI & Machine Learning and BI & Data Analytics. They are not Pillars, but the News Pillar filter lists them beside the four, as the current site does.
 
 **Insight**:
 Any published thought-leadership item: Blog Post, webinar, podcast, or Case Study.

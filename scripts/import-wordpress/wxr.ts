@@ -1,0 +1,83 @@
+// Reads a WordPress export (WXR) into plain objects. Knows nothing about the
+// site's content model; each importer decides what to do with the items.
+
+import { XMLParser } from 'fast-xml-parser';
+
+export interface WxrItem {
+  id: string;
+  type: string;
+  status: string;
+  title: string;
+  link: string;
+  slug: string;
+  parent: string;
+  // GMT, as WordPress writes it: "2024-12-10 12:20:12".
+  dateGmt: string;
+  creator: string;
+  content: string;
+  attachmentUrl: string;
+  meta: Record<string, string>;
+}
+
+export interface Wxr {
+  // Author login to display name. Emails in the export are never read.
+  authors: Map<string, string>;
+  items: WxrItem[];
+  byId: Map<string, WxrItem>;
+}
+
+const parser = new XMLParser({
+  ignoreAttributes: true,
+  parseTagValue: false,
+  trimValues: false,
+  // Titles and bodies keep their entities as written; decoding is the importer's job.
+  processEntities: false,
+  isArray: (name) => ['item', 'wp:postmeta', 'wp:author'].includes(name),
+});
+
+const str = (v: unknown): string => (v === undefined || v === null ? '' : String(v)).trim();
+
+export function parseWxr(xml: string): Wxr {
+  const channel = parser.parse(xml).rss.channel;
+  const authors = new Map<string, string>();
+  for (const a of channel['wp:author'] ?? []) {
+    authors.set(str(a['wp:author_login']), str(a['wp:author_display_name']) || str(a['wp:author_login']));
+  }
+
+  const items: WxrItem[] = (channel.item ?? []).map((i: Record<string, unknown>) => {
+    const meta: Record<string, string> = {};
+    for (const m of (i['wp:postmeta'] as Record<string, unknown>[] | undefined) ?? []) {
+      meta[str(m['wp:meta_key'])] = str(m['wp:meta_value']);
+    }
+    return {
+      id: str(i['wp:post_id']),
+      type: str(i['wp:post_type']),
+      status: str(i['wp:status']),
+      title: str(i.title),
+      link: str(i.link),
+      slug: str(i['wp:post_name']),
+      parent: str(i['wp:post_parent']),
+      dateGmt: str(i['wp:post_date_gmt']),
+      creator: str(i['dc:creator']),
+      content: i['content:encoded'] === undefined ? '' : String(i['content:encoded']),
+      attachmentUrl: str(i['wp:attachment_url']),
+      meta,
+    };
+  });
+
+  return { authors, items, byId: new Map(items.map((i) => [i.id, i])) };
+}
+
+// ACF stores relationship fields as PHP-serialised arrays: a:1:{i:0;s:3:"356";}.
+export function serialisedIds(value: string | undefined): string[] {
+  return [...(value ?? '').matchAll(/s:\d+:"(\d+)"/g)].map((m) => m[1]);
+}
+
+const ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00a0' };
+
+export function decodeEntities(s: string): string {
+  return s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (whole, e: string) => {
+    if (e[0] === '#') return String.fromCodePoint(e[1].toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10));
+    return ENTITIES[e.toLowerCase()] ?? whole;
+  });
+}

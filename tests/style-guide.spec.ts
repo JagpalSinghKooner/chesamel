@@ -101,12 +101,12 @@ test('style-guide page shows every logo in each permitted colour with its clear 
   }
 });
 
-test('style-guide page shows the header, footer, hero, Pillar cards and CTA Components', async ({ page }) => {
+test('style-guide page shows the header, footer, hero, Pillar cards, CTA and Blog Post Components', async ({ page }) => {
   await page.goto('/style-guide/');
   const components = page.locator('[data-style-guide="components"]');
   await expect(components.locator('[data-header]')).toBeVisible();
   await expect(components.locator('footer')).toBeVisible();
-  for (const name of ['hero', 'pillar-cards', 'cta']) {
-    await expect(components.locator(`[data-component="${name}"]`)).toBeVisible();
+  for (const name of ['hero', 'pillar-cards', 'cta', 'blog-post-card', 'blog-post-listing']) {
+    await expect(components.locator(`[data-component="${name}"]`).first()).toBeVisible();
   }
 });
