@@ -1,0 +1,77 @@
+---
+// Private style-guide page: every Design System token, for designers to point
+// at. Hidden from search engines and the sitemap through src/noindex.mjs.
+import Base from '../layouts/Base.astro';
+import { colourGroups } from '../design-system/colours';
+
+const typeStyles = [
+  { cls: 'type-heading-1', spec: 'Heading 1: Figtree Medium, 56px, leading 100%, Black', sample: 'Believe it’s possible' },
+  { cls: 'type-heading-2', spec: 'Heading 2: Figtree Medium, 40px, leading 100%, Black', sample: 'Believe it’s possible' },
+  { cls: 'type-heading-3', spec: 'Heading 3: Figtree Medium, 28px, leading 100%, Black', sample: 'Believe it’s possible' },
+  { cls: 'type-subheading', spec: 'Subheading: DM Sans Regular, 20px, leading 145%, Indigo', sample: 'An agile collective of experts driving extraordinary growth.' },
+  { cls: 'type-body', spec: 'Body: Figtree Regular, 16px, leading 145%, Dark Grey', sample: 'We create innovative, bespoke solutions that fuel positive change. Together we challenge accepted ways of thinking to deliver transformative business outcomes.' },
+  { cls: 'type-tag', spec: 'Tag: Figtree SemiBold, 14px, tracking 0.04em, uppercase, Dark Grey', sample: 'Digital Transformation' },
+  { cls: 'type-caption', spec: 'Caption: Figtree Regular, 14px, Dark Grey', sample: 'Photo: the Chesamel team in London.' },
+  { cls: 'type-large-grey', spec: 'Large grey: Figtree Regular, 24px, Grey. Grey only at this size or larger.', sample: 'Be compassionate. Be brave. Be brilliant.' },
+];
+---
+
+<Base title="Style guide | Chesamel">
+  <main class="mx-auto max-w-5xl px-6 py-16">
+    <h1 class="type-heading-1">Style guide</h1>
+    <p class="type-subheading mt-4">Every colour and type style in the Chesamel Design System.</p>
+
+    <section aria-labelledby="colours" class="mt-16">
+      <h2 id="colours" class="type-heading-2">Colours</h2>
+      {
+        colourGroups.map((group) => (
+          <div class="mt-10">
+            <h3 class="type-heading-3">{group.title}</h3>
+            <p class="type-body mt-3 max-w-2xl">{group.usage}</p>
+            <ul class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+              {group.colours.map((c) => (
+                <li data-colour={c.token} data-hex={c.hex}>
+                  <div
+                    data-swatch
+                    aria-hidden="true"
+                    class="h-24 rounded-lg border border-light-grey"
+                    style={`background-color: var(--color-${c.token})`}
+                  />
+                  <p class="type-body mt-2 font-semibold text-black">{c.name}</p>
+                  <p class="type-caption">{c.hex}</p>
+                  <p class="type-caption">
+                    <code>{c.token}</code>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+
+    <section aria-labelledby="typography" class="mt-20">
+      <h2 id="typography" class="type-heading-2">Typography</h2>
+      <p class="type-body mt-3 max-w-2xl">
+        Figtree for headings and body, DM Sans for subheadings, IBM Plex Sans Arabic for Arabic. Helvetica, then Arial,
+        when the brand fonts can't load. Body text is Dark Grey, not Grey (ADR-0002).
+      </p>
+      <ul class="mt-10 space-y-10">
+        {
+          typeStyles.map((t) => (
+            <li data-type-style={t.cls}>
+              <p class="type-caption">
+                <code>{t.cls}</code>: {t.spec}
+              </p>
+              <p class:list={[t.cls, 'mt-2']}>{t.sample}</p>
+            </li>
+          ))
+        }
+        <li data-type-style="arabic">
+          <p class="type-caption">Arabic: IBM Plex Sans Arabic, right to left</p>
+          <p lang="ar" dir="rtl" class="type-body mt-2 text-xl">آمن بأن كل شيء ممكن</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+</Base>
