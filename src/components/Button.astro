@@ -1,9 +1,11 @@
 ---
-// Link styled as the live site's square button with a ↗ arrow.
+// Link styled as the live site's square button with a ↗ arrow, built on
+// Fulldev's Button (ADR-0005).
 // `tone` picks a pairing that passes WCAG AA contrast:
 //   dark: Black on light backgrounds    light: white with a border, on light backgrounds
 //   indigo: Indigo with white text       outline: white text with a border, on dark backgrounds
 // The live site's Lime buttons are Indigo here: Lime is for small accents only.
+import { Button } from '@/components/ui/button';
 import type { ButtonTone } from './button';
 
 interface Props {
@@ -13,15 +15,18 @@ interface Props {
 
 const { href, tone = 'dark' } = Astro.props;
 
+// Fulldev's sizing and press nudge give way to the brand button's own: auto
+// height from the padding, wrapping labels, and no movement on click.
+const brand = 'h-auto justify-start gap-3 whitespace-normal px-4 py-2.5 text-sm font-semibold transition-colors active:not-aria-[haspopup]:translate-y-0';
 const tones = {
-  dark: 'bg-black text-white hover:bg-dark-grey',
-  light: 'border border-light-grey bg-white text-black hover:border-dark-grey',
-  indigo: 'bg-indigo text-white hover:bg-black',
-  outline: 'border border-white/40 text-white hover:bg-white hover:text-black',
+  dark: 'border-0 bg-black text-white hover:bg-dark-grey',
+  light: 'border-light-grey bg-white text-black hover:border-dark-grey',
+  indigo: 'border-0 bg-indigo text-white hover:bg-black',
+  outline: 'border-white/40 bg-transparent text-white hover:bg-white hover:text-black',
 };
 ---
 
-<a href={href} class:list={['inline-flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-colors', tones[tone]]}>
+<Button href={href} class:list={[brand, tones[tone]]}>
   <slot />
   <span aria-hidden="true">↗</span>
-</a>
+</Button>
