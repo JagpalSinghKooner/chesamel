@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 4321;
+// PORT lets tests run while `astro dev` holds the default port.
+const PORT = Number(process.env.PORT ?? 4321);
 
 // Set BASE_URL to test a deployed site (a Preview) instead of a local build.
 const BASE_URL = process.env.BASE_URL;
@@ -15,13 +16,14 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
-  // Tests run against a fresh production build, not the dev server, so they
-  // see exactly what Cloudflare Pages will serve. Never reuse a server already
-  // on the port: it may be a stale build or the dev server.
+  // Tests run against a fresh production build, not the dev server, served
+  // with Cloudflare Pages' rules (_redirects, /x to /x/, 404.html) so they see
+  // what a Preview will serve. Never reuse a server already on the port: it may
+  // be a stale build or the dev server.
   webServer: BASE_URL
     ? undefined
     : {
-        command: `npm run build && npm run preview -- --port ${PORT} --ignore-lock`,
+        command: `npm run build && npm run serve -- ${PORT}`,
         url: `http://localhost:${PORT}`,
         reuseExistingServer: false,
         timeout: 120_000,

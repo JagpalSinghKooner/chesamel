@@ -1,15 +1,17 @@
 // URL parity: every address the old chesamel.com served still works.
 // Runs against the local production build, or a Preview when BASE_URL is set.
 // Addresses not migrated yet go in urls/pending.json, which is data only.
+// Where the Project Manager chose to change what an address does, the choice
+// is in urls/decisions.json and overrides the live inventory.
 
 import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
-import { judge, type InventoryEntry } from './parity';
+import { applyDecisions, judge, type Decision, type InventoryEntry } from './parity';
 
 const read = <T>(file: string): T =>
   JSON.parse(readFileSync(new URL(`../../urls/${file}`, import.meta.url), 'utf8'));
 
-const inventory = read<InventoryEntry[]>('inventory.json');
+const inventory = applyDecisions(read<InventoryEntry[]>('inventory.json'), read<Decision[]>('decisions.json'));
 const pending = read<string[]>('pending.json');
 const CONCURRENCY = 10;
 
@@ -24,15 +26,21 @@ test('an unknown address returns 404', async ({ request }) => {
   expect(res.status()).toBe(404);
 });
 
+// The spec: old addresses for the dead country links go to the contact page.
+test('dead country addresses redirect to the contact page', async ({ request }) => {
+  for (const country of ['france', 'spain', 'netherlands', 'bulgaria', 'turkey', 'uae', 'japan']) {
+    for (const path of [`/${country}`, `/${country}/`]) {
+      const res = await request.get(path, { maxRedirects: 0 });
+      expect(`${path}: ${res.status()} ${res.headers()['location']}`).toMatch(new RegExp(`^${path}: 301 (https://[^/]+)?/contact/$`));
+    }
+  }
+});
+
 test('every inventoried address resolves as the old site promised', async ({ request }) => {
   test.setTimeout(5 * 60_000);
   const isPending = new Set(pending);
   const failures: string[] = [];
-  // The host, not the site, redirects /x to /x/; the local preview server
-  // serves /x itself. So those redirects are checked only against a deployed
-  // site (BASE_URL), which the "URL parity on Preview" check does.
-  const hostSlashRedirect = (e: InventoryEntry) => e.expect === 'redirect' && e.to === `${e.path}/`;
-  const queue = process.env.BASE_URL ? [...inventory] : inventory.filter((e) => !hostSlashRedirect(e));
+  const queue = [...inventory];
 
   async function worker() {
     for (let entry = queue.shift(); entry; entry = queue.shift()) {

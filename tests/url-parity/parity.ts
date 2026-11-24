@@ -4,6 +4,28 @@ export type InventoryEntry =
   | { path: string; expect: 'page'; source: 'sitemap' | 'crawl' }
   | { path: string; expect: 'redirect'; to: string; source: 'sitemap' | 'crawl' };
 
+// A Project Manager decision to change what an inventoried address does,
+// instead of copying the live site. Kept apart from inventory.json because
+// `npm run inventory` rewrites that file from the live site.
+export type Decision =
+  | { path: string; expect: 'page'; why: string }
+  | { path: string; expect: 'redirect'; to: string; why: string };
+
+export function applyDecisions(inventory: InventoryEntry[], decisions: Decision[]): InventoryEntry[] {
+  const byPath = new Map(decisions.map((d) => [d.path, d]));
+  const inventoried = new Set(inventory.map((e) => e.path));
+  for (const d of decisions) {
+    if (!inventoried.has(d.path)) throw new Error(`${d.path} is not in urls/inventory.json`);
+  }
+  return inventory.map((entry) => {
+    const d = byPath.get(entry.path);
+    if (!d) return entry;
+    return d.expect === 'page'
+      ? { path: entry.path, expect: 'page', source: entry.source }
+      : { path: entry.path, expect: 'redirect', to: d.to, source: entry.source };
+  });
+}
+
 export interface Observed {
   status: number;
   location: string | null;

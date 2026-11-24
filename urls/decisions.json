@@ -1,0 +1,401 @@
+[
+  {
+    "path": "/ar/ai-content-review-agent/",
+    "expect": "redirect",
+    "to": "/ai-content-review-agent/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/big-business-small-thinking-project-everest/",
+    "expect": "redirect",
+    "to": "/big-business-small-thinking-project-everest/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/digital-transformation-for-smes-achieving-more-with-less/",
+    "expect": "redirect",
+    "to": "/digital-transformation-for-smes-achieving-more-with-less/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/flex-index-flexible-workforce-planning/",
+    "expect": "redirect",
+    "to": "/flex-index-flexible-workforce-planning/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/growth-with-a-backbone/",
+    "expect": "redirect",
+    "to": "/growth-with-a-backbone/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/how-businesses-can-adapt-to-the-new-future-of-travel-tourism/",
+    "expect": "redirect",
+    "to": "/how-businesses-can-adapt-to-the-new-future-of-travel-tourism/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/how-mature-is-your-esg-strategy/",
+    "expect": "redirect",
+    "to": "/how-mature-is-your-esg-strategy/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/hyperscaler-skills-gap-reskilling-roadmap/",
+    "expect": "redirect",
+    "to": "/hyperscaler-skills-gap-reskilling-roadmap/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/industries/energy/",
+    "expect": "redirect",
+    "to": "/industries/energy/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/industries/finance/",
+    "expect": "redirect",
+    "to": "/industries/finance/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/industries/healthcare/",
+    "expect": "redirect",
+    "to": "/industries/healthcare/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/industries/hospitality/",
+    "expect": "redirect",
+    "to": "/industries/hospitality/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/industries/technology/",
+    "expect": "redirect",
+    "to": "/industries/technology/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/insights-ai-pilot-to-production-agentic-operations/",
+    "expect": "redirect",
+    "to": "/insights-ai-pilot-to-production-agentic-operations/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/insights-leap-ksa-growth-talent-differentiation/",
+    "expect": "redirect",
+    "to": "/insights-leap-ksa-growth-talent-differentiation/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/making-sense-of-agility-in-business-transformation/",
+    "expect": "redirect",
+    "to": "/making-sense-of-agility-in-business-transformation/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/marketing-resolutions-for-2025-building-trust-in-a-distracted-world/",
+    "expect": "redirect",
+    "to": "/marketing-resolutions-for-2025-building-trust-in-a-distracted-world/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/marketing-transformation-in-healthcare/",
+    "expect": "redirect",
+    "to": "/marketing-transformation-in-healthcare/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/partner-enablement-risk-first/",
+    "expect": "redirect",
+    "to": "/partner-enablement-risk-first/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/",
+    "expect": "redirect",
+    "to": "/services/ai-machine-learning/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/ai-solutions-implementations/",
+    "expect": "redirect",
+    "to": "/services/ai-machine-learning/ai-solutions-implementations/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/ai-strategy-advisory/",
+    "expect": "redirect",
+    "to": "/services/ai-machine-learning/ai-strategy-advisory/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/ai-machine-learning/foundation-enablement/",
+    "expect": "redirect",
+    "to": "/services/ai-machine-learning/foundation-enablement/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/",
+    "expect": "redirect",
+    "to": "/services/bi-data-analytics/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/advanced-analytics-enablement/",
+    "expect": "redirect",
+    "to": "/services/bi-data-analytics/advanced-analytics-enablement/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/solutions-insights/",
+    "expect": "redirect",
+    "to": "/services/bi-data-analytics/solutions-insights/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/bi-data-analytics/strategy-foundation/",
+    "expect": "redirect",
+    "to": "/services/bi-data-analytics/strategy-foundation/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/digital-evolution/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/",
+    "why": "Real Arabic page; text saved in docs/arabic-pages/ for phase 2. Project Manager decision on #10."
+  },
+  {
+    "path": "/ar/services/digital-transformation/digital-experience-customer-engagement/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/digital-experience-customer-engagement/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/digital-transformation/digital-strategy-and-transformation/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/digital-strategy-and-transformation/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/digital-transformation/emerging-technologies-innovation/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/emerging-technologies-innovation/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/hr-transformation-technology/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/hr-transformation-technology/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/leadership-development-coaching/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/leadership-development-coaching/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/hybrid-workforce/talent-strategy-organisational-development/",
+    "expect": "redirect",
+    "to": "/services/hybrid-workforce/talent-strategy-organisational-development/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/environmental-sustainability/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/environmental-sustainability/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/social-governance/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/social-governance/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/investment-impact-transformation/strategy-integration/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/strategy-integration/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/marketing-engine/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/marketing-engine/customer-experience-engagement/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/customer-experience-engagement/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/marketing-engine/digital-marketing-analytics/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/digital-marketing-analytics/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/services/marketing-engine/marketing-strategy-planning/",
+    "expect": "redirect",
+    "to": "/services/marketing-engine/marketing-strategy-planning/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/shaping-a-responsible-tech-strategy-avoiding-innovation-for-innovations-sake/",
+    "expect": "redirect",
+    "to": "/shaping-a-responsible-tech-strategy-avoiding-innovation-for-innovations-sake/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/specialists-or-generalists-effective-marketing-teams-in-2025/",
+    "expect": "redirect",
+    "to": "/specialists-or-generalists-effective-marketing-teams-in-2025/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/sustainable-marketing-how-green-is-your-brands-marketing-strategy/",
+    "expect": "redirect",
+    "to": "/sustainable-marketing-how-green-is-your-brands-marketing-strategy/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/the-booming-health-wellness-industry-and-improving-your-employer-branding/",
+    "expect": "redirect",
+    "to": "/the-booming-health-wellness-industry-and-improving-your-employer-branding/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/the-intersection-of-ai-and-fintech-a-marketing-renaissance/",
+    "expect": "redirect",
+    "to": "/the-intersection-of-ai-and-fintech-a-marketing-renaissance/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/the-marketing-say-do-gap-the-2026-state-of-ai-in-b2b-marketing/",
+    "expect": "redirect",
+    "to": "/the-marketing-say-do-gap-the-2026-state-of-ai-in-b2b-marketing/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/transparency-pays-off-heres-why/",
+    "expect": "redirect",
+    "to": "/transparency-pays-off-heres-why/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/who-we-are",
+    "expect": "redirect",
+    "to": "/who-we-are/",
+    "why": "Real Arabic page; text saved in docs/arabic-pages/ for phase 2. Project Manager decision on #10."
+  },
+  {
+    "path": "/ar/who-we-are/",
+    "expect": "redirect",
+    "to": "/who-we-are/",
+    "why": "Real Arabic page; text saved in docs/arabic-pages/ for phase 2. Project Manager decision on #10."
+  },
+  {
+    "path": "/ar/why-personalisation-remains-fintechs-marketing-success-formula-in-2024/",
+    "expect": "redirect",
+    "to": "/why-personalisation-remains-fintechs-marketing-success-formula-in-2024/",
+    "why": "Live serves the English text under /ar/; Arabic content is phase 2."
+  },
+  {
+    "path": "/ar/المملكة-العربية-السعودية/",
+    "expect": "redirect",
+    "to": "/contact/",
+    "why": "Real Arabic page; text saved in docs/arabic-pages/ for phase 2. Project Manager decision on #10."
+  },
+  {
+    "path": "/the-dos-and-donts-of-using-business-intelligence-in-your-business/",
+    "expect": "page",
+    "why": "Live redirects to the post's own hero image (WordPress bug); the Blog Post is served instead. Project Manager decision on #10."
+  },
+  {
+    "path": "/the-future-of-marketing-is-personal-but-at-what-cost/",
+    "expect": "page",
+    "why": "Live redirects to the post's own hero image (WordPress bug); the Blog Post is served instead. Project Manager decision on #10."
+  },
+  {
+    "path": "/why-now-is-the-time-for-sustainability-consulting/",
+    "expect": "page",
+    "why": "Live redirects to the post's own hero image (WordPress bug); the Blog Post is served instead. Project Manager decision on #10."
+  },
+  {
+    "path": "/work/",
+    "expect": "redirect",
+    "to": "/insights/our-work/",
+    "why": "Live sends it to an unrelated Blog Post (WordPress guessing). Project Manager decision on #10."
+  },
+  {
+    "path": "/product-category/courses/page/2/",
+    "expect": "redirect",
+    "to": "/",
+    "why": "Live sends it to /page/2/, which does not exist; courses are gone, like /learning-zone/."
+  },
+  {
+    "path": "/career-skill/account-management/",
+    "expect": "redirect",
+    "to": "/careers/",
+    "why": "Empty taxonomy archive on live."
+  },
+  {
+    "path": "/career-skill/client-relations/",
+    "expect": "redirect",
+    "to": "/careers/",
+    "why": "Empty taxonomy archive on live."
+  },
+  {
+    "path": "/career-skill/social-media-marketing/",
+    "expect": "redirect",
+    "to": "/careers/",
+    "why": "Empty taxonomy archive on live."
+  },
+  {
+    "path": "/career-skill/stakeholder-management/",
+    "expect": "redirect",
+    "to": "/careers/",
+    "why": "Empty taxonomy archive on live."
+  },
+  {
+    "path": "/tag/ai-workflow-automation/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "why": "Empty tag archive on live; other tags already redirect to the blog."
+  },
+  {
+    "path": "/tag/marketing-engine/",
+    "expect": "redirect",
+    "to": "/insights/blog/",
+    "why": "Empty tag archive on live; other tags already redirect to the blog."
+  },
+  {
+    "path": "/services/digital-transformation/digital-strategy-and-transformation/digital-strategy-and-transformation/",
+    "expect": "redirect",
+    "to": "/services/digital-transformation/digital-strategy-and-transformation/",
+    "why": "Doubled address on live serving the same Service."
+  },
+  {
+    "path": "/services/investment-impact-transformation/environmental-sustainability/environmental-sustainability/",
+    "expect": "redirect",
+    "to": "/services/investment-impact-transformation/environmental-sustainability/",
+    "why": "Doubled address on live serving the same Service."
+  }
+]
