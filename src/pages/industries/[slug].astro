@@ -77,7 +77,7 @@ const posts = (await getBlogPosts()).filter((p) => (p.data.industries as string[
     eyebrow={work.eyebrow}
     heading={work.heading}
     text={work.text}
-    action={{ label: 'View All', href: '/insights/our-work/' }}
+    action={{ label: 'View All', href: `/insights/our-work/?industry=${slug}` }}
     caseStudies={caseStudies.map(summarise)}
   />
   <section aria-labelledby="related-posts" class="bg-off-white">

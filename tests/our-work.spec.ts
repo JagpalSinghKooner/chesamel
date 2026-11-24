@@ -202,6 +202,13 @@ test.describe('Industries', () => {
     await expect(page.getByRole('heading', { name: 'Helping finance grow' })).toBeVisible();
     await expect(sliderTitles(page)).toHaveText(newest);
 
+    await slider(page).getByRole('link', { name: 'View All' }).click();
+    await expect(page).toHaveURL(/\/insights\/our-work\/\?industry=finance$/);
+    await expect(page.getByRole('group', { name: 'Industry' }).getByRole('button', { name: 'Finance' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(card(page, biFinance)).toBeVisible();
+    await expect(card(page, hackathons)).toBeHidden();
+    await page.goBack();
+
     const posts = page.getByRole('region', { name: 'Related Posts' }).locator('[data-component="blog-post-card"]');
     await expect(posts).toHaveCount(3);
     await expect(posts.first()).toContainText('Big Business, Small Thinking: Project Everest');
