@@ -15,6 +15,9 @@ const {
   "data-slot": dataSlot = "carousel-next",
   ...props
 } = Astro.props
+
+// Chesamel patch (ADR-0005): no rounded-full, so the button keeps the
+// Button's corners, which follow --radius like every other building block.
 ---
 
 <button
@@ -27,7 +30,7 @@ const {
   disabled={disabled}
   class={cn(
     buttonVariants({ variant, size }),
-    "rounded-full absolute touch-manipulation group-data-[orientation=horizontal]/carousel:inset-y-0 group-data-[orientation=horizontal]/carousel:-end-12 group-data-[orientation=horizontal]/carousel:my-auto",
+    "absolute touch-manipulation group-data-[orientation=horizontal]/carousel:inset-y-0 group-data-[orientation=horizontal]/carousel:-end-12 group-data-[orientation=horizontal]/carousel:my-auto",
     "group-data-[orientation=vertical]/carousel:right-auto group-data-[orientation=vertical]/carousel:-bottom-12 group-data-[orientation=vertical]/carousel:left-1/2 group-data-[orientation=vertical]/carousel:-translate-x-1/2 group-data-[orientation=vertical]/carousel:translate-y-0 group-data-[orientation=vertical]/carousel:rotate-90",
     className
   )}
