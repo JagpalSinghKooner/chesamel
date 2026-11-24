@@ -112,12 +112,24 @@ _Avoid_: Service line, division
 _Note_: A Blog Post's Pillar labels may also name two further service areas from the current site, AI & Machine Learning and BI & Data Analytics. They are filed with the Pillars, and the News Pillar filter lists all six, as the current site does; elsewhere, Pillar means only the four.
 
 **Insight**:
-Any published thought-leadership item: Blog Post, webinar, podcast, or Case Study.
+Any published thought-leadership item: Blog Post, Webinar, Podcast, Report, or Case Study.
 _Avoid_: Article, resource
 
 **Blog Post**:
 A dated written Insight. All Blog Posts live in the News section and are filtered by Pillar and Industry.
 _Avoid_: Article, post, news item
+
+**Podcast**:
+An Insight that is one episode of Chesamel Unplugged, Chesamel's podcast series, with its guest and links to listen on each platform. The audio lives on those platforms, not on the site.
+_Avoid_: Episode (on its own), show
+
+**Webinar**:
+An Insight that is a recorded panel, interview or talk, shown as a video.
+_Avoid_: Video, event
+
+**Report**:
+An Insight that is a downloadable white paper. Its page introduces it; the full report is sent to readers who ask for it.
+_Avoid_: White paper, download, gated content
 
 **News**:
 The site section that lists every Blog Post. It is a section name, not a kind of content.

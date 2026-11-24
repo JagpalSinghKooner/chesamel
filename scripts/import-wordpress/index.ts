@@ -2,6 +2,7 @@
 //
 //   npm run import            (reads the newest *.WordPress.*.xml in the repo root)
 //   npm run import -- --no-media   (skip downloading media)
+//   npm run import -- --only=insights   (only Podcasts, Webinars and Reports)
 //
 // The export holds personal data and is gitignored; it lives only on the
 // machine that runs the import. Re-running overwrites the imported files, so
@@ -16,6 +17,7 @@ import { importBlogPosts, type ImportedBlogPost, type BlogPostImport } from './b
 import { importCaseStudies } from './case-studies.ts';
 import { importIndustries } from './industries.ts';
 import { attachmentUrls, downloadMedia, notInRepo } from './media.ts';
+import { importInsightItems } from './insights-step.ts';
 import { pillarLabels } from '../../src/data/taxonomy.ts';
 import type { InventoryEntry } from '../../tests/url-parity/parity.ts';
 
@@ -85,6 +87,12 @@ async function main() {
   const file = await findExport();
   console.log(`Reading ${file}`);
   const xml = await readFile(root(file), 'utf8');
+
+  // Podcasts, Webinars and Reports. `--only=insights` stops after this step,
+  // leaving Blog Posts (which Content Editors may have edited) untouched.
+  const insightAddresses = await importInsightItems(xml, { withMedia, write });
+  console.log(`Removed ${await shrinkPending(insightAddresses)} Podcast, Webinar and Report addresses from urls/pending.json`);
+  if (process.argv.includes('--only=insights')) return;
 
   // Media first, so posts can leave out any image that couldn't be fetched.
   const media = [...importBlogPosts(xml).media, ...importCaseStudies(xml).media, ...importIndustries(xml).media];

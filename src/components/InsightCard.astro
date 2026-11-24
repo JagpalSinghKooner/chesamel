@@ -1,0 +1,27 @@
+---
+// Webinar or Report card: image, main Pillar, title and a short link label,
+// linking to the item's page. Styled like the Blog Post card: the Pillar tag
+// is Dark Grey, not the live service colour (ADR-0002).
+import { pillarLabels, type PillarSlug } from '../data/taxonomy';
+
+interface Props {
+  href: string;
+  title: string;
+  image?: { src: string; alt: string };
+  pillar?: PillarSlug;
+  // The line under the title, e.g. "/ read report".
+  action: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { href, title, image, pillar, action, headingLevel: Heading = 'h3' } = Astro.props;
+---
+
+<a href={href} class="group flex h-full flex-col border border-light-grey bg-white hover:border-indigo" data-component="insight-card">
+  {image ? <img src={image.src} alt="" class="aspect-video w-full object-cover" loading="lazy" /> : <div aria-hidden="true" class="aspect-video w-full bg-off-white" />}
+  <div class="flex grow flex-col p-5">
+    {pillar && <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[pillar]}</span>}
+    <Heading class="type-heading-3 mt-5 text-xl leading-tight group-hover:underline">{title}</Heading>
+    <p class="type-caption mt-auto pt-6">{action} <span aria-hidden="true">→</span></p>
+  </div>
+</a>

@@ -1,0 +1,31 @@
+---
+// "/ listen now on": a Podcast episode's links to each platform that has it.
+// `episode` names the episode for screen readers, since a listing repeats
+// the platform names once per episode.
+import type { PodcastData } from '../content/insight-schemas';
+
+interface Props {
+  listen: PodcastData['listen'];
+  episode: string;
+}
+
+const { listen, episode } = Astro.props;
+const names = { spotify: 'Spotify', amazon: 'Amazon Music', podcastAddict: 'Podcast Addict', podchaser: 'Podchaser' } as const;
+const links = (Object.keys(names) as (keyof typeof names)[]).filter((k) => listen[k]).map((k) => ({ href: listen[k]!, name: names[k] }));
+---
+
+<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+  <p class="type-caption">/ listen now on</p>
+  <ul class="flex flex-wrap gap-2">
+    {
+      links.map((l) => (
+        <li>
+          <a href={l.href} class="inline-flex border border-light-grey px-3 py-1.5 text-sm font-semibold text-black hover:border-indigo" rel="noopener">
+            {l.name}
+            <span class="sr-only">: {episode}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

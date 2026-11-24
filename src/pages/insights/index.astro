@@ -1,0 +1,47 @@
+---
+// Insights hub: a tile for each kind of Insight. The live hub also has a dead
+// "/insights/news/" tile (left out) and an empty Reports link with no tile
+// (given a proper tile here).
+import Base from '../../layouts/Base.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+
+const tiles = [
+  { title: 'News', href: '/insights/blog/', eyebrow: '/ latest news, opinions, and how-tos' },
+  { title: 'Webinars', href: '/insights/webinars/', eyebrow: '/ expert panels, deep dives, and interviews' },
+  { title: 'Podcasts', href: '/insights/podcasts/', eyebrow: '/ hot topics and regular discussions' },
+  { title: 'Reports', href: '/insights/reports/', eyebrow: '/ white papers and in-depth reports' },
+  { title: 'Our Work', href: '/insights/our-work/', eyebrow: '/ some of our customer stories' },
+];
+---
+
+<Base title="Insights | Chesamel" description="Check out our latest thoughts, business updates, and original content.">
+  <InsightsHero heading="Insights" text="Check out our latest thoughts, business updates, and original content." breadcrumb={false} />
+  <section aria-labelledby="collection" class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+    <p class="type-caption">/ delve deeper into our full range of insights</p>
+    <h2 id="collection" class="type-heading-2 mt-2">Our Insights Collection</h2>
+    <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        tiles.map((t) => (
+          <li>
+            <a href={t.href} class="group flex h-full min-h-48 flex-col border border-light-grey p-6 hover:border-indigo">
+              <h3 class="type-heading-3 group-hover:underline">{t.title}</h3>
+              <p class="type-caption mt-3">{t.eyebrow}</p>
+              <p class="mt-auto pt-6 text-sm font-semibold text-black">
+                discover insights <span aria-hidden="true">↗</span>
+              </p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <CtaBlock
+    heading="Ready to get started?"
+    text="Don't wait to drive your business forward."
+    actions={[
+      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+      { label: "Let's Chat", href: '/contact/', tone: 'outline' },
+    ]}
+  />
+</Base>

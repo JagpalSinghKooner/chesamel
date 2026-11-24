@@ -1,0 +1,36 @@
+---
+// A YouTube video that loads nothing from YouTube until it is played: a
+// poster linking to the video, swapped for the no-cookie player on click.
+// Without JavaScript the link opens the video on YouTube.
+interface Props {
+  id: string;
+  title: string;
+  poster?: string;
+}
+
+const { id, title, poster } = Astro.props;
+---
+
+<div class="relative aspect-video w-full bg-black" data-component="video-player">
+  <a href={`https://www.youtube.com/watch?v=${id}`} data-video={id} data-title={title} class="group absolute inset-0 flex items-center justify-center">
+    {poster && <img src={poster} alt="" class="absolute inset-0 size-full object-cover opacity-70 group-hover:opacity-50" />}
+    <span class="relative inline-flex items-center gap-3 bg-indigo px-5 py-3 font-semibold text-white">
+      <span aria-hidden="true">▶</span> Play video<span class="sr-only">: {title}</span>
+    </span>
+  </a>
+</div>
+
+<script>
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('a[data-video]')) {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${link.dataset.video}?autoplay=1`;
+      frame.title = `Video: ${link.dataset.title}`;
+      frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      frame.allowFullscreen = true;
+      frame.className = 'absolute inset-0 size-full';
+      link.replaceWith(frame);
+    });
+  }
+</script>
