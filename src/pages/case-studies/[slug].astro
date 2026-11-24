@@ -6,6 +6,7 @@
 // live site.
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import ClientLogos from '../../components/home/ClientLogos.astro';
@@ -33,14 +34,10 @@ const OUR_WORK = '/insights/our-work/';
       <p class="type-subheading mt-4 max-w-3xl">{excerpt}</p>
     </div>
   </section>
-  <nav aria-label="Breadcrumb" class="type-caption border-b border-light-grey">
-    <ol class="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 py-4 sm:px-6">
-      <li><a href="/" class="underline">Home</a> /</li>
-      <li><a href="/insights/" class="underline">Insights</a> /</li>
-      <li><a href={OUR_WORK} class="underline">Our Work</a> /</li>
-      <li aria-current="page">{title}</li>
-    </ol>
-  </nav>
+  <Breadcrumb
+    band
+    trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'Our Work', href: OUR_WORK }, { label: title }]}
+  />
   <article class="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_2fr]">
     <div class="flex flex-col gap-10">
       <dl class="flex flex-col gap-8">

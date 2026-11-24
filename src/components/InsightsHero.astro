@@ -1,6 +1,8 @@
 ---
 // The Indigo band at the top of an Insights listing (as on News): the
 // heading, one line of text, and a breadcrumb back to the Insights hub.
+import Breadcrumb from './Breadcrumb.astro';
+
 interface Props {
   heading: string;
   text: string;
@@ -13,21 +15,7 @@ const { heading, text, breadcrumb = true } = Astro.props;
 
 <section class="bg-indigo text-white">
   <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-    {
-      breadcrumb && (
-        <nav aria-label="Breadcrumb" class="type-caption mb-6 text-white">
-          <ol class="flex flex-wrap gap-2">
-            <li>
-              <a href="/" class="underline">Home</a> /
-            </li>
-            <li>
-              <a href="/insights/" class="underline">Insights</a> /
-            </li>
-            <li aria-current="page">{heading}</li>
-          </ol>
-        </nav>
-      )
-    }
+    {breadcrumb && <Breadcrumb class="mb-6 text-white" trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: heading }]} />}
     <h1 class="type-heading-1 text-white">{heading}</h1>
     <p class="type-subheading mt-4 max-w-2xl text-white">{text}</p>
   </div>

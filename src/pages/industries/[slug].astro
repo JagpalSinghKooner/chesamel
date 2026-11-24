@@ -4,6 +4,7 @@
 // The live "How we work" slider fades between its three steps; here the
 // steps sit side by side, so nothing moves.
 import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
 import BlogPostCard from '../../components/BlogPostCard.astro';
@@ -30,13 +31,7 @@ const posts = (await getBlogPosts()).filter((p) => (p.data.industries as string[
       <p class="mt-4 max-w-2xl font-subheading text-lg text-off-white">{subtitle}</p>
     </div>
   </section>
-  <nav aria-label="Breadcrumb" class="type-caption border-b border-light-grey">
-    <ol class="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 py-4 sm:px-6">
-      <li><a href="/" class="underline">Home</a> /</li>
-      <li><a href="/industries/" class="underline">Industries</a> /</li>
-      <li aria-current="page">{title}</li>
-    </ol>
-  </nav>
+  <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Industries', href: '/industries/' }, { label: title }]} />
   <section aria-labelledby="intro">
     <div class="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
       <div>

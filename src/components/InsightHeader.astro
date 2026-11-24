@@ -2,6 +2,7 @@
 // The top of a Podcast, Webinar or Report page: breadcrumb back to its
 // listing, the main Pillar (if any), the title and a caption line.
 import { pillarLabels, type PillarSlug } from '../data/taxonomy';
+import Breadcrumb from './Breadcrumb.astro';
 
 interface Props {
   section: { label: string; href: string };
@@ -12,13 +13,7 @@ interface Props {
 const { section, pillar, title } = Astro.props;
 ---
 
-<nav aria-label="Breadcrumb" class="type-caption">
-  <ol class="flex flex-wrap gap-2">
-    <li><a href="/" class="underline">Home</a> /</li>
-    <li><a href="/insights/" class="underline">Insights</a> /</li>
-    <li><a href={section.href} class="underline">{section.label}</a></li>
-  </ol>
-</nav>
+<Breadcrumb trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, section]} />
 {pillar && <p class="type-tag mt-8">{pillarLabels[pillar]}</p>}
 <h1 class:list={['type-heading-1 text-4xl sm:text-5xl', pillar ? 'mt-3' : 'mt-8']}>{title}</h1>
 <div class="type-caption mt-6 flex flex-wrap gap-x-6 gap-y-2">

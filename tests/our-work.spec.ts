@@ -82,6 +82,7 @@ test.describe('Case Study page', () => {
     await expect(hero).toContainText('/ BI & Data Analytics');
     await expect(hero).toContainText('Effectively analysing Business Intelligence (BI) in financial services.');
     await expect(page.getByRole('navigation', { name: 'Breadcrumb' }).getByRole('link', { name: 'Our Work' })).toHaveAttribute('href', OUR_WORK);
+    await expect(page.getByRole('navigation', { name: 'Breadcrumb' }).locator('[aria-current="page"]')).toHaveText(biFinance);
 
     const main = page.getByRole('main');
     await expect(main.locator('time').first()).toHaveText('November 13, 2024');

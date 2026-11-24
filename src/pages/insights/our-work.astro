@@ -5,6 +5,7 @@
 // service addresses, is left out: the Pillar cards above it cover the same
 // ground with current addresses.
 import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import CaseStudyListing from '../../components/CaseStudyListing.astro';
 import CaseStudySlider from '../../components/CaseStudySlider.astro';
@@ -27,13 +28,7 @@ const industries = await getIndustries();
       </p>
     </div>
   </section>
-  <nav aria-label="Breadcrumb" class="type-caption border-b border-light-grey">
-    <ol class="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 py-4 sm:px-6">
-      <li><a href="/" class="underline">Home</a> /</li>
-      <li><a href="/insights/" class="underline">Insights</a> /</li>
-      <li aria-current="page">Our Work</li>
-    </ol>
-  </nav>
+  <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'Our Work' }]} />
   <section aria-labelledby="catalogue" class="bg-black">
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <h2 id="catalogue" class="type-heading-2 mb-10 text-white">Our catalogue</h2>
