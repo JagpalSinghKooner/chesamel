@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types"
+import Ellipsis from "@lucide/astro/icons/ellipsis"
+
+import { cn } from "@/lib/utils"
+
+type Props = HTMLAttributes<"span">
+
+const { class: className, ...props } = Astro.props
+---
+
+<span
+  data-slot="breadcrumb-ellipsis"
+  role="presentation"
+  aria-hidden="true"
+  class={cn(
+    "size-5 [&>svg]:size-4 flex items-center justify-center",
+    className
+  )}
+  {...props}
+>
+  <Ellipsis />
+  <span class="sr-only">More</span>
+</span>
