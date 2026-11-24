@@ -2,7 +2,7 @@
 // Latest Insights on the homepage: the three newest Blog Posts.
 import Button from '../Button.astro';
 import BlogPostCard from '../BlogPostCard.astro';
-import { getBlogPosts, summarise } from '../../content/blog';
+import { getBlogPosts, summarisePost } from '../../content/blog';
 
 // The live site also links /insights/news/, which returns 404 there; News is
 // served at /insights/blog/, so it is listed once, as News.
@@ -13,7 +13,7 @@ const filters = [
   { label: 'Webinar', href: '/insights/webinars/' },
 ];
 
-const insights = (await getBlogPosts()).slice(0, 3).map(summarise);
+const insights = (await getBlogPosts()).slice(0, 3).map(summarisePost);
 ---
 
 <section class="bg-off-white" aria-labelledby="latest-insights">

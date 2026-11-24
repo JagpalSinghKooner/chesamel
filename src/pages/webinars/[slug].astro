@@ -1,0 +1,38 @@
+---
+// A Webinar at its original address. The live page never shows the recording
+// when the body has no player; here `video` fills that gap.
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import InsightHeader from '../../components/InsightHeader.astro';
+import LabelLinks from '../../components/LabelLinks.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
+import { getNewest, type Webinar } from '../../content/insight-items';
+import { formatDate, isoDate, primaryPillar } from '../../content/shared';
+
+export async function getStaticPaths() {
+  return (await getNewest('webinars')).map((webinar) => ({ params: { slug: webinar.id }, props: { webinar } }));
+}
+
+const { webinar } = Astro.props as { webinar: Webinar };
+const { title, date, video, image, pillars, industries, description } = webinar.data;
+const { Content } = await render(webinar);
+---
+
+<Base title={`${title} | Chesamel`} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <InsightHeader section={{ label: 'Webinars', href: '/insights/webinars/' }} pillar={primaryPillar(webinar.data)} title={title}>
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
+    </InsightHeader>
+    {
+      video && (
+        <div class="mt-10">
+          <VideoPlayer id={video} title={title} poster={image?.src} />
+        </div>
+      )
+    }
+    <div class="blog-body mt-10">
+      <Content />
+    </div>
+    <LabelLinks industries={industries} pillars={pillars} />
+  </article>
+</Base>

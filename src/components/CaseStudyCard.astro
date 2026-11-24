@@ -1,0 +1,41 @@
+---
+// Case Study card: image, main Pillar, the client when known, and the title,
+// linking to the Case Study. As on the Blog Post card, the Pillar is a Dark
+// Grey `type-tag` rather than the live site's coloured pill (ADR-0002).
+// The image is decorative: the title already names the link.
+import { pillarLabels } from '../data/taxonomy';
+import type { CaseStudySummary } from '../content/case-studies';
+import { primaryPillar } from '../content/shared';
+
+interface Props {
+  caseStudy: CaseStudySummary;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+}
+
+const { caseStudy, headingLevel: Heading = 'h3' } = Astro.props;
+---
+
+<a
+  href={caseStudy.address}
+  class="group flex h-full flex-col overflow-hidden border border-light-grey bg-white hover:border-indigo"
+  data-component="case-study-card"
+>
+  <div class="aspect-video overflow-hidden bg-off-white">
+    <img
+      src={caseStudy.image.src}
+      alt=""
+      loading="lazy"
+      class="size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
+    />
+  </div>
+  <div class="flex grow flex-col p-5">
+    <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[primaryPillar(caseStudy)]}</span>
+    <div class="mt-auto flex items-end justify-between gap-4 pt-8">
+      <div>
+        {caseStudy.client && <p class="type-caption">/ {caseStudy.client}</p>}
+        <Heading class="type-heading-3 mt-1 text-xl leading-tight group-hover:underline">{caseStudy.title}</Heading>
+      </div>
+      <span aria-hidden="true" class="grid size-10 shrink-0 place-items-center bg-black text-white group-hover:bg-indigo">↗</span>
+    </div>
+  </div>
+</a>

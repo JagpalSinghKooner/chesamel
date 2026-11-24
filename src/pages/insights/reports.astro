@@ -1,0 +1,29 @@
+---
+// Reports: every Report, newest first, as on the live listing.
+import Base from '../../layouts/Base.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
+import InsightCard from '../../components/InsightCard.astro';
+import GetStartedCta from '../../components/GetStartedCta.astro';
+import { getNewest, addressOf } from '../../content/insight-items';
+import { primaryPillar } from '../../content/shared';
+
+const reports = await getNewest('reports');
+const text = 'Dive into our curated reports and get the latest marketing, ESG, workforce planning, and digital transformation insights.';
+---
+
+<Base title="Reports | Chesamel" description={text}>
+  <InsightsHero heading="Reports" text={text} />
+  <section aria-labelledby="reports" class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+    <h2 id="reports" class="type-heading-2">Chesamel Reports</h2>
+    <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        reports.map((r) => (
+          <li>
+            <InsightCard href={addressOf(r)} title={r.data.title} image={r.data.image} pillar={primaryPillar(r.data)} action="/ read report" />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <GetStartedCta />
+</Base>

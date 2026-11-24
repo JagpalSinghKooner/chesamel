@@ -1,14 +1,9 @@
 ---
 // Blog Post listing with Pillar and Industry filters, as on the live News page.
-// Filtering happens in the browser, so every post is in the HTML and the page
-// works (unfiltered) without JavaScript. The chosen filters are kept in the
-// address (?pillar=…&industry=…) so a filtered view can be shared.
-//
-// A post with no Industry is shown while no Industry is chosen and hidden
-// once one is.
+// The filters, count and filtering come from FilteredListing.
 import BlogPostCard from './BlogPostCard.astro';
-import { blogPostCount, type BlogPostSummary } from '../content/blog';
-import { pillarLabels, industryLabels } from '../data/taxonomy';
+import FilteredListing from './FilteredListing.astro';
+import type { BlogPostSummary } from '../content/blog';
 
 interface Props {
   posts: BlogPostSummary[];
@@ -16,107 +11,25 @@ interface Props {
 }
 
 const { posts, headingLevel = 'h2' } = Astro.props;
-const groups = [
-  { key: 'pillar', label: 'Pillar', options: Object.entries(pillarLabels) },
-  { key: 'industry', label: 'Industry', options: Object.entries(industryLabels) },
-];
 ---
 
-<div data-component="blog-post-listing" data-blog-listing>
-  <div data-filters hidden class="flex flex-col gap-5">
-    {
-      groups.map((g) => (
-        <div role="group" aria-label={g.label} data-filter={g.key} class="flex flex-col gap-2 sm:flex-row sm:items-baseline">
-          <p class="type-tag w-24 shrink-0" aria-hidden="true">{g.label}</p>
-          <ul class="flex flex-wrap gap-2">
-            <li>
-              <button type="button" data-value="" aria-pressed="true" class="filter-button">All</button>
-            </li>
-            {g.options.map(([value, label]) => (
-              <li>
-                <button type="button" data-value={value} aria-pressed="false" class="filter-button">
-                  {label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
-    }
-  </div>
-  <p role="status" class="type-caption mt-8" data-count>{blogPostCount(posts.length)}</p>
-  <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      posts.map((post) => (
-        <li data-pillars={post.pillars.join(' ')} data-industries={post.industries.join(' ')}>
-          <BlogPostCard post={post} headingLevel={headingLevel} />
-        </li>
-      ))
-    }
-  </ul>
+<div data-component="blog-post-listing">
+  <FilteredListing
+    filters={[
+      { key: 'pillar', label: 'Pillar' },
+      { key: 'industry', label: 'Industry' },
+    ]}
+    total={posts.length}
+    noun={['Blog Post', 'Blog Posts']}
+  >
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        posts.map((post) => (
+          <li data-pillars={post.pillars.join(' ')} data-industries={post.industries.join(' ')}>
+            <BlogPostCard post={post} headingLevel={headingLevel} />
+          </li>
+        ))
+      }
+    </ul>
+  </FilteredListing>
 </div>
-
-<style>
-  @reference "../styles/global.css";
-
-  .filter-button {
-    @apply cursor-pointer border border-medium-grey px-4 py-2 text-sm font-semibold text-dark-grey hover:border-indigo hover:text-indigo;
-  }
-  .filter-button[aria-pressed='true'] {
-    @apply border-indigo bg-indigo text-white hover:text-white;
-  }
-</style>
-
-<script>
-  for (const listing of document.querySelectorAll<HTMLElement>('[data-blog-listing]')) {
-    const filters = listing.querySelector<HTMLElement>('[data-filters]')!;
-    const count = listing.querySelector<HTMLElement>('[data-count]')!;
-    const items = [...listing.querySelectorAll<HTMLLIElement>('li[data-pillars]')];
-    const groups = [...filters.querySelectorAll<HTMLElement>('[data-filter]')];
-    const params = new URLSearchParams(location.search);
-    const chosen: Record<string, string> = {};
-
-    function apply() {
-      let shown = 0;
-      for (const item of items) {
-        const pillars = item.dataset.pillars!.split(' ');
-        const industries = item.dataset.industries!.split(' ').filter(Boolean);
-        const visible =
-          (!chosen.pillar || pillars.includes(chosen.pillar)) && (!chosen.industry || industries.includes(chosen.industry));
-        item.hidden = !visible;
-        if (visible) shown++;
-      }
-      count.textContent = `${shown} Blog Post${shown === 1 ? '' : 's'}`;
-      for (const group of groups) {
-        for (const b of group.querySelectorAll<HTMLButtonElement>('button')) {
-          b.setAttribute('aria-pressed', String(b.dataset.value === (chosen[group.dataset.filter!] ?? '')));
-        }
-      }
-    }
-
-    for (const group of groups) {
-      const key = group.dataset.filter!;
-      const values = [...group.querySelectorAll<HTMLButtonElement>('button')].map((b) => b.dataset.value);
-      const initial = params.get(key);
-      if (initial && values.includes(initial)) chosen[key] = initial;
-
-      group.addEventListener('click', (event) => {
-        const button = (event.target as HTMLElement).closest('button');
-        if (!button) return;
-        if (button.dataset.value) chosen[key] = button.dataset.value;
-        else delete chosen[key];
-        const url = new URL(location.href);
-        for (const g of groups) {
-          const k = g.dataset.filter!;
-          if (chosen[k]) url.searchParams.set(k, chosen[k]);
-          else url.searchParams.delete(k);
-        }
-        history.replaceState(null, '', url);
-        apply();
-      });
-    }
-
-    filters.hidden = false;
-    apply();
-  }
-</script>

@@ -10,6 +10,7 @@ export interface FixtureItem {
   date?: string;
   creator?: string;
   content?: string;
+  excerpt?: string;
   attachmentUrl?: string;
   meta?: Record<string, string>;
 }
@@ -27,7 +28,7 @@ function item(i: FixtureItem): string {
     <link>${i.link ?? `https://chesamel.com/${slug}/`}</link>
     <dc:creator>${cdata(i.creator ?? 'graham')}</dc:creator>
     <content:encoded>${cdata(i.content ?? '<!-- wp:paragraph -->\n<p>Hello.</p>\n<!-- /wp:paragraph -->')}</content:encoded>
-    <excerpt:encoded>${cdata('')}</excerpt:encoded>
+    <excerpt:encoded>${cdata(i.excerpt ?? '')}</excerpt:encoded>
     <wp:post_id>${i.id}</wp:post_id>
     <wp:post_date_gmt>${cdata(i.date ?? '2024-12-10 12:20:12')}</wp:post_date_gmt>
     <wp:post_name>${cdata(slug)}</wp:post_name>
@@ -40,6 +41,7 @@ function item(i: FixtureItem): string {
 }
 
 // The services and industries every fixture export carries, with the live IDs.
+// An item with the same ID replaces one of these.
 const taxonomy: FixtureItem[] = [
   { id: 348, type: 'services', title: 'AI &amp; Machine Learning', link: 'https://chesamel.com/services/ai-machine-learning/' },
   { id: 349, type: 'services', title: 'AI Solutions', link: 'https://chesamel.com/services/ai-machine-learning/ai-solutions-implementations/' },
@@ -55,7 +57,7 @@ export function wxr(items: FixtureItem[]): string {
 <rss version="2.0" xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:wp="http://wordpress.org/export/1.2/">
 <channel>
   <wp:author><wp:author_id>2</wp:author_id><wp:author_login>${cdata('graham')}</wp:author_login><wp:author_email>${cdata('graham@example.com')}</wp:author_email><wp:author_display_name>${cdata('Graham Jones')}</wp:author_display_name></wp:author>
-  ${[...taxonomy, ...items].map(item).join('\n')}
+  ${[...taxonomy.filter((t) => !items.some((i) => i.id === t.id)), ...items].map(item).join('\n')}
 </channel>
 </rss>`;
 }

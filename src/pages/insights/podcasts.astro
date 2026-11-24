@@ -1,0 +1,62 @@
+---
+// Podcast: every episode of Chesamel Unplugged, newest first. Unlike the live
+// listing, each card links to the episode's own page.
+import Base from '../../layouts/Base.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
+import ListenLinks from '../../components/ListenLinks.astro';
+import Button from '../../components/Button.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import { getNewest, addressOf, excerpt } from '../../content/insight-items';
+import { formatDate, isoDate } from '../../content/shared';
+import CaseStudySlider from '../../components/CaseStudySlider.astro';
+import { getCaseStudies, summariseCaseStudy } from '../../content/case-studies';
+
+const podcasts = await getNewest('podcasts');
+// The live page's hand-picked "Customer stories".
+const customerStories = ['elevating-fan-experiences-at-the-brits', 'b2b-marketing-for-ebay', 'augmenting-cybersecurity-with-ai'];
+const caseStudies = await getCaseStudies();
+const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)!).map(summariseCaseStudy);
+---
+
+<Base title="Podcast | Chesamel" description="Listen to the latest episodes in our podcast series, Chesamel Unplugged.">
+  <InsightsHero heading="Podcast" text="Listen to the latest episodes in our podcast series, Chesamel Unplugged." />
+  <section class="bg-black">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-4 py-12 sm:px-6">
+      <h2 class="type-heading-2 text-white">Listen to Chesamel Unplugged</h2>
+      <Button href="https://open.spotify.com/show/3vQMN7K3w5z6T23vDhipjt" tone="outline">Listen now</Button>
+    </div>
+  </section>
+  <section aria-labelledby="episodes" class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <p class="type-caption">/ explore our</p>
+    <h2 id="episodes" class="type-heading-2 mt-2">Latest episodes</h2>
+    <ul class="mt-10 grid gap-6">
+      {
+        podcasts.map((p) => (
+          <li class="border border-light-grey p-6" data-component="podcast-card">
+            <h3 class="type-heading-3 text-2xl leading-tight">
+              <a href={addressOf(p)} class="hover:underline">
+                {p.data.title}
+              </a>
+            </h3>
+            <p class="type-caption mt-3 flex flex-wrap gap-x-6 gap-y-1">
+              <span>
+                with our guest <strong class="font-semibold text-black">{p.data.guest}</strong>
+              </span>
+              <time datetime={isoDate(p.data.date)}>{formatDate(p.data.date)}</time>
+            </p>
+            <p class="mt-4">{excerpt(p.body ?? '')}</p>
+            <div class="mt-5">
+              <ListenLinks listen={p.data.listen} episode={p.data.title} />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <CtaBlock
+    heading="Feature on our podcast"
+    text="Want to share your story, some business advice, or talk about a topic you're an expert in? We're always looking for new guests."
+    actions={[{ label: 'Get in Touch', href: '/contact/', tone: 'indigo' }]}
+  />
+  <CaseStudySlider heading="Customer stories" action={{ label: 'View All', href: '/insights/our-work/' }} caseStudies={stories} />
+</Base>

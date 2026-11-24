@@ -1,0 +1,40 @@
+---
+// Case Study listing with Service and/or Industry filters, as in the live Our
+// Work catalogue (both) and the Industries page (Industry only). The filters,
+// count and filtering come from FilteredListing, as for the Blog Post listing.
+//
+// The live filter is labelled "Service" and lists the same six labels as the
+// News Pillar filter.
+import CaseStudyCard from './CaseStudyCard.astro';
+import FilteredListing from './FilteredListing.astro';
+import type { CaseStudySummary } from '../content/case-studies';
+
+interface Props {
+  caseStudies: CaseStudySummary[];
+  filters?: ('pillar' | 'industry')[];
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  tone?: 'light' | 'dark';
+}
+
+const { caseStudies, filters = ['pillar', 'industry'], headingLevel = 'h3', tone = 'light' } = Astro.props;
+const labels = { pillar: 'Service', industry: 'Industry' };
+---
+
+<div data-component="case-study-listing">
+  <FilteredListing
+    filters={filters.map((key) => ({ key, label: labels[key] }))}
+    total={caseStudies.length}
+    noun={['Case Study', 'Case Studies']}
+    tone={tone}
+  >
+    <ul class="mt-4 grid gap-6 md:grid-cols-2">
+      {
+        caseStudies.map((caseStudy) => (
+          <li data-pillars={caseStudy.pillars.join(' ')} data-industries={caseStudy.industries.join(' ')}>
+            <CaseStudyCard caseStudy={caseStudy} headingLevel={headingLevel} />
+          </li>
+        ))
+      }
+    </ul>
+  </FilteredListing>
+</div>

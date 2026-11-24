@@ -1,0 +1,43 @@
+---
+// A Podcast episode of Chesamel Unplugged at its original address. The live
+// page falls back to the Blog Post template and leaves out the guest and the
+// platform links; both are shown here.
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import InsightHeader from '../../components/InsightHeader.astro';
+import ListenLinks from '../../components/ListenLinks.astro';
+import LabelLinks from '../../components/LabelLinks.astro';
+import { getNewest, type Podcast } from '../../content/insight-items';
+import { formatDate, isoDate, primaryPillar } from '../../content/shared';
+
+export async function getStaticPaths() {
+  return (await getNewest('podcasts')).map((podcast) => ({ params: { slug: podcast.id }, props: { podcast } }));
+}
+
+const { podcast } = Astro.props as { podcast: Podcast };
+const { title, date, guest, listen, image, pillars, description } = podcast.data;
+const { Content } = await render(podcast);
+---
+
+<Base title={`${title} | Chesamel`} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <InsightHeader section={{ label: 'Podcast', href: '/insights/podcasts/' }} pillar={primaryPillar(podcast.data)} title={title}>
+      <span>with our guest <strong class="font-semibold text-black">{guest}</strong></span>
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
+    </InsightHeader>
+    {
+      image && (
+        <figure class="mt-10">
+          <img src={image.src} alt={image.alt} class="w-full" />
+        </figure>
+      )
+    }
+    <div class="blog-body mt-10">
+      <Content />
+    </div>
+    <div class="mt-10">
+      <ListenLinks listen={listen} episode={title} />
+    </div>
+    <LabelLinks pillars={pillars} />
+  </article>
+</Base>

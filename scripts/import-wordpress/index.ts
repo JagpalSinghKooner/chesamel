@@ -2,6 +2,7 @@
 //
 //   npm run import            (reads the newest *.WordPress.*.xml in the repo root)
 //   npm run import -- --no-media   (skip downloading media)
+//   npm run import -- --only=insights   (only Podcasts, Webinars and Reports)
 //
 // The export holds personal data and is gitignored; it lives only on the
 // machine that runs the import. Re-running overwrites the imported files, so
@@ -11,9 +12,13 @@
 
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { parseWxr } from './wxr.ts';
+import { parseWxr, type Wxr } from './wxr.ts';
 import { importBlogPosts, type ImportedBlogPost, type BlogPostImport } from './blog-posts.ts';
+import { importCaseStudies } from './case-studies.ts';
+import { importIndustries } from './industries.ts';
 import { attachmentUrls, downloadMedia, notInRepo } from './media.ts';
+import { importInsightItems } from './insights-step.ts';
+import { withoutMigrated } from './pending.ts';
 import { pillarLabels } from '../../src/data/taxonomy.ts';
 import type { InventoryEntry } from '../../tests/url-parity/parity.ts';
 
@@ -27,7 +32,7 @@ async function findExport(): Promise<string> {
 }
 
 // YAML accepts JSON values, so JSON.stringify gives safe quoting for free.
-function serialise(post: ImportedBlogPost): string {
+function serialise(post: { data: object; body: string }): string {
   const lines = Object.entries(post.data).map(([key, value]) => `${key}: ${JSON.stringify(value)}`);
   return `---\n${lines.join('\n')}\n---\n\n${post.body}`;
 }
@@ -42,11 +47,12 @@ async function write(path: string, contents: string) {
 async function shrinkPending(addresses: string[]) {
   const inventory: InventoryEntry[] = JSON.parse(await readFile(root('urls/inventory.json'), 'utf8'));
   const pages = new Set(inventory.filter((e) => e.expect === 'page').map((e) => e.path));
-  const migrated = new Set(addresses.filter((a) => pages.has(a)));
-  const pending: string[] = JSON.parse(await readFile(root('urls/pending.json'), 'utf8'));
-  const left = pending.filter((p) => !migrated.has(p));
-  await writeFile(root('urls/pending.json'), JSON.stringify(left, null, 2) + '\n');
-  return pending.length - left.length;
+  const { json, removed } = withoutMigrated(
+    await readFile(root('urls/pending.json'), 'utf8'),
+    addresses.filter((a) => pages.has(a)),
+  );
+  await writeFile(root('urls/pending.json'), json);
+  return removed;
 }
 
 function missingImagesReport(missing: BlogPostImport['missingImages']): string {
@@ -82,12 +88,19 @@ async function main() {
   const withMedia = !process.argv.includes('--no-media');
   const file = await findExport();
   console.log(`Reading ${file}`);
-  const xml = await readFile(root(file), 'utf8');
+  // Parsed once; every importer reads the same parsed export.
+  const wxr = parseWxr(await readFile(root(file), 'utf8'));
+
+  // Podcasts, Webinars and Reports. `--only=insights` stops after this step,
+  // leaving Blog Posts (which Content Editors may have edited) untouched.
+  const insightAddresses = await importInsightItems(wxr, { withMedia, write });
+  console.log(`Removed ${await shrinkPending(insightAddresses)} Podcast, Webinar and Report addresses from urls/pending.json`);
+  if (process.argv.includes('--only=insights')) return;
 
   // Media first, so posts can leave out any image that couldn't be fetched.
-  const media = importBlogPosts(xml).media;
+  const media = [...importBlogPosts(wxr).media, ...importCaseStudies(wxr).media, ...importIndustries(wxr).media];
   if (withMedia) {
-    const urls = [...attachmentUrls(parseWxr(xml)), ...media];
+    const urls = [...attachmentUrls(wxr), ...media];
     console.log(`Downloading up to ${new Set(urls).size} media files (existing copies are skipped)`);
     const failures = await downloadMedia(urls);
     // Files the live site has already lost (404) are expected; anything else needs a re-run.
@@ -99,13 +112,37 @@ async function main() {
     }
   }
 
-  const blog = importBlogPosts(xml, { missingMedia: await notInRepo(media) });
+  const blog = importBlogPosts(wxr, { missingMedia: await notInRepo(media) });
   for (const post of blog.posts) await write(post.file, serialise(post));
   console.log(`Wrote ${blog.posts.length} Blog Posts`);
   await write('docs/content-team/blog-posts-without-industry.md', withoutIndustryReport(blog.posts));
   await write('docs/content-team/blog-post-images-to-replace.md', missingImagesReport(blog.missingImages));
   console.log(`Left out ${blog.missingImages.length} images the live site no longer has`);
   console.log(`Removed ${await shrinkPending(blog.posts.map((p) => p.address))} addresses from urls/pending.json`);
+
+  await importCaseStudiesAndIndustries(wxr);
+}
+
+// The listing pages built for Case Studies and Industries, which leave the
+// pending list along with the items.
+const CASE_STUDY_LISTINGS = ['/insights/our-work/', '/industries/'];
+
+async function importCaseStudiesAndIndustries(wxr: Wxr) {
+  const { caseStudies, missingImages } = importCaseStudies(wxr, { missingMedia: await notInRepo(importCaseStudies(wxr).media) });
+  for (const cs of caseStudies) await write(cs.file, serialise(cs));
+  console.log(`Wrote ${caseStudies.length} Case Studies`);
+  for (const m of missingImages) console.error(`Case Study image the live site no longer has: ${m.address} ${m.image}`);
+
+  const { industries, unreadable } = importIndustries(wxr);
+  for (const industry of industries) await write(industry.file, serialise(industry));
+  console.log(`Wrote ${industries.length} Industries`);
+  if (unreadable.length) {
+    console.error(`Could not read these Industry pages; their layout changed:\n${unreadable.map((u) => `${u.address}: ${u.reason}`).join('\n')}`);
+    process.exitCode = 1;
+  }
+
+  const addresses = [...caseStudies, ...industries].map((i) => i.address);
+  console.log(`Removed ${await shrinkPending([...addresses, ...CASE_STUDY_LISTINGS])} Case Study and Industry addresses from urls/pending.json`);
 }
 
 await main();

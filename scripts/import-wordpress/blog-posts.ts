@@ -1,8 +1,9 @@
 // Turns WordPress posts (both the post and the former news type) into Blog Post files.
 
-import { parseWxr, serialisedIds, decodeEntities, type Wxr } from './wxr.ts';
+import { asWxr, decodeEntities, type WxrSource } from './wxr.ts';
 import { toMarkdown, localiseUrls, mediaUrls } from './html.ts';
-import { pillarSlugs, industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
+import { industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
+import { pillarsOf, linkedSlugs } from './labels.ts';
 
 export interface BlogPostData {
   title: string;
@@ -38,8 +39,8 @@ export interface ImportOptions {
 
 const SOURCE_TYPES = ['post', 'news'];
 
-export function importBlogPosts(xml: string, { missingMedia = new Set() }: ImportOptions = {}): BlogPostImport {
-  const wxr = parseWxr(xml);
+export function importBlogPosts(source: WxrSource, { missingMedia = new Set() }: ImportOptions = {}): BlogPostImport {
+  const wxr = asWxr(source);
   const posts: ImportedBlogPost[] = [];
   const media = new Set<string>();
   const missingImages: BlogPostImport['missingImages'] = [];
@@ -80,7 +81,7 @@ export function importBlogPosts(xml: string, { missingMedia = new Set() }: Impor
 // Matches a Markdown image, optionally wrapped in a link.
 const IMAGE = /\[?!\[([^\]]*)\]\((\/wp-content\/[^)\s]+)\)(?:\]\([^)]*\))?/g;
 
-function withoutMissingImages(markdown: string, missing: Set<string>, report: (image: string, alt: string) => void): string {
+export function withoutMissingImages(markdown: string, missing: Set<string>, report: (image: string, alt: string) => void): string {
   if (!missing.size) return markdown;
   return markdown
     .replace(IMAGE, (whole, alt: string, src: string) => {
@@ -90,28 +91,4 @@ function withoutMissingImages(markdown: string, missing: Set<string>, report: (i
     })
     .replace(/\n{3,}/g, '\n\n')
     .replace(/^\n+/, '');
-}
-
-// One old post stores its service as the word "ESG" instead of an ID; the
-// live site redirects the old ESG service to Investment & Impact Transformation.
-const LEGACY_SERVICE_NAMES: Record<string, PillarSlug> = { ESG: 'investment-impact-transformation' };
-
-function pillarsOf(wxr: Wxr, value: string | undefined): PillarSlug[] {
-  const legacy = LEGACY_SERVICE_NAMES[value ?? ''];
-  return legacy ? [legacy] : linkedSlugs(wxr, value, 'services', pillarSlugs);
-}
-
-// Maps ACF relationship IDs to label slugs via the linked post's address:
-// /services/<slug>/… or /industries/<slug>/. Sub-services count as their
-// parent service; IDs of deleted or Arabic posts are dropped. WordPress order
-// is kept, because the first label is the one cards show.
-function linkedSlugs<T extends string>(wxr: Wxr, value: string | undefined, section: string, allowed: readonly T[]): T[] {
-  const found = new Set<T>();
-  for (const id of serialisedIds(value)) {
-    const linked = wxr.byId.get(id);
-    if (!linked) continue;
-    const [first, slug] = new URL(linked.link).pathname.split('/').filter(Boolean);
-    if (first === section && (allowed as readonly string[]).includes(slug)) found.add(slug as T);
-  }
-  return [...found];
 }

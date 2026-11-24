@@ -1,0 +1,14 @@
+---
+// The "Ready to get started?" call to action that closes the Insights and
+// Industries pages, as on the live site.
+import CtaBlock from './CtaBlock.astro';
+---
+
+<CtaBlock
+  heading="Ready to get started?"
+  text="Don't wait to drive your business forward."
+  actions={[
+    { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+    { label: "Let's Chat", href: '/contact/', tone: 'outline' },
+  ]}
+/>

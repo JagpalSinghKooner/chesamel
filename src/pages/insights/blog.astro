@@ -3,9 +3,9 @@
 // serves News at /insights/blog/, so that address is kept.
 import Base from '../../layouts/Base.astro';
 import BlogPostListing from '../../components/BlogPostListing.astro';
-import { getBlogPosts, summarise } from '../../content/blog';
+import { getBlogPosts, summarisePost } from '../../content/blog';
 
-const posts = (await getBlogPosts()).map(summarise);
+const posts = (await getBlogPosts()).map(summarisePost);
 ---
 
 <Base title="News | Chesamel" description="The latest thoughts, updates, and helpful how-tos from Chesamel.">

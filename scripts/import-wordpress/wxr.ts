@@ -13,6 +13,8 @@ export interface WxrItem {
   dateGmt: string;
   creator: string;
   content: string;
+  // The hand-written summary; Case Studies show it as the hero subtitle.
+  excerpt: string;
   attachmentUrl: string;
   meta: Record<string, string>;
 }
@@ -56,6 +58,7 @@ export function parseWxr(xml: string): Wxr {
       dateGmt: str(i['wp:post_date_gmt']),
       creator: str(i['dc:creator']),
       content: i['content:encoded'] === undefined ? '' : String(i['content:encoded']),
+      excerpt: str(i['excerpt:encoded']),
       attachmentUrl: str(i['wp:attachment_url']),
       meta,
     };
@@ -65,6 +68,11 @@ export function parseWxr(xml: string): Wxr {
 }
 
 // ACF stores relationship fields as PHP-serialised arrays: a:1:{i:0;s:3:"356";}.
+// Importers take the export's text or, to save parsing it again, the parsed
+// export.
+export type WxrSource = string | Wxr;
+export const asWxr = (source: WxrSource): Wxr => (typeof source === 'string' ? parseWxr(source) : source);
+
 export function serialisedIds(value: string | undefined): string[] {
   return [...(value ?? '').matchAll(/s:\d+:"(\d+)"/g)].map((m) => m[1]);
 }

@@ -1,0 +1,41 @@
+---
+// A Report at its original address: its intro, then the download box. On the
+// live site a HubSpot form emails the full report; until forms are built
+// (#11), the box asks the reader to get in touch instead.
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import InsightHeader from '../../components/InsightHeader.astro';
+import LabelLinks from '../../components/LabelLinks.astro';
+import Button from '../../components/Button.astro';
+import { getNewest, type Report } from '../../content/insight-items';
+import { primaryPillar } from '../../content/shared';
+
+export async function getStaticPaths() {
+  return (await getNewest('reports')).map((report) => ({ params: { slug: report.id }, props: { report } }));
+}
+
+const { report } = Astro.props as { report: Report };
+const { title, image, pillars, description } = report.data;
+const { Content } = await render(report);
+---
+
+<Base title={`${title} | Chesamel`} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <InsightHeader section={{ label: 'Reports', href: '/insights/reports/' }} pillar={primaryPillar(report.data)} title={title} />
+    <div class="blog-body mt-10">
+      <Content />
+    </div>
+    <section aria-labelledby="download" class="mt-12 grid gap-8 border border-light-grey p-6 sm:grid-cols-[1fr_14rem] sm:p-8" data-report-download>
+      <div class="flex flex-col">
+        <p class="type-caption">/ explore report</p>
+        <h2 id="download" class="type-heading-3 mt-2 text-2xl">Download Full Report</h2>
+        <p class="mt-4 text-dark-grey">Online download is coming soon. Get in touch and we'll send you the full report.</p>
+        <div class="mt-6">
+          <Button href="/contact/" tone="indigo">Request the full report</Button>
+        </div>
+      </div>
+      <img src={image.src} alt={image.alt} class="w-full self-start" />
+    </section>
+    <LabelLinks pillars={pillars} servicesHeading="Related services" />
+  </article>
+</Base>

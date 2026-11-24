@@ -101,6 +101,14 @@ test('style-guide page shows every logo in each permitted colour with its clear 
   }
 });
 
+test('style-guide page shows the Case Study and Industry Components', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const components = page.locator('[data-style-guide="components"]');
+  for (const name of ['case-study-card', 'case-study-slider', 'case-study-listing', 'industry-card']) {
+    await expect(components.locator(`[data-component="${name}"]`).first()).toBeVisible();
+  }
+});
+
 test('style-guide page shows the header, footer, hero, Pillar cards, CTA and Blog Post Components', async ({ page }) => {
   await page.goto('/style-guide/');
   const components = page.locator('[data-style-guide="components"]');

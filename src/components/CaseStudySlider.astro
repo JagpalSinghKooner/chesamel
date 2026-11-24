@@ -1,0 +1,135 @@
+---
+// Case Study slider Component: a heading and a row of Case Study cards that
+// scrolls sideways, one card per view on phones and two from 768px, with the
+// live site's controls under it: a progress bar, previous and next buttons and
+// a "1 / 3" counter. The live site uses it on Our Work, Industry pages, Case
+// Study pages ("Our Related Case Studies") and the Podcast page.
+//
+// The cards are an ordinary scrolling list, so without JavaScript they can
+// still be swiped or scrolled; the script adds the controls. It works in
+// either reading direction: positions are measured from the track's start
+// edge, and under dir="rtl" the arrows are mirrored and Next scrolls left.
+import Button from './Button.astro';
+import CaseStudyCard from './CaseStudyCard.astro';
+import type { CaseStudySummary } from '../content/case-studies';
+
+interface Props {
+  caseStudies: CaseStudySummary[];
+  heading: string;
+  eyebrow?: string;
+  text?: string;
+  action?: { label: string; href: string };
+  // Dark: a Black band with light cards, as on Industry and Case Study pages.
+  tone?: 'light' | 'dark';
+  headingLevel?: 'h2' | 'h3';
+  // Keeps ids unique when a page shows more than one slider.
+  id?: string;
+}
+
+const { caseStudies, heading, eyebrow, text, action, tone = 'dark', headingLevel: Heading = 'h2', id = 'case-study-slider' } = Astro.props;
+const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
+const dark = tone === 'dark';
+---
+
+<section
+  aria-labelledby={`${id}-heading`}
+  class:list={['case-study-slider', dark ? 'bg-black' : 'bg-off-white']}
+  data-component="case-study-slider"
+  data-slider
+>
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        {eyebrow && <p class:list={['font-subheading', dark ? 'text-off-white' : 'text-dark-grey']}>{eyebrow}</p>}
+        <Heading id={`${id}-heading`} class:list={['type-heading-2 mt-3', dark && 'text-white']}>{heading}</Heading>
+        {text && <p class:list={['mt-4', dark ? 'text-off-white' : 'text-dark-grey']}>{text}</p>}
+      </div>
+      {action && <Button href={action.href} tone={dark ? 'outline' : 'light'}>{action.label}</Button>}
+    </div>
+    <ul class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4" data-track>
+      {
+        caseStudies.map((caseStudy) => (
+          <li class="w-full shrink-0 snap-start md:w-[calc((100%-1.5rem)/2)]" data-slide>
+            <CaseStudyCard caseStudy={caseStudy} headingLevel={CardHeading} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-6 flex items-center justify-end gap-4" data-controls hidden>
+      <div aria-hidden="true" class:list={['h-0.5 w-full max-w-xs', dark ? 'bg-dark-grey' : 'bg-light-grey']}>
+        <div class:list={['h-full transition-[width]', dark ? 'bg-white' : 'bg-black']} data-progress></div>
+      </div>
+      <button type="button" aria-label="Previous" class:list={['slider-button', dark && 'slider-button-dark']} data-prev><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>←</span></button>
+      <p class:list={['min-w-12 text-center text-sm font-semibold tabular-nums', dark ? 'text-white' : 'text-black']} data-slide-count>
+        1 / {caseStudies.length}
+      </p>
+      <button type="button" aria-label="Next" class:list={['slider-button', dark && 'slider-button-dark']} data-next><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>→</span></button>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+
+  .slider-button {
+    @apply grid size-10 cursor-pointer place-items-center border border-medium-grey text-black hover:border-black disabled:cursor-default disabled:opacity-40;
+  }
+  .slider-button-dark {
+    @apply border-dark-grey text-white hover:border-white;
+  }
+  /* Once the controls work, they replace the scrollbar. */
+  [data-slider][data-ready] [data-track] {
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  for (const slider of document.querySelectorAll<HTMLElement>('[data-slider]')) {
+    const track = slider.querySelector<HTMLElement>('[data-track]')!;
+    const slides = [...track.querySelectorAll<HTMLElement>('[data-slide]')];
+    const prev = slider.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = slider.querySelector<HTMLButtonElement>('[data-next]')!;
+    const count = slider.querySelector<HTMLElement>('[data-slide-count]')!;
+    const progress = slider.querySelector<HTMLElement>('[data-progress]')!;
+
+    const rtl = () => getComputedStyle(track).direction === 'rtl';
+    // How far a slide's start edge sits from the track's start edge, in
+    // whichever direction the page reads.
+    const offset = (slide: HTMLElement) => {
+      const t = track.getBoundingClientRect();
+      const r = slide.getBoundingClientRect();
+      return rtl() ? t.right - r.right : r.left - t.left;
+    };
+    // Scroll distance from the start; scrollLeft is negative right to left.
+    const scrolled = () => Math.abs(track.scrollLeft);
+    const atEnd = () => scrolled() + track.clientWidth >= track.scrollWidth - 2;
+    // The slide nearest the start edge.
+    const currentIndex = () =>
+      slides.reduce((best, slide, i) => (Math.abs(offset(slide)) < Math.abs(offset(slides[best])) ? i : best), 0);
+
+    function update() {
+      const current = currentIndex();
+      count.textContent = `${current + 1} / ${slides.length}`;
+      prev.disabled = scrolled() <= 2;
+      next.disabled = atEnd();
+      const scrollable = track.scrollWidth - track.clientWidth;
+      progress.style.width = `${scrollable > 0 ? (100 * (track.clientWidth + scrolled())) / track.scrollWidth : 100}%`;
+    }
+
+    const go = (direction: number) => {
+      const target = slides[Math.max(0, Math.min(slides.length - 1, currentIndex() + direction))];
+      const distance = offset(target);
+      track.scrollBy({ left: rtl() ? -distance : distance, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    };
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    track.addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+
+    slider.querySelector<HTMLElement>('[data-controls]')!.hidden = false;
+    slider.dataset.ready = '';
+    update();
+  }
+</script>

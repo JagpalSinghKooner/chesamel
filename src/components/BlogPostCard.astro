@@ -2,7 +2,8 @@
 // Blog Post card: Pillar tag, title, date and reading time, linking to the
 // post. The tag is Dark Grey `type-tag`, not the live site's rose/tiger text:
 // secondary colours are for small accents only (ADR-0002).
-import { formatDate, primaryPillar, type BlogPostSummary } from '../content/blog';
+import type { BlogPostSummary } from '../content/blog';
+import { formatDate, isoDate, primaryPillar } from '../content/shared';
 import { pillarLabels } from '../data/taxonomy';
 
 interface Props {
@@ -21,7 +22,7 @@ const { post, headingLevel: Heading = 'h3' } = Astro.props;
   <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[primaryPillar(post)]}</span>
   <Heading class="type-heading-3 mt-6 text-xl leading-tight group-hover:underline">{post.title}</Heading>
   <p class="type-caption mt-auto flex justify-between gap-4 pt-6">
-    <time datetime={post.date.toISOString().slice(0, 10)}>{formatDate(post.date)}</time>
+    <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
     <span>{post.minutes} min read</span>
   </p>
 </a>

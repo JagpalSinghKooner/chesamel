@@ -1,0 +1,99 @@
+---
+// Industry pages at their original addresses, /industries/<slug>/. All five
+// share the live template; their copy comes from src/content/industries/.
+// The live "How we work" slider fades between its three steps; here the
+// steps sit side by side, so nothing moves.
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Button from '../../components/Button.astro';
+import GetStartedCta from '../../components/GetStartedCta.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import CaseStudySlider from '../../components/CaseStudySlider.astro';
+import ClientLogos from '../../components/home/ClientLogos.astro';
+import { getCaseStudies, getIndustries, summariseCaseStudy, type Industry } from '../../content/case-studies';
+import { getBlogPosts, summarisePost } from '../../content/blog';
+import type { IndustrySlug } from '../../data/taxonomy';
+
+export async function getStaticPaths() {
+  return (await getIndustries()).map((industry) => ({ params: { slug: industry.id }, props: { industry } }));
+}
+
+const { industry } = Astro.props as { industry: Industry };
+// Industry files are named after their slug.
+const slug = industry.id as IndustrySlug;
+const { title, subtitle, description, intro, steps, experience, caseStudies: work, relatedPosts } = industry.data;
+const caseStudies = (await getCaseStudies()).filter((c) => c.data.industries.includes(slug)).slice(0, 3);
+const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(slug)).slice(0, 3);
+---
+
+<Base title={`${title} Industry Solutions | Chesamel`} description={description ?? subtitle}>
+  <section class="bg-black">
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <h1 class="type-heading-1 text-white">{title}</h1>
+      <p class="mt-4 max-w-2xl font-subheading text-lg text-off-white">{subtitle}</p>
+    </div>
+  </section>
+  <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Industries', href: '/industries/' }, { label: title }]} />
+  <section aria-labelledby="intro">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="font-subheading">{intro.eyebrow}</p>
+        <h2 id="intro" class="type-heading-2 mt-3">{intro.heading}</h2>
+      </div>
+      <div>
+        <p>{intro.text}</p>
+        <div class="mt-8"><Button href="/insights/our-work/" tone="light">How We Do It</Button></div>
+      </div>
+    </div>
+  </section>
+  <section aria-label="How we work" class="bg-black">
+    <ol class="mx-auto grid max-w-7xl gap-6 px-4 py-20 sm:px-6 md:grid-cols-3">
+      {
+        steps.map((step) => (
+          <li class="flex flex-col bg-indigo">
+            <img src={step.image.src} alt={step.image.alt} loading="lazy" class="aspect-[4/3] w-full object-cover" />
+            <div class="p-6">
+              <h3 class="type-heading-3 text-xl text-white">{step.heading}</h3>
+              <p class="mt-3 text-white">{step.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+  <section aria-labelledby="experience">
+    <div class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+      <p class="font-subheading">{experience.eyebrow}</p>
+      <h2 id="experience" class="type-heading-2 mt-3">{experience.heading}</h2>
+      {experience.paragraphs.map((p) => <p class="mt-6">{p}</p>)}
+      <div class="mt-8"><Button href="/contact/" tone="indigo">Let's Chat</Button></div>
+    </div>
+  </section>
+  <ClientLogos />
+  <CaseStudySlider
+    eyebrow={work.eyebrow}
+    heading={work.heading}
+    text={work.text}
+    action={{ label: 'View All', href: `/insights/our-work/?industry=${slug}` }}
+    caseStudies={caseStudies.map(summariseCaseStudy)}
+  />
+  <section aria-labelledby="related-posts" class="bg-off-white">
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="font-subheading">/ our latest insights</p>
+          <h2 id="related-posts" class="type-heading-2 mt-3">Related Posts</h2>
+          <p class="mt-4">{relatedPosts.text}</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/insights/blog/" tone="light">View All</Button>
+          <Button href="/contact/" tone="indigo">Let's Chat</Button>
+        </div>
+      </div>
+      <ul class="mt-12 grid gap-4 md:grid-cols-3">
+        {posts.map((post) => <li><BlogPostCard post={summarisePost(post)} /></li>)}
+      </ul>
+    </div>
+  </section>
+  <GetStartedCta />
+</Base>

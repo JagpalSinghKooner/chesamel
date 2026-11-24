@@ -31,16 +31,22 @@ turndown.use(gfm);
 turndown.keep(['iframe', 'video', 'audio']);
 
 // WordPress stores a YouTube embed as a bare URL that it expands on render.
+// Most are YouTube embed blocks, but some were saved through the generic
+// embed handler, so any embed block holding a YouTube URL counts.
 // The no-cookie host sets no tracking cookies before consent.
 const YOUTUBE_ID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/;
+export const youtubeId = (url: string): string | undefined => url.match(YOUTUBE_ID)?.[1];
 turndown.addRule('youtube', {
-  filter: (node) => node.nodeName === 'FIGURE' && /wp-block-embed-youtube/.test(node.getAttribute('class') ?? ''),
+  filter: (node) =>
+    node.nodeName === 'FIGURE' && /\bwp-block-embed\b/.test(node.getAttribute('class') ?? '') && !!youtubeId(node.textContent ?? ''),
   replacement: (_content, node) => {
-    const id = (node.textContent ?? '').match(YOUTUBE_ID)?.[1];
-    if (!id) return '';
+    const id = youtubeId(node.textContent ?? '');
     return `\n\n<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube video" width="560" height="315" loading="lazy" allowfullscreen></iframe>\n\n`;
   },
 });
+
+// Some items embed the same video twice in a row; the second is dropped.
+const withoutRepeatedPlayers = (md: string) => md.replace(/(<iframe [^>]*><\/iframe>)(\s*\1)+/g, '$1');
 
 // A link with nothing in it can't be named by a screen reader (and fails
 // WCAG), so it is dropped; anything inside it, such as a line break, stays.
@@ -54,6 +60,6 @@ turndown.addRule('emptyLink', {
 const tidyLists = (md: string) => md.replace(/^(\s*)(-|\d+\.) +/gm, '$1$2 ');
 
 export function toMarkdown(html: string): string {
-  const markdown = tidyLists(turndown.turndown(localiseUrls(html))).trim();
+  const markdown = withoutRepeatedPlayers(tidyLists(turndown.turndown(localiseUrls(html)))).trim();
   return markdown ? markdown + '\n' : '';
 }
