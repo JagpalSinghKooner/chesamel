@@ -35,8 +35,6 @@ export async function getIndustries(): Promise<Industry[]> {
   return (await getCollection('industries')).sort((a, b) => a.data.order - b.data.order);
 }
 
-export const caseStudyCount = (n: number) => `${n} Case Stud${n === 1 ? 'y' : 'ies'}`;
-
 // "Our Related Case Studies": the newest that share an Industry with this one,
 // then the newest that share its main Pillar, never the Case Study itself.
 export function related(caseStudy: CaseStudy, all: CaseStudy[], limit = 3): CaseStudy[] {

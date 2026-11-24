@@ -1,16 +1,13 @@
 ---
 // Case Study listing with Service and/or Industry filters, as in the live Our
-// Work catalogue (both) and the Industries page (Industry only). It works like
-// the Blog Post listing: every Case Study is in the HTML, filtering happens in
-// the browser, and the chosen filters are kept in the address
-// (?pillar=…&industry=…) so a filtered view can be shared. A Case Study with
-// no Industry is hidden once an Industry is chosen.
+// Work catalogue (both) and the Industries page (Industry only). The filters,
+// count and filtering come from FilteredListing, as for the Blog Post listing.
 //
 // The live filter is labelled "Service" and lists the same six labels as the
 // News Pillar filter.
 import CaseStudyCard from './CaseStudyCard.astro';
-import { caseStudyCount, type CaseStudySummary } from '../content/case-studies';
-import { pillarLabels, industryLabels } from '../data/taxonomy';
+import FilteredListing from './FilteredListing.astro';
+import type { CaseStudySummary } from '../content/case-studies';
 
 interface Props {
   caseStudies: CaseStudySummary[];
@@ -20,115 +17,24 @@ interface Props {
 }
 
 const { caseStudies, filters = ['pillar', 'industry'], headingLevel = 'h3', tone = 'light' } = Astro.props;
-const allGroups = {
-  pillar: { key: 'pillar', label: 'Service', options: Object.entries(pillarLabels) },
-  industry: { key: 'industry', label: 'Industry', options: Object.entries(industryLabels) },
-};
-const groups = filters.map((f) => allGroups[f]);
-const dark = tone === 'dark';
+const labels = { pillar: 'Service', industry: 'Industry' };
 ---
 
-<div data-component="case-study-listing" data-case-study-listing class:list={[dark && 'listing-dark']}>
-  <div data-filters hidden class="flex flex-col gap-5">
-    {
-      groups.map((g) => (
-        <div role="group" aria-label={g.label} data-filter={g.key} class="flex flex-col gap-2 sm:flex-row sm:items-baseline">
-          <p class:list={['type-tag w-24 shrink-0', dark && 'text-off-white']} aria-hidden="true">{g.label}</p>
-          <ul class="flex flex-wrap gap-2">
-            <li>
-              <button type="button" data-value="" aria-pressed="true" class="filter-button">All</button>
-            </li>
-            {g.options.map(([value, label]) => (
-              <li>
-                <button type="button" data-value={value} aria-pressed="false" class="filter-button">
-                  {label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
-    }
-  </div>
-  <p role="status" class:list={['type-caption mt-8', dark && 'text-off-white']} data-count>{caseStudyCount(caseStudies.length)}</p>
-  <ul class="mt-4 grid gap-6 md:grid-cols-2">
-    {
-      caseStudies.map((caseStudy) => (
-        <li data-pillars={caseStudy.pillars.join(' ')} data-industries={caseStudy.industries.join(' ')}>
-          <CaseStudyCard caseStudy={caseStudy} headingLevel={headingLevel} />
-        </li>
-      ))
-    }
-  </ul>
+<div data-component="case-study-listing">
+  <FilteredListing
+    filters={filters.map((key) => ({ key, label: labels[key] }))}
+    total={caseStudies.length}
+    noun={['Case Study', 'Case Studies']}
+    tone={tone}
+  >
+    <ul class="mt-4 grid gap-6 md:grid-cols-2">
+      {
+        caseStudies.map((caseStudy) => (
+          <li data-pillars={caseStudy.pillars.join(' ')} data-industries={caseStudy.industries.join(' ')}>
+            <CaseStudyCard caseStudy={caseStudy} headingLevel={headingLevel} />
+          </li>
+        ))
+      }
+    </ul>
+  </FilteredListing>
 </div>
-
-<style>
-  @reference "../styles/global.css";
-
-  .filter-button {
-    @apply cursor-pointer border border-medium-grey px-4 py-2 text-sm font-semibold text-dark-grey hover:border-indigo hover:text-indigo;
-  }
-  .filter-button[aria-pressed='true'] {
-    @apply border-indigo bg-indigo text-white hover:text-white;
-  }
-  .listing-dark .filter-button {
-    @apply border-dark-grey text-off-white hover:border-white hover:text-white;
-  }
-  .listing-dark .filter-button[aria-pressed='true'] {
-    @apply border-indigo bg-indigo text-white;
-  }
-</style>
-
-<script>
-  for (const listing of document.querySelectorAll<HTMLElement>('[data-case-study-listing]')) {
-    const filters = listing.querySelector<HTMLElement>('[data-filters]')!;
-    const count = listing.querySelector<HTMLElement>('[data-count]')!;
-    const items = [...listing.querySelectorAll<HTMLLIElement>('li[data-pillars]')];
-    const groups = [...filters.querySelectorAll<HTMLElement>('[data-filter]')];
-    const params = new URLSearchParams(location.search);
-    const chosen: Record<string, string> = {};
-
-    function apply() {
-      let shown = 0;
-      for (const item of items) {
-        const pillars = item.dataset.pillars!.split(' ');
-        const industries = item.dataset.industries!.split(' ').filter(Boolean);
-        const visible =
-          (!chosen.pillar || pillars.includes(chosen.pillar)) && (!chosen.industry || industries.includes(chosen.industry));
-        item.hidden = !visible;
-        if (visible) shown++;
-      }
-      count.textContent = `${shown} Case Stud${shown === 1 ? 'y' : 'ies'}`;
-      for (const group of groups) {
-        for (const b of group.querySelectorAll<HTMLButtonElement>('button')) {
-          b.setAttribute('aria-pressed', String(b.dataset.value === (chosen[group.dataset.filter!] ?? '')));
-        }
-      }
-    }
-
-    for (const group of groups) {
-      const key = group.dataset.filter!;
-      const values = [...group.querySelectorAll<HTMLButtonElement>('button')].map((b) => b.dataset.value);
-      const initial = params.get(key);
-      if (initial && values.includes(initial)) chosen[key] = initial;
-
-      group.addEventListener('click', (event) => {
-        const button = (event.target as HTMLElement).closest('button');
-        if (!button) return;
-        if (button.dataset.value) chosen[key] = button.dataset.value;
-        else delete chosen[key];
-        const url = new URL(location.href);
-        for (const g of groups) {
-          const k = g.dataset.filter!;
-          if (chosen[k]) url.searchParams.set(k, chosen[k]);
-          else url.searchParams.delete(k);
-        }
-        history.replaceState(null, '', url);
-        apply();
-      });
-    }
-
-    filters.hidden = false;
-    apply();
-  }
-</script>
