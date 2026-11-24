@@ -28,7 +28,11 @@ test('every inventoried address resolves as the old site promised', async ({ req
   test.setTimeout(5 * 60_000);
   const isPending = new Set(pending);
   const failures: string[] = [];
-  const queue = [...inventory];
+  // The host, not the site, redirects /x to /x/; the local preview server
+  // serves /x itself. So those redirects are checked only against a deployed
+  // site (BASE_URL), which the "URL parity on Preview" check does.
+  const hostSlashRedirect = (e: InventoryEntry) => e.expect === 'redirect' && e.to === `${e.path}/`;
+  const queue = process.env.BASE_URL ? [...inventory] : inventory.filter((e) => !hostSlashRedirect(e));
 
   async function worker() {
     for (let entry = queue.shift(); entry; entry = queue.shift()) {
