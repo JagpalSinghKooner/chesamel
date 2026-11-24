@@ -8,8 +8,14 @@ import Button from '../../components/Button.astro';
 import CtaBlock from '../../components/CtaBlock.astro';
 import { getNewest, addressOf, excerpt } from '../../content/insight-items';
 import { formatDate } from '../../content/blog';
+import CaseStudySlider from '../../components/CaseStudySlider.astro';
+import { getCaseStudies, summarise } from '../../content/case-studies';
 
 const podcasts = await getNewest('podcasts');
+// The live page's hand-picked "Customer stories".
+const customerStories = ['elevating-fan-experiences-at-the-brits', 'b2b-marketing-for-ebay', 'augmenting-cybersecurity-with-ai'];
+const caseStudies = await getCaseStudies();
+const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)!).map(summarise);
 ---
 
 <Base title="Podcast | Chesamel" description="Listen to the latest episodes in our podcast series, Chesamel Unplugged.">
@@ -52,4 +58,5 @@ const podcasts = await getNewest('podcasts');
     text="Want to share your story, some business advice, or talk about a topic you're an expert in? We're always looking for new guests."
     actions={[{ label: 'Get in Touch', href: '/contact/', tone: 'indigo' }]}
   />
+  <CaseStudySlider heading="Customer stories" action={{ label: 'View All', href: '/insights/our-work/' }} caseStudies={stories} />
 </Base>

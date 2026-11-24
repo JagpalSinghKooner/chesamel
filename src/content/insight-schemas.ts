@@ -1,14 +1,9 @@
 // What every Podcast, Webinar and Report file must hold. The build fails on
 // any file that doesn't match, so a broken item never reaches the site.
 
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import { z } from 'astro/zod';
 import { pillarSlugs, industrySlugs } from '../data/taxonomy';
-
-// Media lives in public/ at its old WordPress path. Builds and tests run from
-// the repo root, so the working directory is the reliable anchor here.
-const inPublic = (src: string) => src.startsWith('/') && existsSync(join(process.cwd(), 'public', decodeURI(src)));
+import { inPublic } from './in-public';
 
 const title = z.string().trim().min(1);
 const date = z.coerce.date().refine((d) => !Number.isNaN(d.getTime()), 'Not a valid date');

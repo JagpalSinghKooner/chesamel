@@ -4,6 +4,7 @@
 // addresses add their collections to getStaticPaths here.
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import LabelLinks from '../components/LabelLinks.astro';
 import { getBlogPosts, addressOf, formatDate, primaryPillar, readingMinutes, type BlogPost } from '../content/blog';
 import { pillarLabels } from '../data/taxonomy';
 
@@ -42,20 +43,6 @@ const { Content } = await render(post);
     <div class="blog-body mt-10" data-blog-body>
       <Content />
     </div>
-    <aside aria-labelledby="services-provided" class="mt-16 border-t border-light-grey pt-8">
-      <h2 id="services-provided" class="type-tag">Services provided</h2>
-      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
-        {
-          pillars.map((slug) => (
-            <li>
-              <a href={`/services/${slug}/`} class="flex items-center justify-between border border-light-grey px-4 py-5 font-semibold text-black hover:bg-off-white">
-                {pillarLabels[slug]}
-                <span class="type-caption">Explore service <span aria-hidden="true">↗</span></span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </aside>
+    <LabelLinks pillars={pillars} />
   </article>
 </Base>

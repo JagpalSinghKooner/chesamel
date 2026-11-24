@@ -126,6 +126,12 @@ test.describe('Case Study slider', () => {
   });
 });
 
+test('the Podcast page shows its three chosen customer stories in a Case Study slider', async ({ page }) => {
+  await page.goto('/insights/podcasts/');
+  await expect(slider(page)).toContainText('Customer stories');
+  await expect(sliderTitles(page)).toHaveText(['Elevating Fan Experiences at the BRITs', 'B2B Marketing for eBay', 'Augmenting Cybersecurity with AI']);
+});
+
 test.describe('Industries', () => {
   test('the hub links to each Industry in the live order and filters work by Industry only', async ({ page }) => {
     await page.goto('/industries/');
