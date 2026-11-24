@@ -8,8 +8,11 @@
 // keeps the chosen filters in the address (?pillar=…&industry=…) so a
 // filtered view can be shared. An item with no Industry is shown while no
 // Industry is chosen and hidden once one is.
+//
+// Each filter is a Fulldev Toggle Group (ADR-0005): Data Slot keeps one button
+// pressed, sets aria-pressed and moves between the buttons with the arrow keys.
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { pillarLabels, industryLabels } from '../data/taxonomy';
-
 
 interface Props {
   // Each filter shown, with its visible label ("Pillar", "Service", "Industry").
@@ -23,30 +26,34 @@ interface Props {
 const { filters, total, noun, tone = 'light' } = Astro.props;
 const options = { pillar: Object.entries(pillarLabels), industry: Object.entries(industryLabels) };
 const dark = tone === 'dark';
+
+// The brand's square outlined filter button, filled Indigo when pressed, in
+// place of Fulldev's rounded grey toggle.
+const button = [
+  'h-auto min-w-0 cursor-pointer whitespace-normal border px-4 py-2 font-semibold transition-none hover:bg-transparent',
+  'data-[state=on]:border-indigo data-[state=on]:bg-indigo data-[state=on]:text-white data-[state=on]:hover:border-indigo data-[state=on]:hover:text-white',
+  dark ? 'border-dark-grey text-off-white hover:border-white hover:text-white' : 'border-medium-grey text-dark-grey hover:border-indigo hover:text-indigo',
+];
 ---
 
-<div data-filtered-listing data-noun-one={noun[0]} data-noun-many={noun[1]} class:list={[dark && 'listing-dark']}>
+<div data-filtered-listing data-noun-one={noun[0]} data-noun-many={noun[1]}>
   <div data-filters hidden class="flex flex-col gap-5">
     {
       filters.map((g) => (
-        <div role="group" aria-label={g.label} data-filter={g.key} class="flex flex-col gap-2 sm:flex-row sm:items-baseline">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline">
           <p class:list={['type-tag w-24 shrink-0', dark && 'text-off-white']} aria-hidden="true">
             {g.label}
           </p>
-          <ul class="flex flex-wrap gap-2">
-            <li>
-              <button type="button" data-value="" aria-pressed="true" class="filter-button">
-                All
-              </button>
-            </li>
+          <ToggleGroup aria-label={g.label} defaultValue="all" data-filter={g.key} class="w-auto flex-wrap rounded-none">
+            <ToggleGroupItem value="all" class:list={button}>
+              All
+            </ToggleGroupItem>
             {options[g.key].map(([value, label]) => (
-              <li>
-                <button type="button" data-value={value} aria-pressed="false" class="filter-button">
-                  {label}
-                </button>
-              </li>
+              <ToggleGroupItem value={value} class:list={button}>
+                {label}
+              </ToggleGroupItem>
             ))}
-          </ul>
+          </ToggleGroup>
         </div>
       ))
     }
@@ -57,67 +64,53 @@ const dark = tone === 'dark';
   <slot />
 </div>
 
-<style>
-  @reference "../styles/global.css";
-
-  .filter-button {
-    @apply cursor-pointer border border-medium-grey px-4 py-2 text-sm font-semibold text-dark-grey hover:border-indigo hover:text-indigo;
-  }
-  .filter-button[aria-pressed='true'] {
-    @apply border-indigo bg-indigo text-white hover:text-white;
-  }
-  .listing-dark .filter-button {
-    @apply border-dark-grey text-off-white hover:border-white hover:text-white;
-  }
-  .listing-dark .filter-button[aria-pressed='true'] {
-    @apply border-indigo bg-indigo text-white;
-  }
-</style>
-
 <script>
+  import { createToggleGroup } from '@data-slot/toggle-group';
+
   for (const listing of document.querySelectorAll<HTMLElement>('[data-filtered-listing]')) {
     const filters = listing.querySelector<HTMLElement>('[data-filters]')!;
     const count = listing.querySelector<HTMLElement>('[data-count]')!;
     const items = [...listing.querySelectorAll<HTMLLIElement>('li[data-pillars]')];
-    const groups = [...filters.querySelectorAll<HTMLElement>('[data-filter]')];
     const { nounOne, nounMany } = listing.dataset;
     const params = new URLSearchParams(location.search);
-    const chosen: Record<string, string> = {};
+    // Each filter's controller; Data Slot hands back the one it already made.
+    const groups = [...filters.querySelectorAll<HTMLElement>('[data-filter]')].map((root) => ({
+      key: root.dataset.filter!,
+      root,
+      control: createToggleGroup(root),
+    }));
+    // The chosen value of a filter, or '' for All.
+    const chosen = (key: string) => {
+      const value = groups.find((g) => g.key === key)?.control.value[0];
+      return value && value !== 'all' ? value : '';
+    };
 
     function apply() {
       let shown = 0;
+      const pillar = chosen('pillar');
+      const industry = chosen('industry');
       for (const item of items) {
         const pillars = item.dataset.pillars!.split(' ');
         const industries = item.dataset.industries!.split(' ').filter(Boolean);
-        const visible =
-          (!chosen.pillar || pillars.includes(chosen.pillar)) && (!chosen.industry || industries.includes(chosen.industry));
+        const visible = (!pillar || pillars.includes(pillar)) && (!industry || industries.includes(industry));
         item.hidden = !visible;
         if (visible) shown++;
       }
       count.textContent = `${shown} ${shown === 1 ? nounOne : nounMany}`;
-      for (const group of groups) {
-        for (const b of group.querySelectorAll<HTMLButtonElement>('button')) {
-          b.setAttribute('aria-pressed', String(b.dataset.value === (chosen[group.dataset.filter!] ?? '')));
-        }
-      }
     }
 
-    for (const group of groups) {
-      const key = group.dataset.filter!;
-      const values = [...group.querySelectorAll<HTMLButtonElement>('button')].map((b) => b.dataset.value);
+    for (const { key, root, control } of groups) {
       const initial = params.get(key);
-      if (initial && values.includes(initial)) chosen[key] = initial;
+      if (initial) control.setValue(initial);
+      if (control.value.length === 0) control.setValue('all');
 
-      group.addEventListener('click', (event) => {
-        const button = (event.target as HTMLElement).closest('button');
-        if (!button) return;
-        if (button.dataset.value) chosen[key] = button.dataset.value;
-        else delete chosen[key];
+      root.addEventListener('toggle-group:change', () => {
+        // Pressing the chosen button again would leave none pressed: keep All.
+        if (control.value.length === 0) control.setValue('all');
         const url = new URL(location.href);
         for (const g of groups) {
-          const k = g.dataset.filter!;
-          if (chosen[k]) url.searchParams.set(k, chosen[k]);
-          else url.searchParams.delete(k);
+          if (chosen(g.key)) url.searchParams.set(g.key, chosen(g.key));
+          else url.searchParams.delete(g.key);
         }
         history.replaceState(null, '', url);
         apply();
