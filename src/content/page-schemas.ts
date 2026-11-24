@@ -49,7 +49,7 @@ const sectionTypes = [
   z.object({ type: z.literal('industries'), ...heading, text: text.optional() }),
   z.object({ type: z.literal('logos') }),
   z.object({ type: z.literal('joinUs'), heading: text, text, links: z.array(link).min(1) }),
-  z.object({ type: z.literal('newsletter'), ...heading }),
+  z.object({ type: z.literal('newsletter'), eyebrow: text.optional(), heading: text.optional() }),
   z.object({ type: z.literal('offices'), ...heading, text: text.optional() }),
   // The open roles: every Page under /careers/.
   z.object({ type: z.literal('roles'), heading: text }),
@@ -118,3 +118,10 @@ export type PillarData = z.infer<typeof pillarSchema>;
 export type ServiceData = z.infer<typeof serviceSchema>;
 export type TeamMemberData = z.infer<typeof teamMemberSchema>;
 export type OfficeData = z.infer<typeof officeSchema>;
+
+// What a file must hold, before defaults are filled in; the importer writes these.
+export type PillarFile = z.input<typeof pillarSchema>;
+export type ServiceFile = z.input<typeof serviceSchema>;
+export type PageFile = z.input<typeof pageSchema>;
+export type TeamMemberFile = z.input<typeof teamMemberSchema>;
+export type SectionFile = z.input<typeof sectionSchema>;

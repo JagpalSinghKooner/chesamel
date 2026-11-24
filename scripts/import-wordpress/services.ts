@@ -9,7 +9,7 @@
 import { asWxr, decodeEntities, type Wxr, type WxrSource } from './wxr.ts';
 import { localiseUrls } from './html.ts';
 import { pillarSlugs, type PillarSlug } from '../../src/data/taxonomy.ts';
-import type { PillarData, ServiceData, Section } from '../../src/content/page-schemas.ts';
+import type { PillarFile, ServiceFile, SectionFile as Section } from '../../src/content/page-schemas.ts';
 
 export interface Imported<T> {
   address: string;
@@ -19,8 +19,8 @@ export interface Imported<T> {
 }
 
 export interface ServicesImport {
-  pillars: Imported<PillarData>[];
-  services: Imported<ServiceData>[];
+  pillars: Imported<PillarFile>[];
+  services: Imported<ServiceFile>[];
   media: string[];
   unreadable: { address: string; reason: string }[];
 }

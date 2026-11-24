@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { importServices } from '../../scripts/import-wordpress/services';
-import { wxr } from './fixture';
+import { wxr, type FixtureItem } from './fixture';
 
 // A Pillar page as WordPress stores it, trimmed to the parts that carry copy.
 const pillarPage = `<!-- wp:cover -->
@@ -70,7 +70,7 @@ const servicePage = `<h1 class="wp-block-heading">Customer Experience &amp; Enga
 <h2 class="wp-block-heading">Want to transform your business?</h2>
 <p>the journey starts with just a click.</p>`;
 
-const items = [
+const items: FixtureItem[] = [
   {
     id: 365,
     type: 'services',

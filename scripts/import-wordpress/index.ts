@@ -3,6 +3,7 @@
 //   npm run import            (reads the newest *.WordPress.*.xml in the repo root)
 //   npm run import -- --no-media   (skip downloading media)
 //   npm run import -- --only=insights   (only Podcasts, Webinars and Reports)
+//   npm run import -- --only=pages      (only Pillars, Services, Team Members and open roles)
 //
 // The export holds personal data and is gitignored; it lives only on the
 // machine that runs the import. Re-running overwrites the imported files, so
@@ -19,6 +20,9 @@ import { importIndustries } from './industries.ts';
 import { attachmentUrls, downloadMedia, notInRepo } from './media.ts';
 import { importInsightItems } from './insights-step.ts';
 import { withoutMigrated } from './pending.ts';
+import { importServices } from './services.ts';
+import { importTeamMembers, importCareers } from './people-and-roles.ts';
+import { rm } from 'node:fs/promises';
 import { pillarLabels } from '../../src/data/taxonomy.ts';
 import type { InventoryEntry } from '../../tests/url-parity/parity.ts';
 
@@ -91,6 +95,8 @@ async function main() {
   // Parsed once; every importer reads the same parsed export.
   const wxr = parseWxr(await readFile(root(file), 'utf8'));
 
+  if (process.argv.includes('--only=pages')) return importPages(wxr);
+
   // Podcasts, Webinars and Reports. `--only=insights` stops after this step,
   // leaving Blog Posts (which Content Editors may have edited) untouched.
   const insightAddresses = await importInsightItems(wxr, { withMedia, write });
@@ -121,6 +127,45 @@ async function main() {
   console.log(`Removed ${await shrinkPending(blog.posts.map((p) => p.address))} addresses from urls/pending.json`);
 
   await importCaseStudiesAndIndustries(wxr);
+  await importPages(wxr);
+}
+
+// The standard Pages migrated by hand (src/content/pages/, other than the
+// open roles), with the Office list, leave the pending list here too.
+const HAND_MIGRATED = [
+  '/who-we-are/',
+  '/who-we-are/our-team/',
+  '/who-we-are/network/',
+  '/what-we-do/',
+  '/culture/',
+  '/careers/',
+  '/contact/',
+  '/acceptable-use-policy/',
+  '/modern-slavery-statement/',
+  '/systango-partnership/',
+];
+
+async function importPages(wxr: Wxr) {
+  const { pillars, services, unreadable } = importServices(wxr);
+  for (const item of [...pillars, ...services]) await write(item.file, serialise(item));
+  console.log(`Wrote ${pillars.length} Pillars and ${services.length} Services`);
+  if (unreadable.length) {
+    console.error(`Sections left out because their heading is unknown:\n${unreadable.map((u) => `${u.address}: ${u.reason}`).join('\n')}`);
+    process.exitCode = 1;
+  }
+
+  const { members, withoutPhoto } = importTeamMembers(wxr);
+  await rm(root('src/content/team/'), { recursive: true, force: true });
+  for (const member of members) await write(member.file, serialise(member));
+  console.log(`Wrote ${members.length} Team Members`);
+  if (withoutPhoto.length) console.error(`Team Members left out for having no photo: ${withoutPhoto.join(', ')}`);
+
+  const roles = importCareers(wxr);
+  for (const role of roles) await write(role.file, serialise(role));
+  console.log(`Wrote ${roles.length} open roles`);
+
+  const addresses = [...pillars, ...services, ...roles].map((i) => i.address);
+  console.log(`Removed ${await shrinkPending([...addresses, ...HAND_MIGRATED])} Pillar, Service and Page addresses from urls/pending.json`);
 }
 
 // The listing pages built for Case Studies and Industries, which leave the
