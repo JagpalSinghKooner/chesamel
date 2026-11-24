@@ -13,6 +13,8 @@ export interface WxrItem {
   dateGmt: string;
   creator: string;
   content: string;
+  // The hand-written summary; Case Studies show it as the hero subtitle.
+  excerpt: string;
   attachmentUrl: string;
   meta: Record<string, string>;
 }
@@ -56,6 +58,7 @@ export function parseWxr(xml: string): Wxr {
       dateGmt: str(i['wp:post_date_gmt']),
       creator: str(i['dc:creator']),
       content: i['content:encoded'] === undefined ? '' : String(i['content:encoded']),
+      excerpt: str(i['excerpt:encoded']),
       attachmentUrl: str(i['wp:attachment_url']),
       meta,
     };

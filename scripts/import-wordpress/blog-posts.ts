@@ -81,7 +81,7 @@ export function importBlogPosts(xml: string, { missingMedia = new Set() }: Impor
 // Matches a Markdown image, optionally wrapped in a link.
 const IMAGE = /\[?!\[([^\]]*)\]\((\/wp-content\/[^)\s]+)\)(?:\]\([^)]*\))?/g;
 
-function withoutMissingImages(markdown: string, missing: Set<string>, report: (image: string, alt: string) => void): string {
+export function withoutMissingImages(markdown: string, missing: Set<string>, report: (image: string, alt: string) => void): string {
   if (!missing.size) return markdown;
   return markdown
     .replace(IMAGE, (whole, alt: string, src: string) => {

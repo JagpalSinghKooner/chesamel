@@ -10,6 +10,7 @@ export interface FixtureItem {
   date?: string;
   creator?: string;
   content?: string;
+  excerpt?: string;
   attachmentUrl?: string;
   meta?: Record<string, string>;
 }
@@ -27,7 +28,7 @@ function item(i: FixtureItem): string {
     <link>${i.link ?? `https://chesamel.com/${slug}/`}</link>
     <dc:creator>${cdata(i.creator ?? 'graham')}</dc:creator>
     <content:encoded>${cdata(i.content ?? '<!-- wp:paragraph -->\n<p>Hello.</p>\n<!-- /wp:paragraph -->')}</content:encoded>
-    <excerpt:encoded>${cdata('')}</excerpt:encoded>
+    <excerpt:encoded>${cdata(i.excerpt ?? '')}</excerpt:encoded>
     <wp:post_id>${i.id}</wp:post_id>
     <wp:post_date_gmt>${cdata(i.date ?? '2024-12-10 12:20:12')}</wp:post_date_gmt>
     <wp:post_name>${cdata(slug)}</wp:post_name>
