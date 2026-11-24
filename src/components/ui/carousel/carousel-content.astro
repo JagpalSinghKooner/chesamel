@@ -10,6 +10,9 @@ const {
   "data-slot": dataSlot = "carousel-container",
   ...props
 } = Astro.props
+
+// Chesamel patch (ADR-0005): the row's offset is on the inline start (-ms-4,
+// not -ml-4), so slides line up right to left too.
 ---
 
 <div

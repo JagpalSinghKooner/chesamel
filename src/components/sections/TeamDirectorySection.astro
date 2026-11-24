@@ -15,7 +15,7 @@ const members = await getTeamMembers();
 const teams = Object.entries(teamLabels) as [TeamSlug, string][];
 
 // The square filter button, Black when pressed, in place of Fulldev's toggle.
-const button =
+const filterButton =
   'h-auto min-w-0 whitespace-normal border border-light-grey px-4 py-2 font-subheading text-[length:inherit] font-normal transition-none hover:bg-transparent hover:text-inherit data-[state=on]:bg-black data-[state=on]:text-white';
 ---
 
@@ -24,10 +24,10 @@ const button =
     <SectionHeading id={id} heading={section.heading} eyebrow={section.eyebrow} />
     {section.text && <p class="mt-4 max-w-3xl">{section.text}</p>}
     <ToggleGroup aria-label="Filter by team" defaultValue="all" class="mt-8 hidden w-auto flex-wrap rounded-none" data-team-filter>
-      <ToggleGroupItem value="all" class={button}>All</ToggleGroupItem>
+      <ToggleGroupItem value="all" class={filterButton}>All</ToggleGroupItem>
       {
         teams.map(([slug, label]) => (
-          <ToggleGroupItem value={slug} class={button}>
+          <ToggleGroupItem value={slug} class={filterButton}>
             {label}
           </ToggleGroupItem>
         ))
@@ -48,10 +48,12 @@ const button =
 
 <script>
   import { createToggleGroup } from '@data-slot/toggle-group';
+  import { followReadingDirection } from '../follow-reading-direction';
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-team-directory]')) {
     const filter = root.querySelector<HTMLElement>('[data-team-filter]')!;
     const control = createToggleGroup(filter);
+    followReadingDirection(filter);
     const cards = [...root.querySelectorAll<HTMLElement>('[data-teams]')];
     const count = root.querySelector('[data-team-count]')!;
     filter.classList.replace('hidden', 'flex');

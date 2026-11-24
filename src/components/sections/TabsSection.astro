@@ -73,21 +73,7 @@ const { heading, eyebrow, paragraphs, items } = section;
 </noscript>
 
 <script>
-  // Data Slot's arrow keys don't follow the reading direction. Right to left,
-  // swap them before it sees them, so the left arrow moves to the next tab.
-  const swap: Record<string, string> = { ArrowLeft: 'ArrowRight', ArrowRight: 'ArrowLeft' };
-  for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) {
-    root.addEventListener(
-      'keydown',
-      (event) => {
-        const key = swap[event.key];
-        const target = event.target as HTMLElement;
-        if (!key || !event.isTrusted || getComputedStyle(root).direction !== 'rtl') return;
-        event.stopImmediatePropagation();
-        event.preventDefault();
-        target.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
-      },
-      { capture: true },
-    );
-  }
+  import { followReadingDirection } from '../follow-reading-direction';
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) followReadingDirection(root);
 </script>

@@ -12,6 +12,9 @@ const {
   role = "group",
   ...props
 } = Astro.props
+
+// Chesamel patch (ADR-0005): the gap is on the inline start (ps-4, not pl-4),
+// so slides line up right to left too.
 ---
 
 <div

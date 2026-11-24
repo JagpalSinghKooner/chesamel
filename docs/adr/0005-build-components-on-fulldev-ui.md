@@ -2,7 +2,7 @@
 
 The Components are built on [Fulldev UI](https://ui.full.dev) (MIT, vanilla Astro and Tailwind v4) instead of being hand-built. Its source is copied into `src/components/ui/` through the shadcn registry (`npx shadcn add @fulldev/<name>`), never imported from an npm package, so every line is ours to read, patch and keep. Chesamel Components stay thin wrappers that pass the brand's classes to the Fulldev building blocks: button, card, breadcrumb, tabs, carousel, toggle group, navigation menu, sheet and accordion. We chose this so tested, accessible pieces replace hand-written markup and scripts, while the brand stays in charge.
 
-**The brand wins (ADR-0002).** Fulldev's theme tokens (`--primary`, `--background`, `--border`, `--ring`, …) are mapped onto the brand tokens in `src/styles/global.css` and never point anywhere else. `--radius: 0` is the one setting for corners: every building block is square, and raising it rounds them all. There is no `.dark` theme. Where a Fulldev default and ADR-0002 disagree, ADR-0002 wins, either through the token mapping or through the classes a Component passes.
+**The brand wins (ADR-0002).** Fulldev's theme tokens (`--primary`, `--background`, `--border`, `--ring`, …) are mapped onto the brand tokens in `src/styles/global.css` and never point anywhere else. `--radius: 0` is the one setting for corners: every building block is square, and raising it rounds them all. There is no `.dark` theme. The few corners that were already rounded before Fulldev (the header's controls, the footer's social links, the skip link, the style guide's logo panels) keep their sizes as explicit `rounded-[0.25rem]` and `rounded-[0.5rem]`, so this change shows nothing; #35 decides whether they follow `--radius`. Where a Fulldev default and ADR-0002 disagree, ADR-0002 wins, either through the token mapping or through the classes a Component passes.
 
 ## Pinned version
 
@@ -28,11 +28,18 @@ Updates are pulled deliberately, one building block at a time, never automatical
 - **Inactive tab text passes WCAG AA** (`tabs/tabs-trigger.astro`). Fulldev's 60% foreground is about 3:1 on the muted list with the brand tokens. 80% is about 4.9:1.
 - **No faint focus outline everywhere** (`src/styles/global.css`). `@fulldev/init` sets `outline-ring/50` on every element. That would swap the browser's focus outline for a faint Indigo one, which is hard to see on Black, so the base layer leaves it out.
 
-Data Slot's tabs and toggle groups ignore the reading direction for arrow keys. That is fixed in the Tabs Section, not in the copy, because the logic lives in the `@data-slot/*` packages.
+Data Slot's tabs and toggle groups ignore the reading direction for arrow keys. `src/components/follow-reading-direction.ts` fixes that for the Tabs Section and the filters, not in the copies, because the logic lives in the `@data-slot/*` packages.
+
+`@fulldev/init` also adds a `prefers-reduced-motion` rule that cuts every animation and transition to almost nothing for visitors who ask for less motion. It is kept as delivered.
+
+## Dependencies
+
+Accepted with the ticket: Embla (`embla-carousel`), the `@data-slot/*` packages, `tw-animate-css`, `shadcn` (for `shadcn/tailwind.css`), `components.json`, and the `@/*` path alias. Fulldev also brings `cn` and `class-variance-authority` (its class helpers), `@lucide/astro` (its icons), and `@data-slot/dialog` with Fulldev's Dialog, which its Sheet is built on.
 
 ## Consequences
 
 - The Header keeps its own disclosure menus. Fulldev's Navigation Menu opens on hover, animates one shared panel and covers wide screens only. On phones it would need a second, Sheet-based menu. Adopting it is a visible change, left to #35 with the rest of the live site's look and motion.
 - The Team Member card keeps its native `<details>` for the bio. Fulldev's Accordion needs JavaScript to open; `<details>` works without it.
+- The filters' buttons use Data Slot's roving focus: Tab reaches one button per filter, and the arrow keys move between its buttons, as in the WAI-ARIA toolbar pattern. Before, Tab stopped on every button.
 - Without JavaScript, every tab panel still shows and the Case Study slider still scrolls natively, as before. The Tabs and Case Study slider Components keep these fallbacks.
 - Fulldev's Button and Card bring their own height, padding, weight, rings and shadows. The brand resets for them live in `src/components/button.ts` and `src/components/card.ts`, so each Component passes them in one place.

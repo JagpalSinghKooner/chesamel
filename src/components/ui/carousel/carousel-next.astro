@@ -16,8 +16,10 @@ const {
   ...props
 } = Astro.props
 
-// Chesamel patch (ADR-0005): no rounded-full, so the button keeps the
-// Button's corners, which follow --radius like every other building block.
+// Chesamel patches (ADR-0005): no rounded-full, so the button keeps the
+// Button's corners, which follow --radius like every other building block;
+// the button sits on the logical side (-start-12, -end-12) and its chevron is
+// mirrored right to left.
 ---
 
 <button

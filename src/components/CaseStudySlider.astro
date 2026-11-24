@@ -11,6 +11,7 @@
 // still be swiped or scrolled; the controls appear once the carousel starts.
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Button from './Button.astro';
+import { brandButton } from './button';
 import CaseStudyCard from './CaseStudyCard.astro';
 import type { CaseStudySummary } from '../content/case-studies';
 
@@ -34,7 +35,8 @@ const dark = tone === 'dark';
 // Fulldev's round, floating icon buttons become the brand's square outlined
 // ones in the controls row.
 const control = [
-  'static my-0 size-10 shrink rounded-none bg-transparent text-[length:inherit] font-normal shadow-none hover:bg-transparent active:not-aria-[haspopup]:translate-y-0 disabled:cursor-default disabled:opacity-40',
+  brandButton,
+  'static my-0 size-10 shrink justify-center rounded-none bg-transparent text-[length:inherit] font-normal shadow-none transition-none hover:bg-transparent disabled:cursor-default disabled:opacity-40',
   dark ? 'border-dark-grey text-white hover:border-white hover:text-white' : 'border-medium-grey text-black hover:border-black hover:text-black',
 ];
 ---

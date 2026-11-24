@@ -29,7 +29,7 @@ const dark = tone === 'dark';
 
 // The brand's square outlined filter button, filled Indigo when pressed, in
 // place of Fulldev's rounded grey toggle.
-const button = [
+const filterButton = [
   'h-auto min-w-0 cursor-pointer whitespace-normal border px-4 py-2 font-semibold transition-none hover:bg-transparent',
   'data-[state=on]:border-indigo data-[state=on]:bg-indigo data-[state=on]:text-white data-[state=on]:hover:border-indigo data-[state=on]:hover:text-white',
   dark ? 'border-dark-grey text-off-white hover:border-white hover:text-white' : 'border-medium-grey text-dark-grey hover:border-indigo hover:text-indigo',
@@ -45,11 +45,11 @@ const button = [
             {g.label}
           </p>
           <ToggleGroup aria-label={g.label} defaultValue="all" data-filter={g.key} class="w-auto flex-wrap rounded-none">
-            <ToggleGroupItem value="all" class:list={button}>
+            <ToggleGroupItem value="all" class:list={filterButton}>
               All
             </ToggleGroupItem>
             {options[g.key].map(([value, label]) => (
-              <ToggleGroupItem value={value} class:list={button}>
+              <ToggleGroupItem value={value} class:list={filterButton}>
                 {label}
               </ToggleGroupItem>
             ))}
@@ -66,6 +66,7 @@ const button = [
 
 <script>
   import { createToggleGroup } from '@data-slot/toggle-group';
+  import { followReadingDirection } from './follow-reading-direction';
 
   for (const listing of document.querySelectorAll<HTMLElement>('[data-filtered-listing]')) {
     const filters = listing.querySelector<HTMLElement>('[data-filters]')!;
@@ -100,6 +101,7 @@ const button = [
     }
 
     for (const { key, root, control } of groups) {
+      followReadingDirection(root);
       const initial = params.get(key);
       if (initial) control.setValue(initial);
       if (control.value.length === 0) control.setValue('all');
