@@ -91,6 +91,16 @@ test.describe('Case Study page', () => {
     await expect(main.getByRole('link', { name: 'Back to Case Studies' })).toHaveAttribute('href', OUR_WORK);
   });
 
+  test('links to the Industries it served', async ({ page }) => {
+    await page.goto('/case-studies/business-intelligence-in-finance/');
+    const served = page.getByRole('complementary', { name: 'Industry served' });
+    await expect(served.getByRole('link')).toHaveCount(1);
+    await expect(served.getByRole('link', { name: /Finance/ })).toHaveAttribute('href', '/industries/finance/');
+
+    await page.goto('/case-studies/on-site-teams-at-google/');
+    await expect(page.getByRole('complementary', { name: 'Industry served' })).toHaveCount(0);
+  });
+
   test('its body image, a resized copy, loads', async ({ page }) => {
     await page.goto('/case-studies/business-intelligence-in-finance/');
     const img = page.locator('[data-case-study-body] img').first();

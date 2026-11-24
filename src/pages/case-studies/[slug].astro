@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { caseStudy, all } = Astro.props as { caseStudy: CaseStudy; all: CaseStudy[] };
-const { title, date, excerpt, objective, pillars, description } = caseStudy.data;
+const { title, date, excerpt, objective, pillars, industries, description } = caseStudy.data;
 const { Content } = await render(caseStudy);
 const OUR_WORK = '/insights/our-work/';
 ---
@@ -53,7 +53,7 @@ const OUR_WORK = '/insights/our-work/';
           <dd class="mt-2 text-black">{objective}</dd>
         </div>
       </dl>
-      <LabelLinks pillars={pillars} placement="column" />
+      <LabelLinks pillars={pillars} industries={industries} placement="column" />
     </div>
     <div>
       <div class="blog-body" data-case-study-body>
