@@ -1,6 +1,6 @@
 // Turns WordPress case_studies items into Case Study files.
 
-import { parseWxr, decodeEntities } from './wxr.ts';
+import { asWxr, decodeEntities, type WxrSource } from './wxr.ts';
 import { toMarkdown, localiseUrls, mediaUrls } from './html.ts';
 import { pillarsOf, linkedSlugs } from './labels.ts';
 import { withoutMissingImages, type ImportOptions } from './blog-posts.ts';
@@ -32,8 +32,8 @@ const flattenOneCellTables = (html: string) => html.replace(ONE_CELL_TABLE, '<p>
 
 const clean = (s: string | undefined) => decodeEntities(s ?? '').trim();
 
-export function importCaseStudies(xml: string, { missingMedia = new Set() }: ImportOptions = {}): CaseStudyImport {
-  const wxr = parseWxr(xml);
+export function importCaseStudies(source: WxrSource, { missingMedia = new Set() }: ImportOptions = {}): CaseStudyImport {
+  const wxr = asWxr(source);
   const caseStudies: ImportedCaseStudy[] = [];
   const media = new Set<string>();
   const missingImages: CaseStudyImport['missingImages'] = [];

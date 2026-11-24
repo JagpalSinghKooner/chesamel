@@ -6,7 +6,7 @@
 // Industry's card (image and one-line summary) comes from the "Industries
 // Grid" reusable block, whose order is the order cards are shown in.
 
-import { parseWxr, decodeEntities } from './wxr.ts';
+import { asWxr, decodeEntities, type WxrSource } from './wxr.ts';
 import { localiseUrls } from './html.ts';
 
 import type { IndustryData } from '../../src/content/case-study-schema.ts';
@@ -105,8 +105,8 @@ function readCards(html: string) {
     .map(({ t, i }, n) => ({ name: t.text, order: n + 1, imageToken: all[i - 1], summary: all[i + 1]?.tag === 'p' ? all[i + 1].text : '' }));
 }
 
-export function importIndustries(xml: string): IndustryImport {
-  const wxr = parseWxr(xml);
+export function importIndustries(source: WxrSource): IndustryImport {
+  const wxr = asWxr(source);
   const grid = wxr.items.find((i) => i.type === 'wp_block' && decodeEntities(i.title) === 'Industries Grid');
   const cards = readCards(grid?.content ?? '');
   const industries: ImportedIndustry[] = [];

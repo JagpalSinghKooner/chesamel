@@ -7,6 +7,7 @@ import { importWebinars } from './webinars.ts';
 import { importReports } from './reports.ts';
 import { downloadMedia } from './media.ts';
 import type { ImportedItem } from './insight-item.ts';
+import type { Wxr } from './wxr.ts';
 
 const serialise = (item: ImportedItem<object>) =>
   `---\n${Object.entries(item.data)
@@ -15,10 +16,10 @@ const serialise = (item: ImportedItem<object>) =>
 
 // Returns the addresses written, for the pending list.
 export async function importInsightItems(
-  xml: string,
+  wxr: Wxr,
   { withMedia, write }: { withMedia: boolean; write: (path: string, contents: string) => Promise<void> },
 ): Promise<string[]> {
-  const imports = { Podcasts: importPodcasts(xml), Webinars: importWebinars(xml), Reports: importReports(xml) };
+  const imports = { Podcasts: importPodcasts(wxr), Webinars: importWebinars(wxr), Reports: importReports(wxr) };
   const all = Object.values(imports);
 
   if (withMedia) {

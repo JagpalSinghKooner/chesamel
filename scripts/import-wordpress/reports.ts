@@ -5,7 +5,7 @@
 // the body; the box is rebuilt by the page, and the form is kept by its ID for
 // when HubSpot forms are wired up.
 
-import { parseWxr } from './wxr.ts';
+import { asWxr, type WxrSource } from './wxr.ts';
 import { toMarkdown, mediaUrls } from './html.ts';
 import { pillarsOf } from './labels.ts';
 import type { PillarSlug } from '../../src/data/taxonomy.ts';
@@ -23,8 +23,8 @@ export interface ReportData {
 const DOWNLOAD_BOX = /<!-- wp:group \{[^}]*"className":"download-report-section"/;
 const FORM_ID = /formId:\s*"([0-9a-f-]{36})"/;
 
-export function importReports(xml: string): ItemImport<ReportData> {
-  const wxr = parseWxr(xml);
+export function importReports(source: WxrSource): ItemImport<ReportData> {
+  const wxr = asWxr(source);
   const media = new Set<string>();
   const items = publishedOfType(wxr, 'reports').map((item) => {
     const address = addressOf(item);

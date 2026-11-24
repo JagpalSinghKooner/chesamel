@@ -1,6 +1,6 @@
 // Turns WordPress `webinars` items into Webinar files.
 
-import { parseWxr } from './wxr.ts';
+import { asWxr, type WxrSource } from './wxr.ts';
 import { toMarkdown, mediaUrls, youtubeId } from './html.ts';
 import { pillarsOf, linkedSlugs } from './labels.ts';
 import { industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
@@ -17,8 +17,8 @@ export interface WebinarData {
   description?: string;
 }
 
-export function importWebinars(xml: string): ItemImport<WebinarData> {
-  const wxr = parseWxr(xml);
+export function importWebinars(source: WxrSource): ItemImport<WebinarData> {
+  const wxr = asWxr(source);
   const media = new Set<string>();
   const items = publishedOfType(wxr, 'webinars').map((item) => {
     const address = addressOf(item);

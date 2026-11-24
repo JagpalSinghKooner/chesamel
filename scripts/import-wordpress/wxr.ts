@@ -68,6 +68,11 @@ export function parseWxr(xml: string): Wxr {
 }
 
 // ACF stores relationship fields as PHP-serialised arrays: a:1:{i:0;s:3:"356";}.
+// Importers take the export's text or, to save parsing it again, the parsed
+// export.
+export type WxrSource = string | Wxr;
+export const asWxr = (source: WxrSource): Wxr => (typeof source === 'string' ? parseWxr(source) : source);
+
 export function serialisedIds(value: string | undefined): string[] {
   return [...(value ?? '').matchAll(/s:\d+:"(\d+)"/g)].map((m) => m[1]);
 }

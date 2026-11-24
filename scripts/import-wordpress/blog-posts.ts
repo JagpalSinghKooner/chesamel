@@ -1,6 +1,6 @@
 // Turns WordPress posts (both the post and the former news type) into Blog Post files.
 
-import { parseWxr, decodeEntities } from './wxr.ts';
+import { asWxr, decodeEntities, type WxrSource } from './wxr.ts';
 import { toMarkdown, localiseUrls, mediaUrls } from './html.ts';
 import { industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
 import { pillarsOf, linkedSlugs } from './labels.ts';
@@ -39,8 +39,8 @@ export interface ImportOptions {
 
 const SOURCE_TYPES = ['post', 'news'];
 
-export function importBlogPosts(xml: string, { missingMedia = new Set() }: ImportOptions = {}): BlogPostImport {
-  const wxr = parseWxr(xml);
+export function importBlogPosts(source: WxrSource, { missingMedia = new Set() }: ImportOptions = {}): BlogPostImport {
+  const wxr = asWxr(source);
   const posts: ImportedBlogPost[] = [];
   const media = new Set<string>();
   const missingImages: BlogPostImport['missingImages'] = [];

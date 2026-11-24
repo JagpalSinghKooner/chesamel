@@ -1,6 +1,6 @@
 // Turns WordPress `podcasts` items (episodes of Chesamel Unplugged) into Podcast files.
 
-import { parseWxr } from './wxr.ts';
+import { asWxr, type WxrSource } from './wxr.ts';
 import { toMarkdown, mediaUrls } from './html.ts';
 import { pillarsOf } from './labels.ts';
 import type { PillarSlug } from '../../src/data/taxonomy.ts';
@@ -19,8 +19,8 @@ export interface PodcastData {
 
 const PLATFORMS = { spotify: 'podcast_spotify', amazon: 'podcast_amazon', podcastAddict: 'podcast_podcastaddict', podchaser: 'podcast_podchase' } as const;
 
-export function importPodcasts(xml: string): ItemImport<PodcastData> {
-  const wxr = parseWxr(xml);
+export function importPodcasts(source: WxrSource): ItemImport<PodcastData> {
+  const wxr = asWxr(source);
   const media = new Set<string>();
   const items = publishedOfType(wxr, 'podcasts').map((item) => {
     const address = addressOf(item);
