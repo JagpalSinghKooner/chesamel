@@ -1,7 +1,9 @@
 ---
 // Tabs Section: buttons that switch between panels, as What We Do switches
-// between the four Pillars. Without JavaScript every panel shows, one after
-// another; the script turns them into tabs (arrow keys move between them).
+// between the four Pillars. Built on Fulldev's Tabs (ADR-0005), which give the
+// tab roles and arrow keys through Data Slot. Without JavaScript every panel
+// shows, one after another, and the tab buttons are left out.
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Button from '../Button.astro';
 import SectionHeading from './SectionHeading.astro';
 import type { Section } from '../../content/page-schemas';
@@ -15,27 +17,22 @@ const { heading, eyebrow, paragraphs, items } = section;
   <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
     <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
     {paragraphs.map((p) => <p class="mt-6 max-w-3xl">{p}</p>)}
-    <div data-tabs class="mt-10">
-      <div role="tablist" aria-label={heading} class="hidden flex-wrap gap-2" data-tablist>
+    <Tabs defaultValue="0" class="mt-10 gap-0" data-tabs>
+      <TabsList aria-label={heading} class="flex h-auto w-auto flex-wrap justify-start gap-2 rounded-none bg-transparent p-0 text-inherit group-data-horizontal/tabs:h-auto">
         {
           items.map((item, i) => (
-            <button
-              type="button"
-              role="tab"
-              id={`${id}-tab-${i}`}
-              aria-controls={`${id}-panel-${i}`}
-              aria-selected={i === 0 ? 'true' : 'false'}
-              tabindex={i === 0 ? 0 : -1}
-              class="border-b-4 border-transparent px-4 py-3 font-subheading aria-selected:border-indigo aria-selected:bg-white"
+            <TabsTrigger
+              value={String(i)}
+              class="h-auto flex-none whitespace-normal rounded-none border-0 border-b-4 border-transparent px-4 py-3 font-subheading text-[length:inherit] font-normal text-inherit transition-none hover:text-inherit data-[state=active]:border-indigo data-[state=active]:bg-white data-[state=active]:text-inherit group-data-[variant=default]/tabs-list:data-[state=active]:shadow-none"
             >
               {item.title}
-            </button>
+            </TabsTrigger>
           ))
         }
-      </div>
+      </TabsList>
       {
         items.map((item, i) => (
-          <div id={`${id}-panel-${i}`} role="tabpanel" aria-labelledby={`${id}-tab-${i}`} class="mt-8 grid gap-8 border-t-4 border-indigo bg-white p-8 md:grid-cols-2" data-panel>
+          <TabsContent value={String(i)} class="mt-8 grid flex-none gap-8 border-t-4 border-indigo bg-white p-8 text-[length:inherit] md:grid-cols-2">
             <div>
               <h3 class="type-heading-3 text-2xl">{item.title}</h3>
               {item.paragraphs.map((p) => <p class="mt-4">{p}</p>)}
@@ -51,36 +48,46 @@ const { heading, eyebrow, paragraphs, items } = section;
                 </div>
               )
             }
-          </div>
+          </TabsContent>
         ))
       }
-    </div>
+    </Tabs>
   </div>
 </section>
 
+<noscript>
+  <style is:global>
+    /*
+      In Tailwind's base layer: its rule hiding [hidden] is !important there,
+      and a layered !important beats any unlayered one.
+    */
+    @layer base {
+      [data-tabs] [data-slot='tabs-list'] {
+        display: none !important;
+      }
+      [data-tabs] [data-slot='tabs-content'][hidden] {
+        display: grid !important;
+      }
+    }
+  </style>
+</noscript>
+
 <script>
+  // Data Slot's arrow keys don't follow the reading direction. Right to left,
+  // swap them before it sees them, so the left arrow moves to the next tab.
+  const swap: Record<string, string> = { ArrowLeft: 'ArrowRight', ArrowRight: 'ArrowLeft' };
   for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) {
-    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
-    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
-    root.querySelector('[data-tablist]')?.classList.replace('hidden', 'flex');
-    const select = (n: number) => {
-      tabs.forEach((tab, i) => {
-        tab.setAttribute('aria-selected', String(i === n));
-        tab.tabIndex = i === n ? 0 : -1;
-        panels[i].hidden = i !== n;
-      });
-    };
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => select(i));
-      tab.addEventListener('keydown', (e) => {
-        const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-        if (!step) return;
-        const forward = getComputedStyle(root).direction === 'rtl' ? -step : step;
-        const next = (i + forward + tabs.length) % tabs.length;
-        select(next);
-        tabs[next].focus();
-      });
-    });
-    select(0);
+    root.addEventListener(
+      'keydown',
+      (event) => {
+        const key = swap[event.key];
+        const target = event.target as HTMLElement;
+        if (!key || !event.isTrusted || getComputedStyle(root).direction !== 'rtl') return;
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        target.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+      },
+      { capture: true },
+    );
   }
 </script>
