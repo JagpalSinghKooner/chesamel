@@ -6,7 +6,8 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import LabelLinks from '../components/LabelLinks.astro';
-import { getBlogPosts, addressOf, formatDate, primaryPillar, readingMinutes, type BlogPost } from '../content/blog';
+import { getBlogPosts, addressOf, readingMinutes, type BlogPost } from '../content/blog';
+import { formatDate, isoDate, primaryPillar } from '../content/shared';
 import { pillarLabels } from '../data/taxonomy';
 
 export async function getStaticPaths() {
@@ -25,7 +26,7 @@ const { Content } = await render(post);
     <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
     <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
     <p class="type-caption mt-6 flex gap-6">
-      <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
       <span>{readingMinutes(post.body ?? '')} min read</span>
     </p>
     {

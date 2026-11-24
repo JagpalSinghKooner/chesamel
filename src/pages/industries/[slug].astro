@@ -10,18 +10,20 @@ import GetStartedCta from '../../components/GetStartedCta.astro';
 import BlogPostCard from '../../components/BlogPostCard.astro';
 import CaseStudySlider from '../../components/CaseStudySlider.astro';
 import ClientLogos from '../../components/home/ClientLogos.astro';
-import { getCaseStudies, getIndustries, summarise, type Industry } from '../../content/case-studies';
-import { getBlogPosts, summarise as summarisePost } from '../../content/blog';
+import { getCaseStudies, getIndustries, summariseCaseStudy, type Industry } from '../../content/case-studies';
+import { getBlogPosts, summarisePost } from '../../content/blog';
+import type { IndustrySlug } from '../../data/taxonomy';
 
 export async function getStaticPaths() {
   return (await getIndustries()).map((industry) => ({ params: { slug: industry.id }, props: { industry } }));
 }
 
 const { industry } = Astro.props as { industry: Industry };
-const slug = industry.id;
+// Industry files are named after their slug.
+const slug = industry.id as IndustrySlug;
 const { title, subtitle, description, intro, steps, experience, caseStudies: work, relatedPosts } = industry.data;
-const caseStudies = (await getCaseStudies()).filter((c) => (c.data.industries as string[]).includes(slug)).slice(0, 3);
-const posts = (await getBlogPosts()).filter((p) => (p.data.industries as string[]).includes(slug)).slice(0, 3);
+const caseStudies = (await getCaseStudies()).filter((c) => c.data.industries.includes(slug)).slice(0, 3);
+const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(slug)).slice(0, 3);
 ---
 
 <Base title={`${title} Industry Solutions | Chesamel`} description={description ?? subtitle}>
@@ -73,7 +75,7 @@ const posts = (await getBlogPosts()).filter((p) => (p.data.industries as string[
     heading={work.heading}
     text={work.text}
     action={{ label: 'View All', href: `/insights/our-work/?industry=${slug}` }}
-    caseStudies={caseStudies.map(summarise)}
+    caseStudies={caseStudies.map(summariseCaseStudy)}
   />
   <section aria-labelledby="related-posts" class="bg-off-white">
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">

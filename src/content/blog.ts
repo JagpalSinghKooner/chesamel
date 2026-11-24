@@ -3,6 +3,7 @@
 
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { PillarSlug, IndustrySlug } from '../data/taxonomy';
+import { newestFirst } from './shared';
 
 export type BlogPost = CollectionEntry<'blog'>;
 
@@ -29,7 +30,7 @@ export function readingMinutes(markdown: string): number {
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 }
 
-export function summarise(post: BlogPost): BlogPostSummary {
+export function summarisePost(post: BlogPost): BlogPostSummary {
   return {
     title: post.data.title,
     address: addressOf(post),
@@ -42,11 +43,5 @@ export function summarise(post: BlogPost): BlogPostSummary {
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   const posts = await getCollection('blog');
-  return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
+  return posts.sort(newestFirst);
 }
-
-// The first label is the post's main Pillar, the one cards and headers show.
-export const primaryPillar = (post: { pillars: PillarSlug[] }) => post.pillars[0];
-
-export const formatDate = (date: Date) =>
-  date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });

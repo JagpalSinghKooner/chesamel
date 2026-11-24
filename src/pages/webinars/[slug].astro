@@ -7,7 +7,7 @@ import InsightHeader from '../../components/InsightHeader.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import VideoPlayer from '../../components/VideoPlayer.astro';
 import { getNewest, type Webinar } from '../../content/insight-items';
-import { formatDate } from '../../content/blog';
+import { formatDate, isoDate, primaryPillar } from '../../content/shared';
 
 export async function getStaticPaths() {
   return (await getNewest('webinars')).map((webinar) => ({ params: { slug: webinar.id }, props: { webinar } }));
@@ -20,8 +20,8 @@ const { Content } = await render(webinar);
 
 <Base title={`${title} | Chesamel`} description={description}>
   <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-    <InsightHeader section={{ label: 'Webinars', href: '/insights/webinars/' }} pillar={pillars[0]} title={title}>
-      <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+    <InsightHeader section={{ label: 'Webinars', href: '/insights/webinars/' }} pillar={primaryPillar(webinar.data)} title={title}>
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
     </InsightHeader>
     {
       video && (

@@ -8,7 +8,7 @@ import InsightHeader from '../../components/InsightHeader.astro';
 import ListenLinks from '../../components/ListenLinks.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import { getNewest, type Podcast } from '../../content/insight-items';
-import { formatDate } from '../../content/blog';
+import { formatDate, isoDate, primaryPillar } from '../../content/shared';
 
 export async function getStaticPaths() {
   return (await getNewest('podcasts')).map((podcast) => ({ params: { slug: podcast.id }, props: { podcast } }));
@@ -21,9 +21,9 @@ const { Content } = await render(podcast);
 
 <Base title={`${title} | Chesamel`} description={description}>
   <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-    <InsightHeader section={{ label: 'Podcast', href: '/insights/podcasts/' }} pillar={pillars[0]} title={title}>
+    <InsightHeader section={{ label: 'Podcast', href: '/insights/podcasts/' }} pillar={primaryPillar(podcast.data)} title={title}>
       <span>with our guest <strong class="font-semibold text-black">{guest}</strong></span>
-      <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
     </InsightHeader>
     {
       image && (

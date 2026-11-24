@@ -8,6 +8,7 @@ import InsightHeader from '../../components/InsightHeader.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import Button from '../../components/Button.astro';
 import { getNewest, type Report } from '../../content/insight-items';
+import { primaryPillar } from '../../content/shared';
 
 export async function getStaticPaths() {
   return (await getNewest('reports')).map((report) => ({ params: { slug: report.id }, props: { report } }));
@@ -20,7 +21,7 @@ const { Content } = await render(report);
 
 <Base title={`${title} | Chesamel`} description={description}>
   <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-    <InsightHeader section={{ label: 'Reports', href: '/insights/reports/' }} pillar={pillars[0]} title={title} />
+    <InsightHeader section={{ label: 'Reports', href: '/insights/reports/' }} pillar={primaryPillar(report.data)} title={title} />
     <div class="blog-body mt-10">
       <Content />
     </div>

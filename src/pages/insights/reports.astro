@@ -5,6 +5,7 @@ import InsightsHero from '../../components/InsightsHero.astro';
 import InsightCard from '../../components/InsightCard.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
 import { getNewest, addressOf } from '../../content/insight-items';
+import { primaryPillar } from '../../content/shared';
 
 const reports = await getNewest('reports');
 const text = 'Dive into our curated reports and get the latest marketing, ESG, workforce planning, and digital transformation insights.';
@@ -18,7 +19,7 @@ const text = 'Dive into our curated reports and get the latest marketing, ESG, w
       {
         reports.map((r) => (
           <li>
-            <InsightCard href={addressOf(r)} title={r.data.title} image={r.data.image} pillar={r.data.pillars[0]} action="/ read report" />
+            <InsightCard href={addressOf(r)} title={r.data.title} image={r.data.image} pillar={primaryPillar(r.data)} action="/ read report" />
           </li>
         ))
       }

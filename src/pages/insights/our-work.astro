@@ -13,9 +13,9 @@ import IndustryCard from '../../components/IndustryCard.astro';
 import PillarCards from '../../components/PillarCards.astro';
 import ClientLogos from '../../components/home/ClientLogos.astro';
 import ConnectWithUs from '../../components/home/ConnectWithUs.astro';
-import { getCaseStudies, getIndustries, summarise } from '../../content/case-studies';
+import { getCaseStudies, getIndustries, summariseCaseStudy } from '../../content/case-studies';
 
-const caseStudies = (await getCaseStudies()).map(summarise);
+const caseStudies = (await getCaseStudies()).map(summariseCaseStudy);
 const industries = await getIndustries();
 ---
 

@@ -11,14 +11,14 @@ import PillarCards from '../components/PillarCards.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
 import BlogPostListing from '../components/BlogPostListing.astro';
-import { getBlogPosts, summarise } from '../content/blog';
+import { getBlogPosts, summarisePost } from '../content/blog';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import CaseStudySlider from '../components/CaseStudySlider.astro';
 import CaseStudyListing from '../components/CaseStudyListing.astro';
 import IndustryCard from '../components/IndustryCard.astro';
-import { getCaseStudies, getIndustries, summarise as summariseCaseStudy } from '../content/case-studies';
+import { getCaseStudies, getIndustries, summariseCaseStudy } from '../content/case-studies';
 
-const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarise);
+const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarisePost);
 const newestCaseStudies = (await getCaseStudies()).slice(0, 4).map(summariseCaseStudy);
 const [sampleIndustry] = await getIndustries();
 

@@ -5,6 +5,7 @@
 // The image is decorative: the title already names the link.
 import { pillarLabels } from '../data/taxonomy';
 import type { CaseStudySummary } from '../content/case-studies';
+import { primaryPillar } from '../content/shared';
 
 interface Props {
   caseStudy: CaseStudySummary;
@@ -28,7 +29,7 @@ const { caseStudy, headingLevel: Heading = 'h3' } = Astro.props;
     />
   </div>
   <div class="flex grow flex-col p-5">
-    <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[caseStudy.pillars[0]]}</span>
+    <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[primaryPillar(caseStudy)]}</span>
     <div class="mt-auto flex items-end justify-between gap-4 pt-8">
       <div>
         {caseStudy.client && <p class="type-caption">/ {caseStudy.client}</p>}

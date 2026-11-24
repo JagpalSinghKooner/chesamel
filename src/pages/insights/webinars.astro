@@ -6,6 +6,7 @@ import InsightsHero from '../../components/InsightsHero.astro';
 import InsightCard from '../../components/InsightCard.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
 import { getNewest, addressOf } from '../../content/insight-items';
+import { primaryPillar } from '../../content/shared';
 
 const webinars = await getNewest('webinars');
 ---
@@ -19,7 +20,7 @@ const webinars = await getNewest('webinars');
       {
         webinars.map((w) => (
           <li>
-            <InsightCard href={addressOf(w)} title={w.data.title} image={w.data.image} pillar={w.data.pillars[0]} action="/ watch webinar" />
+            <InsightCard href={addressOf(w)} title={w.data.title} image={w.data.image} pillar={primaryPillar(w.data)} action="/ watch webinar" />
           </li>
         ))
       }

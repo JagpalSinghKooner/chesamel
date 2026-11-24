@@ -2,6 +2,7 @@
 // its address, /<collection>/<file name>/.
 
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { newestFirst } from './shared';
 
 export type InsightCollection = 'podcasts' | 'webinars' | 'reports';
 export type Podcast = CollectionEntry<'podcasts'>;
@@ -12,7 +13,7 @@ export const addressOf = (item: { collection: InsightCollection; id: string }) =
 
 export async function getNewest<C extends InsightCollection>(collection: C): Promise<CollectionEntry<C>[]> {
   const items = (await getCollection(collection)) as CollectionEntry<C>[];
-  return items.sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
+  return items.sort(newestFirst);
 }
 
 // The first `max` characters of a Markdown body as plain text, for cards.

@@ -11,8 +11,8 @@ import Button from '../../components/Button.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import ClientLogos from '../../components/home/ClientLogos.astro';
 import CaseStudySlider from '../../components/CaseStudySlider.astro';
-import { getCaseStudies, related, summarise, type CaseStudy } from '../../content/case-studies';
-import { formatDate } from '../../content/blog';
+import { getCaseStudies, related, summariseCaseStudy, type CaseStudy } from '../../content/case-studies';
+import { formatDate, isoDate, primaryPillar } from '../../content/shared';
 import { pillarLabels } from '../../data/taxonomy';
 
 export async function getStaticPaths() {
@@ -30,7 +30,7 @@ const OUR_WORK = '/insights/our-work/';
   <section class="bg-off-white" data-case-study-hero>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <h1 class="type-heading-1 max-w-4xl text-4xl sm:text-5xl">{title}</h1>
-      <p class="type-tag mt-6">/ {pillarLabels[pillars[0]]}</p>
+      <p class="type-tag mt-6">/ {pillarLabels[primaryPillar(caseStudy.data)]}</p>
       <p class="type-subheading mt-4 max-w-3xl">{excerpt}</p>
     </div>
   </section>
@@ -43,7 +43,7 @@ const OUR_WORK = '/insights/our-work/';
       <dl class="flex flex-col gap-8">
         <div>
           <dt class="type-tag">/ date</dt>
-          <dd class="mt-2"><time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time></dd>
+          <dd class="mt-2"><time datetime={isoDate(date)}>{formatDate(date)}</time></dd>
         </div>
         <div>
           <dt class="type-tag">/ objective</dt>
@@ -67,6 +67,6 @@ const OUR_WORK = '/insights/our-work/';
     eyebrow="/ why not read more"
     heading="Our Related Case Studies"
     action={{ label: 'View All Case Studies', href: OUR_WORK }}
-    caseStudies={related(caseStudy, all).map(summarise)}
+    caseStudies={related(caseStudy, all).map(summariseCaseStudy)}
   />
 </Base>
