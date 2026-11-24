@@ -29,5 +29,5 @@ Each ticket runs in a fresh context window. Starting or finishing a ticket: foll
 
 ## Commit rules
 
-- Never add a `Co-Authored-By: Claude` trailer or any AI attribution to commits.
+- Never add AI attribution anywhere on GitHub: no Claude co-author trailer in commits, no Claude Code footer in pull requests, issues or comments. `.claude/settings.json` turns attribution off, and `.claude/hooks/no-ai-attribution.sh` blocks any command that carries it.
 - Every commit and pull request made for a Change Request must name the Requester and quote their original request.
