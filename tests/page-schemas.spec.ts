@@ -42,15 +42,13 @@ test('section fields are checked: a stats section needs items, card images must 
 
 const pillar = {
   title: 'Marketing Engine',
-  colour: '#FF4A7D',
   order: 1,
   hero: { title: 'Marketing Engine', paragraphs: ['We help organisations strengthen market presence.'] },
   sections: [{ type: 'cta', heading: 'Ready to get started?', text: "don't wait to drive your business forward." }],
 };
 
-test('a Pillar needs a title, a colour and its place in the order', () => {
+test('a Pillar needs a title and its place in the order', () => {
   expect(problems(pillarSchema, pillar)).toEqual([]);
-  expect(problems(pillarSchema, { ...pillar, colour: 'pink' })).toEqual(['colour']);
   const { order, ...rest } = pillar;
   expect(problems(pillarSchema, rest)).toEqual(['order']);
 });

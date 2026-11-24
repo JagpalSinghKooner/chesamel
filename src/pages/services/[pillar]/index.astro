@@ -11,4 +11,4 @@ export async function getStaticPaths() {
 const { pillar } = Astro.props as { pillar: Pillar };
 ---
 
-<SectionsPage entry={pillar} colour={pillar.data.colour} trail={[{ label: 'Home', href: '/' }, { label: 'What We Do', href: '/what-we-do/' }]} />
+<SectionsPage entry={pillar} trail={[{ label: 'Home', href: '/' }, { label: 'What We Do', href: '/what-we-do/' }]} />

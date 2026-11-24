@@ -16,6 +16,5 @@ const { service, pillar } = Astro.props as { service: Service; pillar: Awaited<R
 
 <SectionsPage
   entry={service}
-  colour={pillar.data.colour}
   trail={[{ label: 'Home', href: '/' }, { label: 'What We Do', href: '/what-we-do/' }, { label: pillar.data.title, href: pillarAddress(pillar) }]}
 />

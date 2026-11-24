@@ -5,14 +5,22 @@
 // pages show them. Each open role is a standard Page at /careers/<slug>/.
 
 import { asWxr, decodeEntities, type WxrSource, type WxrItem } from './wxr.ts';
+import { publishedOfType } from './insight-item.ts';
 import { localiseUrls, toMarkdown } from './html.ts';
 import { teamSlugs, type TeamSlug } from '../../src/data/taxonomy.ts';
 import type { PageFile, TeamMemberFile } from '../../src/content/page-schemas.ts';
 
-const published = (type: string) => (i: WxrItem) => i.type === type && i.status === 'publish';
 const slugOf = (link: string) => new URL(link).pathname.split('/').filter(Boolean).at(-1)!;
 // File names come from the name: one live address is WordPress's "__trashed-6".
 const slugify = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// A second person with the same name gets "-2", so neither file overwrites the other.
+function unique(slug: string, taken: Set<string>) {
+  let candidate = slug;
+  for (let n = 2; taken.has(candidate); n++) candidate = `${slug}-${n}`;
+  taken.add(candidate);
+  return candidate;
+}
+
 const meta = (i: WxrItem, key: string) => decodeEntities(i.meta[key] ?? '').trim();
 
 export interface ImportedMember {
@@ -25,7 +33,8 @@ export function importTeamMembers(source: WxrSource) {
   const wxr = asWxr(source);
   const members: ImportedMember[] = [];
   const withoutPhoto: string[] = [];
-  for (const item of wxr.items.filter(published('team_members'))) {
+  const taken = new Set<string>();
+  for (const item of publishedOfType(wxr, 'team_members')) {
     const name = decodeEntities(item.title);
     const photo = wxr.byId.get(item.meta._thumbnail_id ?? '')?.attachmentUrl;
     // A card without a photo would show a gap; the live site shows none either.
@@ -37,7 +46,7 @@ export function importTeamMembers(source: WxrSource) {
     const linkedin = meta(item, 'team_member_linkedin').replace(/^(?=[a-z.]*linkedin\.com)/, 'https://');
     const email = meta(item, 'team_member_email');
     members.push({
-      file: `src/content/team/${slugify(name)}.md`,
+      file: `src/content/team/${unique(slugify(name), taken)}.md`,
       data: {
         name,
         role: meta(item, 'team_member_role'),
@@ -62,7 +71,7 @@ export interface ImportedRole {
 
 export function importCareers(source: WxrSource): ImportedRole[] {
   const wxr = asWxr(source);
-  return wxr.items.filter(published('careers')).map((item) => {
+  return publishedOfType(wxr, 'careers').map((item) => {
     const title = decodeEntities(item.title);
     const description = meta(item, '_yoast_wpseo_metadesc');
     const apply = meta(item, 'career_link');

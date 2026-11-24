@@ -88,6 +88,21 @@ ${rows.join('\n')}
 `;
 }
 
+// The images Pillars, Services and Team Members show.
+const pageMedia = (wxr: Wxr) => [...importServices(wxr).media, ...importTeamMembers(wxr).media];
+
+async function fetchMedia(urls: string[]) {
+  console.log(`Downloading up to ${new Set(urls).size} media files (existing copies are skipped)`);
+  const failures = await downloadMedia(urls);
+  // Files the live site has already lost (404) are expected; anything else needs a re-run.
+  const unexpected = failures.filter((f) => !f.endsWith('HTTP 404'));
+  if (failures.length) console.log(`${failures.length - unexpected.length} media files are gone from the live site (404)`);
+  if (unexpected.length) {
+    console.error(`${unexpected.length} media files failed; re-run to retry:\n${unexpected.join('\n')}`);
+    process.exitCode = 1;
+  }
+}
+
 async function main() {
   const withMedia = !process.argv.includes('--no-media');
   const file = await findExport();
@@ -95,7 +110,10 @@ async function main() {
   // Parsed once; every importer reads the same parsed export.
   const wxr = parseWxr(await readFile(root(file), 'utf8'));
 
-  if (process.argv.includes('--only=pages')) return importPages(wxr);
+  if (process.argv.includes('--only=pages')) {
+    if (withMedia) await fetchMedia(pageMedia(wxr));
+    return importPages(wxr);
+  }
 
   // Podcasts, Webinars and Reports. `--only=insights` stops after this step,
   // leaving Blog Posts (which Content Editors may have edited) untouched.
@@ -104,19 +122,8 @@ async function main() {
   if (process.argv.includes('--only=insights')) return;
 
   // Media first, so posts can leave out any image that couldn't be fetched.
-  const media = [...importBlogPosts(wxr).media, ...importCaseStudies(wxr).media, ...importIndustries(wxr).media];
-  if (withMedia) {
-    const urls = [...attachmentUrls(wxr), ...media];
-    console.log(`Downloading up to ${new Set(urls).size} media files (existing copies are skipped)`);
-    const failures = await downloadMedia(urls);
-    // Files the live site has already lost (404) are expected; anything else needs a re-run.
-    const unexpected = failures.filter((f) => !f.endsWith('HTTP 404'));
-    if (failures.length) console.log(`${failures.length - unexpected.length} media files are gone from the live site (404)`);
-    if (unexpected.length) {
-      console.error(`${unexpected.length} media files failed; re-run to retry:\n${unexpected.join('\n')}`);
-      process.exitCode = 1;
-    }
-  }
+  const media = [...importBlogPosts(wxr).media, ...importCaseStudies(wxr).media, ...importIndustries(wxr).media, ...pageMedia(wxr)];
+  if (withMedia) await fetchMedia([...attachmentUrls(wxr), ...media]);
 
   const blog = importBlogPosts(wxr, { missingMedia: await notInRepo(media) });
   for (const post of blog.posts) await write(post.file, serialise(post));

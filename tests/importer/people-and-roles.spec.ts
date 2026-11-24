@@ -97,3 +97,9 @@ test('a LinkedIn address without https:// gets it', () => {
   const { members } = importTeamMembers(wxr([kate, items[1]]));
   expect(members[0].data.linkedin).toBe('https://linkedin.com/in/kate-kolchina-22356b74');
 });
+
+test('two Team Members with the same name get different files', () => {
+  const twin = { ...john, id: 2434, slug: 'john-cofie-2', link: 'https://chesamel.com/team-members/john-cofie-2/' };
+  const { members } = importTeamMembers(wxr([john, twin, items[1]]));
+  expect(members.map((m) => m.file)).toEqual(['src/content/team/john-cofie.md', 'src/content/team/john-cofie-2.md']);
+});

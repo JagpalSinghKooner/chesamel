@@ -125,7 +125,7 @@ const optional = <K extends string>(key: K, value: string | undefined) => (value
 function readSection(c: Chunk, pillar: PillarSlug, wxr: Wxr, isLast: boolean): Section | undefined {
   const h = c.heading;
   const paragraphs = texts(c.own, 'p').filter((p) => !p.startsWith('/ '));
-  if (isLast) return { type: 'cta', heading: h, ...optional('text', paragraphs[0]) };
+  if (isLast && /get started|transform|get involved/i.test(h)) return { type: 'cta', heading: h, ...optional('text', paragraphs[0]) };
   if (/^(how we work|our process)$/i.test(h)) {
     const items = texts(c.own, 'li');
     return { type: 'points', heading: h, items, ...optional('note', paragraphs[0]) } as Section;
@@ -186,7 +186,9 @@ function readPage(html: string, pillar: PillarSlug, wxr: Wxr, unknown: (reason: 
   };
 }
 
-const ORDER: PillarSlug[] = ['digital-transformation', 'marketing-engine', 'investment-impact-transformation', 'hybrid-workforce', 'ai-machine-learning', 'bi-data-analytics'];
+// The order Pillars are listed in: the four Pillars as the header menu has
+// them, then the two further service areas.
+const PILLAR_ORDER: PillarSlug[] = ['digital-transformation', 'marketing-engine', 'investment-impact-transformation', 'hybrid-workforce', 'ai-machine-learning', 'bi-data-analytics'];
 
 export function importServices(source: WxrSource): ServicesImport {
   const wxr = asWxr(source);
@@ -194,6 +196,7 @@ export function importServices(source: WxrSource): ServicesImport {
   const media = new Set<string>();
   const serviceCount = new Map<string, number>();
 
+  // Services keep WordPress's creation order: every menu_order in the export is 0.
   const items = wxr.items.filter((i) => i.type === 'services' && i.status === 'publish').sort((a, b) => Number(a.id) - Number(b.id));
   for (const item of items) {
     const address = new URL(item.link).pathname;
@@ -207,7 +210,7 @@ export function importServices(source: WxrSource): ServicesImport {
       const description = decodeEntities(item.meta._yoast_wpseo_metadesc ?? '').trim();
       const common = { title: page.hero.title, ...(description && { description }), hero: page.hero, sections: page.sections };
       if (!service) {
-        result.pillars.push({ address, file: `src/content/pillars/${slug}.md`, body: '', data: { ...common, colour: item.meta.service_color, order: ORDER.indexOf(slug) + 1 } });
+        result.pillars.push({ address, file: `src/content/pillars/${slug}.md`, body: '', data: { ...common, order: PILLAR_ORDER.indexOf(slug) + 1 } });
       } else {
         const order = (serviceCount.get(slug) ?? 0) + 1;
         serviceCount.set(slug, order);

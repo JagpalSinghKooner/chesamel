@@ -113,7 +113,7 @@ _Avoid_: Block, module, row
 **Pillar**:
 One of Chesamel's four service areas: Marketing Engine, Digital Transformation, Hybrid Workforce, Investment & Impact Transformation.
 _Avoid_: Service line, division
-_Note_: A Blog Post's Pillar labels may also name two further service areas from the current site, AI & Machine Learning and BI & Data Analytics. They are filed with the Pillars, and the News Pillar filter lists all six, as the current site does; elsewhere, Pillar means only the four.
+_Note_: A Blog Post's Pillar labels may also name two further service areas from the current site, AI & Machine Learning and BI & Data Analytics. They are filed with the Pillars: the News Pillar filter lists all six, and both have a page under /services/ built like a Pillar's, as the current site does. Elsewhere, Pillar means only the four.
 
 **Service**:
 One of a Pillar's offerings, with its own page under the Pillar's address, such as Customer Experience & Engagement under Marketing Engine.

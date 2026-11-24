@@ -27,28 +27,24 @@ sections:
       - We help businesses strengthen market position, digital capability, workforce performance, and investment readiness. Our work is designed to solve real problems and create practical momentum.
     items:
       - title: Marketing Engine
-        colour: "#FF4A7D"
         href: /services/marketing-engine/
         paragraphs:
           - Strategic marketing strategy and delivery that sharpen focus, improve performance, and drive measurable impact. We help brands align strategy, positioning, content, campaigns, and media to deliver commercial results.
         listLabel: / services & sub services
         list: [Research & Data, Marketing Strategy, Branding, Product / Service Optimisation, "Campaigns, Content & Media"]
       - title: Digital Transformation
-        colour: "#24ADEB"
         href: /services/digital-transformation/
         paragraphs:
           - Digital transformation that improves resilience, efficiency, and scale. We help organisations reduce complexity and build stronger foundations across data, cloud, AI, security, architecture, and delivery.
         listLabel: / services & sub services
         list: [AI and Automation CoE, Data and Insight Hub, Cloud and FinOps Command, Cyber Resilience Unit, Digital Factory, Cross-Border Architecture Office, Delivery Models]
       - title: Hybrid Workforce
-        colour: "#FF8A54"
         href: /services/hybrid-workforce/
         paragraphs:
           - A hybrid workforce that builds stronger teams and scalable capability. We help organisations strengthen talent, learning, governance, operational excellence, and delivery models.
         listLabel: / services & sub services
         list: [Talent Hub, Learning Academy, Centre of Excellence, Mission Control, Workforce Optimisation, Workforce Deployment, Delivery Models]
       - title: Investment and Impact Transformation
-        colour: "#1CB280"
         href: /services/investment-impact-transformation/
         paragraphs:
           - Turn growth ambition into investment-ready impact.

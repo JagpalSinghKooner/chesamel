@@ -2,8 +2,8 @@
 // build fails on any file that doesn't match, so a broken page never reaches
 // the site.
 //
-// Pages, Pillars and Services are built from Sections: an ordered list of
-// typed blocks, each drawn by one Component (src/components/Sections.astro).
+// Pages, Pillars and Services are built from Sections: an ordered list in
+// which each kind of Section is drawn by one Component (src/components/Sections.astro).
 // A Content Editor reorders, adds or removes Sections; the look stays the
 // Design System's.
 
@@ -35,7 +35,7 @@ const sectionTypes = [
     type: z.literal('tabs'),
     ...heading,
     paragraphs: z.array(text).default([]),
-    items: z.array(z.object({ title: text, colour: z.string().regex(/^#[0-9a-f]{6}$/i), paragraphs: z.array(text).min(1), listLabel: text.optional(), list: z.array(text).default([]), href: text.optional() })).min(1),
+    items: z.array(z.object({ title: text, paragraphs: z.array(text).min(1), listLabel: text.optional(), list: z.array(text).default([]), href: text.optional() })).min(1),
   }),
   // A Pillar's own delivery models, or, without items, the shared three.
   z.object({ type: z.literal('deliveryModels'), ...heading, text: text.optional(), items: z.array(z.object({ heading: text, text, image: image.optional() })).optional() }),
@@ -84,7 +84,6 @@ export const pageSchema = z.object(built);
 // One of the six service areas at /services/<file name>/.
 export const pillarSchema = z.object({
   ...built,
-  colour: z.string().regex(/^#[0-9a-f]{6}$/i),
   order: z.number().int(),
 });
 

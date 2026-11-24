@@ -206,8 +206,8 @@ const typeStyles = [
       <div class="max-w-xs"><IndustryCard industry={sampleIndustry} headingLevel="h4" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Page hero</h3>
-    <p class="type-body mx-auto mb-6 max-w-5xl px-6">Tops every Page, Pillar and Service. A Pillar's colour runs along its foot.</p>
-    <PageHero title="Marketing Engine" paragraphs={['We help organisations strengthen market presence.']} links={[{ label: "Let's Chat", href: '/contact/' }]} colour="#FF4A7D" headingLevel="h4" />
+    <p class="type-body mx-auto mb-6 max-w-5xl px-6">Tops every Page, Pillar and Service.</p>
+    <PageHero title="Marketing Engine" paragraphs={['We help organisations strengthen market presence.']} links={[{ label: "Let's Chat", href: '/contact/' }]} headingLevel="h4" />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Office list</h3>
     <div class="mx-auto max-w-5xl px-6"><OfficeList /></div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Team Member card</h3>
@@ -215,7 +215,7 @@ const typeStyles = [
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Sections</h3>
     <p class="type-body mx-auto mb-6 max-w-5xl px-6">
       Pages, Pillars and Services are lists of Sections, each drawn by its own Component. Shown here: stats, cards,
-      points, the shared delivery models and the Group Brands.
+      points, the shared delivery models, the Group Brands and tabs.
     </p>
     <Sections
       sections={[
@@ -224,6 +224,15 @@ const typeStyles = [
         { type: 'points', heading: 'How we work', tone: 'dark', paragraphs: [], items: ['We help organisations find the right focus.', 'We connect research and strategy.'], note: 'Need clarity fast?' },
         { type: 'deliveryModels', heading: 'Our Delivery Models' },
         { type: 'brands', heading: 'Our Group Brands' },
+        {
+          type: 'tabs',
+          heading: 'Providing expertise',
+          paragraphs: [],
+          items: [
+            { title: 'Marketing Engine', paragraphs: ['Strategic marketing that drives measurable impact.'], list: ['Branding', 'Research & Data'] },
+            { title: 'Hybrid Workforce', paragraphs: ['A hybrid workforce that builds stronger teams.'], list: ['Talent Hub'] },
+          ],
+        },
       ]}
     />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>

@@ -95,12 +95,11 @@ const items: FixtureItem[] = [
 
 const run = () => importServices(wxr(items));
 
-test('a Pillar becomes a file at its address, with its hero, colour and description', () => {
+test('a Pillar becomes a file at its address, with its hero and description', () => {
   const pillar = run().pillars.find((p) => p.address === '/services/marketing-engine/')!;
   expect(pillar.file).toBe('src/content/pillars/marketing-engine.md');
   expect(pillar.data).toMatchObject({
     title: 'Marketing Engine',
-    colour: '#FF4A7D',
     description: 'Chesamel’s 360° marketing engine solutions.',
     hero: {
       title: 'Marketing Engine',
@@ -177,4 +176,10 @@ test('a heading the importer does not know is reported, not guessed', () => {
   const odd = { ...items[0], content: pillarPage.replace('Elevate your business', 'Something new') };
   const result = importServices(wxr([odd]));
   expect(result.unreadable.filter((u) => u.address === '/services/marketing-engine/')).toEqual([{ address: '/services/marketing-engine/', reason: 'unknown section "Something new"' }]);
+});
+
+test('the last section is the call to action only when its heading reads like one', () => {
+  const odd = { ...items[0], content: pillarPage.replace('Ready to get started?', 'Our awards') };
+  const result = importServices(wxr([odd]));
+  expect(result.unreadable.filter((u) => u.address === '/services/marketing-engine/')).toEqual([{ address: '/services/marketing-engine/', reason: 'unknown section "Our awards"' }]);
 });

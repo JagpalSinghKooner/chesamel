@@ -11,18 +11,17 @@ import type { Page, Pillar, Service } from '../content/pages';
 interface Props {
   entry: Page | Pillar | Service;
   trail: { label: string; href?: string }[];
-  colour?: string;
   // The <title>; the page's title with " | Chesamel" when not given.
   documentTitle?: string;
 }
-const { entry, trail, colour, documentTitle } = Astro.props;
+const { entry, trail, documentTitle } = Astro.props;
 const { title, description, hero, sections } = entry.data;
 const { Content } = await render(entry);
 const hasBody = (entry.body ?? '').trim().length > 0;
 ---
 
 <Base title={documentTitle ?? `${title} | Chesamel`} description={description ?? hero.paragraphs[0] ?? hero.subtitle}>
-  <PageHero {...hero} colour={colour} />
+  <PageHero {...hero} />
   <Breadcrumb band trail={[...trail, { label: title }]} />
   <Sections sections={sections} hasBody={hasBody}><Content /></Sections>
 </Base>
