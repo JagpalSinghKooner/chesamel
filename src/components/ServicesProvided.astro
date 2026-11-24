@@ -1,0 +1,36 @@
+---
+// "Services provided": one bordered link per Pillar label to its service page,
+// as beside Blog Posts and Case Studies on the live site.
+import { pillarLabels, type PillarSlug } from '../data/taxonomy';
+
+interface Props {
+  pillars: PillarSlug[];
+  // Keeps the heading id unique on the page.
+  id?: string;
+  // How many links sit side by side from the sm breakpoint.
+  columns?: 1 | 2;
+}
+
+const { pillars, id = 'services-provided', columns = 2 } = Astro.props;
+---
+
+<aside aria-labelledby={id}>
+  <h2 id={id} class="type-tag">Services provided</h2>
+  <ul class:list={['mt-4 grid gap-3', columns === 2 && 'sm:grid-cols-2']}>
+    {
+      pillars.map((slug) => (
+        <li>
+          <a
+            href={`/services/${slug}/`}
+            class="flex items-center justify-between gap-4 border border-light-grey px-4 py-5 font-semibold text-black hover:bg-off-white"
+          >
+            {pillarLabels[slug]}
+            <span class="type-caption shrink-0">
+              Explore service <span aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>

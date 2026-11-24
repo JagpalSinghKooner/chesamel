@@ -1,0 +1,29 @@
+---
+// Industry card: image, name and one-line summary, linking to the Industry
+// page, as on the live Industries and Our Work pages.
+import { industryAddress, type Industry } from '../content/case-studies';
+
+interface Props {
+  industry: Industry;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  tone?: 'light' | 'dark';
+}
+
+const { industry, headingLevel: Heading = 'h3', tone = 'light' } = Astro.props;
+const { title, card } = industry.data;
+const dark = tone === 'dark';
+---
+
+<a
+  href={industryAddress(industry)}
+  class:list={['group flex h-full flex-col border', dark ? 'border-dark-grey hover:border-white' : 'border-light-grey bg-white hover:border-indigo']}
+  data-component="industry-card"
+>
+  <div class="aspect-[4/3] overflow-hidden">
+    <img src={card.image.src} alt={card.image.alt} loading="lazy" class="size-full object-cover" />
+  </div>
+  <div class="p-5">
+    <Heading class:list={['type-heading-3 text-xl group-hover:underline', dark && 'text-white']}>{title}</Heading>
+    <p class:list={['mt-3', dark ? 'text-off-white' : 'text-dark-grey']}>{card.summary}</p>
+  </div>
+</a>

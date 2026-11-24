@@ -1,0 +1,75 @@
+---
+// Case Studies at their original addresses, /case-studies/<slug>/. The layout
+// follows the live page: a light hero with the title, main Pillar and excerpt;
+// the date, objective and services beside the story; then the client logos
+// and "Our Related Case Studies". The card image isn't shown here, as on the
+// live site.
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/Button.astro';
+import ServicesProvided from '../../components/ServicesProvided.astro';
+import ClientLogos from '../../components/home/ClientLogos.astro';
+import CaseStudySlider from '../../components/CaseStudySlider.astro';
+import { getCaseStudies, related, summarise, type CaseStudy } from '../../content/case-studies';
+import { formatDate } from '../../content/blog';
+import { pillarLabels } from '../../data/taxonomy';
+
+export async function getStaticPaths() {
+  const all = await getCaseStudies();
+  return all.map((caseStudy) => ({ params: { slug: caseStudy.id }, props: { caseStudy, all } }));
+}
+
+const { caseStudy, all } = Astro.props as { caseStudy: CaseStudy; all: CaseStudy[] };
+const { title, date, excerpt, objective, pillars, description } = caseStudy.data;
+const { Content } = await render(caseStudy);
+const OUR_WORK = '/insights/our-work/';
+---
+
+<Base title={`${title} | Chesamel`} description={description ?? excerpt}>
+  <section class="bg-off-white" data-case-study-hero>
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <h1 class="type-heading-1 max-w-4xl text-4xl sm:text-5xl">{title}</h1>
+      <p class="type-tag mt-6">/ {pillarLabels[pillars[0]]}</p>
+      <p class="type-subheading mt-4 max-w-3xl">{excerpt}</p>
+    </div>
+  </section>
+  <nav aria-label="Breadcrumb" class="type-caption border-b border-light-grey">
+    <ol class="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 py-4 sm:px-6">
+      <li><a href="/" class="underline">Home</a> /</li>
+      <li><a href="/insights/" class="underline">Insights</a> /</li>
+      <li><a href={OUR_WORK} class="underline">Our Work</a> /</li>
+      <li aria-current="page">{title}</li>
+    </ol>
+  </nav>
+  <article class="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_2fr]">
+    <div class="flex flex-col gap-10">
+      <dl class="flex flex-col gap-8">
+        <div>
+          <dt class="type-tag">/ date</dt>
+          <dd class="mt-2"><time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time></dd>
+        </div>
+        <div>
+          <dt class="type-tag">/ objective</dt>
+          <dd class="mt-2 text-black">{objective}</dd>
+        </div>
+      </dl>
+      <ServicesProvided pillars={pillars} columns={1} />
+    </div>
+    <div>
+      <div class="blog-body" data-case-study-body>
+        <Content />
+      </div>
+      <div class="mt-16 flex flex-wrap gap-3 border-t border-light-grey pt-8">
+        <Button href={OUR_WORK} tone="dark">Back to Case Studies</Button>
+        <Button href="/what-we-do/" tone="light">Our Services</Button>
+      </div>
+    </div>
+  </article>
+  <ClientLogos />
+  <CaseStudySlider
+    eyebrow="/ why not read more"
+    heading="Our Related Case Studies"
+    action={{ label: 'View All Case Studies', href: OUR_WORK }}
+    caseStudies={related(caseStudy, all).map(summarise)}
+  />
+</Base>
