@@ -5,7 +5,7 @@
 
 import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
-import { extname, join } from 'node:path';
+import { extname, join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export interface Redirect {
@@ -23,22 +23,29 @@ export function parseRedirects(text: string): Redirect[] {
     .filter((line) => line && !line.startsWith('#'))
     .map((line) => {
       const [from, to, status = '302'] = line.split(/\s+/);
+      // Cloudflare also supports * and :placeholder rules; this server doesn't,
+      // so such a rule would pass on a Preview but fail locally.
+      if (/[*:]/.test(from)) throw new Error(`Only exact addresses are supported in _redirects: ${line}`);
       return { from: decodeURI(from), to, status: Number(status) };
     });
 }
 
-export function route(pathname: string, site: { redirects: Redirect[]; exists: (file: string) => boolean }): Answer {
+export function route(
+  pathname: string,
+  site: { redirects: Redirect[]; exists: (file: string) => boolean },
+  search = '',
+): Answer {
   const path = decodeURI(pathname);
   const redirect = site.redirects.find((r) => r.from === path);
   if (redirect) return { status: redirect.status, location: redirect.to };
   const file = path.slice(1);
   if (path.endsWith('/') && site.exists(`${file}index.html`)) return { status: 200, file: `${file}index.html` };
   if (path.endsWith('.html') && site.exists(file)) {
-    return { status: 308, location: path.replace(/(index)?\.html$/, '') };
+    return { status: 308, location: path.replace(/\/index\.html$/, '/').replace(/\.html$/, '') };
   }
   if (!path.endsWith('/') && site.exists(file)) return { status: 200, file };
   if (!path.endsWith('/') && site.exists(`${file}.html`)) return { status: 200, file: `${file}.html` };
-  if (!path.endsWith('/') && site.exists(`${file}/index.html`)) return { status: 308, location: `${pathname}/` };
+  if (!path.endsWith('/') && site.exists(`${file}/index.html`)) return { status: 308, location: `${pathname}/${search}` };
   return { status: 404, file: '404.html' };
 }
 
@@ -69,14 +76,14 @@ function serve(dir: string, port: number) {
     redirects: existsSync(redirectsFile) ? parseRedirects(readFileSync(redirectsFile, 'utf8')) : [],
     exists: (file: string) => {
       const full = join(dir, file);
-      return full.startsWith(dir) && existsSync(full) && statSync(full).isFile();
+      return full.startsWith(dir + sep) && existsSync(full) && statSync(full).isFile();
     },
   };
   createServer((req, res) => {
     const url = new URL(req.url ?? '/', 'http://localhost');
     let answer: Answer;
     try {
-      answer = route(url.pathname, site);
+      answer = route(url.pathname, site, url.search);
     } catch {
       // A malformed percent-encoding can't name any file.
       answer = { status: 400, file: '404.html' };

@@ -1,18 +1,27 @@
 # Permanent redirects, applied by Cloudflare Pages (and by scripts/serve-dist.ts
 # in local tests). Format: <old address> <new address> <status>.
 # Every redirect must be 301: only permanent redirects carry search ranking.
-# Changing or removing a line needs Project Manager Approval. Inventoried
+# Redirects belong to the SEO Specialist, and changing or removing a line
+# needs the Project Manager's go-ahead. Inventoried
 # addresses are checked by tests/url-parity against urls/inventory.json plus
 # urls/decisions.json, so update decisions.json when you change one of those.
 
 # Dead country links (France, Spain, Netherlands, Bulgaria, Turkey, UAE, Japan).
 # The live site never gave them addresses; these catch any guessed or old link.
+# Cloudflare matches lines exactly, so /france and /france/ each need one.
+/france /contact/ 301
 /france/ /contact/ 301
+/spain /contact/ 301
 /spain/ /contact/ 301
+/netherlands /contact/ 301
 /netherlands/ /contact/ 301
+/bulgaria /contact/ 301
 /bulgaria/ /contact/ 301
+/turkey /contact/ 301
 /turkey/ /contact/ 301
+/uae /contact/ 301
 /uae/ /contact/ 301
+/japan /contact/ 301
 /japan/ /contact/ 301
 
 # Old Pillar and Service addresses (match OLD_PILLARS in scripts/import-wordpress/services.ts)

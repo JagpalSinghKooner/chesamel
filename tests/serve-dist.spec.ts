@@ -32,3 +32,17 @@ test('an Arabic address matches its _redirects line whether written raw or perce
   expect(route(asked, site('/ar/المملكة-العربية-السعودية/ /contact/ 301'))).toEqual({ status: 301, location: '/contact/' });
   expect(route(asked, site(`${asked} /contact/ 301`))).toEqual({ status: 301, location: '/contact/' });
 });
+
+test('only a file named index.html loses its name when .html is dropped', () => {
+  const s = { redirects: [], exists: (f: string) => f === 'blog/myindex.html' };
+  expect(route('/blog/myindex.html', s)).toEqual({ status: 308, location: '/blog/myindex' });
+});
+
+// Measured on a Preview: /insights/blog?x=1 308s to /insights/blog/?x=1.
+test('the trailing-slash redirect keeps the query string', () => {
+  expect(route('/insights/blog', site(), '?x=1')).toEqual({ status: 308, location: '/insights/blog/?x=1' });
+});
+
+test('wildcard and placeholder rules are refused, since only exact addresses are served', () => {
+  expect(() => parseRedirects('/old/* /new/:splat 301')).toThrow('Only exact addresses are supported');
+});

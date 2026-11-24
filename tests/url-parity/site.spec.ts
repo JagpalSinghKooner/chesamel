@@ -29,8 +29,10 @@ test('an unknown address returns 404', async ({ request }) => {
 // The spec: old addresses for the dead country links go to the contact page.
 test('dead country addresses redirect to the contact page', async ({ request }) => {
   for (const country of ['france', 'spain', 'netherlands', 'bulgaria', 'turkey', 'uae', 'japan']) {
-    const res = await request.get(`/${country}/`, { maxRedirects: 0 });
-    expect(`${country}: ${res.status()} ${res.headers()['location']}`).toMatch(new RegExp(`^${country}: 301 (https://[^/]+)?/contact/$`));
+    for (const path of [`/${country}`, `/${country}/`]) {
+      const res = await request.get(path, { maxRedirects: 0 });
+      expect(`${path}: ${res.status()} ${res.headers()['location']}`).toMatch(new RegExp(`^${path}: 301 (https://[^/]+)?/contact/$`));
+    }
   }
 });
 

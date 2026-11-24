@@ -1,3 +1,5 @@
+// Project Manager decisions (urls/decisions.json) override what the live site
+// did, and must name an address the inventory actually has.
 import { test, expect } from '@playwright/test';
 import { applyDecisions, type Decision, type InventoryEntry } from './parity';
 
