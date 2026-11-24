@@ -13,6 +13,8 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { parseWxr } from './wxr.ts';
 import { importBlogPosts, type ImportedBlogPost, type BlogPostImport } from './blog-posts.ts';
+import { importCaseStudies } from './case-studies.ts';
+import { importIndustries } from './industries.ts';
 import { attachmentUrls, downloadMedia, notInRepo } from './media.ts';
 import { pillarLabels } from '../../src/data/taxonomy.ts';
 import type { InventoryEntry } from '../../tests/url-parity/parity.ts';
@@ -27,7 +29,7 @@ async function findExport(): Promise<string> {
 }
 
 // YAML accepts JSON values, so JSON.stringify gives safe quoting for free.
-function serialise(post: ImportedBlogPost): string {
+function serialise(post: { data: object; body: string }): string {
   const lines = Object.entries(post.data).map(([key, value]) => `${key}: ${JSON.stringify(value)}`);
   return `---\n${lines.join('\n')}\n---\n\n${post.body}`;
 }
@@ -85,7 +87,7 @@ async function main() {
   const xml = await readFile(root(file), 'utf8');
 
   // Media first, so posts can leave out any image that couldn't be fetched.
-  const media = importBlogPosts(xml).media;
+  const media = [...importBlogPosts(xml).media, ...importCaseStudies(xml).media, ...importIndustries(xml).media];
   if (withMedia) {
     const urls = [...attachmentUrls(parseWxr(xml)), ...media];
     console.log(`Downloading up to ${new Set(urls).size} media files (existing copies are skipped)`);
@@ -106,6 +108,30 @@ async function main() {
   await write('docs/content-team/blog-post-images-to-replace.md', missingImagesReport(blog.missingImages));
   console.log(`Left out ${blog.missingImages.length} images the live site no longer has`);
   console.log(`Removed ${await shrinkPending(blog.posts.map((p) => p.address))} addresses from urls/pending.json`);
+
+  await importCaseStudiesAndIndustries(xml);
+}
+
+// The listing pages built for Case Studies and Industries, which leave the
+// pending list along with the items.
+const CASE_STUDY_LISTINGS = ['/insights/our-work/', '/industries/'];
+
+async function importCaseStudiesAndIndustries(xml: string) {
+  const { caseStudies, missingImages } = importCaseStudies(xml, { missingMedia: await notInRepo(importCaseStudies(xml).media) });
+  for (const cs of caseStudies) await write(cs.file, serialise(cs));
+  console.log(`Wrote ${caseStudies.length} Case Studies`);
+  for (const m of missingImages) console.error(`Case Study image the live site no longer has: ${m.address} ${m.image}`);
+
+  const { industries, unreadable } = importIndustries(xml);
+  for (const industry of industries) await write(industry.file, serialise(industry));
+  console.log(`Wrote ${industries.length} Industries`);
+  if (unreadable.length) {
+    console.error(`Could not read these Industry pages; their layout changed:\n${unreadable.map((u) => `${u.address}: ${u.reason}`).join('\n')}`);
+    process.exitCode = 1;
+  }
+
+  const addresses = [...caseStudies, ...industries].map((i) => i.address);
+  console.log(`Removed ${await shrinkPending([...addresses, ...CASE_STUDY_LISTINGS])} Case Study and Industry addresses from urls/pending.json`);
 }
 
 await main();
