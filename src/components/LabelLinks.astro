@@ -5,6 +5,9 @@
 //
 // By default each list sits under the content with a rule above it; in a
 // side column (`placement="column"`) it stacks the links one per row instead.
+// Each link is a Fulldev Button.
+import { Button } from '@/components/ui/button';
+import { brandButton } from './button';
 import { pillarLabels, industryLabels, type PillarSlug, type IndustrySlug } from '../data/taxonomy';
 
 interface Props {
@@ -31,12 +34,12 @@ const groups = [
       <ul class:list={['mt-4 grid gap-3', below && 'sm:grid-cols-2']}>
         {g.links.map((l) => (
           <li>
-            <a href={l.href} class="flex items-center justify-between gap-4 border border-light-grey px-4 py-5 font-semibold text-black hover:bg-off-white">
+            <Button as="a" href={l.href} class:list={[brandButton, 'flex justify-between gap-4 border-light-grey bg-transparent px-4 py-5 text-[length:inherit] text-black transition-none hover:bg-off-white hover:text-black']}>
               {l.label}
               <span class="type-caption shrink-0">
                 {g.cta} <span aria-hidden="true">↗</span>
               </span>
-            </a>
+            </Button>
           </li>
         ))}
       </ul>

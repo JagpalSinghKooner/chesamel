@@ -1,7 +1,9 @@
 ---
 // "/ listen now on": a Podcast episode's links to each platform that has it.
 // `episode` names the episode for screen readers, since a listing repeats
-// the platform names once per episode.
+// the platform names once per episode. Each link is a Fulldev Button.
+import { Button } from '@/components/ui/button';
+import { brandButton } from './button';
 import type { PodcastData } from '../content/insight-schemas';
 
 interface Props {
@@ -20,10 +22,10 @@ const links = (Object.keys(names) as (keyof typeof names)[]).filter((k) => liste
     {
       links.map((l) => (
         <li>
-          <a href={l.href} class="inline-flex border border-light-grey px-3 py-1.5 text-sm font-semibold text-black hover:border-indigo" rel="noopener">
+          <Button as="a" href={l.href} class:list={[brandButton, 'gap-0 border-light-grey bg-transparent px-3 py-1.5 text-black transition-none hover:border-indigo hover:bg-transparent']} rel="noopener">
             {l.name}
             <span class="sr-only">: {episode}</span>
-          </a>
+          </Button>
         </li>
       ))
     }
