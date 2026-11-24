@@ -1,11 +1,13 @@
 ---
-// Breadcrumb Component: "Home / Insights / Our Work". Each step with an
-// `href` is a link; a final step without one is the current page and is
-// marked `aria-current="page"`.
+// Breadcrumb Component: "Home / Insights / Our Work", built on Fulldev's
+// Breadcrumb (ADR-0005). Each step with an `href` is a link; a final step
+// without one is the current page and is marked `aria-current="page"`.
 //
 // `band` gives it its own full-width strip with a rule under it, as below the
 // hero on Our Work, Industry and Case Study pages; otherwise it sits inline
 // in whatever holds it.
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+
 interface Props {
   trail: { label: string; href?: string }[];
   band?: boolean;
@@ -16,24 +18,27 @@ const { trail, band = false, class: className } = Astro.props;
 const last = trail.length - 1;
 ---
 
-<nav aria-label="Breadcrumb" class:list={['type-caption', band && 'border-b border-light-grey', className]}>
-  <ol class:list={['flex flex-wrap gap-2', band && 'mx-auto max-w-7xl px-4 py-4 sm:px-6']}>
+<Breadcrumb aria-label="Breadcrumb" class:list={['type-caption', band && 'border-b border-light-grey', className]}>
+  {/* Text keeps the colour of whatever holds it (white on a dark hero). */}
+  <BreadcrumbList class:list={['gap-2 text-[length:inherit] text-inherit sm:gap-2', band && 'mx-auto max-w-7xl px-4 py-4 sm:px-6']}>
     {
-      trail.map((step, i) =>
-        step.href ? (
-          <li>
-            <a href={step.href} class="underline">
-              {step.label}
-            </a>
-            {i < last && ' /'}
-          </li>
-        ) : (
-          <li aria-current={i === last ? 'page' : undefined}>
-            {step.label}
-            {i < last && ' /'}
-          </li>
-        ),
-      )
+      trail.map((step, i) => (
+        <>
+          <BreadcrumbItem class="gap-0">
+            {step.href ? (
+              <BreadcrumbLink href={step.href} class="underline hover:text-inherit">
+                {step.label}
+              </BreadcrumbLink>
+            ) : i === last ? (
+              <BreadcrumbPage class="text-inherit">{step.label}</BreadcrumbPage>
+            ) : (
+              step.label
+            )}
+          </BreadcrumbItem>
+          {/* Sits a space's width after its step, as "Home /" did. */}
+          {i < last && <BreadcrumbSeparator class="-ms-2">{'\u00a0/'}</BreadcrumbSeparator>}
+        </>
+      ))
     }
-  </ol>
-</nav>
+  </BreadcrumbList>
+</Breadcrumb>
