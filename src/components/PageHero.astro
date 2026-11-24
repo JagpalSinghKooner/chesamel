@@ -1,0 +1,37 @@
+---
+// Page hero Component: the title band at the top of a Page, Pillar or
+// Service, with its subtitle, paragraphs, facts (such as a role's "Hybrid /
+// Full-Time") and buttons.
+import Button from './Button.astro';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  details?: string[];
+  links?: { label: string; href: string }[];
+  // h1 on a page; lower where the hero is shown as a sample.
+  headingLevel?: 'h1' | 'h4';
+}
+const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], headingLevel: Heading = 'h1' } = Astro.props;
+---
+
+<section data-component="page-hero" class="bg-off-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="max-w-3xl">
+      {eyebrow && <p class="font-subheading">{eyebrow}</p>}
+      <Heading class:list={['type-heading-1 text-4xl sm:text-6xl', eyebrow && 'mt-3']}>{title}</Heading>
+      {subtitle && <p class="type-subheading mt-6 text-xl">{subtitle}</p>}
+      {paragraphs.map((p, i) => <p class:list={[i === 0 ? 'mt-6 text-lg' : 'mt-4']}>{p}</p>)}
+      {details.length > 0 && <p class="font-subheading mt-6 flex flex-wrap gap-x-6 gap-y-2 text-dark-grey">{details.map((d) => <span>{d}</span>)}</p>}
+      {
+        links.length > 0 && (
+          <div class="mt-8 flex flex-wrap gap-3">
+            {links.map((link, i) => <Button href={link.href} tone={i === 0 ? 'indigo' : 'light'}>{link.label}</Button>)}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

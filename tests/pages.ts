@@ -22,4 +22,19 @@ export const pages = [
   '/industries/',
   '/industries/finance/',
   '/case-studies/business-intelligence-in-finance/',
+  // One Pillar and one of its Services (every one is also checked by
+  // every-pillar-service-page.spec.ts), and the standard Pages.
+  '/services/marketing-engine/',
+  '/services/marketing-engine/customer-experience-engagement/',
+  '/who-we-are/',
+  '/who-we-are/our-team/',
+  '/who-we-are/network/',
+  '/what-we-do/',
+  '/culture/',
+  '/careers/',
+  '/careers/account-director/',
+  '/contact/',
+  '/acceptable-use-policy/',
+  '/modern-slavery-statement/',
+  '/systango-partnership/',
 ];

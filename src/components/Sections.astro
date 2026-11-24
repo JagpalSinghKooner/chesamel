@@ -1,0 +1,114 @@
+---
+// Draws a Page's, Pillar's or Service's Sections in order, each with the
+// Component for its type. `body` is where the file's Markdown sits; a list
+// without a body Section shows the body last, before the closing CTA.
+import IntroSection from './sections/IntroSection.astro';
+import StatsSection from './sections/StatsSection.astro';
+import CardsSection from './sections/CardsSection.astro';
+import PointsSection from './sections/PointsSection.astro';
+import TabsSection from './sections/TabsSection.astro';
+import DeliveryModelsSection from './sections/DeliveryModelsSection.astro';
+import BrandsSection from './sections/BrandsSection.astro';
+import TeamSection from './sections/TeamSection.astro';
+import TeamDirectorySection from './sections/TeamDirectorySection.astro';
+import InsightsSection from './sections/InsightsSection.astro';
+import IndustriesSection from './sections/IndustriesSection.astro';
+import JoinUsSection from './sections/JoinUsSection.astro';
+import RolesSection from './sections/RolesSection.astro';
+import OfficesSection from './sections/OfficesSection.astro';
+import CaseStudySlider from './CaseStudySlider.astro';
+import ClientLogos from './home/ClientLogos.astro';
+import ConnectWithUs from './home/ConnectWithUs.astro';
+import CtaBlock from './CtaBlock.astro';
+import { getCaseStudies, summariseCaseStudy } from '../content/case-studies';
+import type { Section } from '../content/page-schemas';
+
+interface Props {
+  sections: Section[];
+  hasBody?: boolean;
+}
+const { sections, hasBody = false } = Astro.props;
+
+// The body goes where its Section is, or before a closing CTA, or last.
+const list: Section[] = [...sections];
+if (hasBody && !list.some((s) => s.type === 'body')) {
+  const cta = list.at(-1)?.type === 'cta' ? list.length - 1 : list.length;
+  list.splice(cta, 0, { type: 'body' });
+}
+
+const caseStudies = await getCaseStudies();
+const caseStudiesFor = (pillar?: string) => {
+  const mine = pillar ? caseStudies.filter((c) => (c.data.pillars as string[]).includes(pillar)) : [];
+  return [...new Set([...mine, ...caseStudies])].slice(0, 6).map(summariseCaseStudy);
+};
+---
+
+{
+  list.map((section, i) => {
+    const id = `section-${i + 1}`;
+    switch (section.type) {
+      case 'intro':
+        return <IntroSection id={id} section={section} />;
+      case 'stats':
+        return <StatsSection section={section} />;
+      case 'cards':
+        return <CardsSection id={id} section={section} />;
+      case 'points':
+        return <PointsSection id={id} section={section} />;
+      case 'tabs':
+        return <TabsSection id={id} section={section} />;
+      case 'deliveryModels':
+        return <DeliveryModelsSection id={id} section={section} />;
+      case 'brands':
+        return <BrandsSection id={id} section={section} />;
+      case 'team':
+        return <TeamSection id={id} section={section} />;
+      case 'teamDirectory':
+        return <TeamDirectorySection id={id} section={section} />;
+      case 'caseStudies':
+        return (
+          <CaseStudySlider
+            id={id}
+            heading={section.heading}
+            eyebrow={section.eyebrow}
+            text={section.text}
+            action={{ label: 'View All', href: '/insights/our-work/' }}
+            caseStudies={caseStudiesFor(section.pillar)}
+          />
+        );
+      case 'insights':
+        return <InsightsSection id={id} section={section} />;
+      case 'industries':
+        return <IndustriesSection id={id} section={section} />;
+      case 'logos':
+        return <ClientLogos />;
+      case 'joinUs':
+        return <JoinUsSection id={id} section={section} />;
+      case 'newsletter':
+        return <ConnectWithUs eyebrow={section.eyebrow} heading={section.heading} />;
+      case 'offices':
+        return <OfficesSection id={id} section={section} />;
+      case 'roles':
+        return <RolesSection id={id} section={section} />;
+      case 'body':
+        return (
+          <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+            <div class="blog-body" data-page-body>
+              <slot />
+            </div>
+          </div>
+        );
+      case 'cta':
+        return (
+          <CtaBlock
+            heading={section.heading}
+            text={section.text}
+            actions={[
+              { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+              { label: "Let's Chat", href: '/contact/', tone: 'outline' },
+            ]}
+          />
+        );
+    }
+  })
+}

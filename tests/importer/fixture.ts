@@ -13,6 +13,8 @@ export interface FixtureItem {
   excerpt?: string;
   attachmentUrl?: string;
   meta?: Record<string, string>;
+  menuOrder?: number;
+  categories?: { domain: string; slug: string; name: string }[];
 }
 
 const cdata = (s: string) => `<![CDATA[${s}]]>`;
@@ -34,6 +36,8 @@ function item(i: FixtureItem): string {
     <wp:post_name>${cdata(slug)}</wp:post_name>
     <wp:status>${cdata(i.status ?? (type === 'attachment' ? 'inherit' : 'publish'))}</wp:status>
     <wp:post_parent>0</wp:post_parent>
+    <wp:menu_order>${i.menuOrder ?? 0}</wp:menu_order>
+    ${(i.categories ?? []).map((c) => `<category domain="${c.domain}" nicename="${c.slug}">${cdata(c.name)}</category>`).join('\n')}
     <wp:post_type>${cdata(type)}</wp:post_type>
     ${i.attachmentUrl ? `<wp:attachment_url>${cdata(i.attachmentUrl)}</wp:attachment_url>` : ''}
     ${meta}

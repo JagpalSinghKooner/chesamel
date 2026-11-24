@@ -1,0 +1,28 @@
+---
+// Intro Section: a heading with paragraphs and buttons, and an image beside
+// them when there is one.
+import Button from '../Button.astro';
+import SectionHeading from './SectionHeading.astro';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'intro' }> };
+const { id, section } = Astro.props;
+const { heading, eyebrow, paragraphs, image, links } = section;
+---
+
+<section aria-labelledby={id}>
+  <div class:list={['mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6', image && 'lg:grid-cols-2 lg:items-center']}>
+    <div class="max-w-3xl">
+      <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
+      {paragraphs.map((p) => <p class="mt-6">{p}</p>)}
+      {
+        links.length > 0 && (
+          <div class="mt-8 flex flex-wrap gap-3">
+            {links.map((link, i) => <Button href={link.href} tone={i === 0 ? 'indigo' : 'light'}>{link.label}</Button>)}
+          </div>
+        )
+      }
+    </div>
+    {image && <img src={image.src} alt={image.alt} loading="lazy" class="aspect-[4/3] w-full object-cover" />}
+  </div>
+</section>

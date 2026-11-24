@@ -104,12 +104,32 @@ _Avoid_: Style guide, theme, UI kit
 A reusable, named building block of a page, such as a Pillar card, a hero, or a Case Study slider, defined in the Design System.
 _Avoid_: Block, widget, module, section
 
+**Section**:
+One entry in the ordered list a Page, Pillar or Service is built from, such as stats, cards or a call to action. Each kind of Section is drawn by one Component, so a Content Editor can add, remove or reorder Sections without touching the design.
+_Avoid_: Block, module, row
+
 ## Content
 
 **Pillar**:
 One of Chesamel's four service areas: Marketing Engine, Digital Transformation, Hybrid Workforce, Investment & Impact Transformation.
 _Avoid_: Service line, division
-_Note_: A Blog Post's Pillar labels may also name two further service areas from the current site, AI & Machine Learning and BI & Data Analytics. They are filed with the Pillars, and the News Pillar filter lists all six, as the current site does; elsewhere, Pillar means only the four.
+_Note_: A Blog Post's Pillar labels may also name two further service areas from the current site, AI & Machine Learning and BI & Data Analytics. They are filed with the Pillars: the News Pillar filter lists all six, and both have a page under /services/ built like a Pillar's, as the current site does. Elsewhere, Pillar means only the four.
+
+**Service**:
+One of a Pillar's offerings, with its own page under the Pillar's address, such as Customer Experience & Engagement under Marketing Engine.
+_Avoid_: Sub-service, capability, product
+
+**Page**:
+A standalone page of the site that is not an Insight, a Pillar or a Service, such as Who We Are, Culture, Contact or one open role under Careers.
+_Avoid_: Landing page, static page
+
+**Team Member**:
+A Chesamel person shown on Our Team, with their role, teams and photo. Team Members have no page of their own.
+_Avoid_: Staff, employee, profile
+
+**Office**:
+One of Chesamel's office locations, with its address and, where it has one, its phone number. The Office list shows them all.
+_Avoid_: Location, branch, hub
 
 **Insight**:
 Any published thought-leadership item: Blog Post, Webinar, Podcast, Report, or Case Study.

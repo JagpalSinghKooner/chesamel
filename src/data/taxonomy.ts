@@ -27,3 +27,19 @@ export type IndustrySlug = keyof typeof industryLabels;
 
 export const pillarSlugs = Object.keys(pillarLabels) as [PillarSlug, ...PillarSlug[]];
 export const industrySlugs = Object.keys(industryLabels) as [IndustrySlug, ...IndustrySlug[]];
+
+// The teams Team Members are filed under, in the live Our Team filter's order.
+export const teamLabels = {
+  founders: 'Founders',
+  leadership: 'Executive Leadership',
+  advisors: 'Advisors',
+  growth: 'Growth',
+  'marketing-transformation': 'Marketing Transformation',
+  'digital-transformation': 'Digital Transformation',
+  'workforce-transformation': 'Workforce Transformation',
+  'content-and-experiences': 'Content and Experiences',
+  gcc: 'GCC',
+} as const;
+
+export type TeamSlug = keyof typeof teamLabels;
+export const teamSlugs = Object.keys(teamLabels) as [TeamSlug, ...TeamSlug[]];

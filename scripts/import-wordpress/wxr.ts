@@ -16,6 +16,10 @@ export interface WxrItem {
   // The hand-written summary; Case Studies show it as the hero subtitle.
   excerpt: string;
   attachmentUrl: string;
+  // WordPress's manual ordering; the Our Team page sorts by it.
+  menuOrder: number;
+  // Taxonomy terms, such as a Team Member's teams: { domain: 'teams', slug: 'gcc', name: 'GCC' }.
+  categories: { domain: string; slug: string; name: string }[];
   meta: Record<string, string>;
 }
 
@@ -27,12 +31,14 @@ export interface Wxr {
 }
 
 const parser = new XMLParser({
-  ignoreAttributes: true,
+  // The only attributes the importers read: a <category>'s domain and nicename.
+  ignoreAttributes: (attribute: string) => !['domain', 'nicename'].includes(attribute),
+  attributeNamePrefix: '@',
   parseTagValue: false,
   trimValues: false,
   // Titles and bodies keep their entities as written; decoding is the importer's job.
   processEntities: false,
-  isArray: (name) => ['item', 'wp:postmeta', 'wp:author'].includes(name),
+  isArray: (name) => ['item', 'wp:postmeta', 'wp:author', 'category'].includes(name),
 });
 
 const str = (v: unknown): string => (v === undefined || v === null ? '' : String(v)).trim();
@@ -60,6 +66,12 @@ export function parseWxr(xml: string): Wxr {
       content: i['content:encoded'] === undefined ? '' : String(i['content:encoded']),
       excerpt: str(i['excerpt:encoded']),
       attachmentUrl: str(i['wp:attachment_url']),
+      menuOrder: Number(str(i['wp:menu_order']) || 0),
+      categories: ((i.category as Record<string, unknown>[] | undefined) ?? []).map((c) => ({
+        domain: str(c['@domain']),
+        slug: str(c['@nicename']),
+        name: decodeEntities(str(c['#text'])),
+      })),
       meta,
     };
   });

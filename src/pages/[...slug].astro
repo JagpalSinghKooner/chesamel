@@ -1,44 +1,34 @@
 ---
-// Blog Posts at their original addresses: /<slug>/, and /news/<slug>/ for
-// posts of WordPress's former `news` type. Later tickets that serve other content at root-level
-// addresses add their collections to getStaticPaths here.
-import { render } from 'astro:content';
-import Base from '../layouts/Base.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
-import LabelLinks from '../components/LabelLinks.astro';
-import { getBlogPosts, addressOf, readingMinutes, type BlogPost } from '../content/blog';
-import { formatDate, isoDate, primaryPillar } from '../content/shared';
-import { pillarLabels } from '../data/taxonomy';
+// Root-level content at its original address: Blog Posts at /<slug>/ (and
+// /news/<slug>/ for posts of WordPress's former `news` type), and standard
+// Pages at their file path, such as /who-we-are/network/. Astro allows one
+// root rest route, so every collection served at the root is added here.
+import BlogPostPage from '../components/BlogPostPage.astro';
+import { getBlogPosts, addressOf, type BlogPost } from '../content/blog';
+import SectionsPage from '../layouts/SectionsPage.astro';
+import { getPages, pageAddress, type Page } from '../content/pages';
 
 export async function getStaticPaths() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({ params: { slug: addressOf(post).slice(1, -1) }, props: { post } }));
+  const posts = (await getBlogPosts()).map((post) => ({ params: { slug: addressOf(post).slice(1, -1) }, props: { post } }));
+  const pages = (await getPages()).map((page) => ({ params: { slug: pageAddress(page).slice(1, -1) }, props: { page } }));
+  return [...posts, ...pages];
 }
 
-const { post } = Astro.props as { post: BlogPost };
-const { title, date, hero, pillars, description } = post.data;
-const { Content } = await render(post);
+// A Page's breadcrumb walks up its address: /who-we-are/our-team/ sits under Who We Are.
+async function trailOf(page: Page) {
+  const all = await getPages();
+  const parts = page.id.split('/').slice(0, -1);
+  return [
+    { label: 'Home', href: '/' },
+    ...parts.map((_, i) => {
+      const id = parts.slice(0, i + 1).join('/');
+      const parent = all.find((p) => p.id === id);
+      return { label: parent?.data.title ?? id, href: `/${id}/` };
+    }),
+  ];
+}
+
+const { post, page } = Astro.props as { post?: BlogPost; page?: Page };
 ---
 
-<Base title={`${title} | Chesamel`} description={description}>
-  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-    <Breadcrumb trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'News', href: '/insights/blog/' }]} />
-    <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
-    <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
-    <p class="type-caption mt-6 flex gap-6">
-      <time datetime={isoDate(date)}>{formatDate(date)}</time>
-      <span>{readingMinutes(post.body ?? '')} min read</span>
-    </p>
-    {
-      hero && (
-        <figure class="mt-10" data-hero>
-          <img src={hero.src} alt={hero.alt} class="w-full" fetchpriority="high" />
-        </figure>
-      )
-    }
-    <div class="blog-body mt-10" data-blog-body>
-      <Content />
-    </div>
-    <LabelLinks pillars={pillars} />
-  </article>
-</Base>
+{page ? <SectionsPage entry={page} trail={await trailOf(page)} /> : <BlogPostPage post={post!} />}

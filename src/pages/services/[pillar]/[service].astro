@@ -1,0 +1,20 @@
+---
+// Service pages at their original addresses, /services/<pillar>/<service>/.
+import SectionsPage from '../../../layouts/SectionsPage.astro';
+import { getPillars, getServices, pillarAddress, type Service } from '../../../content/pages';
+
+export async function getStaticPaths() {
+  const pillars = await getPillars();
+  return (await getServices()).map((service) => {
+    const [pillar, slug] = service.id.split('/');
+    return { params: { pillar, service: slug }, props: { service, pillar: pillars.find((p) => p.id === pillar)! } };
+  });
+}
+
+const { service, pillar } = Astro.props as { service: Service; pillar: Awaited<ReturnType<typeof getPillars>>[number] };
+---
+
+<SectionsPage
+  entry={service}
+  trail={[{ label: 'Home', href: '/' }, { label: 'What We Do', href: '/what-we-do/' }, { label: pillar.data.title, href: pillarAddress(pillar) }]}
+/>

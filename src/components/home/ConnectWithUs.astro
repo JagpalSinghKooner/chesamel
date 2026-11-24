@@ -3,13 +3,19 @@
 // with #11, so for now the band links to the contact page.
 import Button from '../Button.astro';
 import { contactLink } from '../../data/site';
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+}
+const { eyebrow = '/ get the latest industry news, straight to your inbox', heading = 'Connect with us' } = Astro.props;
 ---
 
 <section class="relative isolate overflow-hidden bg-indigo">
   <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-end lg:justify-between">
     <div>
-      <p class="font-subheading text-white">/ get the latest industry news, straight to your inbox</p>
-      <h2 class="type-heading-2 mt-3 text-white">Connect with us</h2>
+      <p class="font-subheading text-white">{eyebrow}</p>
+      <h2 class="type-heading-2 mt-3 text-white">{heading}</h2>
     </div>
     <Button href={contactLink.href} tone="dark">Get in Touch</Button>
   </div>

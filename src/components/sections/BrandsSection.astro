@@ -1,0 +1,35 @@
+---
+// Group Brands Section: the brands of the Chesamel Group, each linking to its
+// own website.
+import SectionHeading from './SectionHeading.astro';
+import { brands } from '../../data/brands';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'brands' }> };
+const { id, section } = Astro.props;
+const { heading, eyebrow, text } = section;
+---
+
+<section data-component="section-brands" aria-labelledby={id}>
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
+    {text && <p class="mt-4 max-w-3xl">{text}</p>}
+    <ul class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        brands.map((brand) => (
+          <li class="flex flex-col border border-light-grey">
+            <img src={brand.image} alt="" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+            <div class="flex flex-1 flex-col gap-3 p-6">
+              <h3 class="type-heading-3 text-xl">
+                <a href={brand.href} rel="noopener" target="_blank" class="underline-offset-4 hover:underline">
+                  {brand.name}<span class="sr-only"> (opens in a new tab)</span> ↗
+                </a>
+              </h3>
+              <p>{brand.summary}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
