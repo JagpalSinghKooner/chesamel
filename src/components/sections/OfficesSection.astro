@@ -1,0 +1,17 @@
+---
+// Offices Section: a heading over the Office list.
+import OfficeList from '../OfficeList.astro';
+import SectionHeading from './SectionHeading.astro';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'offices' }> };
+const { id, section } = Astro.props;
+---
+
+<section aria-labelledby={id} class="bg-off-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <SectionHeading id={id} heading={section.heading} eyebrow={section.eyebrow} />
+    {section.text && <p class="mt-4 max-w-3xl">{section.text}</p>}
+    <div class="mt-10"><OfficeList /></div>
+  </div>
+</section>

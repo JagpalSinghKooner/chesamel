@@ -118,3 +118,11 @@ test('style-guide page shows the header, footer, hero, Pillar cards, CTA and Blo
     await expect(components.locator(`[data-component="${name}"]`).first()).toBeVisible();
   }
 });
+
+test('style-guide page shows the page hero, Office list, Team Member card and Section Components', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const components = page.locator('[data-style-guide="components"]');
+  for (const name of ['page-hero', 'office-list', 'team-card', 'section-stats', 'section-cards', 'section-points', 'section-delivery-models', 'section-brands']) {
+    await expect(components.locator(`[data-component="${name}"]`).first()).toBeVisible();
+  }
+});

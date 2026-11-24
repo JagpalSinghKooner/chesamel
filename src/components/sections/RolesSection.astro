@@ -1,0 +1,28 @@
+---
+// Roles Section: a card for each open role (every Page under /careers/).
+import { getRoles, pageAddress } from '../../content/pages';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'roles' }> };
+const { id, section } = Astro.props;
+const roles = await getRoles();
+---
+
+<section aria-labelledby={id}>
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <h2 id={id} class="type-heading-2">{section.heading}</h2>
+    <p class="type-caption mt-4">{roles.length} {roles.length === 1 ? 'role' : 'roles'}</p>
+    <ul class="mt-8 grid gap-4 md:grid-cols-2">
+      {
+        roles.map((role) => (
+          <li class="border border-light-grey p-6">
+            <h3 class="type-heading-3 text-xl">
+              <a href={pageAddress(role)} class="underline-offset-4 hover:underline">{role.data.title}</a>
+            </h3>
+            <p class="font-subheading mt-3 text-dark-grey">{role.data.hero.details.join(' / ')}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

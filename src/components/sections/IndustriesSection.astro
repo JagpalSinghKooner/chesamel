@@ -1,0 +1,21 @@
+---
+// Industries Section: a card for each Industry.
+import IndustryCard from '../IndustryCard.astro';
+import SectionHeading from './SectionHeading.astro';
+import { getIndustries } from '../../content/case-studies';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'industries' }> };
+const { id, section } = Astro.props;
+const industries = await getIndustries();
+---
+
+<section aria-labelledby={id} class="bg-black">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <SectionHeading id={id} heading={section.heading} eyebrow={section.eyebrow} dark />
+    {section.text && <p class="mt-4 text-off-white">{section.text}</p>}
+    <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      {industries.map((industry) => <li><IndustryCard industry={industry} tone="dark" /></li>)}
+    </ul>
+  </div>
+</section>

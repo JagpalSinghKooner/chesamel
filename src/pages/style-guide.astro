@@ -17,6 +17,11 @@ import CaseStudySlider from '../components/CaseStudySlider.astro';
 import CaseStudyListing from '../components/CaseStudyListing.astro';
 import IndustryCard from '../components/IndustryCard.astro';
 import { getCaseStudies, getIndustries, summariseCaseStudy } from '../content/case-studies';
+import PageHero from '../components/PageHero.astro';
+import OfficeList from '../components/OfficeList.astro';
+import TeamCard from '../components/sections/TeamCard.astro';
+import Sections from '../components/Sections.astro';
+import { getTeamMembers } from '../content/pages';
 
 const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarisePost);
 const newestCaseStudies = (await getCaseStudies()).slice(0, 4).map(summariseCaseStudy);
@@ -200,6 +205,27 @@ const typeStyles = [
     <div class="mx-auto max-w-5xl px-6">
       <div class="max-w-xs"><IndustryCard industry={sampleIndustry} headingLevel="h4" /></div>
     </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Page hero</h3>
+    <p class="type-body mx-auto mb-6 max-w-5xl px-6">Tops every Page, Pillar and Service. A Pillar's colour runs along its foot.</p>
+    <PageHero title="Marketing Engine" paragraphs={['We help organisations strengthen market presence.']} links={[{ label: "Let's Chat", href: '/contact/' }]} colour="#FF4A7D" headingLevel="h4" />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Office list</h3>
+    <div class="mx-auto max-w-5xl px-6"><OfficeList /></div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Team Member card</h3>
+    <div class="mx-auto max-w-5xl px-6"><div class="max-w-xs"><TeamCard member={(await getTeamMembers()).find((m) => m.id === 'john-cofie')!} headingLevel="h4" /></div></div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Sections</h3>
+    <p class="type-body mx-auto mb-6 max-w-5xl px-6">
+      Pages, Pillars and Services are lists of Sections, each drawn by its own Component. Shown here: stats, cards,
+      points, the shared delivery models and the Group Brands.
+    </p>
+    <Sections
+      sections={[
+        { type: 'stats', items: [{ value: '150+', label: '/ People' }, { value: '17+', label: '/ Operating Countries' }] },
+        { type: 'cards', heading: 'Our Approach', tone: 'off-white', items: [{ heading: 'Planning', text: 'Gearing up for growth.' }, { heading: 'Teamwork', text: 'Finding the right collaborators.' }] },
+        { type: 'points', heading: 'How we work', tone: 'dark', paragraphs: [], items: ['We help organisations find the right focus.', 'We connect research and strategy.'], note: 'Need clarity fast?' },
+        { type: 'deliveryModels', heading: 'Our Delivery Models' },
+        { type: 'brands', heading: 'Our Group Brands' },
+      ]}
+    />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
   </section>

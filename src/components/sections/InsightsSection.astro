@@ -1,0 +1,34 @@
+---
+// Insights Section: the three newest Blog Posts, those of one Pillar when
+// given (topped up with the newest overall if it has fewer than three).
+import Button from '../Button.astro';
+import BlogPostCard from '../BlogPostCard.astro';
+import SectionHeading from './SectionHeading.astro';
+import { getBlogPosts, summarisePost } from '../../content/blog';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'insights' }> };
+const { id, section } = Astro.props;
+const { heading, eyebrow, text, pillar } = section;
+const all = await getBlogPosts();
+const mine = pillar ? all.filter((p) => p.data.pillars.includes(pillar)) : [];
+const posts = [...new Set([...mine, ...all])].slice(0, 3);
+---
+
+<section aria-labelledby={id} class="bg-off-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
+        {text && <p class="mt-4">{text}</p>}
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <Button href="/insights/blog/" tone="light">View All</Button>
+        <Button href="/contact/" tone="indigo">Let's Talk</Button>
+      </div>
+    </div>
+    <ul class="mt-12 grid gap-4 md:grid-cols-3">
+      {posts.map((post) => <li><BlogPostCard post={summarisePost(post)} /></li>)}
+    </ul>
+  </div>
+</section>

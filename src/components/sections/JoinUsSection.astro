@@ -1,0 +1,21 @@
+---
+// Join Us Section: the "+ Join us" band pointing at the open roles.
+import Button from '../Button.astro';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'joinUs' }> };
+const { id, section } = Astro.props;
+---
+
+<section aria-labelledby={id} class="bg-off-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
+    <img src="/wp-content/uploads/2024/12/join-us.jpg" alt="" loading="lazy" class="aspect-[2/1] w-full object-cover" />
+    <div>
+      <h2 id={id} class="type-heading-2">{section.heading}</h2>
+      <p class="mt-4">{section.text}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {section.links.map((link, i) => <Button href={link.href} tone={i === 0 ? 'indigo' : 'light'}>{link.label}</Button>)}
+      </div>
+    </div>
+  </div>
+</section>

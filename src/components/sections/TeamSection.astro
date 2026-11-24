@@ -1,0 +1,25 @@
+---
+// Team Section: chosen Team Members in a row, such as the leadership on Who
+// We Are. A name that matches no Team Member file fails the build.
+import TeamCard from './TeamCard.astro';
+import { getTeamMembers } from '../../content/pages';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'team' }> };
+const { id, section } = Astro.props;
+const all = await getTeamMembers();
+const members = section.members.map((slug) => {
+  const member = all.find((m) => m.id === slug);
+  if (!member) throw new Error(`No Team Member file src/content/team/${slug}.md`);
+  return member;
+});
+---
+
+<section aria-labelledby={section.heading ? id : undefined} aria-label={section.heading ? undefined : 'Our people'}>
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    {section.heading && <h2 id={id} class="type-heading-2">{section.heading}</h2>}
+    <ul class="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+      {members.map((member) => <li><TeamCard member={member} /></li>)}
+    </ul>
+  </div>
+</section>

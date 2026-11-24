@@ -1,0 +1,41 @@
+---
+// A Blog Post's page: breadcrumb, main Pillar, title, date, reading time,
+// hero image, body and its label links.
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import LabelLinks from './LabelLinks.astro';
+import { readingMinutes, type BlogPost } from '../content/blog';
+import { formatDate, isoDate, primaryPillar } from '../content/shared';
+import { pillarLabels } from '../data/taxonomy';
+
+interface Props {
+  post: BlogPost;
+}
+const { post } = Astro.props;
+const { title, date, hero, pillars, description } = post.data;
+const { Content } = await render(post);
+---
+
+<Base title={`${title} | Chesamel`} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <Breadcrumb trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'News', href: '/insights/blog/' }]} />
+    <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
+    <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
+    <p class="type-caption mt-6 flex gap-6">
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
+      <span>{readingMinutes(post.body ?? '')} min read</span>
+    </p>
+    {
+      hero && (
+        <figure class="mt-10" data-hero>
+          <img src={hero.src} alt={hero.alt} class="w-full" fetchpriority="high" />
+        </figure>
+      )
+    }
+    <div class="blog-body mt-10" data-blog-body>
+      <Content />
+    </div>
+    <LabelLinks pillars={pillars} />
+  </article>
+</Base>

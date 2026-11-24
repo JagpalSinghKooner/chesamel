@@ -1,0 +1,14 @@
+---
+// Pillar pages at their original addresses, /services/<pillar>/: the four
+// Pillars plus AI & Machine Learning and BI & Data Analytics.
+import SectionsPage from '../../../layouts/SectionsPage.astro';
+import { getPillars, type Pillar } from '../../../content/pages';
+
+export async function getStaticPaths() {
+  return (await getPillars()).map((pillar) => ({ params: { pillar: pillar.id }, props: { pillar } }));
+}
+
+const { pillar } = Astro.props as { pillar: Pillar };
+---
+
+<SectionsPage entry={pillar} colour={pillar.data.colour} trail={[{ label: 'Home', href: '/' }, { label: 'What We Do', href: '/what-we-do/' }]} />

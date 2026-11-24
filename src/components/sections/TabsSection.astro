@@ -1,0 +1,87 @@
+---
+// Tabs Section: buttons that switch between panels, as What We Do switches
+// between the four Pillars. Without JavaScript every panel shows, one after
+// another; the script turns them into tabs (arrow keys move between them).
+import Button from '../Button.astro';
+import SectionHeading from './SectionHeading.astro';
+import type { Section } from '../../content/page-schemas';
+
+type Props = { id: string; section: Extract<Section, { type: 'tabs' }> };
+const { id, section } = Astro.props;
+const { heading, eyebrow, paragraphs, items } = section;
+---
+
+<section aria-labelledby={id} class="bg-off-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
+    {paragraphs.map((p) => <p class="mt-6 max-w-3xl">{p}</p>)}
+    <div data-tabs class="mt-10">
+      <div role="tablist" aria-label={heading} class="hidden flex-wrap gap-2" data-tablist>
+        {
+          items.map((item, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`${id}-tab-${i}`}
+              aria-controls={`${id}-panel-${i}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              tabindex={i === 0 ? 0 : -1}
+              class="border-b-4 border-transparent px-4 py-3 font-subheading aria-selected:border-current"
+              style={`color: ${item.colour}`}
+            >
+              <span class="text-black">{item.title}</span>
+            </button>
+          ))
+        }
+      </div>
+      {
+        items.map((item, i) => (
+          <div id={`${id}-panel-${i}`} role="tabpanel" aria-labelledby={`${id}-tab-${i}`} class="mt-8 grid gap-8 border-t-4 bg-white p-8 md:grid-cols-2" style={`border-color: ${item.colour}`} data-panel>
+            <div>
+              <h3 class="type-heading-3 text-2xl">{item.title}</h3>
+              {item.paragraphs.map((p) => <p class="mt-4">{p}</p>)}
+              {item.href && <div class="mt-6"><Button href={item.href} tone="dark">Learn more</Button></div>}
+            </div>
+            {
+              item.list.length > 0 && (
+                <div>
+                  {item.listLabel && <p class="font-subheading">{item.listLabel}</p>}
+                  <ul class="mt-4 grid gap-2">
+                    {item.list.map((entry) => <li class="border-b border-light-grey pb-2">{entry}</li>)}
+                  </ul>
+                </div>
+              )
+            }
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    root.querySelector('[data-tablist]')?.classList.replace('hidden', 'flex');
+    const select = (n: number) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === n));
+        tab.tabIndex = i === n ? 0 : -1;
+        panels[i].hidden = i !== n;
+      });
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i));
+      tab.addEventListener('keydown', (e) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        const forward = getComputedStyle(root).direction === 'rtl' ? -step : step;
+        const next = (i + forward + tabs.length) % tabs.length;
+        select(next);
+        tabs[next].focus();
+      });
+    });
+    select(0);
+  }
+</script>
