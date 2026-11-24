@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "serve": "node scripts/serve-dist.ts",
     "check": "astro check",
     "test": "playwright test",
     "inventory": "node scripts/url-inventory.ts",

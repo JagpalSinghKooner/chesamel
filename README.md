@@ -20,8 +20,10 @@ To see the production build instead:
 
 ```sh
 npm run build     # writes the static site to dist/
-npm run preview   # serves dist/ at http://localhost:4321
+npm run serve     # serves dist/ at http://localhost:4321 with Cloudflare Pages' rules
 ```
+
+`npm run serve` applies `public/_redirects`, adds the trailing slash (`/x` to `/x/`) and returns the 404 page for unknown addresses, as Cloudflare does. `npm run preview` (Astro's own server) does none of these.
 
 ## Run the tests
 
@@ -62,6 +64,17 @@ The importer (`scripts/import-wordpress/`) reads the newest `*.WordPress.*.xml` 
 - `urls/pending.json`, minus every address it migrated.
 
 Re-running overwrites the imported Blog Posts, so don't run it once Content Editors have edited them.
+
+## Redirects and URL parity
+
+Every address the old site served must keep working. `urls/inventory.json` records what the live site did at each address (`npm run inventory` rebuilds it from the live site). `tests/url-parity/site.spec.ts` checks the built site against it, locally and on each Preview.
+
+- **Redirects** live in `public/_redirects`, one `<old> <new> 301` per line. Cloudflare Pages applies them. Every redirect is a 301.
+- **Decisions** (`urls/decisions.json`) are where the Project Manager chose something different from the live site, such as sending an English copy under `/ar/` to its English twin. Each has a `why`. They live apart from the inventory because `npm run inventory` rewrites that file. When you change an inventoried redirect, change both files.
+- **Pending** (`urls/pending.json`) is empty. A new live address found by a re-crawl lands there until it's migrated or redirected.
+- `docs/arabic-pages/` keeps the three live pages that were written in Arabic, for phase 2.
+
+Changing a redirect or an address needs Project Manager Approval.
 
 ## Deployment
 
