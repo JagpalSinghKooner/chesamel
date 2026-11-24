@@ -4,7 +4,7 @@
 // (given a proper tile here).
 import Base from '../../layouts/Base.astro';
 import InsightsHero from '../../components/InsightsHero.astro';
-import CtaBlock from '../../components/CtaBlock.astro';
+import GetStartedCta from '../../components/GetStartedCta.astro';
 
 const tiles = [
   { title: 'News', href: '/insights/blog/', eyebrow: '/ latest news, opinions, and how-tos' },
@@ -36,12 +36,5 @@ const tiles = [
       }
     </ul>
   </section>
-  <CtaBlock
-    heading="Ready to get started?"
-    text="Don't wait to drive your business forward."
-    actions={[
-      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
-      { label: "Let's Chat", href: '/contact/', tone: 'outline' },
-    ]}
-  />
+  <GetStartedCta />
 </Base>

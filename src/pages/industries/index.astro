@@ -4,7 +4,7 @@
 // slider; here they sit in a grid, so all five are visible at once.
 import Base from '../../layouts/Base.astro';
 import Button from '../../components/Button.astro';
-import CtaBlock from '../../components/CtaBlock.astro';
+import GetStartedCta from '../../components/GetStartedCta.astro';
 import CaseStudyListing from '../../components/CaseStudyListing.astro';
 import IndustryCard from '../../components/IndustryCard.astro';
 import ClientLogos from '../../components/home/ClientLogos.astro';
@@ -66,12 +66,5 @@ const industries = await getIndustries();
     </div>
   </section>
   <ClientLogos />
-  <CtaBlock
-    heading="Ready to get started?"
-    text="Don't wait to drive your business forward."
-    actions={[
-      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
-      { label: "Let's Chat", href: '/contact/', tone: 'outline' },
-    ]}
-  />
+  <GetStartedCta />
 </Base>

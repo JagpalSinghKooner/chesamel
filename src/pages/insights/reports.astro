@@ -3,7 +3,7 @@
 import Base from '../../layouts/Base.astro';
 import InsightsHero from '../../components/InsightsHero.astro';
 import InsightCard from '../../components/InsightCard.astro';
-import CtaBlock from '../../components/CtaBlock.astro';
+import GetStartedCta from '../../components/GetStartedCta.astro';
 import { getNewest, addressOf } from '../../content/insight-items';
 
 const reports = await getNewest('reports');
@@ -24,12 +24,5 @@ const text = 'Dive into our curated reports and get the latest marketing, ESG, w
       }
     </ul>
   </section>
-  <CtaBlock
-    heading="Ready to get started?"
-    text="Don't wait to drive your business forward."
-    actions={[
-      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
-      { label: "Let's Chat", href: '/contact/', tone: 'outline' },
-    ]}
-  />
+  <GetStartedCta />
 </Base>
