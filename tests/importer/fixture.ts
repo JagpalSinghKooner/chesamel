@@ -41,6 +41,7 @@ function item(i: FixtureItem): string {
 }
 
 // The services and industries every fixture export carries, with the live IDs.
+// An item with the same ID replaces one of these.
 const taxonomy: FixtureItem[] = [
   { id: 348, type: 'services', title: 'AI &amp; Machine Learning', link: 'https://chesamel.com/services/ai-machine-learning/' },
   { id: 349, type: 'services', title: 'AI Solutions', link: 'https://chesamel.com/services/ai-machine-learning/ai-solutions-implementations/' },
@@ -56,7 +57,7 @@ export function wxr(items: FixtureItem[]): string {
 <rss version="2.0" xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:wp="http://wordpress.org/export/1.2/">
 <channel>
   <wp:author><wp:author_id>2</wp:author_id><wp:author_login>${cdata('graham')}</wp:author_login><wp:author_email>${cdata('graham@example.com')}</wp:author_email><wp:author_display_name>${cdata('Graham Jones')}</wp:author_display_name></wp:author>
-  ${[...taxonomy, ...items].map(item).join('\n')}
+  ${[...taxonomy.filter((t) => !items.some((i) => i.id === t.id)), ...items].map(item).join('\n')}
 </channel>
 </rss>`;
 }
