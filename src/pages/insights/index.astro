@@ -1,7 +1,9 @@
 ---
 // Insights hub: a tile for each kind of Insight. The live hub also has a dead
 // "/insights/news/" tile (left out) and an empty Reports link with no tile
-// (given a proper tile here).
+// (given a proper tile here). Each tile is a Fulldev Card.
+import { Card } from '@/components/ui/card';
+import { brandCard } from '../../components/card';
 import Base from '../../layouts/Base.astro';
 import InsightsHero from '../../components/InsightsHero.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
@@ -24,13 +26,13 @@ const tiles = [
       {
         tiles.map((t) => (
           <li>
-            <a href={t.href} class="group flex h-full min-h-48 flex-col border border-light-grey p-6 hover:border-indigo">
+            <Card as="a" href={t.href} class:list={[brandCard, 'group h-full min-h-48 border border-light-grey p-6 hover:border-indigo']}>
               <h3 class="type-heading-3 group-hover:underline">{t.title}</h3>
               <p class="type-caption mt-3">{t.eyebrow}</p>
               <p class="mt-auto pt-6 text-sm font-semibold text-black">
                 discover insights <span aria-hidden="true">↗</span>
               </p>
-            </a>
+            </Card>
           </li>
         ))
       }

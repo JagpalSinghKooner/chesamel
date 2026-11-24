@@ -1,6 +1,8 @@
 ---
 // Team Directory Section: every Team Member, with the live Our Team page's
 // team filter. Without JavaScript everyone shows; the filter hides the rest.
+// The filter is a Fulldev Toggle Group (ADR-0005).
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import TeamCard from './TeamCard.astro';
 import SectionHeading from './SectionHeading.astro';
 import { getTeamMembers } from '../../content/pages';
@@ -11,22 +13,26 @@ type Props = { id: string; section: Extract<Section, { type: 'teamDirectory' }> 
 const { id, section } = Astro.props;
 const members = await getTeamMembers();
 const teams = Object.entries(teamLabels) as [TeamSlug, string][];
+
+// The square filter button, Black when pressed, in place of Fulldev's toggle.
+const filterButton =
+  'h-auto min-w-0 whitespace-normal border border-light-grey px-4 py-2 font-subheading text-[length:inherit] font-normal transition-none hover:bg-transparent hover:text-inherit data-[state=on]:bg-black data-[state=on]:text-white';
 ---
 
 <section aria-labelledby={id} data-team-directory>
   <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
     <SectionHeading id={id} heading={section.heading} eyebrow={section.eyebrow} />
     {section.text && <p class="mt-4 max-w-3xl">{section.text}</p>}
-    <div role="group" aria-label="Filter by team" class="mt-8 hidden flex-wrap gap-2" data-team-filter>
-      <button type="button" aria-pressed="true" data-team="" class="border border-light-grey px-4 py-2 font-subheading aria-pressed:bg-black aria-pressed:text-white">All</button>
+    <ToggleGroup aria-label="Filter by team" defaultValue="all" class="mt-8 hidden w-auto flex-wrap rounded-none" data-team-filter>
+      <ToggleGroupItem value="all" class={filterButton}>All</ToggleGroupItem>
       {
         teams.map(([slug, label]) => (
-          <button type="button" aria-pressed="false" data-team={slug} class="border border-light-grey px-4 py-2 font-subheading aria-pressed:bg-black aria-pressed:text-white">
+          <ToggleGroupItem value={slug} class={filterButton}>
             {label}
-          </button>
+          </ToggleGroupItem>
         ))
       }
-    </div>
+    </ToggleGroup>
     <p class="type-caption mt-6" aria-live="polite" data-team-count>{members.length} people</p>
     <ul class="mt-6 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
       {
@@ -41,23 +47,26 @@ const teams = Object.entries(teamLabels) as [TeamSlug, string][];
 </section>
 
 <script>
+  import { createToggleGroup } from '@data-slot/toggle-group';
+  import { followReadingDirection } from '../follow-reading-direction';
+
   for (const root of document.querySelectorAll<HTMLElement>('[data-team-directory]')) {
     const filter = root.querySelector<HTMLElement>('[data-team-filter]')!;
-    const buttons = [...filter.querySelectorAll<HTMLButtonElement>('button')];
+    const control = createToggleGroup(filter);
+    followReadingDirection(filter);
     const cards = [...root.querySelectorAll<HTMLElement>('[data-teams]')];
     const count = root.querySelector('[data-team-count]')!;
     filter.classList.replace('hidden', 'flex');
-    for (const button of buttons) {
-      button.addEventListener('click', () => {
-        const team = button.dataset.team!;
-        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-        let shown = 0;
-        for (const card of cards) {
-          card.hidden = team !== '' && !card.dataset.teams!.split(' ').includes(team);
-          if (!card.hidden) shown++;
-        }
-        count.textContent = `${shown} ${shown === 1 ? 'person' : 'people'}`;
-      });
-    }
+    filter.addEventListener('toggle-group:change', () => {
+      // Pressing the chosen team again would leave none pressed: back to All.
+      if (control.value.length === 0) control.setValue('all');
+      const team = control.value[0];
+      let shown = 0;
+      for (const card of cards) {
+        card.hidden = team !== 'all' && !card.dataset.teams!.split(' ').includes(team);
+        if (!card.hidden) shown++;
+      }
+      count.textContent = `${shown} ${shown === 1 ? 'person' : 'people'}`;
+    });
   }
 </script>

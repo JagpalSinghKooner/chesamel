@@ -1,6 +1,8 @@
 ---
 // Latest Insights on the homepage: the three newest Blog Posts.
+import { Button as FulldevButton } from '@/components/ui/button';
 import Button from '../Button.astro';
+import { brandButton } from '../button';
 import BlogPostCard from '../BlogPostCard.astro';
 import { getBlogPosts, summarisePost } from '../../content/blog';
 
@@ -21,7 +23,7 @@ const insights = (await getBlogPosts()).slice(0, 3).map(summarisePost);
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
       <h2 id="latest-insights" class="type-heading-2">Latest Insights</h2>
       <ul class="flex flex-wrap gap-2">
-        {filters.map((f) => <li><a href={f.href} class="block border border-light-grey px-3 py-2 text-sm font-semibold hover:border-dark-grey">{f.label}</a></li>)}
+        {filters.map((f) => <li><FulldevButton as="a" href={f.href} class:list={[brandButton, 'block border-light-grey bg-transparent px-3 py-2 text-inherit transition-none hover:border-dark-grey hover:bg-transparent hover:text-inherit']}>{f.label}</FulldevButton></li>)}
         <li><Button href="/insights/" tone="light">All Insights</Button></li>
       </ul>
     </div>

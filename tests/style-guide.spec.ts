@@ -126,3 +126,16 @@ test('style-guide page shows the page hero, Office list, Team Member card and Se
     await expect(components.locator(`[data-component="${name}"]`).first()).toBeVisible();
   }
 });
+
+test('style-guide page shows each Fulldev building block in the brand styling', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const blocks = page.locator('[data-style-guide="building-blocks"]');
+  for (const name of ['button', 'card', 'breadcrumb', 'tabs', 'carousel', 'toggle-group', 'navigation-menu', 'sheet', 'accordion']) {
+    await expect(blocks.locator(`[data-building-block="${name}"]`)).toBeVisible();
+  }
+  // The brand wins over Fulldev's defaults (ADR-0002, ADR-0005): square
+  // corners and an Indigo primary button.
+  const primary = blocks.locator('[data-building-block="button"] [data-slot="button"]').first();
+  await expect(primary).toHaveCSS('border-top-left-radius', '0px');
+  await expect(primary).toHaveCSS('background-color', 'rgb(115, 66, 255)');
+});

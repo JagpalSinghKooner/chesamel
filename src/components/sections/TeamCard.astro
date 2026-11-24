@@ -1,7 +1,10 @@
 ---
 // Team Member card: photo, name, "/ role", and LinkedIn and email links when
-// the member has them. With `bio`, the bio opens below the card.
+// the member has them. With `bio`, the bio opens below the card. Built on
+// Fulldev's Card (ADR-0005).
 import { render } from 'astro:content';
+import { Card } from '@/components/ui/card';
+import { brandCard } from '../card';
 import type { TeamMember } from '../../content/pages';
 
 interface Props {
@@ -15,7 +18,7 @@ const { Content } = await render(member);
 const hasBio = bio && (member.body ?? '').trim().length > 0;
 ---
 
-<article class="flex h-full flex-col" data-component="team-card">
+<Card as="article" class:list={[brandCard, 'h-full']} data-component="team-card">
   <img src={photo.src} alt="" loading="lazy" class="aspect-square w-full bg-off-white object-cover" />
   <Heading class="type-heading-3 mt-4 text-xl">{name}</Heading>
   <p class="font-subheading mt-1 text-dark-grey">/ {role}</p>
@@ -35,4 +38,4 @@ const hasBio = bio && (member.body ?? '').trim().length > 0;
       </details>
     )
   }
-</article>
+</Card>

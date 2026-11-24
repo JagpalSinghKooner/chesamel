@@ -4,7 +4,9 @@
 // Netherlands, Bulgaria, Turkey, UAE and Japan with links to "#", and linked
 // USA and UK to addresses that 404; those links are gone (#6).
 // The map is the live site's inline SVG, redrawn as circles (674 KB to 112 KB).
+import { Button as FulldevButton } from '@/components/ui/button';
 import Button from '../Button.astro';
+import { brandButton } from '../button';
 import { qatarLink, contactLink } from '../../data/site';
 
 const countries = ['USA', 'UK', 'Portugal', 'Sweden', 'Saudi Arabia'];
@@ -21,9 +23,9 @@ const countries = ['USA', 'UK', 'Portugal', 'Sweden', 'Saudi Arabia'];
       <ul class="flex flex-wrap content-start gap-2 lg:max-w-md lg:justify-end">
         {countries.map((c) => <li class="border border-white/15 px-3 py-1.5 text-sm text-off-white">{c}</li>)}
         <li>
-          <a href={qatarLink.href} hreflang="ar" class="block border border-white/40 px-3 py-1.5 text-sm font-semibold text-white hover:bg-white hover:text-black">
-            {qatarLink.label} <span aria-hidden="true">↗</span>
-          </a>
+          <FulldevButton as="a" href={qatarLink.href} hreflang="ar" class:list={[brandButton, 'block border-white/40 bg-transparent px-3 py-1.5 text-white transition-none hover:bg-white hover:text-black']}>
+            {qatarLink.label}{' '}<span aria-hidden="true">↗</span>
+          </FulldevButton>
         </li>
       </ul>
     </div>

@@ -1,7 +1,10 @@
 ---
 // Blog Post card: Pillar tag, title, date and reading time, linking to the
-// post. The tag is Dark Grey `type-tag`, not the live site's rose/tiger text:
-// secondary colours are for small accents only (ADR-0002).
+// post. Built on Fulldev's Card (ADR-0005). The tag is Dark Grey `type-tag`,
+// not the live site's rose/tiger text: secondary colours are for small accents
+// only (ADR-0002).
+import { Card, CardContent } from '@/components/ui/card';
+import { brandCard, brandCardContent } from './card';
 import type { BlogPostSummary } from '../content/blog';
 import { formatDate, isoDate, primaryPillar } from '../content/shared';
 import { pillarLabels } from '../data/taxonomy';
@@ -14,15 +17,18 @@ interface Props {
 const { post, headingLevel: Heading = 'h3' } = Astro.props;
 ---
 
-<a
+<Card
+  as="a"
   href={post.address}
-  class="group flex h-full min-h-64 flex-col border border-light-grey bg-white/40 p-5 hover:border-indigo hover:bg-white"
+  class:list={[brandCard, 'group h-full min-h-64 border border-light-grey bg-white/40 hover:border-indigo hover:bg-white']}
   data-component="blog-post-card"
 >
-  <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[primaryPillar(post)]}</span>
-  <Heading class="type-heading-3 mt-6 text-xl leading-tight group-hover:underline">{post.title}</Heading>
-  <p class="type-caption mt-auto flex justify-between gap-4 pt-6">
-    <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
-    <span>{post.minutes} min read</span>
-  </p>
-</a>
+  <CardContent class:list={[brandCardContent, 'grow p-5']}>
+    <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[primaryPillar(post)]}</span>
+    <Heading class="type-heading-3 mt-6 text-xl leading-tight group-hover:underline">{post.title}</Heading>
+    <p class="type-caption mt-auto flex justify-between gap-4 pt-6">
+      <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
+      <span>{post.minutes} min read</span>
+    </p>
+  </CardContent>
+</Card>

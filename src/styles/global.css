@@ -7,6 +7,8 @@
 @import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 /*
   Design System tokens, from Chesamel-Brand-Guidelines.pdf (pages 13-16).
@@ -58,14 +60,90 @@
 }
 
 /*
+  Fulldev UI's theme tokens, mapped onto the brand tokens above (ADR-0005).
+  The brand wins over every Fulldev default (ADR-0002), so these only ever
+  point at brand colours.
+
+  --radius is the one setting for corners: 0 keeps every Fulldev building
+  block square. Raise it here to round them all at once.
+
+  There is no .dark theme: the site has no dark mode.
+*/
+:root {
+  --radius: 0;
+
+  --background: var(--color-white);
+  /* Body text is Dark Grey, not the guidelines' Grey: ADR-0002. */
+  --foreground: var(--color-dark-grey);
+  --card: var(--color-white);
+  --card-foreground: var(--color-dark-grey);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-dark-grey);
+  --primary: var(--color-indigo);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-off-white);
+  --secondary-foreground: var(--color-black);
+  /* Grey fails AA for small text, so muted text is Dark Grey too. */
+  --muted: var(--color-off-white);
+  --muted-foreground: var(--color-dark-grey);
+  --accent: var(--color-off-white);
+  --accent-foreground: var(--color-black);
+  --destructive: var(--color-rose);
+  --border: var(--color-light-grey);
+  --input: var(--color-medium-grey);
+  --ring: var(--color-indigo);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-heading: var(--font-sans);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
   Body text is Dark Grey, not the guidelines' Grey: ADR-0002.
   Grey fails WCAG AA below 24px (18.7px bold), so it is only for large text.
   Small tags and captions use Dark Grey.
+
+  The rest is Fulldev's base layer (from `add @fulldev/init`), less its
+  `outline-ring/50` on every element: that would swap the browser's focus
+  outline for a faint Indigo one everywhere, which is a visible change and
+  hard to see on Black.
 */
 @layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+  }
   body {
-    font-family: var(--font-sans);
-    color: var(--color-dark-grey);
+    @apply bg-background text-foreground;
     line-height: 1.45;
   }
 }
@@ -196,5 +274,15 @@
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
+  }
+}
+
+/* Fulldev's base: motion off for visitors who ask for less (from @fulldev/init). */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

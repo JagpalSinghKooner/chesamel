@@ -1,15 +1,17 @@
 ---
 // Case Study slider Component: a heading and a row of Case Study cards that
-// scrolls sideways, one card per view on phones and two from 768px, with the
+// slides sideways, one card per view on phones and two from 768px, with the
 // live site's controls under it: a progress bar, previous and next buttons and
 // a "1 / 3" counter. The live site uses it on Our Work, Industry pages, Case
 // Study pages ("Our Related Case Studies") and the Podcast page.
 //
-// The cards are an ordinary scrolling list, so without JavaScript they can
-// still be swiped or scrolled; the script adds the controls. It works in
-// either reading direction: positions are measured from the track's start
-// edge, and under dir="rtl" the arrows are mirrored and Next scrolls left.
+// Built on Fulldev's Carousel (Embla), whose copy is patched to work right to
+// left (ADR-0005): under dir="rtl" the arrows are mirrored and Next goes left.
+// Without JavaScript the cards are an ordinary scrolling row, so they can
+// still be swiped or scrolled; the controls appear once the carousel starts.
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Button from './Button.astro';
+import { brandButton } from './button';
 import CaseStudyCard from './CaseStudyCard.astro';
 import type { CaseStudySummary } from '../content/case-studies';
 
@@ -29,9 +31,17 @@ interface Props {
 const { caseStudies, heading, eyebrow, text, action, tone = 'dark', headingLevel: Heading = 'h2', id = 'case-study-slider' } = Astro.props;
 const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
 const dark = tone === 'dark';
+
+// Fulldev's round, floating icon buttons become the brand's square outlined
+// ones in the controls row.
+const control = [
+  brandButton,
+  'static my-0 size-10 shrink justify-center rounded-none bg-transparent text-[length:inherit] font-normal shadow-none transition-none hover:bg-transparent disabled:cursor-default disabled:opacity-40',
+  dark ? 'border-dark-grey text-white hover:border-white hover:text-white' : 'border-medium-grey text-black hover:border-black hover:text-black',
+];
 ---
 
-<section
+<Carousel
   aria-labelledby={`${id}-heading`}
   class:list={['case-study-slider', dark ? 'bg-black' : 'bg-off-white']}
   data-component="case-study-slider"
@@ -46,90 +56,64 @@ const dark = tone === 'dark';
       </div>
       {action && <Button href={action.href} tone={dark ? 'outline' : 'light'}>{action.label}</Button>}
     </div>
-    <ul class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4" data-track>
+    <CarouselContent class="mt-12 pb-4 group-data-[orientation=horizontal]/carousel:-ms-6">
       {
         caseStudies.map((caseStudy) => (
-          <li class="w-full shrink-0 snap-start md:w-[calc((100%-1.5rem)/2)]" data-slide>
+          <CarouselItem class="group-data-[orientation=horizontal]/carousel:ps-6 md:basis-1/2" data-slide>
             <CaseStudyCard caseStudy={caseStudy} headingLevel={CardHeading} />
-          </li>
+          </CarouselItem>
         ))
       }
-    </ul>
+    </CarouselContent>
     <div class="mt-6 flex items-center justify-end gap-4" data-controls hidden>
       <div aria-hidden="true" class:list={['h-0.5 w-full max-w-xs', dark ? 'bg-dark-grey' : 'bg-light-grey']}>
         <div class:list={['h-full transition-[width]', dark ? 'bg-white' : 'bg-black']} data-progress></div>
       </div>
-      <button type="button" aria-label="Previous" class:list={['slider-button', dark && 'slider-button-dark']} data-prev><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>←</span></button>
+      <CarouselPrevious aria-label="Previous" class:list={control}><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>←</span></CarouselPrevious>
       <p class:list={['min-w-12 text-center text-sm font-semibold tabular-nums', dark ? 'text-white' : 'text-black']} data-slide-count>
         1 / {caseStudies.length}
       </p>
-      <button type="button" aria-label="Next" class:list={['slider-button', dark && 'slider-button-dark']} data-next><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>→</span></button>
+      <CarouselNext aria-label="Next" class:list={control}><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>→</span></CarouselNext>
     </div>
   </div>
-</section>
+</Carousel>
 
 <style>
-  @reference "../styles/global.css";
-
-  .slider-button {
-    @apply grid size-10 cursor-pointer place-items-center border border-medium-grey text-black hover:border-black disabled:cursor-default disabled:opacity-40;
-  }
-  .slider-button-dark {
-    @apply border-dark-grey text-white hover:border-white;
-  }
-  /* Once the controls work, they replace the scrollbar. */
-  [data-slider][data-ready] [data-track] {
-    scrollbar-width: none;
+  /* Until the carousel starts (or without JavaScript), the row scrolls natively. */
+  [data-slider]:not([data-ready]) :global([data-carousel-viewport]) {
+    overflow-x: auto;
   }
 </style>
 
 <script>
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  import type { EmblaCarouselType } from 'embla-carousel';
 
-  for (const slider of document.querySelectorAll<HTMLElement>('[data-slider]')) {
-    const track = slider.querySelector<HTMLElement>('[data-track]')!;
-    const slides = [...track.querySelectorAll<HTMLElement>('[data-slide]')];
-    const prev = slider.querySelector<HTMLButtonElement>('[data-prev]')!;
-    const next = slider.querySelector<HTMLButtonElement>('[data-next]')!;
-    const count = slider.querySelector<HTMLElement>('[data-slide-count]')!;
-    const progress = slider.querySelector<HTMLElement>('[data-progress]')!;
+  // Fulldev's Carousel starts Embla and hands it over on `carousel:init`; this
+  // adds the counter and progress bar and shows the controls.
+  for (const slider of document.querySelectorAll<HTMLElement & { __fulldevCarouselApi?: EmblaCarouselType }>('[data-slider]')) {
+    slider.addEventListener('carousel:init', () => {
+      const api = slider.__fulldevCarouselApi!;
+      const count = slider.querySelector<HTMLElement>('[data-slide-count]')!;
+      const progress = slider.querySelector<HTMLElement>('[data-progress]')!;
+      const slides = api.slideNodes().length;
 
-    const rtl = () => getComputedStyle(track).direction === 'rtl';
-    // How far a slide's start edge sits from the track's start edge, in
-    // whichever direction the page reads.
-    const offset = (slide: HTMLElement) => {
-      const t = track.getBoundingClientRect();
-      const r = slide.getBoundingClientRect();
-      return rtl() ? t.right - r.right : r.left - t.left;
-    };
-    // Scroll distance from the start; scrollLeft is negative right to left.
-    const scrolled = () => Math.abs(track.scrollLeft);
-    const atEnd = () => scrolled() + track.clientWidth >= track.scrollWidth - 2;
-    // The slide nearest the start edge.
-    const currentIndex = () =>
-      slides.reduce((best, slide, i) => (Math.abs(offset(slide)) < Math.abs(offset(slides[best])) ? i : best), 0);
+      function update() {
+        const engine = api.internalEngine();
+        // The first card of the current position: at the end, two cards can
+        // share one position.
+        const current = engine.slideRegistry[api.selectedScrollSnap()][0];
+        count.textContent = `${current + 1} / ${slides}`;
+        // How much of the row has been seen, as the bar's share of its track.
+        const view = api.rootNode().clientWidth;
+        const range = Math.abs(engine.limit.length);
+        const seen = view + range * Math.min(1, Math.max(0, api.scrollProgress()));
+        progress.style.width = `${range > 0 ? (100 * seen) / (view + range) : 100}%`;
+      }
 
-    function update() {
-      const current = currentIndex();
-      count.textContent = `${current + 1} / ${slides.length}`;
-      prev.disabled = scrolled() <= 2;
-      next.disabled = atEnd();
-      const scrollable = track.scrollWidth - track.clientWidth;
-      progress.style.width = `${scrollable > 0 ? (100 * (track.clientWidth + scrolled())) / track.scrollWidth : 100}%`;
-    }
-
-    const go = (direction: number) => {
-      const target = slides[Math.max(0, Math.min(slides.length - 1, currentIndex() + direction))];
-      const distance = offset(target);
-      track.scrollBy({ left: rtl() ? -distance : distance, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-    };
-    prev.addEventListener('click', () => go(-1));
-    next.addEventListener('click', () => go(1));
-    track.addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update);
-
-    slider.querySelector<HTMLElement>('[data-controls]')!.hidden = false;
-    slider.dataset.ready = '';
-    update();
+      api.on('select', update).on('scroll', update).on('reInit', update);
+      slider.querySelector<HTMLElement>('[data-controls]')!.hidden = false;
+      slider.dataset.ready = '';
+      update();
+    });
   }
 </script>
