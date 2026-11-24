@@ -22,6 +22,22 @@ import OfficeList from '../components/OfficeList.astro';
 import TeamCard from '../components/sections/TeamCard.astro';
 import Sections from '../components/Sections.astro';
 import { getTeamMembers } from '../content/pages';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarisePost);
 const newestCaseStudies = (await getCaseStudies()).slice(0, 4).map(summariseCaseStudy);
@@ -237,5 +253,124 @@ const typeStyles = [
     />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
+  </section>
+
+  <section aria-labelledby="building-blocks" class="mx-auto mt-20 max-w-5xl px-6 pb-20" data-style-guide="building-blocks">
+    <h2 id="building-blocks" class="type-heading-2">Fulldev building blocks</h2>
+    <p class="type-body mt-3 max-w-2xl">
+      The Fulldev UI pieces the Components above are built from (ADR-0005), shown with Fulldev's own styling under the
+      brand tokens: brand colours, square corners, no dark mode. The Components pass their own classes on top.
+    </p>
+    <div class="mt-10 grid gap-12">
+      <div data-building-block="button">
+        <h3 class="type-heading-3">Button</h3>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <Button>Primary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="link">Link</Button>
+        </div>
+      </div>
+      <div data-building-block="card">
+        <h3 class="type-heading-3">Card</h3>
+        <Card class="mt-4 max-w-sm">
+          <CardHeader>
+            <CardTitle as="h4">Card title</CardTitle>
+            <CardDescription>A short description under the title.</CardDescription>
+          </CardHeader>
+          <CardContent>The card's content.</CardContent>
+          <CardFooter><Button size="sm">Action</Button></CardFooter>
+        </Card>
+      </div>
+      <div data-building-block="breadcrumb">
+        <h3 class="type-heading-3">Breadcrumb</h3>
+        <Breadcrumb aria-label="Example breadcrumb" class="mt-4">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink href="/insights/">Insights</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>Our Work</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+      <div data-building-block="tabs">
+        <h3 class="type-heading-3">Tabs</h3>
+        <Tabs defaultValue="one" class="mt-4">
+          <TabsList aria-label="Example tabs">
+            <TabsTrigger value="one">First</TabsTrigger>
+            <TabsTrigger value="two">Second</TabsTrigger>
+          </TabsList>
+          <TabsContent value="one">The first panel.</TabsContent>
+          <TabsContent value="two">The second panel.</TabsContent>
+        </Tabs>
+      </div>
+      <div data-building-block="carousel">
+        <h3 class="type-heading-3">Carousel</h3>
+        <div class="mt-4 px-12">
+          <Carousel aria-label="Example carousel" class="max-w-sm">
+            <CarouselContent>
+              {['One', 'Two', 'Three'].map((n) => (
+                <CarouselItem>
+                  <div class="grid aspect-video place-items-center border border-light-grey bg-off-white">{n}</div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      </div>
+      <div data-building-block="toggle-group">
+        <h3 class="type-heading-3">Toggle group</h3>
+        <ToggleGroup aria-label="Example toggle group" variant="outline" defaultValue="all" class="mt-4">
+          <ToggleGroupItem value="all">All</ToggleGroupItem>
+          <ToggleGroupItem value="one">One</ToggleGroupItem>
+          <ToggleGroupItem value="two">Two</ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+      <div data-building-block="navigation-menu">
+        <h3 class="type-heading-3">Navigation menu</h3>
+        <NavigationMenu aria-label="Example menu" class="mt-4 justify-start">
+          <NavigationMenuList>
+            <NavigationMenuItem value="what-we-do">
+              <NavigationMenuTrigger>What we do</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul class="grid w-64 gap-1">
+                  <li><NavigationMenuLink href="/services/marketing-engine/">Marketing Engine</NavigationMenuLink></li>
+                  <li><NavigationMenuLink href="/services/digital-transformation/">Digital Transformation</NavigationMenuLink></li>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+      <div data-building-block="sheet">
+        <h3 class="type-heading-3">Sheet</h3>
+        <Sheet class="mt-4">
+          <SheetTrigger variant="outline">Open sheet</SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Sheet title</SheetTitle>
+              <SheetDescription>A panel that slides in from the side.</SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      </div>
+      <div data-building-block="accordion">
+        <h3 class="type-heading-3">Accordion</h3>
+        <Accordion class="mt-4 max-w-md">
+          <AccordionItem value="one">
+            <AccordionTrigger>First question</AccordionTrigger>
+            <AccordionContent>The first answer.</AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="two">
+            <AccordionTrigger>Second question</AccordionTrigger>
+            <AccordionContent>The second answer.</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    </div>
   </section>
 </Base>
