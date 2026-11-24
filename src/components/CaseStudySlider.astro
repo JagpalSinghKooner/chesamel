@@ -6,7 +6,9 @@
 // Study pages ("Our Related Case Studies") and the Podcast page.
 //
 // The cards are an ordinary scrolling list, so without JavaScript they can
-// still be swiped or scrolled; the script adds the controls.
+// still be swiped or scrolled; the script adds the controls. It works in
+// either reading direction: positions are measured from the track's start
+// edge, and under dir="rtl" the arrows are mirrored and Next scrolls left.
 import Button from './Button.astro';
 import CaseStudyCard from './CaseStudyCard.astro';
 import type { CaseStudySummary } from '../content/case-studies';
@@ -57,11 +59,11 @@ const dark = tone === 'dark';
       <div aria-hidden="true" class:list={['h-0.5 w-full max-w-xs', dark ? 'bg-dark-grey' : 'bg-light-grey']}>
         <div class:list={['h-full transition-[width]', dark ? 'bg-white' : 'bg-black']} data-progress></div>
       </div>
-      <button type="button" aria-label="Previous" class:list={['slider-button', dark && 'slider-button-dark']} data-prev>←</button>
+      <button type="button" aria-label="Previous" class:list={['slider-button', dark && 'slider-button-dark']} data-prev><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>←</span></button>
       <p class:list={['min-w-12 text-center text-sm font-semibold tabular-nums', dark ? 'text-white' : 'text-black']} data-slide-count>
         1 / {caseStudies.length}
       </p>
-      <button type="button" aria-label="Next" class:list={['slider-button', dark && 'slider-button-dark']} data-next>→</button>
+      <button type="button" aria-label="Next" class:list={['slider-button', dark && 'slider-button-dark']} data-next><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>→</span></button>
     </div>
   </div>
 </section>
@@ -92,21 +94,35 @@ const dark = tone === 'dark';
     const count = slider.querySelector<HTMLElement>('[data-slide-count]')!;
     const progress = slider.querySelector<HTMLElement>('[data-progress]')!;
 
-    // Distance from one card to the next, gap included.
-    const step = () => (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth);
-    const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    const rtl = () => getComputedStyle(track).direction === 'rtl';
+    // How far a slide's start edge sits from the track's start edge, in
+    // whichever direction the page reads.
+    const offset = (slide: HTMLElement) => {
+      const t = track.getBoundingClientRect();
+      const r = slide.getBoundingClientRect();
+      return rtl() ? t.right - r.right : r.left - t.left;
+    };
+    // Scroll distance from the start; scrollLeft is negative right to left.
+    const scrolled = () => Math.abs(track.scrollLeft);
+    const atEnd = () => scrolled() + track.clientWidth >= track.scrollWidth - 2;
+    // The slide nearest the start edge.
+    const currentIndex = () =>
+      slides.reduce((best, slide, i) => (Math.abs(offset(slide)) < Math.abs(offset(slides[best])) ? i : best), 0);
 
     function update() {
-      const current = Math.min(slides.length, Math.round(track.scrollLeft / step()) + 1);
-      count.textContent = `${current} / ${slides.length}`;
-      prev.disabled = track.scrollLeft <= 2;
+      const current = currentIndex();
+      count.textContent = `${current + 1} / ${slides.length}`;
+      prev.disabled = scrolled() <= 2;
       next.disabled = atEnd();
       const scrollable = track.scrollWidth - track.clientWidth;
-      progress.style.width = `${scrollable > 0 ? (100 * (track.clientWidth + track.scrollLeft)) / track.scrollWidth : 100}%`;
+      progress.style.width = `${scrollable > 0 ? (100 * (track.clientWidth + scrolled())) / track.scrollWidth : 100}%`;
     }
 
-    const go = (direction: number) =>
-      track.scrollBy({ left: direction * step(), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    const go = (direction: number) => {
+      const target = slides[Math.max(0, Math.min(slides.length - 1, currentIndex() + direction))];
+      const distance = offset(target);
+      track.scrollBy({ left: rtl() ? -distance : distance, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    };
     prev.addEventListener('click', () => go(-1));
     next.addEventListener('click', () => go(1));
     track.addEventListener('scroll', update, { passive: true });

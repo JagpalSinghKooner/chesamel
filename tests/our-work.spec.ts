@@ -124,6 +124,51 @@ test.describe('Case Study slider', () => {
     await s.getByRole('button', { name: 'Previous' }).click();
     await expect(counter).toHaveText('2 / 3');
   });
+
+  test('works right to left, with its arrows pointing the reading way', async ({ page }) => {
+    // Set dir="rtl" before the slider's script runs, as an Arabic page would.
+    await page.addInitScript(() => {
+      document.addEventListener('readystatechange', () => {
+        if (document.readyState === 'interactive') document.documentElement.dir = 'rtl';
+      });
+    });
+    await page.setViewportSize({ width: 400, height: 800 });
+    await page.goto('/industries/finance/');
+    const s = slider(page);
+    await s.scrollIntoViewIfNeeded();
+    const counter = s.locator('[data-slide-count]');
+    const prev = s.getByRole('button', { name: 'Previous' });
+    const next = s.getByRole('button', { name: 'Next' });
+    const firstCard = s.locator('[data-slide]').first();
+    await expect(counter).toHaveText('1 / 3');
+    await expect(prev).toBeDisabled();
+    await expect(next).toBeEnabled();
+    await expect(firstCard).toBeInViewport({ ratio: 0.9 });
+
+    // The arrows are mirrored, so Previous points right and Next points left.
+    const box = async (l: typeof prev) => (await l.boundingBox())!;
+    expect((await box(prev)).x).toBeGreaterThan((await box(next)).x);
+    for (const arrow of [prev, next]) {
+      const mirrored = await arrow.locator('[data-arrow]').evaluate((e) => {
+        const { scale, transform } = getComputedStyle(e);
+        return scale.startsWith('-1') || transform.startsWith('matrix(-1,');
+      });
+      expect(mirrored).toBe(true);
+    }
+
+    await next.click();
+    await expect(counter).toHaveText('2 / 3');
+    await expect(prev).toBeEnabled();
+    await expect(firstCard).not.toBeInViewport({ ratio: 0.5 });
+    await next.click();
+    await expect(counter).toHaveText('3 / 3');
+    await expect(next).toBeDisabled();
+    await prev.click();
+    await expect(counter).toHaveText('2 / 3');
+    await prev.click();
+    await expect(counter).toHaveText('1 / 3');
+    await expect(prev).toBeDisabled();
+  });
 });
 
 test('the Podcast page shows its three chosen customer stories in a Case Study slider', async ({ page }) => {
