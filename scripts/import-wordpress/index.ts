@@ -51,10 +51,11 @@ async function write(path: string, contents: string) {
 async function shrinkPending(addresses: string[]) {
   const inventory: InventoryEntry[] = JSON.parse(await readFile(root('urls/inventory.json'), 'utf8'));
   const pages = new Set(inventory.filter((e) => e.expect === 'page').map((e) => e.path));
-  const { json, removed } = withoutMigrated(
-    await readFile(root('urls/pending.json'), 'utf8'),
-    addresses.filter((a) => pages.has(a)),
-  );
+  const served = addresses.filter((a) => pages.has(a));
+  // The host adds a missing trailing slash, so /x redirects to a migrated /x/
+  // as the old site promised.
+  const slashless = inventory.filter((e) => e.expect === 'redirect' && e.to === `${e.path}/` && served.includes(e.to)).map((e) => e.path);
+  const { json, removed } = withoutMigrated(await readFile(root('urls/pending.json'), 'utf8'), [...served, ...slashless]);
   await writeFile(root('urls/pending.json'), json);
   return removed;
 }
