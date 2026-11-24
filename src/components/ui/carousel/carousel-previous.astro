@@ -27,14 +27,14 @@ const {
   disabled={disabled}
   class={cn(
     buttonVariants({ variant, size }),
-    "rounded-full absolute touch-manipulation group-data-[orientation=horizontal]/carousel:inset-y-0 group-data-[orientation=horizontal]/carousel:-left-12 group-data-[orientation=horizontal]/carousel:my-auto",
+    "rounded-full absolute touch-manipulation group-data-[orientation=horizontal]/carousel:inset-y-0 group-data-[orientation=horizontal]/carousel:-start-12 group-data-[orientation=horizontal]/carousel:my-auto",
     "group-data-[orientation=vertical]/carousel:-top-12 group-data-[orientation=vertical]/carousel:left-1/2 group-data-[orientation=vertical]/carousel:-translate-x-1/2 group-data-[orientation=vertical]/carousel:translate-y-0 group-data-[orientation=vertical]/carousel:rotate-90",
     className
   )}
   {...props}
 >
   <slot>
-    <ChevronLeftIcon aria-hidden="true" />
+    <ChevronLeftIcon aria-hidden="true" class="rtl:-scale-x-100" />
     <span class="sr-only">Previous slide</span>
   </slot>
 </button>

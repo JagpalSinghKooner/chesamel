@@ -68,7 +68,14 @@ const resolvedOpts: EmblaOptionsType = {
       const opts: EmblaOptionsType = JSON.parse(
         root.dataset.carouselOptions || "{}"
       )
-      const api = EmblaCarousel(viewport, opts)
+      // Chesamel patch (ADR-0005): Embla reads its direction only from its
+      // options, so pass the page's reading direction, or a right-to-left
+      // page scrolls the wrong way.
+      const rtl = getComputedStyle(root).direction === "rtl"
+      const api = EmblaCarousel(viewport, {
+        direction: rtl ? "rtl" : "ltr",
+        ...opts,
+      })
       root.__fulldevCarouselApi = api
       const previous = getParts<HTMLButtonElement>(root, "previous")
       const next = getParts<HTMLButtonElement>(root, "next")
@@ -113,11 +120,14 @@ const resolvedOpts: EmblaOptionsType = {
         )
           return
         const vertical = root.dataset.orientation === "vertical"
+        // Chesamel patch (ADR-0005): right to left, the left arrow goes on.
+        const back = vertical ? "ArrowUp" : rtl ? "ArrowRight" : "ArrowLeft"
+        const on = vertical ? "ArrowDown" : rtl ? "ArrowLeft" : "ArrowRight"
         switch (event.key) {
-          case vertical ? "ArrowUp" : "ArrowLeft":
+          case back:
             onPrevious()
             break
-          case vertical ? "ArrowDown" : "ArrowRight":
+          case on:
             onNext()
             break
           case "Home":
