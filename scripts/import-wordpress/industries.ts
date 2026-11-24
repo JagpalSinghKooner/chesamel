@@ -9,23 +9,10 @@
 import { parseWxr, decodeEntities } from './wxr.ts';
 import { localiseUrls } from './html.ts';
 
-interface Image {
-  src: string;
-  alt: string;
-}
+import type { IndustryData } from '../../src/content/case-study-schema.ts';
 
-export interface IndustryData {
-  title: string;
-  subtitle: string;
-  description?: string;
-  order: number;
-  card: { image: Image; summary: string };
-  intro: { eyebrow: string; heading: string; text: string };
-  steps: { image: Image; heading: string; text: string }[];
-  experience: { eyebrow: string; heading: string; paragraphs: string[] };
-  caseStudies: { eyebrow: string; heading: string; text: string };
-  relatedPosts: { text: string };
-}
+export type { IndustryData };
+type Image = IndustryData['card']['image'];
 
 export interface ImportedIndustry {
   address: string;

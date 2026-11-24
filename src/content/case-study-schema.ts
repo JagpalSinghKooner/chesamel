@@ -3,18 +3,11 @@
 
 import { z } from 'astro/zod';
 import { pillarSlugs, industrySlugs } from '../data/taxonomy';
-import { inPublic } from './in-public';
-
-const text = z.string().trim().min(1);
-
-const image = z.object({
-  src: z.string().refine(inPublic, 'Image not found in public/'),
-  alt: z.string(),
-});
+import { text, date, image } from './schema-parts';
 
 export const caseStudySchema = z.object({
   title: text,
-  date: z.coerce.date().refine((d) => !Number.isNaN(d.getTime()), 'Not a valid date'),
+  date,
   // The hero subtitle.
   excerpt: text,
   // Shown as "/ objective" beside the story.

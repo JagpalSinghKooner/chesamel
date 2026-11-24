@@ -3,18 +3,16 @@
 
 import { z } from 'astro/zod';
 import { pillarSlugs, industrySlugs } from '../data/taxonomy';
-import { inPublic } from './in-public';
+import { text, date, image } from './schema-parts';
 
-const title = z.string().trim().min(1);
-const date = z.coerce.date().refine((d) => !Number.isNaN(d.getTime()), 'Not a valid date');
-const image = z.object({ src: z.string().refine(inPublic, 'Image not found in public/'), alt: z.string() });
+const title = text;
 const pillars = z.array(z.enum(pillarSlugs));
 const description = z.string().optional();
 
 export const podcastSchema = z.object({
   title,
   date,
-  guest: z.string().trim().min(1),
+  guest: text,
   // The episode on each platform. There is no audio on the site itself.
   listen: z
     .object({

@@ -4,23 +4,13 @@ import { parseWxr, decodeEntities } from './wxr.ts';
 import { toMarkdown, localiseUrls, mediaUrls } from './html.ts';
 import { pillarsOf, linkedSlugs } from './labels.ts';
 import { withoutMissingImages, type ImportOptions } from './blog-posts.ts';
-import { industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
+import { industrySlugs } from '../../src/data/taxonomy.ts';
+import type { CaseStudyData as CaseStudyFields } from '../../src/content/case-study-schema.ts';
 
-export interface CaseStudyData {
-  title: string;
-  date: string;
-  // The hero subtitle on the Case Study page.
-  excerpt: string;
-  // Shown as "/ objective" beside the body.
-  objective: string;
-  // The client's name; the card shows it as "/ <client>" when set.
-  client?: string;
-  // The card image; the Case Study page itself doesn't show it.
-  image?: { src: string; alt: string };
-  pillars: PillarSlug[];
-  industries: IndustrySlug[];
-  description?: string;
-}
+// A Case Study file's frontmatter, as the schema defines it, except that the
+// date is written as text and the image is left out when the live site has
+// lost it (the schema then fails the build until one is added).
+export type CaseStudyData = Omit<CaseStudyFields, 'date' | 'image'> & { date: string; image?: CaseStudyFields['image'] };
 
 export interface ImportedCaseStudy {
   address: string;
