@@ -18,6 +18,7 @@ import { importCaseStudies } from './case-studies.ts';
 import { importIndustries } from './industries.ts';
 import { attachmentUrls, downloadMedia, notInRepo } from './media.ts';
 import { importInsightItems } from './insights-step.ts';
+import { withoutMigrated } from './pending.ts';
 import { pillarLabels } from '../../src/data/taxonomy.ts';
 import type { InventoryEntry } from '../../tests/url-parity/parity.ts';
 
@@ -46,11 +47,12 @@ async function write(path: string, contents: string) {
 async function shrinkPending(addresses: string[]) {
   const inventory: InventoryEntry[] = JSON.parse(await readFile(root('urls/inventory.json'), 'utf8'));
   const pages = new Set(inventory.filter((e) => e.expect === 'page').map((e) => e.path));
-  const migrated = new Set(addresses.filter((a) => pages.has(a)));
-  const pending: string[] = JSON.parse(await readFile(root('urls/pending.json'), 'utf8'));
-  const left = pending.filter((p) => !migrated.has(p));
-  await writeFile(root('urls/pending.json'), JSON.stringify(left, null, 2) + '\n');
-  return pending.length - left.length;
+  const { json, removed } = withoutMigrated(
+    await readFile(root('urls/pending.json'), 'utf8'),
+    addresses.filter((a) => pages.has(a)),
+  );
+  await writeFile(root('urls/pending.json'), json);
+  return removed;
 }
 
 function missingImagesReport(missing: BlogPostImport['missingImages']): string {
