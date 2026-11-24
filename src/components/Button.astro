@@ -26,7 +26,7 @@ const tones = {
 };
 ---
 
-<Button href={href} class:list={[brand, tones[tone]]}>
+<Button as="a" href={href} class:list={[brand, tones[tone]]}>
   <slot />
   <span aria-hidden="true">↗</span>
 </Button>

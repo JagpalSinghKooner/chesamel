@@ -1,6 +1,9 @@
 ---
 // Industry card: image, name and one-line summary, linking to the Industry
-// page, as on the live Industries and Our Work pages.
+// page, as on the live Industries and Our Work pages. Built on Fulldev's Card
+// (ADR-0005).
+import { Card, CardContent } from '@/components/ui/card';
+import { brandCard, brandCardContent } from './card';
 import { industryAddress, type Industry } from '../content/case-studies';
 
 interface Props {
@@ -14,16 +17,17 @@ const { title, card } = industry.data;
 const dark = tone === 'dark';
 ---
 
-<a
+<Card
+  as="a"
   href={industryAddress(industry)}
-  class:list={['group flex h-full flex-col border', dark ? 'border-dark-grey hover:border-white' : 'border-light-grey bg-white hover:border-indigo']}
+  class:list={[brandCard, 'group h-full border', dark ? 'border-dark-grey hover:border-white' : 'border-light-grey bg-white hover:border-indigo']}
   data-component="industry-card"
 >
   <div class="aspect-[4/3] overflow-hidden">
     <img src={card.image.src} alt={card.image.alt} loading="lazy" class="size-full object-cover" />
   </div>
-  <div class="p-5">
+  <CardContent class:list={[brandCardContent, 'block p-5']}>
     <Heading class:list={['type-heading-3 text-xl group-hover:underline', dark && 'text-white']}>{title}</Heading>
     <p class:list={['mt-3', dark ? 'text-off-white' : 'text-dark-grey']}>{card.summary}</p>
-  </div>
-</a>
+  </CardContent>
+</Card>
