@@ -1,0 +1,40 @@
+---
+// "Industry served" and "Services provided": bordered links to each label's
+// page, as on the live webinar and report pages. Either list may be empty,
+// and an empty list isn't shown.
+import { pillarLabels, industryLabels, type PillarSlug, type IndustrySlug } from '../data/taxonomy';
+
+interface Props {
+  pillars?: PillarSlug[];
+  industries?: IndustrySlug[];
+  servicesHeading?: string;
+}
+
+const { pillars = [], industries = [], servicesHeading = 'Services provided' } = Astro.props;
+const groups = [
+  { id: 'industry-served', heading: 'Industry served', cta: 'Explore industry', links: industries.map((s) => ({ href: `/industries/${s}/`, label: industryLabels[s] })) },
+  { id: 'services-provided', heading: servicesHeading, cta: 'Explore service', links: pillars.map((s) => ({ href: `/services/${s}/`, label: pillarLabels[s] })) },
+].filter((g) => g.links.length);
+---
+
+{
+  groups.map((g) => (
+    <aside aria-labelledby={g.id} class="mt-16 border-t border-light-grey pt-8" data-component="label-links">
+      <h2 id={g.id} class="type-tag">
+        {g.heading}
+      </h2>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+        {g.links.map((l) => (
+          <li>
+            <a href={l.href} class="flex items-center justify-between gap-4 border border-light-grey px-4 py-5 font-semibold text-black hover:bg-off-white">
+              {l.label}
+              <span class="type-caption shrink-0">
+                {g.cta} <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  ))
+}

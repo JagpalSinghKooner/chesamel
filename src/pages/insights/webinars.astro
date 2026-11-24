@@ -1,0 +1,36 @@
+---
+// Webinars: every Webinar, newest first. The live listing is hand-written JS
+// that shows only 2 of the 5 and links to none; this lists and links them all.
+import Base from '../../layouts/Base.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
+import InsightCard from '../../components/InsightCard.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import { getNewest, addressOf } from '../../content/insight-items';
+
+const webinars = await getNewest('webinars');
+---
+
+<Base title="Webinars | Chesamel" description="Watch our latest panels, interviews, and discussions with industry experts.">
+  <InsightsHero heading="Webinars" text="Watch our latest panels, interviews, and discussions with industry experts." />
+  <section aria-labelledby="archive" class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+    <p class="type-caption">/ explore our</p>
+    <h2 id="archive" class="type-heading-2 mt-2">Webinar Archive</h2>
+    <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        webinars.map((w) => (
+          <li>
+            <InsightCard href={addressOf(w)} title={w.data.title} image={w.data.image} pillar={w.data.pillars[0]} action="/ watch webinar" />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <CtaBlock
+    heading="Ready to get started?"
+    text="Don't wait to drive your business forward."
+    actions={[
+      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+      { label: "Let's Chat", href: '/contact/', tone: 'outline' },
+    ]}
+  />
+</Base>
