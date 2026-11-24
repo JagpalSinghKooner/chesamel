@@ -171,6 +171,8 @@ test.describe('Case Study slider', () => {
     await expect(counter).toHaveText('2 / 3');
     await expect(prev).toBeEnabled();
     await expect(firstCard).not.toBeInViewport({ ratio: 0.5 });
+    // Sliding the wrong way also hides the first card, but leaves nothing in view.
+    await expect(s.locator('[data-slide]').nth(1)).toBeInViewport({ ratio: 0.9 });
     await next.click();
     await expect(counter).toHaveText('3 / 3');
     await expect(next).toBeDisabled();
