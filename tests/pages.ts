@@ -8,4 +8,9 @@ export const pages = [
   '/insights/blog/',
   '/flex-index-flexible-workforce-planning/',
   '/news/qatar-the-dawning-oasis-of-global-innovation/',
+  // Our Work, Industries, one Industry and one Case Study.
+  '/insights/our-work/',
+  '/industries/',
+  '/industries/finance/',
+  '/case-studies/business-intelligence-in-finance/',
 ];

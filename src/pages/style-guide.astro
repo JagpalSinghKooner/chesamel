@@ -12,8 +12,15 @@ import CtaBlock from '../components/CtaBlock.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
 import BlogPostListing from '../components/BlogPostListing.astro';
 import { getBlogPosts, summarise } from '../content/blog';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import CaseStudySlider from '../components/CaseStudySlider.astro';
+import CaseStudyListing from '../components/CaseStudyListing.astro';
+import IndustryCard from '../components/IndustryCard.astro';
+import { getCaseStudies, getIndustries, summarise as summariseCaseStudy } from '../content/case-studies';
 
 const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarise);
+const newestCaseStudies = (await getCaseStudies()).slice(0, 4).map(summariseCaseStudy);
+const [sampleIndustry] = await getIndustries();
 
 // Each logo in each colour the guidelines permit, on a background that suits
 // it. The dashed outline shows the clear space built into the Component.
@@ -164,6 +171,34 @@ const typeStyles = [
     <div class="mx-auto max-w-5xl px-6">
       <p class="type-body mb-6 max-w-2xl">Pillar and Industry filters over Blog Post cards, as on News. Shown here with the six newest posts.</p>
       <BlogPostListing posts={newestPosts} headingLevel="h4" />
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Case Study card</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body mb-6 max-w-2xl">Image, main Pillar, the client when known, and the title. Shown here with the newest Case Study.</p>
+      <div class="max-w-md"><CaseStudyCard caseStudy={newestCaseStudies[0]} headingLevel="h4" /></div>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Case Study slider</h3>
+    <p class="type-body mx-auto mb-6 max-w-5xl px-6">
+      Dark, as on Industry and Case Study pages, and light, as for “Latest Work” on Our Work. One card per view on
+      phones, two from 768px.
+    </p>
+    <CaseStudySlider
+      id="style-guide-slider-dark"
+      headingLevel="h3"
+      eyebrow="/ why not read more"
+      heading="Our Related Case Studies"
+      action={{ label: 'View All Case Studies', href: '/insights/our-work/' }}
+      caseStudies={newestCaseStudies.slice(0, 3)}
+    />
+    <CaseStudySlider id="style-guide-slider-light" headingLevel="h3" tone="light" heading="Latest Work" caseStudies={newestCaseStudies.slice(0, 3)} />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Case Study listing</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body mb-6 max-w-2xl">Service and Industry filters over Case Study cards, as on Our Work; the Industries page shows the Industry filter only. Shown here with the four newest Case Studies.</p>
+      <CaseStudyListing caseStudies={newestCaseStudies} headingLevel="h4" />
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Industry card</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="max-w-xs"><IndustryCard industry={sampleIndustry} headingLevel="h4" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
