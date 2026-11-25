@@ -10,6 +10,8 @@ export default defineConfig({
   testDir: './tests',
   forbidOnly: !!process.env.CI,
   retries: 0,
+  // GitHub's standard runner for a private repo has 2 vCPUs; Playwright's default of half the cores gives 1.
+  workers: process.env.CI ? 2 : undefined,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: BASE_URL ?? `http://localhost:${PORT}`,
