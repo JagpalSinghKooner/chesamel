@@ -1,0 +1,33 @@
+---
+// One card of a Cards Section: an optional icon, a heading (a link when the
+// card has an address) and its text. `as` is li in a grid, div in a slider.
+import type { Section } from '../../content/page-schemas';
+
+interface Props {
+  item: Extract<Section, { type: 'cards' }>['items'][number];
+  dark?: boolean;
+  as?: 'li' | 'div';
+}
+const { item, dark = false, as: Tag = 'li' } = Astro.props;
+const external = (href: string) => /^https?:/.test(href);
+---
+
+<Tag class:list={['flex h-full flex-col gap-3 border-t pt-5', dark ? 'border-white/20' : 'border-light-grey']}>
+  {item.image && <img src={item.image.src} alt={item.image.alt} loading="lazy" class="h-14 w-auto self-start" />}
+  <h3 class:list={['type-heading-3 text-xl', dark && 'text-white']}>
+    {
+      item.href ? (
+        <a
+          href={item.href}
+          class="underline decoration-transparent underline-offset-4 transition-colors duration-300 hover:decoration-current focus-visible:decoration-current"
+          {...(external(item.href) && { rel: 'noopener', target: '_blank' })}
+        >
+          {item.heading}
+        </a>
+      ) : (
+        item.heading
+      )
+    }
+  </h3>
+  {item.text && <p class:list={[dark && 'text-off-white']}>{item.text}</p>}
+</Tag>

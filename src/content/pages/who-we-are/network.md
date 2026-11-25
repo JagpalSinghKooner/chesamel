@@ -34,6 +34,7 @@ sections:
     text: From workforce management to integrated marketing, have a look at the brands under the Chesamel Group umbrella.
   - type: cards
     heading: Our Partner Brands
+    layout: slider
     text: Want to navigate the complex world of business within a dynamic partnership which fosters new opportunities for expansion and growth? We work with incredible forward-thinking brands because together we challenge accepted ways of thinking to deliver transformative business outcomes.
     items:
       - { heading: Google Cloud, text: Leading cloud technology to help businesses scale., image: { src: /wp-content/uploads/2024/10/Google-Cloud.svg, alt: "" } }

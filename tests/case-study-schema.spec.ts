@@ -3,7 +3,7 @@
 import { test, expect } from '@playwright/test';
 import { caseStudySchema, industrySchema } from '../src/content/case-study-schema';
 
-const image = { src: '/images/hero.webp', alt: '' };
+const image = { src: '/images/hero-poster.webp', alt: '' };
 
 const caseStudy = {
   title: 'Business Intelligence in Finance',

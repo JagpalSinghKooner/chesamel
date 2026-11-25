@@ -12,12 +12,14 @@ import WhereWeAre from '../components/home/WhereWeAre.astro';
 import { contactLink } from '../data/site';
 ---
 
-<Base title="Chesamel | Global Business Transformation">
+<Base title="Chesamel | Global Business Transformation" overlayHeader>
   <Hero
     before="Global"
-    highlight="Business"
+    words={['Business', 'Digital', 'Marketing', 'Workforce']}
     after="Transformation"
-    image={{ src: '/images/hero.webp', srcset: '/images/hero-960.webp 960w, /images/hero.webp 1920w' }}
+    image={{ src: '/images/hero-poster.webp', srcset: '/images/hero-poster-960.webp 960w, /images/hero-poster.webp 1920w' }}
+    video="/video/hero.mp4"
+    solutions
     actions={[
       { label: 'What We Do', href: '/what-we-do/', tone: 'dark' },
       { label: 'Our Work', href: '/insights/our-work/', tone: 'indigo' },

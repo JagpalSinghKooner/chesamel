@@ -20,7 +20,7 @@ const { Content } = await render(podcast);
 ---
 
 <Base title={`${title} | Chesamel`} description={description}>
-  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+  <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
     <InsightHeader section={{ label: 'Podcast', href: '/insights/podcasts/' }} pillar={primaryPillar(podcast.data)} title={title}>
       <span>with our guest <strong class="font-semibold text-black">{guest}</strong></span>
       <time datetime={isoDate(date)}>{formatDate(date)}</time>

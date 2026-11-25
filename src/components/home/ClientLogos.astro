@@ -1,6 +1,14 @@
 ---
-// Client logo strip under the homepage hero. The live site scrolls it as a
-// marquee; here it wraps, so nothing moves.
+// Client logo strip under the homepage hero, scrolling sideways as on the live
+// site. Built on Fulldev's Marquee (ADR-0005), which also gives it what the
+// live strip lacks: a pause button (WCAG 2.2.2), a stop on hover or focus,
+// right-to-left support, and no motion at all for visitors who ask for less.
+// Without JavaScript the logos sit in a row that scrolls by hand.
+//
+// The logos are listed twice so the loop never shows a gap on wide screens;
+// the second copy is hidden from screen readers.
+import { Marquee, MarqueeContent, MarqueeItem, MarqueeToggle } from '@/components/ui/marquee';
+
 const clients = [
   { name: 'Nepremacy', src: '/images/clients/nepremacy.svg' },
   { name: 'Systango', src: '/images/clients/systango.png' },
@@ -13,14 +21,23 @@ const clients = [
 ];
 ---
 
-<section aria-label="Clients" class="border-b border-light-grey bg-off-white">
-  <ul class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-6 px-4 py-8 sm:px-6">
-    {
-      clients.map((c) => (
-        <li>
-          <img src={c.src} alt={c.name} class="h-8 w-auto max-w-32 object-contain" loading="lazy" />
-        </li>
-      ))
-    }
-  </ul>
+<section aria-label="Clients" class="border-b border-light-grey bg-off-white" data-component="client-logos">
+  <Marquee class="mx-auto flex max-w-7xl items-center gap-4 px-5 py-10 sm:px-6" style="--marquee-gap: clamp(3rem, 6vw, 5rem)">
+    <MarqueeContent class="flex-1 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      {
+        [0, 1].map((copy) =>
+          clients.map((c) => (
+            <MarqueeItem aria-hidden={copy === 1 ? 'true' : undefined} class="flex items-center">
+              <img src={c.src} alt={copy === 0 ? c.name : ''} class="h-10 w-auto max-w-40 object-contain" loading="lazy" />
+            </MarqueeItem>
+          )),
+        )
+      }
+    </MarqueeContent>
+    <MarqueeToggle
+      playLabel="Play the client logos"
+      pauseLabel="Pause the client logos"
+      class="size-10 shrink-0 rounded-md border-medium-grey bg-white text-black hover:bg-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-black"
+    />
+  </Marquee>
 </section>

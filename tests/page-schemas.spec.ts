@@ -3,7 +3,7 @@
 import { test, expect } from '@playwright/test';
 import { pageSchema, pillarSchema, serviceSchema, teamMemberSchema, officeSchema } from '../src/content/page-schemas';
 
-const image = { src: '/images/hero.webp', alt: '' };
+const image = { src: '/images/hero-poster.webp', alt: '' };
 
 const page = {
   title: 'Who We Are',

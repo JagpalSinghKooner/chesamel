@@ -6,6 +6,7 @@
 // live site.
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import BrandmarkRings from '../../components/BrandmarkRings.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
@@ -27,8 +28,9 @@ const OUR_WORK = '/insights/our-work/';
 ---
 
 <Base title={`${title} | Chesamel`} description={description ?? excerpt}>
-  <section class="bg-off-white" data-case-study-hero>
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+  <section class="relative isolate overflow-hidden bg-off-white" data-case-study-hero>
+    <BrandmarkRings solid class="absolute -end-32 -bottom-48 -z-10 size-[24rem] sm:size-[34rem] lg:-end-16 lg:-bottom-56 lg:size-[44rem]" />
+    <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32">
       <h1 class="type-heading-1 max-w-4xl text-4xl sm:text-5xl">{title}</h1>
       <p class="type-tag mt-6">/ {pillarLabels[primaryPillar(caseStudy.data)]}</p>
       <p class="type-subheading mt-4 max-w-3xl">{excerpt}</p>
@@ -38,7 +40,7 @@ const OUR_WORK = '/insights/our-work/';
     band
     trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'Our Work', href: OUR_WORK }, { label: title }]}
   />
-  <article class="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_2fr]">
+  <article class="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 lg:py-20 lg:grid-cols-[1fr_2fr]">
     <div class="flex flex-col gap-10">
       <dl class="flex flex-col gap-8">
         <div>

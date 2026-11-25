@@ -4,6 +4,7 @@
 // The live "How we work" slider fades between its three steps; here the
 // steps sit side by side, so nothing moves.
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
@@ -27,15 +28,10 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
 ---
 
 <Base title={`${title} Industry Solutions | Chesamel`} description={description ?? subtitle}>
-  <section class="bg-black">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <h1 class="type-heading-1 text-white">{title}</h1>
-      <p class="mt-4 max-w-2xl font-subheading text-lg text-off-white">{subtitle}</p>
-    </div>
-  </section>
+  <PageHero title={title} subtitle={subtitle} tone="light" />
   <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Industries', href: '/industries/' }, { label: title }]} />
   <section aria-labelledby="intro">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-20 sm:px-6 lg:py-28 lg:grid-cols-2 lg:items-center">
       <div>
         <p class="font-subheading">{intro.eyebrow}</p>
         <h2 id="intro" class="type-heading-2 mt-3">{intro.heading}</h2>
@@ -47,7 +43,7 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
     </div>
   </section>
   <section aria-label="How we work" class="bg-black">
-    <ol class="mx-auto grid max-w-7xl gap-6 px-4 py-20 sm:px-6 md:grid-cols-3">
+    <ol class="mx-auto grid max-w-7xl gap-6 px-5 py-20 sm:px-6 lg:py-28 md:grid-cols-3">
       {
         steps.map((step) => (
           <li class="flex flex-col bg-indigo">
@@ -62,7 +58,7 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
     </ol>
   </section>
   <section aria-labelledby="experience">
-    <div class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl px-5 py-20 sm:px-6 lg:py-28">
       <p class="font-subheading">{experience.eyebrow}</p>
       <h2 id="experience" class="type-heading-2 mt-3">{experience.heading}</h2>
       {experience.paragraphs.map((p) => <p class="mt-6">{p}</p>)}
@@ -78,7 +74,7 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
     caseStudies={caseStudies.map(summariseCaseStudy)}
   />
   <section aria-labelledby="related-posts" class="bg-off-white">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p class="font-subheading">/ our latest insights</p>

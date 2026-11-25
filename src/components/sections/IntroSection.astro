@@ -11,7 +11,7 @@ const { heading, eyebrow, paragraphs, image, links } = section;
 ---
 
 <section aria-labelledby={id}>
-  <div class:list={['mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6', image && 'lg:grid-cols-2 lg:items-center']}>
+  <div class:list={['mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-6 lg:py-28', image && 'lg:grid-cols-2 lg:items-center']}>
     <div class="max-w-3xl">
       <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
       {paragraphs.map((p) => <p class="mt-6">{p}</p>)}

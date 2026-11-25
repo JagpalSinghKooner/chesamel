@@ -3,6 +3,7 @@
 import { readdirSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { revealAll } from './reveal-all';
 
 const WCAG_AA = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 // Every .md under a folder, as the address its path gives.
@@ -23,6 +24,8 @@ for (const address of [...addressesIn('pillars', '/services/'), ...addressesIn('
       if ((await request.head(src)).status() !== 200) broken.push(src);
     }
     expect(broken).toEqual([]);
+
+    await revealAll(page);
 
     const results = await new AxeBuilder({ page }).withTags(WCAG_AA).analyze();
     expect(results.violations).toEqual([]);

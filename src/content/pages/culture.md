@@ -31,6 +31,7 @@ sections:
   - type: cards
     eyebrow: / providing an array of lifestyle benefits
     heading: Why Us?
+    layout: slider
     tone: dark
     items:
       - { heading: Recognition, text: "We take the time to recognise and reward our employees for their work, both individually and as a team." }

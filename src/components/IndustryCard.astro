@@ -20,14 +20,14 @@ const dark = tone === 'dark';
 <Card
   as="a"
   href={industryAddress(industry)}
-  class:list={[brandCard, 'group h-full border', dark ? 'border-dark-grey hover:border-white' : 'border-light-grey bg-white hover:border-indigo']}
+  class:list={[brandCard, 'group h-full border transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-indigo', dark ? 'border-dark-grey hover:border-white focus-visible:outline-white' : 'border-light-grey bg-white hover:border-indigo']}
   data-component="industry-card"
 >
   <div class="aspect-[4/3] overflow-hidden">
-    <img src={card.image.src} alt={card.image.alt} loading="lazy" class="size-full object-cover" />
+    <img src={card.image.src} alt={card.image.alt} loading="lazy" class="size-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105" />
   </div>
   <CardContent class:list={[brandCardContent, 'block p-5']}>
-    <Heading class:list={['type-heading-3 text-xl group-hover:underline', dark && 'text-white']}>{title}</Heading>
+    <Heading class:list={['type-heading-3 text-xl group-hover:underline group-focus-visible:underline', dark && 'text-white']}>{title}</Heading>
     <p class:list={['mt-3', dark ? 'text-off-white' : 'text-dark-grey']}>{card.summary}</p>
   </CardContent>
 </Card>
