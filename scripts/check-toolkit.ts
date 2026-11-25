@@ -70,11 +70,11 @@ export async function checkRepo(): Promise<Violation[]> {
   return found;
 }
 
-export const format = (v: Violation) => `${v.file}:${v.line}: ${v.rule}: ${v.text}`;
+export const formatViolation = (v: Violation) => `${v.file}:${v.line}: ${v.rule}: ${v.text}`;
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const found = await checkRepo();
-  for (const v of found) console.error(format(v));
+  for (const v of found) console.error(formatViolation(v));
   if (found.length) {
     console.error(`\n${found.length} Toolkit rule violation(s). See docs/adr/0005-build-components-on-fulldev-ui.md, Toolkit.`);
     process.exit(1);

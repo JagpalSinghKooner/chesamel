@@ -167,7 +167,7 @@ const typeStyles = [
             <ul class="mt-4 grid grid-cols-3 gap-6 sm:grid-cols-4 lg:grid-cols-6">
               {group.names.map((name) => (
                 <li class="flex flex-col items-center gap-2 border border-light-grey p-4 text-black">
-                  <Icon name={name as IconName} class="size-6" filled={['pause', 'play', 'triangle'].includes(name)} />
+                  <Icon name={name as IconName} class="size-6" />
                   <code class="type-caption">{name}</code>
                 </li>
               ))}

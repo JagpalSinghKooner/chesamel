@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { checkRepo, findViolations, format } from '../scripts/check-toolkit';
+import { checkRepo, findViolations, formatViolation } from '../scripts/check-toolkit';
 
 const rules = (path: string, text: string) => findViolations(path, text).map((v) => `${v.line}:${v.rule}`);
 
@@ -44,5 +44,5 @@ test('files outside Components and layouts are not checked', () => {
 
 test('our Components and layouts follow the Toolkit rules (ADR-0005)', async () => {
   const found = await checkRepo();
-  expect(found.map(format), 'run `npm run check:toolkit` for the list').toEqual([]);
+  expect(found.map(formatViolation), 'run `npm run check:toolkit` for the list').toEqual([]);
 });

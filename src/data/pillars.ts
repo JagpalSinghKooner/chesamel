@@ -4,7 +4,8 @@
 // `accent` is the Pillar's secondary colour token (ADR-0002, Pillar accents).
 // A Pillar's Services share it. Use it only for small non-text accents: tag
 // borders, dots, icons, accent bars. Never as a fill behind text and never
-// as text colour, since white or black text on these fails WCAG AA.
+// as text colour, since white text on these is 2.3 to 3.2:1 and fails
+// WCAG AA.
 export type PillarAccent = 'sky' | 'rose' | 'mint' | 'tiger';
 
 export interface Pillar {

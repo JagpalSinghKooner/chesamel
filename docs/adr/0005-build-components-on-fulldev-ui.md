@@ -8,12 +8,12 @@ The Components are built on [Fulldev UI](https://ui.full.dev) (MIT, vanilla Astr
 
 One tool for each job (#41). Later tickets build only with these; anything else needs a new decision first.
 
-- **Icons:** the `Icon` Component (`src/components/Icon.astro`), the only way to show an icon. Interface icons come from Lucide (`@lucide/astro`); brand logos come from [Simple Icons](https://simpleicons.org), saved as SVG files in `src/design-system/icons/`. Every icon is listed by name in `src/design-system/icons.ts`. Icons are decorative (`aria-hidden`) unless given a `label`. The Chesamel logo is the `Logo` Component, not an icon.
+- **Icons:** the `Icon` Component (`src/components/Icon.astro`), the only way to show an icon. Interface icons come from Lucide (`@lucide/astro`); brand logos come from [Simple Icons](https://simpleicons.org), saved as SVG files in `src/design-system/icons/`. Every icon is listed by name in `src/design-system/icons.ts`. Icons are decorative (`aria-hidden`) unless given a `label`. Simple Icons has no Podchaser, so `podchaser` shows Lucide's podcast icon. The Chesamel logo is the `Logo` Component, not an icon, and the multi-colour Pillar illustrations in `public/images/pillars/` are images, not icons.
 - **Motion:** `data-reveal` in `Base.astro`, `tw-animate-css`, Embla through `Slider` and `Marquee`, and Data Slot. No GSAP, Motion One or other motion library.
 - **Sliders:** `Slider` / `SliderItem`, and `Marquee` for a strip that scrolls by itself.
 - **Accordions and tabs:** Fulldev `accordion` and `tabs`.
 - **Colour:** the brand tokens in `src/styles/global.css`, by name (`text-indigo`, `bg-off-white`, `var(--color-sky)`).
-- **Layout:** Tailwind's default breakpoints (sm 640, md 768, lg 1024, xl 1280, 2xl 1536) and its spacing and type scales. Live chesamel.com's px values are measured to learn the intent, then snapped to the nearest Tailwind class. Any multiple of 0.25rem is on the spacing scale (`min-h-136` is 34rem). No arbitrary values (`p-[13px]`, `size-[28rem]`, `min-[1000px]:`). The only exceptions are tokens already in `global.css`, such as `max-w-(--container-7xl)`.
+- **Layout:** Tailwind's default breakpoints (sm 640, md 768, lg 1024, xl 1280, 2xl 1536) and its spacing and type scales. Live chesamel.com's px values are measured to learn the intent, then snapped to the nearest Tailwind class. Any multiple of 0.25rem is on the spacing scale (`min-h-136` is 34rem). No arbitrary values (`p-[13px]`, `size-[28rem]`, `min-[1000px]:`). The only exceptions are tokens already in `global.css`, such as `max-w-(--container-7xl)`, and expressions or percentages that no Tailwind class expresses (`max-h-[calc(100vh-5rem)]`, `lg:min-h-[min(56rem,100svh)]`, `basis-[85%]`).
 
 ### Rules
 

@@ -2,8 +2,8 @@
 // draws them (ADR-0005, Toolkit). To add one, import it here.
 //
 // Interface icons come from Lucide (@lucide/astro), one import per icon so
-// only those used are bundled. Lucide icons are outlines; pass `filled` to
-// Icon for a solid shape.
+// only those used are bundled. Lucide icons are outlines; `solid` marks the
+// ones the site shows filled.
 //
 // Brand logos come from Simple Icons (CC0, simpleicons.org), saved in
 // ./icons/ with their <title> and role removed, since Icon sets the label.
@@ -26,25 +26,37 @@ import Spotify from './icons/spotify.svg';
 import X from './icons/x.svg';
 import YouTube from './icons/youtube.svg';
 
+export interface IconEntry {
+  // An Astro component that draws an <svg>: a Lucide icon or an imported file.
+  svg: (props: Record<string, unknown>) => unknown;
+  // Filled with currentColor rather than outlined.
+  solid: boolean;
+}
+
+const outline = (svg: IconEntry['svg']): IconEntry => ({ svg, solid: false });
+const solid = (svg: IconEntry['svg']): IconEntry => ({ svg, solid: true });
+
 export const interfaceIcons = {
-  menu: Menu,
-  pause: Pause,
-  play: Play,
-  triangle: Triangle,
+  menu: outline(Menu),
+  pause: solid(Pause),
+  play: solid(Play),
+  triangle: solid(Triangle),
 };
 
 export const brandIcons = {
-  linkedin: LinkedIn,
-  facebook: Facebook,
-  x: X,
-  pinterest: Pinterest,
-  youtube: YouTube,
-  instagram: Instagram,
-  spotify: Spotify,
-  'amazon-music': AmazonMusic,
-  'podcast-addict': PodcastAddict,
-  podchaser: MicSignal,
-  'google-maps': GoogleMaps,
+  linkedin: solid(LinkedIn),
+  facebook: solid(Facebook),
+  x: solid(X),
+  pinterest: solid(Pinterest),
+  youtube: solid(YouTube),
+  instagram: solid(Instagram),
+  spotify: solid(Spotify),
+  'amazon-music': solid(AmazonMusic),
+  'podcast-addict': solid(PodcastAddict),
+  podchaser: outline(MicSignal),
+  'google-maps': solid(GoogleMaps),
 };
 
 export type IconName = keyof typeof interfaceIcons | keyof typeof brandIcons;
+
+export const icons: Record<IconName, IconEntry> = { ...interfaceIcons, ...brandIcons };
