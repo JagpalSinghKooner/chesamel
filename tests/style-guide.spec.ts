@@ -139,3 +139,27 @@ test('style-guide page shows each Fulldev building block in the brand styling', 
   await expect(primary).toHaveCSS('border-top-left-radius', '0px');
   await expect(primary).toHaveCSS('background-color', 'rgb(115, 66, 255)');
 });
+
+test('style-guide page shows every icon, decorative unless labelled', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const section = page.locator('[data-style-guide="icons"]');
+  const brands = ['linkedin', 'facebook', 'x', 'pinterest', 'youtube', 'instagram', 'spotify', 'amazon-music', 'podcast-addict', 'podchaser', 'google-maps'];
+  for (const name of [...brands, 'menu', 'pause', 'play', 'triangle']) {
+    const icon = section.locator(`svg[data-icon="${name}"]`).first();
+    await expect(icon, name).toBeVisible();
+    await expect(icon, name).toHaveAttribute('aria-hidden', 'true');
+    expect((await icon.boundingBox())!.width, name).toBeGreaterThan(0);
+  }
+  await expect(section.getByRole('img', { name: 'LinkedIn' })).toBeVisible();
+});
+
+test('style-guide page shows each Pillar accent as a small non-text mark', async ({ page }) => {
+  await page.goto('/style-guide/');
+  const expected = { 'Digital Transformation': '#24ADEB', 'Marketing Engine': '#FF4A7D', 'Investment & Impact Transformation': '#1CB280', 'Hybrid Workforce': '#FF8A54' };
+  for (const [name, hex] of Object.entries(expected)) {
+    const item = page.locator(`[data-pillar-accent="${name}"]`);
+    await expect(item).toContainText(name);
+    await expect(item.locator('[data-accent-bar]')).toHaveCSS('background-color', toRgb(hex));
+    await expect(item).toHaveCSS('color', toRgb('#141E25'));
+  }
+});

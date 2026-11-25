@@ -26,6 +26,9 @@ Each ticket runs in a fresh context window. Starting or finishing a ticket: foll
 - Never commit or push to `main` directly. `main` changes only by merging a pull request.
 - Merge only when CI (the `Build and test` and `URL parity on Preview` checks) and the Cloudflare Pages Preview are all green, and, for a Change Request, the Requester has given Approval.
 - When you add a page, add its path to `tests/pages.ts` so the smoke and accessibility tests cover it.
+- Every ticket carries a Settled decisions section. If you hit a choice the ticket doesn't settle, stop, add the `needs-info` label, comment the question, and wait. Don't pick an answer. Open tickets that predate this rule are rewritten into the template and grilled just before they start.
+- Answers that outlive the ticket go into the repo (`GLOSSARY.md`, an ADR or a `src/data/` file), and the ticket links to where.
+- Build only with the tools in ADR-0005's Toolkit section. `npm run check:toolkit` enforces its rules.
 
 ## Commit rules
 

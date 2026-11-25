@@ -42,7 +42,8 @@ export const colourGroups: ColourGroup[] = [
   },
   {
     title: 'Secondary (limited use only)',
-    usage: 'Small accents such as tags and icons. Never large areas, never one per Pillar.',
+    usage:
+      'Small non-text accents only: tag borders, dots, icons, accent bars. Never large areas, never behind text, never as text colour. Each Pillar has one (ADR-0002): Sky for Digital Transformation, Rose for Marketing Engine, Mint for Investment & Impact Transformation, Tiger for Hybrid Workforce.',
     colours: [
       { name: 'Fuchsia', token: 'fuchsia', hex: '#DF73F0' },
       { name: 'Mint', token: 'mint', hex: '#1CB280' },
