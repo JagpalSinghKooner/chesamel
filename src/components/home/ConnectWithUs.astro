@@ -1,22 +1,23 @@
 ---
-// Newsletter band. The live sign-up form posts to HubSpot; that form arrives
-// with #11, so for now the band links to the contact page.
-import Button from '../Button.astro';
-import { contactLink } from '../../data/site';
+// Newsletter band: the heading beside the newsletter form (#11), which sends
+// nothing until #48 posts it to HubSpot.
+import Form from '../Form.astro';
 
 interface Props {
   eyebrow?: string;
   heading?: string;
+  // Prefixes the form's ids, so one page can show the band more than once.
+  idPrefix?: string;
 }
-const { eyebrow = '/ get the latest industry news, straight to your inbox', heading = 'Connect with us' } = Astro.props;
+const { eyebrow = '/ get the latest industry news, straight to your inbox', heading = 'Connect with us', idPrefix = 'newsletter' } = Astro.props;
 ---
 
 <section class="relative isolate overflow-hidden bg-indigo">
-  <div class="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-6 lg:py-20 lg:flex-row lg:items-end lg:justify-between">
-    <div>
+  <div class="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-14 sm:px-6 lg:flex-row lg:items-center lg:gap-10 lg:py-18">
+    <div class="lg:w-md lg:shrink-0">
       <p class="font-subheading text-white">{eyebrow}</p>
       <h2 class="type-heading-2 mt-3 text-white">{heading}</h2>
     </div>
-    <Button href={contactLink.href} tone="dark">Get in Touch</Button>
+    <div class="lg:flex-1"><Form kind="newsletter" idPrefix={idPrefix} /></div>
   </div>
 </section>

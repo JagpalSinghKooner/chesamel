@@ -1,0 +1,173 @@
+---
+// Contact and newsletter forms (issue #11): the live HubSpot forms' fields,
+// wording and layout as native, accessible fields. Nothing is sent yet: a
+// valid submit shows the success message, and #48 fills in `sendForm`
+// (./form.ts) to post to HubSpot.
+//
+//   contact:    the Contact hero's form, on Off-White
+//   newsletter: the newsletter band's form, on Indigo
+//
+// Each label is hidden and the placeholder shows in the field, as on the live
+// site; screen readers still read the label. Errors and the success message
+// follow the brand (ADR-0002): live puts 10px white text on a Rose fill, which
+// fails WCAG AA, so here the text is Dark Grey (white on Indigo) at 12px, and
+// Rose (Lime on Indigo) only marks the field's border.
+//
+// `preview` shows a state without typing, for the style guide.
+import { Button } from '@/components/ui/button';
+import { brandButton, focusOutline } from './button';
+import { contactForm, newsletterForm, formMessages, type ConsentText } from '../data/forms';
+
+interface Props {
+  kind: 'contact' | 'newsletter';
+  // Prefixes every id, so one page can show a form more than once.
+  idPrefix?: string;
+  preview?: 'errors' | 'success';
+}
+const { kind, idPrefix = kind, preview } = Astro.props;
+const form = kind === 'contact' ? contactForm : newsletterForm;
+const indigo = kind === 'newsletter';
+const id = `${idPrefix}-form`;
+const showErrors = preview === 'errors';
+
+const tone = indigo
+  ? {
+      input: 'border-2 border-transparent bg-white/5 py-3.5 text-base leading-6 text-white placeholder:text-white aria-invalid:border-lime lg:text-lg lg:leading-7 focus-visible:outline-white',
+      error: 'text-white',
+      consent: 'bg-white/5 px-4.5 py-3.5 text-white',
+      checkbox: 'accent-black focus-visible:outline-white',
+      link: 'text-white',
+    }
+  : {
+      input: 'border border-light-grey bg-black/2 py-3.5 text-lg leading-7 text-black placeholder:text-dark-grey aria-invalid:border-rose aria-invalid:ring-1 aria-invalid:ring-rose focus-visible:outline-indigo',
+      error: 'text-dark-grey',
+      consent: 'text-dark-grey',
+      checkbox: 'accent-indigo focus-visible:outline-indigo',
+      link: 'text-dark-grey',
+    };
+
+// Splits a consent text around its linked word.
+const parts = ({ text, link }: ConsentText) => {
+  if (!link) return { before: text, link: undefined, after: '' };
+  const at = text.indexOf(link.word);
+  return { before: text.slice(0, at), link, after: text.slice(at + link.word.length) };
+};
+const label = parts(form.consent.label);
+const notes = form.consent.notes.map(parts);
+
+const submitClass = indigo
+  ? 'w-full justify-between gap-4 border-0 bg-black px-6.5 py-4 text-base leading-6 text-white hover:bg-dark-grey focus-visible:outline-white lg:text-lg lg:leading-7'
+  : 'w-full justify-center border-0 bg-indigo px-6.5 py-3.5 text-base leading-6 text-white hover:bg-black focus-visible:outline-indigo sm:w-56 sm:shrink-0 sm:text-lg sm:leading-7';
+---
+
+<form
+  id={id}
+  method="post"
+  data-form={kind}
+  data-hubspot-form={form.hubspotFormId}
+  hidden={preview === 'success'}
+  class:list={['grid', indigo ? 'gap-3' : 'gap-7']}
+>
+  <div class:list={['grid sm:grid-cols-2', indigo ? 'gap-3' : 'gap-3.5']}>
+    {
+      form.fields.map((field) => {
+        const inputId = `${idPrefix}-${field.name}`;
+        const invalid = showErrors && field.required;
+        return (
+          <div class:list={[field.wide && 'sm:col-span-2']}>
+            <label for={inputId} class="sr-only">
+              {field.label}
+            </label>
+            <div class="relative">
+              {indigo && field.required && (
+                <span aria-hidden="true" class="pointer-events-none absolute start-5 top-1/2 -translate-y-1/2 font-semibold text-lime lg:text-lg">
+                  *
+                </span>
+              )}
+              <input
+                id={inputId}
+                name={field.name}
+                type={field.type}
+                autocomplete={field.autocomplete}
+                placeholder={field.placeholder}
+                required={field.required}
+                aria-describedby={`${inputId}-error`}
+                aria-invalid={invalid ? 'true' : undefined}
+                data-field
+                class:list={['block w-full px-8 font-semibold', focusOutline, tone.input]}
+              />
+            </div>
+            <p id={`${inputId}-error`} hidden={!invalid} class:list={['mt-1 text-xs font-medium', tone.error]}>
+              {invalid ? formMessages.required : ''}
+            </p>
+          </div>
+        );
+      })
+    }
+    {
+      indigo && (
+        <div class="sm:col-start-2">
+          <Button type="submit" class:list={[brandButton, focusOutline, submitClass]}>
+            {form.submitLabel}
+            <span aria-hidden="true" class="text-lime rtl:-scale-x-100">↗</span>
+          </Button>
+        </div>
+      )
+    }
+  </div>
+
+  <div class:list={[!indigo && 'flex flex-col gap-7 sm:flex-row sm:items-start sm:justify-between sm:gap-10']}>
+    <div class:list={['text-xs font-medium', tone.consent]}>
+      <div class="flex items-center gap-4">
+        <input
+          id={`${idPrefix}-consent`}
+          name={form.consent.name}
+          type="checkbox"
+          value="true"
+          class:list={['size-5.5 shrink-0', focusOutline, tone.checkbox]}
+        />
+        <label for={`${idPrefix}-consent`}>
+          {label.before}
+          {label.link && <a href={label.link.href} class:list={['underline', tone.link]}>{label.link.word}</a>}
+          {label.after}
+        </label>
+      </div>
+      <div class:list={['mt-3 grid gap-1', !indigo && 'ps-10']}>
+        {
+          notes.map((note) => (
+            <p>
+              {note.before}
+              {note.link && <a href={note.link.href} class:list={['underline', tone.link]}>{note.link.word}</a>}
+              {note.after}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+    {
+      !indigo && (
+        <Button type="submit" class:list={[brandButton, focusOutline, submitClass]}>
+          {form.submitLabel}
+        </Button>
+      )
+    }
+  </div>
+
+  <p data-form-summary hidden={!showErrors} class:list={['text-xs font-medium', tone.error]}>{formMessages.summary}</p>
+</form>
+
+<div
+  id={`${id}-success`}
+  role="status"
+  tabindex="-1"
+  hidden={preview !== 'success'}
+  data-form-success
+  class:list={['grid gap-2 text-lg font-semibold', focusOutline, indigo ? 'text-white focus-visible:outline-white' : 'text-black focus-visible:outline-indigo']}
+>
+  {form.success.map((p) => <p>{p}</p>)}
+</div>
+
+<script>
+  import { enhance } from './form';
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-form]')) enhance(form);
+</script>
