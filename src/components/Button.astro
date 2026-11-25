@@ -11,7 +11,7 @@
 // On hover the arrow nudges up and right, as on the live site; a keyboard
 // focus gets the same nudge plus a visible outline.
 import { Button } from '@/components/ui/button';
-import { brandButton, focusOutline, type ButtonTone } from './button';
+import { brandButton, buttonTones, focusOutline, type ButtonTone } from './button';
 
 interface Props {
   href: string;
@@ -21,12 +21,6 @@ interface Props {
 const { href, tone = 'dark' } = Astro.props;
 
 const brand = 'gap-4 px-5 py-4 text-base leading-none duration-300';
-const tones = {
-  dark: 'border-0 bg-black text-white hover:bg-dark-grey focus-visible:outline-black',
-  light: 'border-light-grey bg-white text-black hover:border-black focus-visible:outline-black',
-  indigo: 'border-0 bg-indigo text-white hover:bg-black focus-visible:outline-indigo',
-  outline: 'border-white/40 bg-transparent text-white hover:bg-white hover:text-black focus-visible:outline-white',
-};
 // The arrow's colour: a small accent, so Lime is allowed on Black.
 const arrows = {
   dark: 'text-lime',
@@ -36,7 +30,7 @@ const arrows = {
 };
 ---
 
-<Button as="a" href={href} class:list={[brandButton, focusOutline, brand, tones[tone]]}>
+<Button as="a" href={href} class:list={[brandButton, focusOutline, brand, buttonTones[tone]]}>
   <slot />
   <span
     aria-hidden="true"

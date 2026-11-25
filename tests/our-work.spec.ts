@@ -166,8 +166,6 @@ test.describe('Case Study slider', () => {
     });
     await page.setViewportSize({ width: 400, height: 800 });
     await page.goto('/industries/finance/');
-    // The cookie banner would cover the slider's buttons on this small screen.
-    await page.getByRole('button', { name: 'Reject all' }).click();
     const s = slider(page);
     await s.scrollIntoViewIfNeeded();
     const counter = s.locator('[data-slide-count]');

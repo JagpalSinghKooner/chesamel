@@ -12,6 +12,15 @@ export const focusOutline = 'focus-visible:outline-2 focus-visible:outline-offse
 
 export type ButtonTone = 'dark' | 'light' | 'indigo' | 'outline';
 
+// Each tone's colours, hover and focus outline (see Button.astro). Shared so a
+// plain <button>, such as the cookie banner's, can wear the same tone.
+export const buttonTones: Record<ButtonTone, string> = {
+  dark: 'border-0 bg-black text-white hover:bg-dark-grey focus-visible:outline-black',
+  light: 'border-light-grey bg-white text-black hover:border-black focus-visible:outline-black',
+  indigo: 'border-0 bg-indigo text-white hover:bg-black focus-visible:outline-indigo',
+  outline: 'border-white/40 bg-transparent text-white hover:bg-white hover:text-black focus-visible:outline-white',
+};
+
 export interface ButtonAction {
   label: string;
   href: string;

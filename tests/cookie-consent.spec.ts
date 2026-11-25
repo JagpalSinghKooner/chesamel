@@ -121,6 +121,59 @@ test.describe('cookie banner', () => {
     expect(hubspot).toEqual([]);
   });
 
+  test('never hides a focused control or the end of the page on a phone (WCAG 2.4.11)', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await expect(banner(page)).toBeVisible();
+    await revealAll(page);
+
+    // Tab through the whole page; no focused element outside the bar may sit
+    // entirely underneath it.
+    const hidden: string[] = [];
+    for (let stop = 0; stop < 200; stop++) {
+      await page.keyboard.press('Tab');
+      const state = await page.evaluate(() => {
+        const el = document.activeElement as HTMLElement | null;
+        const bar = document.querySelector('[data-cookie-banner="live"]')!;
+        if (!el || el === document.body) return { done: true };
+        const r = el.getBoundingClientRect();
+        const b = bar.getBoundingClientRect();
+        const covered = !bar.contains(el) && r.height > 0 && r.top >= b.top && r.bottom <= b.bottom;
+        return { done: false, covered, name: `${el.tagName} ${el.textContent?.trim().slice(0, 40) || el.getAttribute('aria-label')}` };
+      });
+      if (state.done) break;
+      if (state.covered) hidden.push(state.name!);
+    }
+    expect(hidden).toEqual([]);
+
+    // The footer's last link can be scrolled clear of the bar.
+    const last = page.getByRole('contentinfo').getByRole('link', { name: 'Modern Slavery Act' });
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    const linkBox = (await last.boundingBox())!;
+    const barBox = (await banner(page).boundingBox())!;
+    expect(linkBox.y + linkBox.height).toBeLessThanOrEqual(barBox.y);
+  });
+
+  test('gives back the reserved space once a choice is made', async ({ page }) => {
+    await page.goto('/');
+    await expect(banner(page)).toBeVisible();
+    await expect.poll(() => page.evaluate(() => document.body.style.paddingBottom)).not.toBe('');
+    await page.getByRole('button', { name: 'Reject all' }).click();
+    expect(await page.evaluate(() => [document.body.style.paddingBottom, document.documentElement.style.scrollPaddingBottom])).toEqual(['', '']);
+  });
+
+  test('the style guide copy is inert', async ({ page }) => {
+    const hubspot = await watchHubSpot(page);
+    await page.goto('/style-guide/');
+    const preview = page.locator('[data-cookie-banner="preview"]');
+    await preview.getByRole('button', { name: 'Accept all' }).click();
+    await expect(preview).toBeVisible();
+    await expect(banner(page).first()).toBeVisible();
+    await settle(page);
+    expect(hubspot).toEqual([]);
+    expect(await page.evaluate((key) => localStorage.getItem(key), consentStorageKey)).toBeNull();
+  });
+
   test('passes axe while shown, on a phone too', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');

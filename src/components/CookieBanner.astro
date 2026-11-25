@@ -9,9 +9,13 @@
 // again. The footer's "Cookie settings" link reopens it. Without JavaScript the
 // banner stays hidden and HubSpot never loads.
 //
-// `preview` draws it in place, always shown, for the style guide.
+// While it shows, the page gets bottom padding and scroll padding the height
+// of the bar, so nothing (the footer's last links, a focused control) is left
+// underneath it (WCAG 2.4.11 Focus Not Obscured).
+//
+// `preview` draws it in place, always shown and inert, for the style guide.
 import { Button } from '@/components/ui/button';
-import { brandButton, focusOutline } from './button';
+import { brandButton, buttonTones, focusOutline } from './button';
 import { legalLinks } from '../data/site';
 
 interface Props {
@@ -21,8 +25,8 @@ interface Props {
 const { preview = false } = Astro.props;
 const id = preview ? 'cookie-settings-preview' : 'cookie-settings';
 const privacyPolicy = legalLinks.find((link) => link.label === 'Privacy & Cookies Policy')!;
-// The Button's "outline" tone (Button.astro), on both buttons: equally prominent.
-const choiceButton = 'border-white/40 bg-transparent px-5 py-3 text-base leading-none text-white hover:bg-white hover:text-black focus-visible:outline-white';
+// The Button's "outline" tone on both buttons: equally prominent.
+const choiceButton = [brandButton, focusOutline, buttonTones.outline, 'px-5 py-3 text-base leading-none'];
 ---
 
 <section
@@ -41,8 +45,8 @@ const choiceButton = 'border-white/40 bg-transparent px-5 py-3 text-base leading
       <a href={privacyPolicy.href} class="whitespace-nowrap text-white underline hover:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Privacy policy</a>
     </p>
     <div class="flex shrink-0 gap-3">
-      <Button data-cookie-choice="accepted" class:list={[brandButton, focusOutline, choiceButton]}>Accept all</Button>
-      <Button data-cookie-choice="rejected" class:list={[brandButton, focusOutline, choiceButton]}>Reject all</Button>
+      <Button data-cookie-choice="accepted" class:list={choiceButton}>Accept all</Button>
+      <Button data-cookie-choice="rejected" class:list={choiceButton}>Reject all</Button>
     </div>
   </div>
 </section>
@@ -82,21 +86,41 @@ const choiceButton = 'border-white/40 bg-transparent px-5 py-3 text-base leading
     document.body.append(script);
   }
 
+  // Reserves the bar's height at the foot of the page while it shows, and
+  // keeps that in step as the bar's height changes (resizing, zoom).
+  const reserveSpace = new ResizeObserver(() => {
+    if (!banner || banner.hidden) return;
+    const height = `${banner.offsetHeight}px`;
+    document.body.style.paddingBottom = height;
+    document.documentElement.style.scrollPaddingBottom = height;
+  });
+
+  function openBanner() {
+    if (!banner) return;
+    banner.hidden = false;
+    reserveSpace.observe(banner);
+  }
+
   function closeBanner() {
     if (!banner) return;
     const hadFocus = banner.contains(document.activeElement);
     banner.hidden = true;
+    reserveSpace.disconnect();
+    document.body.style.paddingBottom = '';
+    document.documentElement.style.scrollPaddingBottom = '';
     if (hadFocus) opener?.focus();
     opener = undefined;
   }
 
   const choice = storedChoice();
   if (choice === 'accepted') loadHubSpot();
-  if (!choice && banner) banner.hidden = false;
+  if (!choice) openBanner();
 
   document.addEventListener('click', (event) => {
     const target = event.target instanceof Element ? event.target : null;
     const button = target?.closest<HTMLElement>('[data-cookie-choice]');
+    // The style guide's copy only shows the design; its buttons do nothing.
+    if (button?.closest('[data-cookie-banner="preview"]')) return;
     if (button) {
       const chosen = button.dataset.cookieChoice as ConsentChoice;
       remember(chosen);
@@ -110,7 +134,7 @@ const choiceButton = 'border-white/40 bg-transparent px-5 py-3 text-base leading
     if (link && banner) {
       event.preventDefault();
       opener = link;
-      banner.hidden = false;
+      openBanner();
       banner.focus();
     }
   });
