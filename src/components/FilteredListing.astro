@@ -11,7 +11,15 @@
 //
 // Each filter is a Fulldev Toggle Group (ADR-0005): Data Slot keeps one button
 // pressed, sets aria-pressed and moves between the buttons with the arrow keys.
+//
+// With `perPage`, the listing is paged (#42). Every page of the listing
+// carries every item, and the server hides all but the current page's, so
+// each static page (/insights/blog/page/2/) works without JavaScript and is
+// linked by the static Pager under it. Once a filter is chosen, the script
+// pages through the matches itself with a button Pager instead; choosing All
+// again brings back the static page and its links.
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import Pager from './Pager.astro';
 import { pillarLabels, industryLabels } from '../data/taxonomy';
 
 interface Props {
@@ -21,9 +29,17 @@ interface Props {
   // The count's noun, singular and plural: ['Case Study', 'Case Studies'].
   noun: [string, string];
   tone?: 'light' | 'dark';
+  // Paging: items per page, this static page's number, and the address of
+  // page n. Without `perPage` every item shows.
+  perPage?: number;
+  page?: number;
+  pageHref?: (n: number) => string;
+  // Names the pagers' landmarks, e.g. "News pages".
+  pagerLabel?: string;
 }
 
-const { filters, total, noun, tone = 'light' } = Astro.props;
+const { filters, total, noun, tone = 'light', perPage, page = 1, pageHref, pagerLabel = 'Pages' } = Astro.props;
+const lastPage = perPage ? Math.max(1, Math.ceil(total / perPage)) : 1;
 const options = { pillar: Object.entries(pillarLabels), industry: Object.entries(industryLabels) };
 const dark = tone === 'dark';
 
@@ -36,7 +52,7 @@ const filterButton = [
 ];
 ---
 
-<div data-filtered-listing data-noun-one={noun[0]} data-noun-many={noun[1]}>
+<div data-filtered-listing data-noun-one={noun[0]} data-noun-many={noun[1]} data-per-page={perPage} data-page={page}>
   <div data-filters hidden class="flex flex-col gap-5">
     {
       filters.map((g) => (
@@ -62,17 +78,32 @@ const filterButton = [
     {`${total} ${total === 1 ? noun[0] : noun[1]}`}
   </p>
   <slot />
+  {
+    perPage && (
+      <>
+        <Pager last={lastPage} current={page} href={pageHref} label={pagerLabel} tone={tone} data-static-pager />
+        <Pager last={lastPage} label={`${pagerLabel}, filtered`} tone={tone} data-filtered-pager hidden />
+      </>
+    )
+  }
 </div>
 
 <script>
   import { createToggleGroup } from '@data-slot/toggle-group';
   import { followReadingDirection } from './follow-reading-direction';
+  import { showPage, onPage } from './pager';
 
   for (const listing of document.querySelectorAll<HTMLElement>('[data-filtered-listing]')) {
     const filters = listing.querySelector<HTMLElement>('[data-filters]')!;
     const count = listing.querySelector<HTMLElement>('[data-count]')!;
     const items = [...listing.querySelectorAll<HTMLLIElement>('li[data-pillars]')];
     const { nounOne, nounMany } = listing.dataset;
+    const perPage = Number(listing.dataset.perPage) || Math.max(items.length, 1);
+    const staticPage = Number(listing.dataset.page) || 1;
+    const staticPager = listing.querySelector<HTMLElement>('[data-static-pager]');
+    const filteredPager = listing.querySelector<HTMLElement>('[data-filtered-pager]');
+    // The page of matches shown while a filter is chosen.
+    let filteredPage = 1;
     const params = new URLSearchParams(location.search);
     // Each filter's controller; Data Slot hands back the one it already made.
     const groups = [...filters.querySelectorAll<HTMLElement>('[data-filter]')].map((root) => ({
@@ -87,17 +118,33 @@ const filterButton = [
     };
 
     function apply() {
-      let shown = 0;
       const pillar = chosen('pillar');
       const industry = chosen('industry');
-      for (const item of items) {
+      const filtered = Boolean(pillar || industry);
+      const matches = items.filter((item) => {
         const pillars = item.dataset.pillars!.split(' ');
         const industries = item.dataset.industries!.split(' ').filter(Boolean);
-        const visible = (!pillar || pillars.includes(pillar)) && (!industry || industries.includes(industry));
-        item.hidden = !visible;
-        if (visible) shown++;
+        return (!pillar || pillars.includes(pillar)) && (!industry || industries.includes(industry));
+      });
+      const last = Math.max(1, Math.ceil(matches.length / perPage));
+      filteredPage = Math.min(filteredPage, last);
+      const current = filtered ? filteredPage : staticPage;
+      const shownItems = new Set(matches.slice((current - 1) * perPage, current * perPage));
+      for (const item of items) item.hidden = !shownItems.has(item);
+      if (staticPager) staticPager.hidden = filtered;
+      if (filteredPager) {
+        if (filtered) showPage(filteredPager, current, last);
+        else filteredPager.hidden = true;
       }
-      count.textContent = `${shown} ${shown === 1 ? nounOne : nounMany}`;
+      count.textContent = `${matches.length} ${matches.length === 1 ? nounOne : nounMany}`;
+    }
+
+    if (filteredPager) {
+      onPage(filteredPager, (n) => {
+        filteredPage = n;
+        apply();
+        listing.scrollIntoView({ block: 'start' });
+      });
     }
 
     for (const { key, root, control } of groups) {
@@ -115,6 +162,7 @@ const filterButton = [
           else url.searchParams.delete(g.key);
         }
         history.replaceState(null, '', url);
+        filteredPage = 1;
         apply();
       });
     }

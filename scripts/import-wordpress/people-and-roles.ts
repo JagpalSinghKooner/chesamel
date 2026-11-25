@@ -69,18 +69,26 @@ export interface ImportedRole {
   body: string;
 }
 
+// The role card (#42) shows the employer and the day the role was posted, as
+// WordPress shows it, and Careers lists the newest first. `posted` is
+// wp:post_date, the site's own wall-clock time, written as if it were UTC so
+// the date shown never shifts with the time zone of the machine building it.
 export function importCareers(source: WxrSource): ImportedRole[] {
   const wxr = asWxr(source);
   return publishedOfType(wxr, 'careers').map((item) => {
     const title = decodeEntities(item.title);
     const description = meta(item, '_yoast_wpseo_metadesc');
     const apply = meta(item, 'career_link');
+    const employer = meta(item, 'career_employer');
+    const posted = item.dateLocal && `${item.dateLocal.replace(' ', 'T')}Z`;
     return {
       address: `/careers/${slugOf(item.link)}/`,
       file: `src/content/pages/careers/${slugOf(item.link)}.md`,
       data: {
         title,
         ...(description && { description }),
+        ...(employer && { employer }),
+        ...(posted && { posted }),
         hero: {
           title,
           details: ['career_office_based', 'career_employment_type', 'career_location'].map((k) => meta(item, k)).filter(Boolean),

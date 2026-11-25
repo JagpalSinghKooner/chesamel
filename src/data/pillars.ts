@@ -6,6 +6,8 @@
 // borders, dots, icons, accent bars. Never as a fill behind text and never
 // as text colour, since white text on these is 2.3 to 3.2:1 and fails
 // WCAG AA.
+import type { PillarSlug } from './taxonomy';
+
 export type PillarAccent = 'sky' | 'rose' | 'mint' | 'tiger';
 
 export interface Pillar {
@@ -51,3 +53,16 @@ export const pillars: Pillar[] = [
     accent: 'tiger',
   },
 ];
+
+// The accent of every label an Insight can carry (its `pillars` field), for
+// tags and accent bars. The four Pillars take their own; AI & Machine
+// Learning and BI & Data Analytics take Sky, as on the live site (#42,
+// ADR-0002).
+export const labelAccents: Record<PillarSlug, PillarAccent> = {
+  'ai-machine-learning': 'sky',
+  'bi-data-analytics': 'sky',
+  'digital-transformation': 'sky',
+  'hybrid-workforce': 'tiger',
+  'investment-impact-transformation': 'mint',
+  'marketing-engine': 'rose',
+};

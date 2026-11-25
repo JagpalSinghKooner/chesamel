@@ -4,7 +4,8 @@
 // count and filtering come from FilteredListing, as for the Blog Post listing.
 //
 // The live filter is labelled "Service" and lists the same six labels as the
-// News Pillar filter.
+// News Pillar filter. `perPage` pages it as the Blog Post listing is paged
+// (#42): Our Work shows 4 a page.
 import CaseStudyCard from './CaseStudyCard.astro';
 import FilteredListing from './FilteredListing.astro';
 import type { CaseStudySummary } from '../content/case-studies';
@@ -14,9 +15,13 @@ interface Props {
   filters?: ('pillar' | 'industry')[];
   headingLevel?: 'h2' | 'h3' | 'h4';
   tone?: 'light' | 'dark';
+  perPage?: number;
+  page?: number;
+  pageHref?: (n: number) => string;
 }
 
-const { caseStudies, filters = ['pillar', 'industry'], headingLevel = 'h3', tone = 'light' } = Astro.props;
+const { caseStudies, filters = ['pillar', 'industry'], headingLevel = 'h3', tone = 'light', perPage, page = 1, pageHref } = Astro.props;
+const onPage = (i: number) => !perPage || Math.floor(i / perPage) + 1 === page;
 const labels = { pillar: 'Service', industry: 'Industry' };
 ---
 
@@ -26,12 +31,16 @@ const labels = { pillar: 'Service', industry: 'Industry' };
     total={caseStudies.length}
     noun={['Case Study', 'Case Studies']}
     tone={tone}
+    perPage={perPage}
+    page={page}
+    pageHref={pageHref}
+    pagerLabel="Case Study pages"
   >
     <ul class="mt-4 grid gap-6 md:grid-cols-2">
       {
-        caseStudies.map((caseStudy) => (
-          <li data-pillars={caseStudy.pillars.join(' ')} data-industries={caseStudy.industries.join(' ')}>
-            <CaseStudyCard caseStudy={caseStudy} headingLevel={headingLevel} />
+        caseStudies.map((caseStudy, i) => (
+          <li hidden={!onPage(i)} data-pillars={caseStudy.pillars.join(' ')} data-industries={caseStudy.industries.join(' ')}>
+            <CaseStudyCard caseStudy={caseStudy} headingLevel={headingLevel} tone={tone} />
           </li>
         ))
       }

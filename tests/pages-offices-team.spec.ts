@@ -16,16 +16,46 @@ test('the contact page lists the UK, Qatar and Saudi Arabia offices with address
   }
 });
 
-test('Our Team lists every Team Member and filters them by team', async ({ page }) => {
+test('Our Team starts on Founders, filters by team and pages 8 at a time', async ({ page }) => {
   await page.goto('/who-we-are/our-team/');
   const cards = page.locator('[data-teams]');
+  const shown = page.locator('[data-teams]:visible');
+  const filter = page.getByRole('group', { name: 'Filter by team' });
+  const pager = page.getByRole('navigation', { name: 'Team pages' });
   await expect(cards).toHaveCount(73);
-  await page.getByRole('button', { name: 'Founders' }).click();
-  await expect(page.locator('[data-teams]:visible')).toHaveCount(2);
-  await expect(page.locator('[data-teams]:visible').getByRole('heading', { name: 'John Cofie' })).toBeVisible();
+  await expect(filter.getByRole('button')).toHaveText([
+    'Founders', 'Executive Leadership', 'Advisors', 'Growth', 'Marketing Transformation', 'Digital Transformation',
+    'Workforce Transformation', 'Content and Experiences', 'GCC', 'All',
+  ]);
+  await expect(filter.getByRole('button', { name: 'Founders' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(shown).toHaveCount(2);
+  await expect(shown.getByRole('heading', { name: 'John Cofie' })).toBeVisible();
   await expect(page.locator('[data-team-count]')).toHaveText('2 people');
-  await page.getByRole('button', { name: 'All' }).click();
-  await expect(page.locator('[data-teams]:visible')).toHaveCount(73);
+  await expect(pager).toBeHidden();
+
+  await filter.getByRole('button', { name: 'All' }).click();
+  await expect(page.locator('[data-team-count]')).toHaveText('73 people');
+  await expect(shown).toHaveCount(8);
+  await expect(pager.getByRole('button', { name: /^Page \d+$/ }).filter({ visible: true })).toHaveText(['1', '2', '3']);
+  const firstPage = await shown.locator('h3').allTextContents();
+  await pager.getByRole('button', { name: 'Page 2' }).click();
+  await expect(pager.getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+  await expect(shown).toHaveCount(8);
+  expect(await shown.locator('h3').allTextContents()).not.toEqual(firstPage);
+  await pager.getByRole('button', { name: 'Last page' }).click();
+  await expect(shown).toHaveCount(73 - 9 * 8);
+  await expect(pager.getByRole('button', { name: 'Next page' })).toBeHidden();
+});
+
+test('a Team Member card links LinkedIn and email from icon buttons and opens the full bio', async ({ page }) => {
+  await page.goto('/who-we-are/our-team/');
+  const john = page.locator('[data-teams]:visible').filter({ has: page.getByRole('heading', { name: 'John Cofie' }) });
+  await expect(john.getByRole('link', { name: 'LinkedIn profile of John Cofie (opens in a new tab)' })).toHaveAttribute('href', /linkedin\.com/);
+  await expect(john.getByRole('link', { name: 'Email John Cofie' })).toHaveAttribute('href', /^mailto:/);
+  await page.getByRole('group', { name: 'Filter by team' }).getByRole('button', { name: 'Advisors' }).click();
+  const dilshan = page.locator('[data-teams]:visible').filter({ has: page.getByRole('heading', { name: 'Dilshan Swaris' }) });
+  await dilshan.getByText('read full bio').click();
+  await expect(dilshan.locator('details')).toHaveAttribute('open', '');
 });
 
 test('What We Do switches between the four Pillars', async ({ page }) => {
@@ -39,10 +69,22 @@ test('What We Do switches between the four Pillars', async ({ page }) => {
   await expect(page.getByRole('tab', { name: 'Investment and Impact Transformation' })).toBeFocused();
 });
 
-test('Careers links each of the four open roles, and a role links to its application', async ({ page }) => {
+test('Careers links each of the four open roles, newest first, and a role links to its application', async ({ page }) => {
   await page.goto('/careers/');
   const roles = page.getByRole('region', { name: 'Current Job Opportunities' }).getByRole('link');
   await expect(roles).toHaveCount(4);
+  await expect(roles.locator('h3')).toHaveText([
+    'Account Based Marketing Manager (ABM)',
+    'Client Services & Social Media Programme Manager',
+    'Social Media Project Manager- EMEA',
+    'Account Director',
+  ]);
+  const first = roles.first();
+  await expect(first).toHaveAttribute('href', '/careers/account-based-marketing-manager-abm/');
+  await expect(first).toContainText('Chesamel Group');
+  await expect(first).toContainText('Apply Now');
+  await expect(first.locator('time')).toHaveText('19th Oct 2026');
+  await expect(first.locator('a')).toHaveCount(0);
   await page.getByRole('link', { name: 'Account Director' }).click();
   await expect(page).toHaveURL('/careers/account-director/');
   await expect(page.getByRole('link', { name: 'Apply for this role' })).toHaveAttribute('href', /linkedin\.com\/jobs/);

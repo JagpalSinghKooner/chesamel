@@ -1,5 +1,7 @@
 ---
 title: "Account Based Marketing Manager (ABM)"
+employer: "Chesamel Group"
+posted: "2026-10-19T14:52:17Z"
 hero: {"title":"Account Based Marketing Manager (ABM)","details":["Remote","Full-Time","UK"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4479373046/"}]}
 ---
 

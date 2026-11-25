@@ -1,0 +1,117 @@
+---
+// Pager: the numbered page controls under News, Our Work, Podcast and Our
+// Team, as on the live site: first and previous, the current page and the
+// next two, then next and last (#42).
+//
+// With `href`, every control is a real link to that page's address (News,
+// Our Work and Podcast, whose pages are static routes). Without it, the
+// controls are buttons for a listing that pages in the browser (Our Team, or
+// a filtered News or Our Work): every number up to `last` is rendered, and
+// `showPage` and `onPage` from ./pager.ts show the right ones and report
+// clicks.
+//
+// First and previous are left out on page 1, next and last on the last page,
+// and the current page carries aria-current="page". Square 44px controls with
+// a 60% Medium Grey border; the current page is Indigo.
+import Icon from './Icon.astro';
+import { focusOutline } from './button';
+import { pageWindow } from './pager';
+
+interface Props {
+  last: number;
+  current?: number;
+  // The address of page n, for a static listing.
+  href?: (n: number) => string;
+  // Names the navigation landmark, e.g. "News pages".
+  label: string;
+  tone?: 'light' | 'dark';
+  class?: string;
+  // Starts hidden, for a Pager a script shows when it is needed.
+  hidden?: boolean;
+  [key: `data-${string}`]: unknown;
+}
+
+const { last, current = 1, href, label, tone = 'light', class: className, hidden = false, ...rest } = Astro.props;
+const dark = tone === 'dark';
+
+const control = [
+  focusOutline,
+  'grid size-11 place-items-center border text-base font-semibold transition-colors duration-300',
+  'aria-[current=page]:border-indigo aria-[current=page]:bg-indigo aria-[current=page]:text-white',
+  dark
+    ? 'border-white/40 text-white hover:border-white focus-visible:outline-white'
+    : 'border-medium-grey/60 text-dark-grey hover:border-indigo hover:text-indigo focus-visible:outline-indigo',
+];
+// Mirrored in right-to-left pages, so the arrows point the reading way.
+const arrow = 'size-4 rtl:-scale-x-100';
+
+const steps = [
+  { step: 'first', icon: 'chevrons-left', label: 'First page', target: 1, show: current > 1, gap: '' },
+  { step: 'prev', icon: 'chevron-left', label: 'Previous page', target: current - 1, show: current > 1, gap: 'me-4' },
+  { step: 'next', icon: 'chevron-right', label: 'Next page', target: current + 1, show: current < last, gap: 'ms-4' },
+  { step: 'last', icon: 'chevrons-right', label: 'Last page', target: last, show: current < last, gap: '' },
+] as const;
+const [first, prev, next, end] = steps;
+const numbers = href ? pageWindow(current, last) : Array.from({ length: last }, (_, i) => i + 1);
+const inWindow = new Set(pageWindow(current, last));
+---
+
+<nav aria-label={label} hidden={hidden || last <= 1} class:list={['mt-10 md:mt-16', className]} data-component="pager" {...rest}>
+  <ul class="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+    {
+      [first, prev].map((s) =>
+        href ? (
+          s.show && (
+            <li class={s.gap}>
+              <a href={href(s.target)} aria-label={s.label} class:list={control}>
+                <Icon name={s.icon} class={arrow} />
+              </a>
+            </li>
+          )
+        ) : (
+          <li class={s.gap} hidden={!s.show}>
+            <button type="button" data-step={s.step} data-target={s.target} aria-label={s.label} class:list={['cursor-pointer', control]}>
+              <Icon name={s.icon} class={arrow} />
+            </button>
+          </li>
+        ),
+      )
+    }
+    {
+      numbers.map((n) =>
+        href ? (
+          <li>
+            <a href={href(n)} aria-label={`Page ${n}`} aria-current={n === current ? 'page' : undefined} class:list={control}>
+              {n}
+            </a>
+          </li>
+        ) : (
+          <li hidden={!inWindow.has(n)}>
+            <button type="button" data-page={n} aria-label={`Page ${n}`} aria-current={n === current ? 'page' : undefined} class:list={['cursor-pointer', control]}>
+              {n}
+            </button>
+          </li>
+        ),
+      )
+    }
+    {
+      [next, end].map((s) =>
+        href ? (
+          s.show && (
+            <li class={s.gap}>
+              <a href={href(s.target)} aria-label={s.label} class:list={control}>
+                <Icon name={s.icon} class={arrow} />
+              </a>
+            </li>
+          )
+        ) : (
+          <li class={s.gap} hidden={!s.show}>
+            <button type="button" data-step={s.step} data-target={s.target} aria-label={s.label} class:list={['cursor-pointer', control]}>
+              <Icon name={s.icon} class={arrow} />
+            </button>
+          </li>
+        ),
+      )
+    }
+  </ul>
+</nav>

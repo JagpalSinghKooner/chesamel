@@ -1,24 +1,35 @@
 ---
 // Podcast: every episode of Chesamel Unplugged, newest first. Unlike the live
-// listing, each card links to the episode's own page.
-import Base from '../../layouts/Base.astro';
-import InsightsHero from '../../components/InsightsHero.astro';
-import ListenLinks from '../../components/ListenLinks.astro';
-import Button from '../../components/Button.astro';
-import CtaBlock from '../../components/CtaBlock.astro';
-import { getNewest, addressOf, excerpt } from '../../content/insight-items';
-import { formatDate, isoDate } from '../../content/shared';
-import CaseStudySlider from '../../components/CaseStudySlider.astro';
-import { getCaseStudies, summariseCaseStudy } from '../../content/case-studies';
+// listing, each card links to the episode's own page. 3 episodes a page
+// (#42): later pages are /insights/podcasts/page/N/.
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import InsightsHero from '../../../components/InsightsHero.astro';
+import ListenLinks from '../../../components/ListenLinks.astro';
+import Button from '../../../components/Button.astro';
+import CtaBlock from '../../../components/CtaBlock.astro';
+import { getNewest, addressOf, excerpt } from '../../../content/insight-items';
+import { formatDate, isoDate } from '../../../content/shared';
+import CaseStudySlider from '../../../components/CaseStudySlider.astro';
+import { getCaseStudies, summariseCaseStudy } from '../../../content/case-studies';
+import Pager from '../../../components/Pager.astro';
+import ListingRedirect from '../../../components/ListingRedirect.astro';
+import { listings, pagePaths, pageHref, pageTitle } from '../../../content/paging';
 
-const podcasts = await getNewest('podcasts');
+const { base: BASE, perPage: PER_PAGE } = listings.podcasts;
+
+export const getStaticPaths = (async ({ paginate }) => pagePaths(paginate, await getNewest('podcasts'), listings.podcasts.perPage)) satisfies GetStaticPaths;
+
+const { current, last } = Astro.props;
+const podcasts = (await getNewest('podcasts')).slice((current - 1) * PER_PAGE, current * PER_PAGE);
 // The live page's hand-picked "Customer stories".
 const customerStories = ['elevating-fan-experiences-at-the-brits', 'b2b-marketing-for-ebay', 'augmenting-cybersecurity-with-ai'];
 const caseStudies = await getCaseStudies();
 const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)!).map(summariseCaseStudy);
 ---
 
-<Base title="Podcast | Chesamel" description="Listen to the latest episodes in our podcast series, Chesamel Unplugged.">
+<Base title={`${pageTitle('Podcast', current, last)} | Chesamel`} description="Listen to the latest episodes in our podcast series, Chesamel Unplugged.">
+  <ListingRedirect base={BASE} last={last} />
   <InsightsHero heading="Podcast" text="Listen to the latest episodes in our podcast series, Chesamel Unplugged." />
   <section class="bg-black">
     <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-5 py-12 sm:px-6">
@@ -52,6 +63,7 @@ const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)
         ))
       }
     </ul>
+    <Pager last={last} current={current} href={pageHref(BASE)} label="Podcast pages" />
   </section>
   <CtaBlock
     heading="Feature on our podcast"

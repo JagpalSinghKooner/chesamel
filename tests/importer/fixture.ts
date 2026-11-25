@@ -8,6 +8,8 @@ export interface FixtureItem {
   slug?: string;
   link?: string;
   date?: string;
+  // wp:post_date, the site's own time; the GMT date when not given.
+  localDate?: string;
   creator?: string;
   content?: string;
   excerpt?: string;
@@ -32,6 +34,7 @@ function item(i: FixtureItem): string {
     <content:encoded>${cdata(i.content ?? '<!-- wp:paragraph -->\n<p>Hello.</p>\n<!-- /wp:paragraph -->')}</content:encoded>
     <excerpt:encoded>${cdata(i.excerpt ?? '')}</excerpt:encoded>
     <wp:post_id>${i.id}</wp:post_id>
+    <wp:post_date>${cdata(i.localDate ?? i.date ?? '2024-12-10 12:20:12')}</wp:post_date>
     <wp:post_date_gmt>${cdata(i.date ?? '2024-12-10 12:20:12')}</wp:post_date_gmt>
     <wp:post_name>${cdata(slug)}</wp:post_name>
     <wp:status>${cdata(i.status ?? (type === 'attachment' ? 'inherit' : 'publish'))}</wp:status>

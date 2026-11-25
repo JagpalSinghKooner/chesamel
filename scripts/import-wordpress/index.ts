@@ -4,6 +4,7 @@
 //   npm run import -- --no-media   (skip downloading media)
 //   npm run import -- --only=insights   (only Podcasts, Webinars and Reports)
 //   npm run import -- --only=pages      (only Pillars, Services, Team Members and open roles)
+//   npm run import -- --only=careers    (only the open roles)
 //
 // The export holds personal data and is gitignored; it lives only on the
 // machine that runs the import. Re-running overwrites the imported files, so
@@ -111,6 +112,8 @@ async function main() {
   // Parsed once; every importer reads the same parsed export.
   const wxr = parseWxr(await readFile(root(file), 'utf8'));
 
+  if (process.argv.includes('--only=careers')) return importRoles(wxr);
+
   if (process.argv.includes('--only=pages')) {
     if (withMedia) await fetchMedia(pageMedia(wxr));
     return importPages(wxr);
@@ -153,6 +156,13 @@ const HAND_MIGRATED = [
   '/systango-partnership/',
 ];
 
+async function importRoles(wxr: Wxr) {
+  const roles = importCareers(wxr);
+  for (const role of roles) await write(role.file, serialise(role));
+  console.log(`Wrote ${roles.length} open roles`);
+  return roles;
+}
+
 async function importPages(wxr: Wxr) {
   const { pillars, services, unreadable } = importServices(wxr);
   for (const item of [...pillars, ...services]) await write(item.file, serialise(item));
@@ -168,9 +178,7 @@ async function importPages(wxr: Wxr) {
   console.log(`Wrote ${members.length} Team Members`);
   if (withoutPhoto.length) console.error(`Team Members left out for having no photo: ${withoutPhoto.join(', ')}`);
 
-  const roles = importCareers(wxr);
-  for (const role of roles) await write(role.file, serialise(role));
-  console.log(`Wrote ${roles.length} open roles`);
+  const roles = await importRoles(wxr);
 
   const addresses = [...pillars, ...services, ...roles].map((i) => i.address);
   console.log(`Removed ${await shrinkPending([...addresses, ...HAND_MIGRATED])} Pillar, Service and Page addresses from urls/pending.json`);

@@ -4,31 +4,45 @@
 // live page. The live page's "Our services" block, six cards linking to old
 // service addresses, is left out: the Pillar cards above it cover the same
 // ground with current addresses.
-import Base from '../../layouts/Base.astro';
-import InsightsHero from '../../components/InsightsHero.astro';
-import Button from '../../components/Button.astro';
-import CaseStudyListing from '../../components/CaseStudyListing.astro';
-import CaseStudySlider from '../../components/CaseStudySlider.astro';
-import IndustryCard from '../../components/IndustryCard.astro';
-import PillarCards from '../../components/PillarCards.astro';
-import ClientLogos from '../../components/home/ClientLogos.astro';
-import ConnectWithUs from '../../components/home/ConnectWithUs.astro';
-import { getCaseStudies, getIndustries, summariseCaseStudy } from '../../content/case-studies';
+//
+// The catalogue shows 4 Case Studies a page (#42): later pages are
+// /insights/our-work/page/N/, and every page carries every Case Study so the
+// filters reach them all. "Latest Work", below it as on live, marks each of
+// its three cards "New".
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import InsightsHero from '../../../components/InsightsHero.astro';
+import Button from '../../../components/Button.astro';
+import CaseStudyListing from '../../../components/CaseStudyListing.astro';
+import CaseStudySlider from '../../../components/CaseStudySlider.astro';
+import IndustryCard from '../../../components/IndustryCard.astro';
+import PillarCards from '../../../components/PillarCards.astro';
+import ClientLogos from '../../../components/home/ClientLogos.astro';
+import ConnectWithUs from '../../../components/home/ConnectWithUs.astro';
+import ListingRedirect from '../../../components/ListingRedirect.astro';
+import { getCaseStudies, getIndustries, summariseCaseStudy } from '../../../content/case-studies';
+import { listings, pagePaths, pageHref, pageTitle } from '../../../content/paging';
 
+const { base: BASE, perPage: PER_PAGE } = listings.ourWork;
+
+export const getStaticPaths = (async ({ paginate }) => pagePaths(paginate, await getCaseStudies(), listings.ourWork.perPage)) satisfies GetStaticPaths;
+
+const { current, last } = Astro.props;
 const caseStudies = (await getCaseStudies()).map(summariseCaseStudy);
 const industries = await getIndustries();
 ---
 
-<Base title="Our Work | Chesamel" description="See our latest customer stories and learn how we turn our solutions into results.">
+<Base title={`${pageTitle('Our Work', current, last)} | Chesamel`} description="See our latest customer stories and learn how we turn our solutions into results.">
+  <ListingRedirect base={BASE} last={last} />
   <InsightsHero heading="Our Work" text="See our latest customer stories and learn how we turn our solutions into results." />
   <section aria-labelledby="catalogue" class="bg-black">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <h2 id="catalogue" class="type-heading-2 mb-10 text-white">Our catalogue</h2>
-      <CaseStudyListing caseStudies={caseStudies} tone="dark" />
+      <CaseStudyListing caseStudies={caseStudies} tone="dark" perPage={PER_PAGE} page={current} pageHref={pageHref(BASE)} />
     </div>
   </section>
   <ClientLogos />
-  <CaseStudySlider id="latest-work" heading="Latest Work" tone="light" caseStudies={caseStudies.slice(0, 3)} />
+  <CaseStudySlider id="latest-work" heading="Latest Work" tone="light" caseStudies={caseStudies.slice(0, 3)} markNew />
   <PillarCards>
     <h2 class="type-heading-2">How we add value</h2>
     <p class="mt-6 max-w-md">

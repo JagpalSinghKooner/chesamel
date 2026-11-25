@@ -1,8 +1,13 @@
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { test, expect, type Page } from '@playwright/test';
 
 const caseStudyFiles = readdirSync(new URL('../src/content/case-studies/', import.meta.url)).filter((f) => f.endsWith('.md'));
 const total = caseStudyFiles.length;
+const PER_PAGE = 4;
+const lastPage = Math.ceil(total / PER_PAGE);
+const industriesOf = (file: string) =>
+  readFileSync(new URL(`../src/content/case-studies/${file}`, import.meta.url), 'utf8').match(/^industries: (.*)$/m)?.[1] ?? '';
+const technology = caseStudyFiles.filter((f) => industriesOf(f).includes('"technology"')).length;
 
 // Known Case Studies, with their labels in the migrated content.
 const biFinance = 'Business Intelligence in Finance'; // BI & Data Analytics, Finance
@@ -14,18 +19,29 @@ const newest = ['Google Financial Services Series', 'Google Partnership Kickstar
 const OUR_WORK = '/insights/our-work/';
 const catalogue = (page: Page) => page.locator('[data-component="case-study-listing"]');
 const cards = (page: Page) => catalogue(page).locator('[data-component="case-study-card"]:visible');
+const allCards = (page: Page) => catalogue(page).locator('[data-component="case-study-card"]');
 const card = (page: Page, title: string) => catalogue(page).getByRole('link', { name: title });
 const slider = (page: Page) => page.locator('[data-component="case-study-slider"]');
 const sliderTitles = (page: Page) => slider(page).locator('[data-component="case-study-card"] :is(h2, h3, h4)');
 
 test.describe('Our Work', () => {
-  test('lists every Case Study, newest first', async ({ page }) => {
+  test('carries every Case Study, newest first, and shows four a page with real page links', async ({ page }) => {
     await page.goto(OUR_WORK);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Our Work');
-    await expect(cards(page)).toHaveCount(total);
+    await expect(allCards(page)).toHaveCount(total);
+    await expect(cards(page)).toHaveCount(PER_PAGE);
     await expect(page.getByRole('status')).toHaveText(`${total} Case Studies`);
-    const titles = await cards(page).locator('h3').allTextContents();
+    const titles = await allCards(page).locator('h3').allTextContents();
     expect(titles.slice(0, 3)).toEqual(newest);
+
+    const pager = page.getByRole('navigation', { name: 'Case Study pages', exact: true });
+    await expect(pager.getByRole('link', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
+    await pager.getByRole('link', { name: 'Page 2' }).click();
+    await expect(page).toHaveURL(`${OUR_WORK}page/2/`);
+    await expect(cards(page).locator('h3')).toHaveText(titles.slice(4, 8));
+    await page.goto(`${OUR_WORK}?pages=${lastPage}`);
+    await expect(page).toHaveURL(`${OUR_WORK}page/${lastPage}/`);
+    await expect(cards(page)).toHaveCount(total - (lastPage - 1) * PER_PAGE);
   });
 
   test('a card shows the image, the main Pillar, the client when there is one, and the title', async ({ page }) => {
@@ -35,6 +51,8 @@ test.describe('Our Work', () => {
     await expect(hack).toContainText('Marketing Engine');
     await expect(hack).toContainText('/ Google Cloud');
     expect(await hack.locator('img').evaluate((img: HTMLImageElement) => img.getAttribute('src'))).toMatch(/^\/wp-content\/uploads\//);
+    await page.goto(`${OUR_WORK}?pillar=bi-data-analytics`);
+    await expect(card(page, biFinance)).toBeVisible();
     await expect(card(page, biFinance)).not.toContainText('/ Google Cloud');
   });
 
@@ -46,17 +64,20 @@ test.describe('Our Work', () => {
     await expect(card(page, hackathons)).toBeHidden();
     await expect(page).toHaveURL(/\?pillar=bi-data-analytics$/);
 
-    await page.goto(`${OUR_WORK}?industry=technology`);
+    await page.goto(`${OUR_WORK}?a_industries=technology`);
+    await expect(page).toHaveURL(`${OUR_WORK}?industry=technology`);
     await expect(card(page, hackathons)).toBeVisible();
     await expect(card(page, biFinance)).toBeHidden();
     await expect(card(page, onSiteTeams)).toBeHidden();
-    const shown = await cards(page).count();
-    await expect(page.getByRole('status')).toHaveText(`${shown} Case Studies`);
+    await expect(cards(page)).toHaveCount(Math.min(technology, PER_PAGE));
+    await expect(page.getByRole('status')).toHaveText(`${technology} Case Studies`);
   });
 
-  test('shows the newest work in a Case Study slider and links to each Industry', async ({ page }) => {
+  test('shows the newest work, each marked New, in a Case Study slider and links to each Industry', async ({ page }) => {
     await page.goto(OUR_WORK);
     await expect(sliderTitles(page)).toHaveText(newest);
+    await expect(slider(page).locator('[data-new]')).toHaveText(['New', 'New', 'New']);
+    await expect(catalogue(page).locator('[data-new]')).toHaveCount(0);
     const industries = page.getByRole('region', { name: 'Our Industries' });
     await expect(industries.getByRole('link', { name: /Finance/ })).toHaveAttribute('href', '/industries/finance/');
   });
@@ -72,7 +93,7 @@ test.describe('Our Work', () => {
 
 test.describe('Case Study page', () => {
   test('shows the Case Study at its original address with its Pillar, excerpt, objective and services', async ({ page }) => {
-    await page.goto(OUR_WORK);
+    await page.goto(`${OUR_WORK}?pillar=bi-data-analytics`);
     await card(page, biFinance).click();
 
     await expect(page).toHaveURL(/\/case-studies\/business-intelligence-in-finance\/$/);

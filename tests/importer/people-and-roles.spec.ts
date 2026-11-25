@@ -44,12 +44,17 @@ const items: FixtureItem[] = [
     title: 'Account Director',
     slug: 'account-director',
     link: 'https://chesamel.com/careers/account-director/',
+    // Just after midnight in London is still the day before in GMT: the card
+    // shows WordPress's own (local) date.
+    localDate: '2026-10-20 00:30:00',
+    date: '2026-10-19 23:30:00',
     content: '<p>We are looking for an Account Director.</p>\n<h2 class="wp-block-heading">About Chesamel</h2>\n<ul><li>Build trusted relationships.</li></ul>',
     meta: {
       career_office_based: 'Hybrid',
       career_employment_type: 'Full-Time',
       career_location: 'London, UK',
       career_link: 'https://www.linkedin.com/jobs/view/4475431909/',
+      career_employer: 'Chesamel Group',
       _yoast_wpseo_metadesc: 'Join Chesamel as an Account Director.',
     },
   },
@@ -83,6 +88,8 @@ test('a careers item becomes a Page at its address, with its facts and the apply
   expect(role.data).toEqual({
     title: 'Account Director',
     description: 'Join Chesamel as an Account Director.',
+    employer: 'Chesamel Group',
+    posted: '2026-10-20T00:30:00Z',
     hero: {
       title: 'Account Director',
       details: ['Hybrid', 'Full-Time', 'London, UK'],
@@ -90,6 +97,13 @@ test('a careers item becomes a Page at its address, with its facts and the apply
     },
   });
   expect(role.body).toBe('We are looking for an Account Director.\n\n## About Chesamel\n\n- Build trusted relationships.\n');
+});
+
+test('a careers item with no employer is imported without one, never with a default', () => {
+  const role = items.find((i) => i.type === 'careers')!;
+  const [imported] = importCareers(wxr([{ ...role, meta: { ...role.meta, career_employer: '' } }]));
+  expect(imported.data).not.toHaveProperty('employer');
+  expect(imported.data.posted).toBe('2026-10-20T00:30:00Z');
 });
 
 test('a LinkedIn address without https:// gets it', () => {

@@ -1,8 +1,7 @@
 ---
-// Roles Section: a card for each open role (every Page under /careers/), each
-// a Fulldev Card (ADR-0005).
-import { Card } from '@/components/ui/card';
-import { brandCard } from '../card';
+// Roles Section: a Careers job card for each open role (every Page under
+// /careers/), newest first, three across from 1024px, as on live (#42).
+import CareerCard from '../CareerCard.astro';
 import { getRoles, pageAddress } from '../../content/pages';
 import type { Section } from '../../content/page-schemas';
 
@@ -15,15 +14,12 @@ const roles = await getRoles();
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
     <h2 id={id} class="type-heading-2">{section.heading}</h2>
     <p class="type-caption mt-4">{roles.length} {roles.length === 1 ? 'role' : 'roles'}</p>
-    <ul class="mt-8 grid gap-4 md:grid-cols-2">
+    <ul class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
         roles.map((role) => (
-          <Card as="li" class:list={[brandCard, 'block border border-light-grey p-6']}>
-            <h3 class="type-heading-3 text-xl">
-              <a href={pageAddress(role)} class="underline-offset-4 hover:underline">{role.data.title}</a>
-            </h3>
-            <p class="font-subheading mt-3 text-dark-grey">{role.data.hero.details.join(' / ')}</p>
-          </Card>
+          <li>
+            <CareerCard href={pageAddress(role)} title={role.data.title} details={role.data.hero.details} employer={role.data.employer} posted={role.data.posted} />
+          </li>
         ))
       }
     </ul>

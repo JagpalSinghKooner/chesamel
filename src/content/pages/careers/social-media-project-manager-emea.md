@@ -1,5 +1,7 @@
 ---
 title: "Social Media Project Manager- EMEA"
+employer: "Chesamel Group"
+posted: "2026-10-19T14:34:25Z"
 hero: {"title":"Social Media Project Manager- EMEA","details":["Remote","Contract","UK/EMEA"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4475443614/"}]}
 ---
 
