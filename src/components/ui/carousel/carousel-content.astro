@@ -3,11 +3,14 @@ import type { HTMLAttributes } from "astro/types"
 
 import { cn } from "@/lib/utils"
 
-type Props = HTMLAttributes<"div">
+// Chesamel patch (ADR-0005): `viewportProps` reach the scrolling viewport,
+// so a slider can give it a tab stop for when it scrolls natively.
+type Props = HTMLAttributes<"div"> & { viewportProps?: HTMLAttributes<"div"> }
 
 const {
   class: className,
   "data-slot": dataSlot = "carousel-container",
+  viewportProps: { class: viewportClass, ...viewportProps } = {},
   ...props
 } = Astro.props
 
@@ -16,9 +19,10 @@ const {
 ---
 
 <div
-  class="overflow-hidden"
+  class={cn("overflow-hidden", viewportClass)}
   data-slot="carousel-content"
   data-carousel-viewport
+  {...viewportProps}
 >
   <div
     data-slot={dataSlot}

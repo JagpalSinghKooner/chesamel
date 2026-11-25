@@ -6,8 +6,8 @@
 // Built on Fulldev's Carousel (Embla), whose copy is patched to work right to
 // left (ADR-0005). It moves by touch or mouse drag, by the buttons, and by the
 // arrow keys, Home and End while focus is inside it. Without JavaScript the
-// slides are an ordinary row that scrolls sideways, and the controls stay
-// hidden. Under prefers-reduced-motion the slides jump instead of gliding.
+// slides are an ordinary row that scrolls sideways, with its own tab stop so a
+// keyboard can scroll it, and the controls stay hidden. Under prefers-reduced-motion the slides jump instead of gliding.
 //
 // The live sliders sit in many Sections; the Section draws its own heading and
 // passes its id as `labelledby`. The slider is then a named group, not a
@@ -40,7 +40,10 @@ const control = [
 ---
 
 <Carousel role="group" aria-labelledby={labelledby} aria-label={label} class:list={['slider', className]} data-component="slider" data-slider>
-  <CarouselContent class="pb-4 group-data-[orientation=horizontal]/carousel:-ms-6">
+  <CarouselContent
+    class="pb-4 group-data-[orientation=horizontal]/carousel:-ms-6"
+    viewportProps={{ tabindex: 0, class: 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo', 'data-native-scroll': '' }}
+  >
     <slot />
   </CarouselContent>
   <div class="mt-6 flex items-center justify-end gap-4" data-controls hidden>
@@ -101,6 +104,9 @@ const control = [
       api.on('reInit', () => {
         slider.querySelector<HTMLElement>('[data-controls]')!.hidden = api.scrollSnapList().length < 2;
       });
+      // The row no longer scrolls natively, so its own tab stop goes; the
+      // buttons and arrow keys take over.
+      slider.querySelector('[data-native-scroll]')?.removeAttribute('tabindex');
       slider.dataset.ready = '';
       update();
     });

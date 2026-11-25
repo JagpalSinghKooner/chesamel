@@ -24,6 +24,7 @@ Updates are pulled deliberately, one building block at a time, never automatical
 ## Local patches
 
 - **Carousel works right to left** (`carousel/carousel.astro`, `carousel-content.astro`, `carousel-item.astro`, `carousel-previous.astro`, `carousel-next.astro`). Fulldev's Carousel ignores `dir="rtl"`, and Embla reads its direction only from its options, so a right-to-left page slid every card out of view. The patch passes Embla the computed direction, mirrors the arrow keys, mirrors the default chevrons, and uses logical sides (`-ms-4`, `ps-4`, `-start-12`, `-end-12`) for the slide gaps and the floating buttons.
+- **Carousel viewport takes attributes** (`carousel-content.astro`, #35). `viewportProps` reach the scrolling viewport, so the Slider can give a natively scrolling row a tab stop until the carousel starts.
 - **Carousel buttons follow `--radius`** (`carousel-previous.astro`, `carousel-next.astro`). Fulldev makes them `rounded-full`, which no radius setting reaches.
 - **Inactive tab text passes WCAG AA** (`tabs/tabs-trigger.astro`). Fulldev's 60% foreground is about 3:1 on the muted list with the brand tokens. 80% is about 4.9:1.
 - **No faint focus outline everywhere** (`src/styles/global.css`). `@fulldev/init` sets `outline-ring/50` on every element. That would swap the browser's focus outline for a faint Indigo one, which is hard to see on Black, so the base layer leaves it out.

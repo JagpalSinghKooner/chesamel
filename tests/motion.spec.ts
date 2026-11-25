@@ -140,6 +140,8 @@ test.describe('Slider', () => {
     await expect(counter).toHaveText('5 / 5');
     await page.keyboard.press('Home');
     await expect(counter).toHaveText('1 / 5');
+    // Once started, the row's own tab stop gives way to the buttons.
+    await expect(slider.locator('[data-carousel-viewport]')).not.toHaveAttribute('tabindex');
   });
 
   test('every slider named in the ticket is a slider', async ({ page }) => {
@@ -168,6 +170,8 @@ test.describe('without JavaScript', () => {
     const slider = page.locator('[data-component="section-cards"]', { hasText: 'Our Approach' }).locator('[data-slider]');
     const viewport = slider.locator('[data-carousel-viewport]');
     await expect(viewport).toHaveCSS('overflow-x', 'auto');
+    // A keyboard can reach and scroll the row.
+    await expect(viewport).toHaveAttribute('tabindex', '0');
     expect(await viewport.evaluate((e) => e.scrollWidth > e.clientWidth)).toBe(true);
     await expect(slider.locator('[data-controls]')).toBeHidden();
     await expect(page.locator('main > *').last()).toHaveCSS('opacity', '1');
