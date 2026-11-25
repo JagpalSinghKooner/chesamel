@@ -40,22 +40,26 @@ const noindex = isNoindex(Astro.url.pathname);
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      // Marks elements as they come into view: every Section after the first fades
+      // in (global.css), and the brandmark rings turn once (BrandmarkRings).
+      // Inline, so it runs with the page and never leaves Sections hidden waiting
+      // for a bundle.
+      {
+      for (const section of document.querySelectorAll('main > :not(:first-child)')) section.dataset.reveal = '';
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.dataset.inView = '';
+            observer.unobserve(entry.target);
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px' },
+      );
+      for (const element of document.querySelectorAll('[data-motion], [data-reveal]')) observer.observe(element);
+      }
+    </script>
   </body>
 </html>
 
-<script>
-  // Marks elements as they come into view: every Section after the first fades
-  // in (global.css), and the brandmark rings turn once (BrandmarkRings).
-  for (const section of document.querySelectorAll<HTMLElement>('main > :not(:first-child)')) section.dataset.reveal = '';
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        (entry.target as HTMLElement).dataset.inView = '';
-        observer.unobserve(entry.target);
-      }
-    },
-    { rootMargin: '0px 0px -10% 0px' },
-  );
-  for (const element of document.querySelectorAll('[data-motion], [data-reveal]')) observer.observe(element);
-</script>

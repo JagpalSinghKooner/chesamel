@@ -320,12 +320,14 @@
   when JavaScript runs and the visitor has not asked for less motion, so
   without either, everything simply shows.
 */
-html.motion [data-reveal]:not([data-in-view]) {
-  opacity: 0;
-  translate: 0 2rem;
-}
-html.motion [data-reveal] {
-  transition:
-    opacity 0.7s ease-out,
-    translate 0.7s ease-out;
+@media screen {
+  html.motion [data-reveal]:not([data-in-view]) {
+    opacity: 0;
+    translate: 0 2rem;
+  }
+  html.motion [data-reveal] {
+    transition:
+      opacity 0.7s ease-out,
+      translate 0.7s ease-out;
+  }
 }

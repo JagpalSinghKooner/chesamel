@@ -3,6 +3,7 @@
 // page, as on the live Industries and Our Work pages. Built on Fulldev's Card
 // (ADR-0005).
 import { Card, CardContent } from '@/components/ui/card';
+import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import { industryAddress, type Industry } from '../content/case-studies';
 
@@ -20,7 +21,7 @@ const dark = tone === 'dark';
 <Card
   as="a"
   href={industryAddress(industry)}
-  class:list={[brandCard, 'group h-full border transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-indigo', dark ? 'border-dark-grey hover:border-white focus-visible:outline-white' : 'border-light-grey bg-white hover:border-indigo']}
+  class:list={[brandCard, focusOutline, 'group h-full border transition-colors duration-300 focus-visible:outline-indigo', dark ? 'border-dark-grey hover:border-white focus-visible:outline-white' : 'border-light-grey bg-white hover:border-indigo']}
   data-component="industry-card"
 >
   <div class="aspect-[4/3] overflow-hidden">

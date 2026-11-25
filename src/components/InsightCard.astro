@@ -4,6 +4,7 @@
 // like the Blog Post card: the Pillar tag is Dark Grey, not the live service
 // colour (ADR-0002).
 import { Card, CardContent } from '@/components/ui/card';
+import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import { pillarLabels, type PillarSlug } from '../data/taxonomy';
 
@@ -20,7 +21,7 @@ interface Props {
 const { href, title, image, pillar, action, headingLevel: Heading = 'h3' } = Astro.props;
 ---
 
-<Card as="a" href={href} class:list={[brandCard, 'group h-full border border-light-grey bg-white hover:border-indigo transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-indigo']} data-component="insight-card">
+<Card as="a" href={href} class:list={[brandCard, focusOutline, 'group h-full border border-light-grey bg-white hover:border-indigo transition-colors duration-300 focus-visible:outline-indigo']} data-component="insight-card">
   {
     image ? (
       <div class="aspect-video overflow-hidden">

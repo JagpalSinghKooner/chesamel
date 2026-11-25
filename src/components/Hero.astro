@@ -166,6 +166,7 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
       play();
     }
     pause.addEventListener('click', () => {
+      if (reduced.matches) return;
       const paused = pause.getAttribute('aria-pressed') !== 'true';
       pause.setAttribute('aria-pressed', String(paused));
       pause.querySelector('[data-icon-pause]')!.classList.toggle('hidden', paused);
@@ -173,9 +174,12 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
       if (paused) stop();
       else play();
     });
-    // Asking for less motion part-way through stops everything.
+    // Asking for less motion part-way through stops everything for good, and
+    // the pause button goes, since nothing can play again.
     reduced.addEventListener('change', () => {
-      if (reduced.matches) stop();
+      if (!reduced.matches) return;
+      stop();
+      pause.hidden = true;
     });
   }
 </script>

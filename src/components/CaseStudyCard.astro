@@ -5,6 +5,7 @@
 // coloured pill (ADR-0002). The image is decorative: the title already names
 // the link.
 import { Card, CardContent } from '@/components/ui/card';
+import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import { pillarLabels } from '../data/taxonomy';
 import type { CaseStudySummary } from '../content/case-studies';
@@ -21,7 +22,7 @@ const { caseStudy, headingLevel: Heading = 'h3' } = Astro.props;
 <Card
   as="a"
   href={caseStudy.address}
-  class:list={[brandCard, 'group h-full overflow-hidden border border-light-grey bg-white hover:border-indigo transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-indigo']}
+  class:list={[brandCard, focusOutline, 'group h-full overflow-hidden border border-light-grey bg-white hover:border-indigo transition-colors duration-300 focus-visible:outline-indigo']}
   data-component="case-study-card"
 >
   <div class="aspect-video overflow-hidden bg-off-white">

@@ -8,6 +8,7 @@
 // The logos are listed twice so the loop never shows a gap on wide screens;
 // the second copy is hidden from screen readers.
 import { Marquee, MarqueeContent, MarqueeItem, MarqueeToggle } from '@/components/ui/marquee';
+import { focusOutline } from '../button';
 
 const clients = [
   { name: 'Nepremacy', src: '/images/clients/nepremacy.svg' },
@@ -37,7 +38,7 @@ const clients = [
     <MarqueeToggle
       playLabel="Play the client logos"
       pauseLabel="Pause the client logos"
-      class="size-10 shrink-0 rounded-md border-medium-grey bg-white text-black hover:bg-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-black"
+      class:list={[focusOutline, 'size-10 shrink-0 rounded-md border-medium-grey bg-white text-black hover:bg-black hover:text-white focus-visible:outline-black']}
     />
   </Marquee>
 </section>

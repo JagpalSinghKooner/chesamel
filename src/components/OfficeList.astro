@@ -13,6 +13,7 @@ interface Props {
 }
 const { headingLevel = 'h3' } = Astro.props;
 const [first, ...rest] = await getOffices();
+if (!first) throw new Error('No Office files in src/content/offices/');
 ---
 
 <div class="flex flex-col gap-6" data-office-list data-component="office-list">

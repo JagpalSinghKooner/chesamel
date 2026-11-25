@@ -4,6 +4,7 @@
 // not the live site's rose/tiger text: secondary colours are for small accents
 // only (ADR-0002).
 import { Card, CardContent } from '@/components/ui/card';
+import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import type { BlogPostSummary } from '../content/blog';
 import { formatDate, isoDate, primaryPillar } from '../content/shared';
@@ -20,7 +21,7 @@ const { post, headingLevel: Heading = 'h3' } = Astro.props;
 <Card
   as="a"
   href={post.address}
-  class:list={[brandCard, 'group h-full min-h-64 border border-light-grey bg-white/40 hover:border-indigo hover:bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-indigo']}
+  class:list={[brandCard, focusOutline, 'group h-full min-h-64 border border-light-grey bg-white/40 hover:border-indigo hover:bg-white transition-colors duration-300 focus-visible:outline-indigo']}
   data-component="blog-post-card"
 >
   <CardContent class:list={[brandCardContent, 'grow p-5']}>

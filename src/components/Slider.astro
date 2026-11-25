@@ -13,7 +13,7 @@
 // passes its id as `labelledby`. The slider is then a named group, not a
 // second landmark with the same name as its Section.
 import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { brandButton } from './button';
+import { brandButton, focusOutline } from './button';
 
 interface Props {
   // The id of the heading that names this slider, or a name of its own.
@@ -31,7 +31,8 @@ const dark = tone === 'dark';
 // ones in the controls row.
 const control = [
   brandButton,
-  'static my-0 size-11 shrink justify-center rounded-md bg-transparent text-[length:inherit] font-normal shadow-none transition-colors duration-300 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid',
+  focusOutline,
+  'static my-0 size-11 shrink justify-center rounded-md bg-transparent text-[length:inherit] font-normal shadow-none transition-colors duration-300 disabled:cursor-default disabled:opacity-40',
   dark
     ? 'border-white/40 text-white hover:border-white hover:bg-white hover:text-black focus-visible:outline-white'
     : 'border-medium-grey text-black hover:border-black hover:bg-black hover:text-white focus-visible:outline-black',

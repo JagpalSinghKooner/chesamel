@@ -1,6 +1,6 @@
 # Build the Components on Fulldev UI, copied into the repo
 
-The Components are built on [Fulldev UI](https://ui.full.dev) (MIT, vanilla Astro and Tailwind v4) instead of being hand-built. Its source is copied into `src/components/ui/` through the shadcn registry (`npx shadcn add @fulldev/<name>`), never imported from an npm package, so every line is ours to read, patch and keep. Chesamel Components stay thin wrappers that pass the brand's classes to the Fulldev building blocks: button, card, breadcrumb, tabs, carousel, toggle group, navigation menu, sheet and accordion. We chose this so tested, accessible pieces replace hand-written markup and scripts, while the brand stays in charge.
+The Components are built on [Fulldev UI](https://ui.full.dev) (MIT, vanilla Astro and Tailwind v4) instead of being hand-built. Its source is copied into `src/components/ui/` through the shadcn registry (`npx shadcn add @fulldev/<name>`), never imported from an npm package, so every line is ours to read, patch and keep. Chesamel Components stay thin wrappers that pass the brand's classes to the Fulldev building blocks: button, card, breadcrumb, tabs, carousel, marquee, toggle group, navigation menu, sheet and accordion. We chose this so tested, accessible pieces replace hand-written markup and scripts, while the brand stays in charge.
 
 **The brand wins (ADR-0002).** Fulldev's theme tokens (`--primary`, `--background`, `--border`, `--ring`, …) are mapped onto the brand tokens in `src/styles/global.css` and never point anywhere else. `--radius: 0` is the one setting for corners: every building block is square, and raising it rounds them all. There is no `.dark` theme. The few corners that were rounded before Fulldev (the header's controls, the footer's social links, the skip link, the style guide's logo panels) follow `--radius` too since #35, through `rounded-md` and `rounded-lg`, because the live site's controls are square. Where a Fulldev default and ADR-0002 disagree, ADR-0002 wins, either through the token mapping or through the classes a Component passes.
 
@@ -30,11 +30,13 @@ Updates are pulled deliberately, one building block at a time, never automatical
 
 Data Slot's tabs and toggle groups ignore the reading direction for arrow keys. `src/components/follow-reading-direction.ts` fixes that for the Tabs Section and the filters, not in the copies, because the logic lives in the `@data-slot/*` packages.
 
+The Marquee (added in #35 for the client-logo strip) is copied as delivered, with no local patch: it already follows the reading direction, pauses on hover, focus and its toggle, and stays still under reduced motion.
+
 `@fulldev/init` also adds a `prefers-reduced-motion` rule that cuts every animation and transition to almost nothing for visitors who ask for less motion. It is kept as delivered.
 
 ## Dependencies
 
-Accepted with the ticket: Embla (`embla-carousel`), the `@data-slot/*` packages, `tw-animate-css`, `shadcn` (for `shadcn/tailwind.css`), `components.json`, and the `@/*` path alias. Fulldev also brings `cn` and `class-variance-authority` (its class helpers), `@lucide/astro` (its icons), and `@data-slot/dialog` with Fulldev's Dialog, which its Sheet is built on.
+Accepted with the ticket: Embla (`embla-carousel`, and `embla-carousel-auto-scroll` for the Marquee, added in #35), the `@data-slot/*` packages, `tw-animate-css`, `shadcn` (for `shadcn/tailwind.css`), `components.json`, and the `@/*` path alias. Fulldev also brings `cn` and `class-variance-authority` (its class helpers), `@lucide/astro` (its icons), and `@data-slot/dialog` with Fulldev's Dialog, which its Sheet is built on.
 
 ## Consequences
 
