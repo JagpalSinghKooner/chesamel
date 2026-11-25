@@ -109,12 +109,12 @@ test('style-guide page shows the Case Study and Industry Components', async ({ p
   }
 });
 
-test('style-guide page shows the header, footer, hero, Pillar cards, CTA and Blog Post Components', async ({ page }) => {
+test('style-guide page shows the header, footer, hero, Pillar cards, CTA, Blog Post and cookie banner Components', async ({ page }) => {
   await page.goto('/style-guide/');
   const components = page.locator('[data-style-guide="components"]');
   await expect(components.locator('[data-header]')).toBeVisible();
   await expect(components.locator('footer')).toBeVisible();
-  for (const name of ['hero', 'pillar-cards', 'cta', 'blog-post-card', 'blog-post-listing']) {
+  for (const name of ['hero', 'pillar-cards', 'cta', 'blog-post-card', 'blog-post-listing', 'cookie-banner']) {
     await expect(components.locator(`[data-component="${name}"]`).first()).toBeVisible();
   }
 });

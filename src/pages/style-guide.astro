@@ -9,6 +9,7 @@ import Icon from '../components/Icon.astro';
 import { brandIcons, interfaceIcons, type IconName } from '../design-system/icons';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 import Hero from '../components/Hero.astro';
 import ClientLogos from '../components/home/ClientLogos.astro';
 import PillarCards from '../components/PillarCards.astro';
@@ -417,6 +418,9 @@ const typeStyles = [
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Cookie banner</h3>
+    <p class="type-body mx-auto mb-4 max-w-5xl px-6">Fixed to the bottom of the screen until the visitor chooses; the footer’s Cookie settings link reopens it.</p>
+    <CookieBanner preview />
   </section>
 
   <section aria-labelledby="building-blocks" class="mx-auto mt-20 max-w-5xl px-6 pb-20" data-style-guide="building-blocks">

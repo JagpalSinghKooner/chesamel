@@ -1,0 +1,117 @@
+---
+// Cookie consent banner (#12): a bar fixed to the bottom of the screen, not a
+// modal, so the page stays usable while it shows. Base.astro renders it right
+// after the skip link, so it comes next in reading and focus order.
+//
+// Accept all loads HubSpot's tracking code, on this and later page views.
+// Reject all keeps it from loading. Either choice is remembered for
+// consentMonths (src/data/consent.ts) in localStorage, then the banner asks
+// again. The footer's "Cookie settings" link reopens it. Without JavaScript the
+// banner stays hidden and HubSpot never loads.
+//
+// `preview` draws it in place, always shown, for the style guide.
+import { Button } from '@/components/ui/button';
+import { brandButton, focusOutline } from './button';
+import { legalLinks } from '../data/site';
+
+interface Props {
+  preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+const id = preview ? 'cookie-settings-preview' : 'cookie-settings';
+const privacyPolicy = legalLinks.find((link) => link.label === 'Privacy & Cookies Policy')!;
+// The Button's "outline" tone (Button.astro), on both buttons: equally prominent.
+const choiceButton = 'border-white/40 bg-transparent px-5 py-3 text-base leading-none text-white hover:bg-white hover:text-black focus-visible:outline-white';
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-title`}
+  tabindex="-1"
+  hidden={!preview}
+  data-cookie-banner={preview ? 'preview' : 'live'}
+  data-component="cookie-banner"
+  class:list={['border-t border-white/10 bg-black text-off-white focus:outline-none', preview ? 'relative' : 'fixed inset-x-0 bottom-0 z-40']}
+>
+  <div class="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-5 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8">
+    <p class="text-sm leading-relaxed">
+      <strong id={`${id}-title`} class="font-semibold text-white">We use cookies.</strong>{' '}
+      Analytics that don’t use cookies run for everyone. With your OK, we also use HubSpot cookies to understand how you use the site.{' '}
+      <a href={privacyPolicy.href} class="whitespace-nowrap text-white underline hover:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Privacy policy</a>
+    </p>
+    <div class="flex shrink-0 gap-3">
+      <Button data-cookie-choice="accepted" class:list={[brandButton, focusOutline, choiceButton]}>Accept all</Button>
+      <Button data-cookie-choice="rejected" class:list={[brandButton, focusOutline, choiceButton]}>Reject all</Button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { consentStorageKey, cookieSettingsHref } from '../data/consent';
+  import { readChoice, serialiseChoice, hubspotScriptSrc, type ConsentChoice } from '../lib/consent';
+
+  const banner = document.querySelector<HTMLElement>('[data-cookie-banner="live"]');
+  // The "Cookie settings" link that reopened the banner, to return focus to.
+  let opener: HTMLElement | undefined;
+
+  // localStorage can be blocked (private modes, strict settings): then there is
+  // no remembered choice, the banner asks on each page and HubSpot stays off.
+  function storedChoice(): ConsentChoice | undefined {
+    try {
+      return readChoice(localStorage.getItem(consentStorageKey), new Date());
+    } catch {
+      return undefined;
+    }
+  }
+
+  function remember(choice: ConsentChoice) {
+    try {
+      localStorage.setItem(consentStorageKey, serialiseChoice(choice, new Date()));
+    } catch {
+      // Not remembered; the choice still applies to this page.
+    }
+  }
+
+  function loadHubSpot() {
+    if (document.getElementById('hs-script-loader')) return;
+    const script = document.createElement('script');
+    script.id = 'hs-script-loader';
+    script.async = true;
+    script.src = hubspotScriptSrc;
+    document.body.append(script);
+  }
+
+  function closeBanner() {
+    if (!banner) return;
+    const hadFocus = banner.contains(document.activeElement);
+    banner.hidden = true;
+    if (hadFocus) opener?.focus();
+    opener = undefined;
+  }
+
+  const choice = storedChoice();
+  if (choice === 'accepted') loadHubSpot();
+  if (!choice && banner) banner.hidden = false;
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const button = target?.closest<HTMLElement>('[data-cookie-choice]');
+    if (button) {
+      const chosen = button.dataset.cookieChoice as ConsentChoice;
+      remember(chosen);
+      // Rejecting after accepting cannot unload HubSpot from this page; it
+      // stops it from loading on the next ones.
+      if (chosen === 'accepted') loadHubSpot();
+      closeBanner();
+      return;
+    }
+    const link = target?.closest<HTMLAnchorElement>(`a[href="${cookieSettingsHref}"]`);
+    if (link && banner) {
+      event.preventDefault();
+      opener = link;
+      banner.hidden = false;
+      banner.focus();
+    }
+  });
+</script>

@@ -3,6 +3,7 @@
 // that go nowhere and the admin "Edit Profile" link.
 
 import type { IconName } from '../design-system/icons';
+import { cookieSettingsHref } from './consent';
 
 export interface Link {
   label: string;
@@ -66,6 +67,8 @@ export const footerLinks: Link[] = [
   { label: 'Our Work', href: '/insights/our-work/' },
   { label: 'Blog', href: '/insights/blog/' },
   { label: 'Contact', href: '/contact/' },
+  // Reopens the cookie banner (CookieBanner.astro) rather than going anywhere.
+  { label: 'Cookie settings', href: cookieSettingsHref },
 ];
 
 export const legalLinks: Link[] = [
