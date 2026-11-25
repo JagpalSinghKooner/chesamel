@@ -13,6 +13,13 @@
 // fails WCAG AA, so here the text is Dark Grey (white on Indigo) at 12px, and
 // Rose (Lime on Indigo) only marks the field's border.
 //
+// Submit buttons start disabled and ./form.ts enables them, so without
+// JavaScript (or before it runs) a submit goes nowhere: the form has no method
+// or action, and a disabled default button blocks Enter too.
+//
+// The success box is an empty live region; the script fills it from its
+// <template> once the form is sent, so screen readers announce the message.
+//
 // `preview` shows a state without typing, for the style guide.
 import { Button } from '@/components/ui/button';
 import { brandButton, focusOutline } from './button';
@@ -62,7 +69,6 @@ const submitClass = indigo
 
 <form
   id={id}
-  method="post"
   data-form={kind}
   data-hubspot-form={form.hubspotFormId}
   hidden={preview === 'success'}
@@ -107,7 +113,7 @@ const submitClass = indigo
     {
       indigo && (
         <div class="sm:col-start-2">
-          <Button type="submit" class:list={[brandButton, focusOutline, submitClass]}>
+          <Button type="submit" disabled data-form-submit class:list={[brandButton, focusOutline, submitClass]}>
             {form.submitLabel}
             <span aria-hidden="true" class="text-lime rtl:-scale-x-100">↗</span>
           </Button>
@@ -146,7 +152,7 @@ const submitClass = indigo
     </div>
     {
       !indigo && (
-        <Button type="submit" class:list={[brandButton, focusOutline, submitClass]}>
+        <Button type="submit" disabled data-form-submit class:list={[brandButton, focusOutline, submitClass]}>
           {form.submitLabel}
         </Button>
       )
@@ -158,13 +164,13 @@ const submitClass = indigo
 
 <div
   id={`${id}-success`}
-  role="status"
+  aria-live="polite"
   tabindex="-1"
-  hidden={preview !== 'success'}
   data-form-success
   class:list={['grid gap-2 text-lg font-semibold', focusOutline, indigo ? 'text-white focus-visible:outline-white' : 'text-black focus-visible:outline-indigo']}
 >
-  {form.success.map((p) => <p>{p}</p>)}
+  {preview === 'success' && form.success.map((p) => <p>{p}</p>)}
+  <template>{form.success.map((p) => <p>{p}</p>)}</template>
 </div>
 
 <script>

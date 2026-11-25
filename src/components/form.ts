@@ -39,6 +39,9 @@ export function enhance(form: HTMLFormElement) {
   const inputs = [...form.querySelectorAll<HTMLInputElement>('input[data-field]')];
   const summary = form.querySelector<HTMLElement>('[data-form-summary]');
   const success = document.getElementById(`${form.id}-success`);
+  const message = success?.querySelector('template');
+  // Buttons stay disabled until now, so a submit without JavaScript sends nothing.
+  for (const button of form.querySelectorAll<HTMLButtonElement>('[data-form-submit]')) button.disabled = false;
 
   for (const input of inputs) {
     input.addEventListener('blur', () => show(input, problemWith(input)));
@@ -66,8 +69,9 @@ export function enhance(form: HTMLFormElement) {
     await sendForm(form.dataset.hubspotForm ?? '', values);
 
     form.hidden = true;
-    if (success) {
-      success.hidden = false;
+    // The live region was empty until now, so the message is announced.
+    if (success && message) {
+      success.append(message.content.cloneNode(true));
       success.focus();
     }
   });

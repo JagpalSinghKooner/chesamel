@@ -120,3 +120,30 @@ test('the style guide shows both forms with their error and success states', asy
     await expect(page.locator(`#style-guide-${name}-form`)).toBeVisible();
   }
 });
+
+test.describe('without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  for (const { name, path, prefix, form } of cases) {
+    test(`the ${name} form cannot be submitted, so nothing is sent`, async ({ page }) => {
+      await page.goto(path);
+      await page.waitForLoadState('networkidle');
+      const sent: Request[] = [];
+      page.on('request', (request) => sent.push(request));
+
+      for (const field of form.fields) await formOf(page, prefix).getByLabel(field.label, { exact: true }).fill(valid[field.name]);
+      const submit = formOf(page, prefix).getByRole('button', { name: form.submitLabel });
+      await expect(submit).toBeDisabled();
+      await submit.click({ force: true });
+      // Enter in a field is the other way to submit; a disabled default button blocks it.
+      await formOf(page, prefix).getByLabel('Email', { exact: true }).press('Enter');
+      await page.waitForTimeout(500);
+
+      const url = new URL(page.url());
+      expect(url.pathname).toBe(path);
+      expect(url.search).toBe('');
+      const sends = sent.filter((r) => r.method() !== 'GET' || new URL(r.url()).origin !== url.origin || r.resourceType() !== 'image');
+      expect(sends.map((r) => `${r.method()} ${r.url()}`)).toEqual([]);
+    });
+  }
+});

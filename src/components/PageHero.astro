@@ -19,14 +19,14 @@ interface Props {
   links?: { label: string; href: string }[];
   tone?: 'indigo' | 'light';
   // Light tone only: faint rings instead of solid ones, as on Contact.
-// The `aside` slot sits beside the text from 1024px, under it on smaller
-// screens: Contact's form.
   faintRings?: boolean;
   // h1 on a page; lower where the hero is shown as a sample.
   headingLevel?: 'h1' | 'h4';
 }
 const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], tone = 'indigo', faintRings = false, headingLevel: Heading = 'h1' } = Astro.props;
 const indigo = tone === 'indigo';
+// The `aside` slot sits beside the text from 1024px, under it on smaller
+// screens: Contact's form.
 const hasAside = Astro.slots.has('aside');
 ---
 
