@@ -57,6 +57,12 @@
   --font-*: initial;
   --font-sans: "Figtree Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
   --font-subheading: "DM Sans Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
+
+  /*
+    The live site's content column is 1280px wide. max-w-7xl wraps a 24px
+    gutter on each side, so it is 1280px plus both gutters.
+  */
+  --container-7xl: 83rem;
 }
 
 /*
@@ -146,28 +152,49 @@
     @apply bg-background text-foreground;
     line-height: 1.45;
   }
+  /* The live site sets body text at 20px on wide screens; 18px keeps long
+     reads comfortable while closing most of the gap. */
+  @media (width >= 64rem) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
 }
 
 /* Type styles, from the type hierarchy on page 14 of the guidelines. */
+/*
+  The guidelines give one size per style. On screens 1024px and wider the
+  headings grow to the live site's sizes (h1 72px, h2 52px, h3 30px), keeping
+  the guidelines' order and weights.
+*/
 @utility type-heading-1 {
   font-weight: 500;
   font-size: 3.5rem;
   line-height: 1;
   color: var(--color-black);
+  @media (width >= 64rem) {
+    font-size: 4.5rem;
+  }
 }
 
 @utility type-heading-2 {
   font-weight: 500;
   font-size: 2.5rem;
-  line-height: 1;
+  line-height: 1.1;
   color: var(--color-black);
+  @media (width >= 64rem) {
+    font-size: 3.25rem;
+  }
 }
 
 @utility type-heading-3 {
   font-weight: 500;
   font-size: 1.75rem;
-  line-height: 1;
+  line-height: 1.1;
   color: var(--color-black);
+  @media (width >= 64rem) {
+    font-size: 1.875rem;
+  }
 }
 
 @utility type-subheading {
@@ -284,5 +311,23 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*
+  Scroll reveal: Sections fade and rise into place as they come into view, as
+  on the live site. The `motion` class is set by the script in Base.astro only
+  when JavaScript runs and the visitor has not asked for less motion, so
+  without either, everything simply shows.
+*/
+@media screen {
+  html.motion [data-reveal]:not([data-in-view]) {
+    opacity: 0;
+    translate: 0 2rem;
+  }
+  html.motion [data-reveal] {
+    transition:
+      opacity 0.7s ease-out,
+      translate 0.7s ease-out;
   }
 }

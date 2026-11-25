@@ -7,7 +7,7 @@ const valid = {
   title: 'Shaping a Responsible Tech Strategy',
   date: '2024-12-10T12:20:12Z',
   author: 'Graham Jones',
-  hero: { src: '/images/hero.webp', alt: '' },
+  hero: { src: '/images/hero-poster.webp', alt: '' },
   pillars: ['digital-transformation'],
   industries: [],
 };

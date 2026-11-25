@@ -1,8 +1,14 @@
 ---
 // Page hero Component: the title band at the top of a Page, Pillar or
 // Service, with its subtitle, paragraphs, facts (such as a role's "Hybrid /
-// Full-Time") and buttons.
+// Full-Time") and buttons, and the brandmark rings turning in its corner.
+//
+// Two tones, as on the live site:
+//   indigo: most Pages, white text and white rings
+//   light:  Pillars, Services, Contact and open roles; Off-White with Indigo
+//           rings (the live site's pink rings are Indigo: ADR-0002)
 import Button from './Button.astro';
+import BrandmarkRings from './BrandmarkRings.astro';
 
 interface Props {
   title: string;
@@ -11,24 +17,37 @@ interface Props {
   paragraphs?: string[];
   details?: string[];
   links?: { label: string; href: string }[];
+  tone?: 'indigo' | 'light';
+  // Light tone only: faint rings instead of solid ones, as on Contact.
+  faintRings?: boolean;
   // h1 on a page; lower where the hero is shown as a sample.
   headingLevel?: 'h1' | 'h4';
 }
-const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], headingLevel: Heading = 'h1' } = Astro.props;
+const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], tone = 'indigo', faintRings = false, headingLevel: Heading = 'h1' } = Astro.props;
+const indigo = tone === 'indigo';
 ---
 
-<section data-component="page-hero" class="bg-off-white">
-  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-    <div class="max-w-3xl">
+<section data-component="page-hero" data-tone={tone} class:list={['relative isolate overflow-hidden', indigo ? 'bg-indigo text-white' : 'bg-off-white']}>
+  <BrandmarkRings
+    tone={indigo ? 'white' : 'indigo'}
+    solid={!indigo && !faintRings}
+    class="absolute -end-32 -bottom-48 -z-10 size-[24rem] opacity-90 sm:size-[34rem] lg:-end-16 lg:-bottom-56 lg:size-[44rem]"
+  />
+  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32">
+    <div class="max-w-4xl">
       {eyebrow && <p class="font-subheading">{eyebrow}</p>}
-      <Heading class:list={['type-heading-1 text-4xl sm:text-6xl', eyebrow && 'mt-3']}>{title}</Heading>
-      {subtitle && <p class="type-subheading mt-6 text-xl">{subtitle}</p>}
-      {paragraphs.map((p, i) => <p class:list={[i === 0 ? 'mt-6 text-lg' : 'mt-4']}>{p}</p>)}
-      {details.length > 0 && <p class="font-subheading mt-6 flex flex-wrap gap-x-6 gap-y-2 text-dark-grey">{details.map((d) => <span>{d}</span>)}</p>}
+      <Heading class:list={['type-heading-1 text-5xl sm:text-6xl lg:text-7xl', eyebrow && 'mt-3', indigo && 'text-white']}>{title}</Heading>
+      {subtitle && <p class:list={['type-subheading mt-6 text-xl lg:text-2xl', indigo && 'text-white']}>{subtitle}</p>}
+      {paragraphs.map((p, i) => <p class:list={[i === 0 ? 'mt-6 text-lg lg:text-xl' : 'mt-4', 'max-w-3xl']}>{p}</p>)}
+      {details.length > 0 && <p class:list={['font-subheading mt-6 flex flex-wrap gap-x-6 gap-y-2', !indigo && 'text-dark-grey']}>{details.map((d) => <span>{d}</span>)}</p>}
       {
         links.length > 0 && (
-          <div class="mt-8 flex flex-wrap gap-3">
-            {links.map((link, i) => <Button href={link.href} tone={i === 0 ? 'indigo' : 'light'}>{link.label}</Button>)}
+          <div class="mt-10 flex flex-wrap gap-3">
+            {links.map((link, i) => (
+              <Button href={link.href} tone={indigo ? (i === 0 ? 'outline' : 'dark') : i === 0 ? 'indigo' : 'light'}>
+                {link.label}
+              </Button>
+            ))}
           </div>
         )
       }

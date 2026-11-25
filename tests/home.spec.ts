@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { revealAll } from './reveal-all';
 import { pages } from './pages';
 
 test.describe('header', () => {
@@ -74,7 +75,8 @@ test.describe('homepage', () => {
     await page.goto('/');
     const main = page.getByRole('main');
 
-    await expect(main.getByRole('heading', { level: 1 })).toHaveText('Global Business Transformation');
+    // The word slider changes the shown word; the heading's name stays the same.
+    await expect(main.getByRole('heading', { level: 1 })).toHaveAccessibleName('Global Business Transformation');
     await expect(main.getByRole('link', { name: 'What We Do' }).first()).toHaveAttribute('href', '/what-we-do/');
 
     await expect(main.getByRole('heading', { name: 'What’s holding your business back?' })).toBeVisible();
@@ -117,6 +119,7 @@ test.describe('homepage', () => {
     await page.goto('/');
     await page.getByRole('button', { name: 'Menu' }).click();
     await page.getByRole('navigation', { name: 'Main' }).getByRole('button', { name: 'What we do' }).click();
+    await revealAll(page);
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
     expect(results.violations).toEqual([]);
   });

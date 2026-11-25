@@ -3,7 +3,7 @@
 // filter, as on the live page. The live page shows the Industry cards in a
 // slider; here they sit in a grid, so all five are visible at once.
 import Base from '../../layouts/Base.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
 import Button from '../../components/Button.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
 import CaseStudyListing from '../../components/CaseStudyListing.astro';
@@ -19,17 +19,13 @@ const industries = await getIndustries();
   title="Industries | Chesamel"
   description="Explore the range of industries we serve and how we approach business transformation in each sector."
 >
-  <section class="bg-black">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <h1 class="type-heading-1 text-white">Industries</h1>
-      <p class="mt-4 max-w-2xl font-subheading text-lg text-off-white">
-        Explore the range of industries we serve and how we approach business transformation in each sector.
-      </p>
-    </div>
-  </section>
-  <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Industries' }]} />
+  <InsightsHero
+    heading="Industries"
+    text="Explore the range of industries we serve and how we approach business transformation in each sector."
+    parents={[{ label: 'Home', href: '/' }]}
+  />
   <section aria-labelledby="our-expertise">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-20 sm:px-6 lg:py-28 lg:grid-cols-2 lg:items-center">
       <div>
         <p class="font-subheading">/ our expertise</p>
         <h2 id="our-expertise" class="type-heading-2 mt-3">Tailored solutions for your sector</h2>
@@ -41,7 +37,7 @@ const industries = await getIndustries();
     </div>
   </section>
   <section aria-labelledby="key-industries" class="bg-off-white">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 id="key-industries" class="type-heading-2">Key industries</h2>
@@ -55,7 +51,7 @@ const industries = await getIndustries();
     </div>
   </section>
   <section aria-labelledby="latest-work" class="bg-black">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <p class="font-subheading text-off-white">/ see our work in action</p>
       <h2 id="latest-work" class="type-heading-2 mt-3 mb-10 text-white">Latest work</h2>
       <CaseStudyListing caseStudies={caseStudies} filters={['industry']} tone="dark" />

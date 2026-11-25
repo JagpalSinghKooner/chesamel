@@ -12,7 +12,7 @@ const dark = tone === 'dark';
 ---
 
 <section data-component="section-points" aria-labelledby={id} class:list={[dark && 'bg-black']}>
-  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_2fr]">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-6 lg:py-28 lg:grid-cols-[1fr_2fr]">
     <div>
       <SectionHeading id={id} heading={heading} eyebrow={eyebrow} dark={dark} />
       {paragraphs.map((p) => <p class:list={['mt-6', dark && 'text-off-white']}>{p}</p>)}

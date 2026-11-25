@@ -1,26 +1,40 @@
 ---
-// Hero Component: full-width image with a heading and buttons, as at the top
-// of the live homepage. `highlight` is the word set on an Indigo marker,
-// standing in for the live site's orange word: secondary colours are for
-// small accents only (ADR-0002).
+// Hero Component: the full-height band at the top of the homepage, with its
+// looping video, the heading whose middle word slides through `words`, the
+// buttons and, on wide screens, the "/ solutions" panel of Pillar links.
 //
-// The live hero plays a 7.5 MB video; this shows a still frame from it.
+// The live heading colours each word in a secondary colour; here every word
+// sits on the Indigo marker, since secondary colours are for small accents only
+// (ADR-0002).
+//
+// The video: the live file is 7.5 MB (1920x1080). This one is re-encoded to
+// 1280x720 without sound, 1.5 MB, and is only fetched on screens 1024px and
+// wider, when the visitor hasn't asked for less motion or to save data.
+// Everyone else, and anyone without JavaScript, sees the poster frame.
+//
+// Moving content needs a pause (WCAG 2.2.2): one button pauses both the video
+// and the word slider. Screen readers always hear the first word, so the
+// heading's name does not change under them.
 import Button from './Button.astro';
 import type { ButtonAction } from './button';
+import { pillars } from '../data/pillars';
 
 interface Props {
   before?: string;
-  highlight: string;
+  words: [string, ...string[]];
   after?: string;
   headingLevel?: 'h1' | 'h2';
   image: { src: string; srcset?: string };
+  video?: string;
   actions: ButtonAction[];
+  // The "/ solutions" panel of Pillar links on the right, from 1280px.
+  solutions?: boolean;
 }
 
-const { before, highlight, after, headingLevel: Heading = 'h1', image, actions } = Astro.props;
+const { before, words, after, headingLevel: Heading = 'h1', image, video, actions, solutions = false } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-black" data-component="hero">
+<section class="relative isolate overflow-hidden bg-black" data-component="hero" data-hero data-words={JSON.stringify(words)}>
   <img
     src={image.src}
     srcset={image.srcset}
@@ -28,14 +42,144 @@ const { before, highlight, after, headingLevel: Heading = 'h1', image, actions }
     alt=""
     class="absolute inset-0 -z-10 size-full object-cover"
     fetchpriority="high"
+    data-hero-poster
   />
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/20"></div>
-  <div class="mx-auto flex min-h-[28rem] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[36rem] sm:px-6">
-    <Heading class="type-heading-1 max-w-3xl text-white sm:text-7xl">
-      {before && <>{before} </>}<span class="bg-indigo px-2 box-decoration-clone">{highlight}</span>{after && <> {after}</>}
+  {video && <template data-hero-video><video src={video} muted loop playsinline preload="auto" aria-hidden="true" class="absolute inset-0 -z-10 size-full object-cover"></video></template>}
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/50 to-black/10"></div>
+  <div class="mx-auto flex min-h-[34rem] max-w-7xl flex-col justify-center px-5 pt-28 pb-20 sm:px-6 lg:min-h-[min(56rem,100svh)] xl:pe-[30rem]">
+    <Heading class="type-heading-1 text-5xl text-white sm:text-7xl xl:text-[5.25rem]">
+      {before && <>{before}{' '}</>}<span class="relative inline-block overflow-hidden bg-indigo px-2 align-bottom"
+        ><span class="sr-only">{words[0]}</span><span aria-hidden="true" class="hero-word inline-block" data-hero-word>{words[0]}</span></span
+      >{after && <><br />{after}</>}
     </Heading>
     <div class="mt-10 flex flex-wrap gap-3">
       {actions.map((a) => <Button href={a.href} tone={a.tone}>{a.label}</Button>)}
     </div>
   </div>
+
+  {
+    solutions && (
+      <nav
+        aria-label="Solutions"
+        class="absolute inset-y-0 end-0 hidden w-[27.75rem] flex-col bg-black/60 pt-28 backdrop-blur-xl xl:flex"
+      >
+        <p class="px-8 pb-6 text-mint">/ solutions</p>
+        <ul class="flex flex-1 flex-col">
+          {pillars.map((p) => (
+            <li class="flex flex-1">
+              <a
+                href={p.href}
+                class="group flex flex-1 items-center gap-4 border-t border-white/10 px-8 py-4 font-bold text-white transition-colors duration-300 hover:bg-black/60 focus-visible:bg-black/60 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-white"
+              >
+                <img src={p.icon} alt="" class="size-12" />
+                <span class="flex-1 transition-[padding] duration-300 group-hover:ps-1.5 group-focus-visible:ps-1.5">{p.label}</span>
+                <span aria-hidden="true" class="text-lime rtl:-scale-x-100">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+
+  <button
+    type="button"
+    hidden
+    aria-pressed="false"
+    class="absolute end-5 bottom-5 flex size-10 items-center justify-center border border-white/40 bg-black/40 text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:end-6 xl:end-[28.75rem]"
+    data-hero-pause
+  >
+    <span class="sr-only">Pause animation</span>
+    <svg aria-hidden="true" viewBox="0 0 16 16" class="size-4 fill-current" data-icon-pause><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z" /></svg>
+    <svg aria-hidden="true" viewBox="0 0 16 16" class="hidden size-4 fill-current" data-icon-play><path d="M4 2l10 6-10 6z" /></svg>
+  </button>
 </section>
+
+<style>
+  .hero-word.out {
+    animation: word-out 0.5s ease-in forwards;
+  }
+  .hero-word.in {
+    animation: word-in 0.5s ease-out;
+  }
+  @keyframes word-out {
+    to {
+      transform: translateY(-110%);
+    }
+  }
+  @keyframes word-in {
+    from {
+      transform: translateY(110%);
+    }
+  }
+</style>
+
+<script>
+  // Starts the video and the word slider where motion is welcome, and shows
+  // the one button that pauses both.
+  for (const hero of document.querySelectorAll<HTMLElement>('[data-hero]')) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduced.matches) continue;
+
+    const pause = hero.querySelector<HTMLButtonElement>('[data-hero-pause]')!;
+    const word = hero.querySelector<HTMLElement>('[data-hero-word]')!;
+    const words: string[] = JSON.parse(hero.dataset.words!);
+
+    let video: HTMLVideoElement | undefined;
+    const template = hero.querySelector<HTMLTemplateElement>('[data-hero-video]');
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (template && !saveData && matchMedia('(min-width: 1024px)').matches) {
+      video = template.content.firstElementChild!.cloneNode() as HTMLVideoElement;
+      video.poster = hero.querySelector<HTMLImageElement>('[data-hero-poster]')!.currentSrc;
+      template.replaceWith(video);
+      video.play().catch(() => {});
+    }
+
+    let index = 0;
+    let timer: number | undefined;
+    const next = () => {
+      word.classList.add('out');
+      word.addEventListener(
+        'animationend',
+        () => {
+          index = (index + 1) % words.length;
+          word.textContent = words[index];
+          word.classList.replace('out', 'in');
+        },
+        { once: true },
+      );
+    };
+    const play = () => {
+      if (words.length > 1) timer = window.setInterval(next, 4000);
+      video?.play().catch(() => {});
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      video?.pause();
+    };
+    word.addEventListener('animationend', (e) => {
+      if (e.animationName.includes('word-in')) word.classList.remove('in');
+    });
+
+    if (words.length > 1 || video) {
+      pause.hidden = false;
+      play();
+    }
+    pause.addEventListener('click', () => {
+      if (reduced.matches) return;
+      const paused = pause.getAttribute('aria-pressed') !== 'true';
+      pause.setAttribute('aria-pressed', String(paused));
+      pause.querySelector('[data-icon-pause]')!.classList.toggle('hidden', paused);
+      pause.querySelector('[data-icon-play]')!.classList.toggle('hidden', !paused);
+      if (paused) stop();
+      else play();
+    });
+    // Asking for less motion part-way through stops everything for good, and
+    // the pause button goes, since nothing can play again.
+    reduced.addEventListener('change', () => {
+      if (!reduced.matches) return;
+      stop();
+      pause.hidden = true;
+    });
+  }
+</script>

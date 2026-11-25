@@ -18,15 +18,15 @@ const { trail, band = false, class: className } = Astro.props;
 const last = trail.length - 1;
 ---
 
-<Breadcrumb aria-label="Breadcrumb" class:list={['type-caption', band && 'border-b border-light-grey', className]}>
+<Breadcrumb aria-label="Breadcrumb" class:list={['type-caption lg:text-base', band && 'border-b border-light-grey', className]}>
   {/* Text keeps the colour of whatever holds it (white on a dark hero). */}
-  <BreadcrumbList class:list={['gap-2 text-[length:inherit] text-inherit sm:gap-2', band && 'mx-auto max-w-7xl px-4 py-4 sm:px-6']}>
+  <BreadcrumbList class:list={['gap-2 text-[length:inherit] text-inherit sm:gap-2', band && 'mx-auto max-w-7xl px-5 py-4 sm:px-6 lg:py-5']}>
     {
       trail.map((step, i) => (
         <>
           <BreadcrumbItem class="gap-0">
             {step.href ? (
-              <BreadcrumbLink href={step.href} class="underline hover:text-inherit">
+              <BreadcrumbLink href={step.href} class="underline decoration-transparent underline-offset-4 transition-colors duration-300 hover:text-inherit hover:decoration-current focus-visible:decoration-current">
                 {step.label}
               </BreadcrumbLink>
             ) : i === last ? (

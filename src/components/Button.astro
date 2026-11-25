@@ -4,9 +4,14 @@
 // `tone` picks a pairing that passes WCAG AA contrast:
 //   dark: Black on light backgrounds    light: white with a border, on light backgrounds
 //   indigo: Indigo with white text       outline: white text with a border, on dark backgrounds
-// The live site's Lime buttons are Indigo here: Lime is for small accents only.
+// The live site's Lime buttons are Indigo here: Lime is for small accents only,
+// so it appears only on the arrow of the dark button.
+//
+// Sizes follow the live site: 16px semibold text and 16px by 20px padding.
+// On hover the arrow nudges up and right, as on the live site; a keyboard
+// focus gets the same nudge plus a visible outline.
 import { Button } from '@/components/ui/button';
-import { brandButton, type ButtonTone } from './button';
+import { brandButton, focusOutline, type ButtonTone } from './button';
 
 interface Props {
   href: string;
@@ -15,16 +20,29 @@ interface Props {
 
 const { href, tone = 'dark' } = Astro.props;
 
-const brand = 'gap-3 px-4 py-2.5 text-sm';
+const brand = 'gap-4 px-5 py-4 text-base leading-none duration-300';
 const tones = {
-  dark: 'border-0 bg-black text-white hover:bg-dark-grey',
-  light: 'border-light-grey bg-white text-black hover:border-dark-grey',
-  indigo: 'border-0 bg-indigo text-white hover:bg-black',
-  outline: 'border-white/40 bg-transparent text-white hover:bg-white hover:text-black',
+  dark: 'border-0 bg-black text-white hover:bg-dark-grey focus-visible:outline-black',
+  light: 'border-light-grey bg-white text-black hover:border-black focus-visible:outline-black',
+  indigo: 'border-0 bg-indigo text-white hover:bg-black focus-visible:outline-indigo',
+  outline: 'border-white/40 bg-transparent text-white hover:bg-white hover:text-black focus-visible:outline-white',
+};
+// The arrow's colour: a small accent, so Lime is allowed on Black.
+const arrows = {
+  dark: 'text-lime',
+  light: 'text-indigo',
+  indigo: 'text-white',
+  outline: 'text-current',
 };
 ---
 
-<Button as="a" href={href} class:list={[brandButton, brand, tones[tone]]}>
+<Button as="a" href={href} class:list={[brandButton, focusOutline, brand, tones[tone]]}>
   <slot />
-  <span aria-hidden="true">↗</span>
+  <span
+    aria-hidden="true"
+    class:list={[
+      'inline-block transition-transform duration-300 group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5 group-focus-visible/button:translate-x-0.5 group-focus-visible/button:-translate-y-0.5 rtl:-scale-x-100',
+      arrows[tone],
+    ]}>↗</span
+  >
 </Button>

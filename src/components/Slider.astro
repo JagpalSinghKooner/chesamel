@@ -1,0 +1,114 @@
+---
+// Slider Component: a row of slides that moves sideways, with the live site's
+// controls under it: a progress bar, previous and next buttons and a "1 / 3"
+// counter. Each slide is a SliderItem, whose width sets how many show at once.
+//
+// Built on Fulldev's Carousel (Embla), whose copy is patched to work right to
+// left (ADR-0005). It moves by touch or mouse drag, by the buttons, and by the
+// arrow keys, Home and End while focus is inside it. Without JavaScript the
+// slides are an ordinary row that scrolls sideways, with its own tab stop so a
+// keyboard can scroll it, and the controls stay hidden. Under prefers-reduced-motion the slides jump instead of gliding.
+//
+// The live sliders sit in many Sections; the Section draws its own heading and
+// passes its id as `labelledby`. The slider is then a named group, not a
+// second landmark with the same name as its Section.
+import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { brandButton, focusOutline } from './button';
+
+interface Props {
+  // The id of the heading that names this slider, or a name of its own.
+  labelledby?: string;
+  label?: string;
+  // Dark: for a Black or Indigo band.
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { labelledby, label, tone = 'light', class: className } = Astro.props;
+const dark = tone === 'dark';
+
+// Fulldev's round, floating icon buttons become the brand's square outlined
+// ones in the controls row.
+const control = [
+  brandButton,
+  focusOutline,
+  'static my-0 size-11 shrink justify-center rounded-md bg-transparent text-[length:inherit] font-normal shadow-none transition-colors duration-300 disabled:cursor-default disabled:opacity-40',
+  dark
+    ? 'border-white/40 text-white hover:border-white hover:bg-white hover:text-black focus-visible:outline-white'
+    : 'border-medium-grey text-black hover:border-black hover:bg-black hover:text-white focus-visible:outline-black',
+];
+---
+
+<Carousel role="group" aria-labelledby={labelledby} aria-label={label} class:list={['slider', className]} data-component="slider" data-slider>
+  <CarouselContent
+    class="pb-4 group-data-[orientation=horizontal]/carousel:-ms-6"
+    viewportProps={{ tabindex: 0, class: 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo', 'data-native-scroll': '' }}
+  >
+    <slot />
+  </CarouselContent>
+  <div class="mt-6 flex items-center justify-end gap-4" data-controls hidden>
+    <div aria-hidden="true" class:list={['h-0.5 w-full max-w-xs', dark ? 'bg-white/25' : 'bg-light-grey']}>
+      <div class:list={['h-full transition-[width] duration-300', dark ? 'bg-white' : 'bg-indigo']} data-progress></div>
+    </div>
+    <CarouselPrevious aria-label="Previous" class:list={control}><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>←</span></CarouselPrevious>
+    <p class:list={['min-w-12 text-center text-sm font-semibold tabular-nums', dark ? 'text-white' : 'text-black']} data-slide-count></p>
+    <CarouselNext aria-label="Next" class:list={control}><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>→</span></CarouselNext>
+  </div>
+</Carousel>
+
+<style>
+  /* Until the carousel starts (or without JavaScript), the row scrolls natively. */
+  [data-slider]:not([data-ready]) :global([data-carousel-viewport]) {
+    overflow-x: auto;
+  }
+</style>
+
+<script>
+  import type { EmblaCarouselType } from 'embla-carousel';
+
+  // Fulldev's Carousel starts Embla and hands it over on `carousel:init`; this
+  // adds the counter and progress bar and shows the controls.
+  for (const slider of document.querySelectorAll<HTMLElement & { __fulldevCarouselApi?: EmblaCarouselType }>('[data-slider]')) {
+    slider.addEventListener('carousel:init', () => {
+      const api = slider.__fulldevCarouselApi!;
+      const count = slider.querySelector<HTMLElement>('[data-slide-count]')!;
+      const progress = slider.querySelector<HTMLElement>('[data-progress]')!;
+      const slides = api.slideNodes().length;
+
+      function update() {
+        const engine = api.internalEngine();
+        // The first slide of the current position: at the end, two slides can
+        // share one position.
+        const current = engine.slideRegistry[api.selectedScrollSnap()][0];
+        count.textContent = `${current + 1} / ${slides}`;
+        // How much of the row has been seen, as the bar's share of its track.
+        const view = api.rootNode().clientWidth;
+        const range = Math.abs(engine.limit.length);
+        const seen = view + range * Math.min(1, Math.max(0, api.scrollProgress()));
+        progress.style.width = `${range > 0 ? (100 * seen) / (view + range) : 100}%`;
+      }
+
+      api.on('select', update).on('scroll', update).on('reInit', update);
+
+      // Reaching either end disables that button; if it had focus, focus moves
+      // to the other one rather than dropping out of the slider.
+      const [previous, next] = ['previous', 'next'].map((part) => slider.querySelector<HTMLButtonElement>(`[data-carousel-${part}]`)!);
+      api.on('select', () => {
+        requestAnimationFrame(() => {
+          if (previous.disabled && (document.activeElement === previous || document.activeElement === document.body)) next.focus();
+          else if (next.disabled && (document.activeElement === next || document.activeElement === document.body)) previous.focus();
+        });
+      });
+      // Nothing to move when every slide already fits.
+      slider.querySelector<HTMLElement>('[data-controls]')!.hidden = api.scrollSnapList().length < 2;
+      api.on('reInit', () => {
+        slider.querySelector<HTMLElement>('[data-controls]')!.hidden = api.scrollSnapList().length < 2;
+      });
+      // The row no longer scrolls natively, so its own tab stop goes; the
+      // buttons and arrow keys take over.
+      slider.querySelector('[data-native-scroll]')?.removeAttribute('tabindex');
+      slider.dataset.ready = '';
+      update();
+    });
+  }
+</script>

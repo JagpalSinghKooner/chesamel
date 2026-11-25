@@ -3,6 +3,7 @@
 import { readdirSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { revealAll } from './reveal-all';
 
 const WCAG_AA = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 const addresses = readdirSync(new URL('../src/content/blog/', import.meta.url), { recursive: true, encoding: 'utf8' })
@@ -25,6 +26,7 @@ for (const address of addresses) {
     expect(broken).toEqual([]);
 
     // Embedded players are YouTube's markup, outside the site's control.
+    await revealAll(page);
     const results = await new AxeBuilder({ page }).withTags(WCAG_AA).exclude('iframe').analyze();
     expect(results.violations).toEqual([]);
   });

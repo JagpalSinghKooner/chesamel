@@ -20,12 +20,14 @@ const sectionTypes = [
   // Big numbers: "150+ / People".
   z.object({ type: z.literal('stats'), items: z.array(z.object({ value: text, label: text })).min(1) }),
   // A grid of cards: approach steps, capabilities, benefits, partners.
+  // `layout: slider` shows them one or more at a time in a slider instead.
   z.object({
     type: z.literal('cards'),
     ...heading,
     text: text.optional(),
     image: image.optional(),
     tone: z.enum(['light', 'off-white', 'dark']).default('light'),
+    layout: z.enum(['grid', 'slider']).default('grid'),
     items: z.array(z.object({ heading: text, text: text.optional(), image: image.optional(), href: text.optional() })).min(1),
   }),
   // A heading with a list of points and an optional closing note: "How we work".

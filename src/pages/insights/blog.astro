@@ -2,6 +2,7 @@
 // News: every Blog Post, filterable by Pillar and Industry. The live site
 // serves News at /insights/blog/, so that address is kept.
 import Base from '../../layouts/Base.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
 import BlogPostListing from '../../components/BlogPostListing.astro';
 import { getBlogPosts, summarisePost } from '../../content/blog';
 
@@ -9,13 +10,8 @@ const posts = (await getBlogPosts()).map(summarisePost);
 ---
 
 <Base title="News | Chesamel" description="The latest thoughts, updates, and helpful how-tos from Chesamel.">
-  <section class="bg-indigo text-white">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <h1 class="type-heading-1 text-white">News</h1>
-      <p class="type-subheading mt-4 text-white">The latest thoughts, updates, and helpful how-tos.</p>
-    </div>
-  </section>
-  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+  <InsightsHero heading="News" text="The latest thoughts, updates, and helpful how-tos." />
+  <div class="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
     <BlogPostListing posts={posts} />
   </div>
 </Base>

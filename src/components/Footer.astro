@@ -12,8 +12,8 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="bg-black text-off-white">
-  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-    <a href="/" aria-label="Chesamel home" class="-ml-4 inline-block rounded-[0.25rem] focus-visible:outline-2 focus-visible:outline-white">
+  <div class="mx-auto max-w-7xl px-5 py-12 sm:px-6">
+    <a href="/" aria-label="Chesamel home" class="-ml-4 inline-block rounded-md focus-visible:outline-2 focus-visible:outline-white">
       <Logo variant="tagline-lockup" colour="white" height={40} />
     </a>
 
@@ -30,14 +30,14 @@ const year = new Date().getFullYear();
     <div class="mt-6 flex flex-col gap-6 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
       <nav aria-label="Footer">
         <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          {footerLinks.map((link) => <li><a href={link.href} class="hover:text-white hover:underline">{link.label}</a></li>)}
+          {footerLinks.map((link) => <li><a href={link.href} class="hover:text-white hover:underline focus-visible:text-white focus-visible:underline">{link.label}</a></li>)}
         </ul>
       </nav>
       <ul class="flex gap-3">
         {
           socialLinks.map((s) => (
             <li>
-              <Button as="a" href={s.href} aria-label={s.label} size="icon-sm" class="flex rounded-[0.25rem] border-0 bg-white/10 transition-none hover:bg-white/20 active:not-aria-[haspopup]:translate-y-0">
+              <Button as="a" href={s.href} aria-label={s.label} size="icon-sm" class="flex rounded-md border-0 bg-white/10 transition-none hover:bg-white/20 focus-visible:bg-white/20 active:not-aria-[haspopup]:translate-y-0">
                 <img src={s.icon} alt="" width="16" height="16" />
               </Button>
             </li>
@@ -50,7 +50,7 @@ const year = new Date().getFullYear();
       {
         accreditations.map((a) => (
           <li>
-            <a href={a.href} aria-label={a.label} class="block opacity-70 hover:opacity-100">
+            <a href={a.href} aria-label={a.label} class="block opacity-70 hover:opacity-100 focus-visible:opacity-100">
               <img src={a.image} alt="" width={a.width} height={a.height} class="h-10 w-auto" loading="lazy" />
             </a>
           </li>
@@ -61,7 +61,7 @@ const year = new Date().getFullYear();
     <div class="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs lg:flex-row lg:justify-between">
       <p>© {year} Chesamel Group Ltd. All rights reserved.</p>
       <ul class="flex flex-wrap gap-x-5 gap-y-2">
-        {legalLinks.map((link) => <li><a href={link.href} class="hover:text-white hover:underline">{link.label}</a></li>)}
+        {legalLinks.map((link) => <li><a href={link.href} class="hover:text-white hover:underline focus-visible:text-white focus-visible:underline">{link.label}</a></li>)}
       </ul>
     </div>
   </div>

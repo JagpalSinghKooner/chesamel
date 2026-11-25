@@ -68,6 +68,7 @@ sections:
       - { label: Let's Chat, href: /contact/ }
   - type: cards
     heading: + Why Us
+    layout: slider
     text: Built for organisations that need clarity, speed, and execution without the overhead of a large consultancy. Chesamel combines specialist capability, practical delivery, and integrated support to help clients move from problem to action faster.
     tone: off-white
     items:

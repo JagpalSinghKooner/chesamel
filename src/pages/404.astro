@@ -2,12 +2,21 @@
 // Cloudflare Pages serves the homepage with a 200 for every unknown address
 // unless this page exists, which would hide every broken address from the
 // URL parity check.
+//
+// Laid out as the live 404: a light hero with the brandmark rings and two ways
+// back in.
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 
 <Base title="Page not found | Chesamel">
-  <div class="mx-auto max-w-3xl px-6 py-24">
-    <h1 class="type-heading-1">Page not found</h1>
-    <p class="mt-4">We couldn't find that page. <a class="underline" href="/">Go to the homepage</a>.</p>
-  </div>
+  <PageHero
+    tone="light"
+    title="We couldn’t find that page"
+    paragraphs={['This page may have been moved or removed, apologies for any inconvenience caused. Get back on track with the links below.']}
+    links={[
+      { label: 'Homepage', href: '/' },
+      { label: 'Our Services', href: '/what-we-do/' },
+    ]}
+  />
 </Base>

@@ -18,10 +18,13 @@ const { entry, trail, documentTitle } = Astro.props;
 const { title, description, hero, sections } = entry.data;
 const { Content } = await render(entry);
 const hasBody = (entry.body ?? '').trim().length > 0;
+// As on the live site: Pillars, Services, Contact and open roles have a light
+// hero, every other Page an Indigo one.
+const lightHero = entry.collection !== 'pages' || entry.id === 'contact' || entry.id.startsWith('careers/');
 ---
 
 <Base title={documentTitle ?? `${title} | Chesamel`} description={description ?? hero.paragraphs[0] ?? hero.subtitle}>
-  <PageHero {...hero} />
+  <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} faintRings={entry.id === 'contact'} />
   <Breadcrumb band trail={[...trail, { label: title }]} />
   <Sections sections={sections} hasBody={hasBody}><Content /></Sections>
 </Base>

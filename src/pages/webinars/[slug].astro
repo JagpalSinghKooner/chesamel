@@ -19,7 +19,7 @@ const { Content } = await render(webinar);
 ---
 
 <Base title={`${title} | Chesamel`} description={description}>
-  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+  <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
     <InsightHeader section={{ label: 'Webinars', href: '/insights/webinars/' }} pillar={primaryPillar(webinar.data)} title={title}>
       <time datetime={isoDate(date)}>{formatDate(date)}</time>
     </InsightHeader>

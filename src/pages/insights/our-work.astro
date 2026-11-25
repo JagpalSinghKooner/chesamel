@@ -5,7 +5,7 @@
 // service addresses, is left out: the Pillar cards above it cover the same
 // ground with current addresses.
 import Base from '../../layouts/Base.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import InsightsHero from '../../components/InsightsHero.astro';
 import Button from '../../components/Button.astro';
 import CaseStudyListing from '../../components/CaseStudyListing.astro';
 import CaseStudySlider from '../../components/CaseStudySlider.astro';
@@ -20,17 +20,9 @@ const industries = await getIndustries();
 ---
 
 <Base title="Our Work | Chesamel" description="See our latest customer stories and learn how we turn our solutions into results.">
-  <section class="bg-black">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <h1 class="type-heading-1 text-white">Our Work</h1>
-      <p class="mt-4 max-w-2xl font-subheading text-lg text-off-white">
-        See our latest customer stories and learn how we turn our solutions into results.
-      </p>
-    </div>
-  </section>
-  <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'Our Work' }]} />
+  <InsightsHero heading="Our Work" text="See our latest customer stories and learn how we turn our solutions into results." />
   <section aria-labelledby="catalogue" class="bg-black">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <h2 id="catalogue" class="type-heading-2 mb-10 text-white">Our catalogue</h2>
       <CaseStudyListing caseStudies={caseStudies} tone="dark" />
     </div>
@@ -50,7 +42,7 @@ const industries = await getIndustries();
   </PillarCards>
   <ConnectWithUs />
   <section aria-labelledby="our-industries" class="bg-black">
-    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <p class="font-subheading text-off-white">/ experience and expertise in an array of fields</p>
       <h2 id="our-industries" class="type-heading-2 mt-3 text-white">Our Industries</h2>
       <div class="mt-12 grid gap-6 lg:grid-cols-[1fr_3fr]">

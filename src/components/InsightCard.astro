@@ -4,6 +4,7 @@
 // like the Blog Post card: the Pillar tag is Dark Grey, not the live service
 // colour (ADR-0002).
 import { Card, CardContent } from '@/components/ui/card';
+import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import { pillarLabels, type PillarSlug } from '../data/taxonomy';
 
@@ -20,11 +21,19 @@ interface Props {
 const { href, title, image, pillar, action, headingLevel: Heading = 'h3' } = Astro.props;
 ---
 
-<Card as="a" href={href} class:list={[brandCard, 'group h-full border border-light-grey bg-white hover:border-indigo']} data-component="insight-card">
-  {image ? <img src={image.src} alt="" class="aspect-video w-full object-cover" loading="lazy" /> : <div aria-hidden="true" class="aspect-video w-full bg-off-white" />}
+<Card as="a" href={href} class:list={[brandCard, focusOutline, 'group h-full border border-light-grey bg-white hover:border-indigo transition-colors duration-300 focus-visible:outline-indigo']} data-component="insight-card">
+  {
+    image ? (
+      <div class="aspect-video overflow-hidden">
+        <img src={image.src} alt="" class="size-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105" loading="lazy" />
+      </div>
+    ) : (
+      <div aria-hidden="true" class="aspect-video w-full bg-off-white" />
+    )
+  }
   <CardContent class:list={[brandCardContent, 'grow p-5']}>
     {pillar && <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[pillar]}</span>}
-    <Heading class="type-heading-3 mt-5 text-xl leading-tight group-hover:underline">{title}</Heading>
+    <Heading class="type-heading-3 mt-5 text-xl leading-tight group-hover:underline group-focus-visible:underline">{title}</Heading>
     <p class="type-caption mt-auto pt-6">{action} <span aria-hidden="true">→</span></p>
   </CardContent>
 </Card>

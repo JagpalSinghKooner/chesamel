@@ -1,22 +1,30 @@
 ---
-// The Indigo band at the top of an Insights listing (as on News): the
-// heading, one line of text, and a breadcrumb back to the Insights hub.
+// The Indigo band at the top of a listing (the Insights hub, News, Our Work,
+// Industries, Podcasts, Webinars, Reports): the heading, one line of text and
+// the brandmark rings, with the breadcrumb as a strip below, as on the live
+// site.
 import Breadcrumb from './Breadcrumb.astro';
+import BrandmarkRings from './BrandmarkRings.astro';
 
 interface Props {
   heading: string;
   text: string;
-  // Omit on the hub itself.
+  // The breadcrumb above this page; Home / Insights by default. Omit with
+  // `breadcrumb={false}` on the hub itself.
+  parents?: { label: string; href: string }[];
   breadcrumb?: boolean;
+  // h1 on a page; lower where the hero is shown as a sample.
+  headingLevel?: 'h1' | 'h4';
 }
 
-const { heading, text, breadcrumb = true } = Astro.props;
+const { heading, text, parents = [{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }], breadcrumb = true, headingLevel: Heading = 'h1' } = Astro.props;
 ---
 
-<section class="bg-indigo text-white">
-  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-    {breadcrumb && <Breadcrumb class="mb-6 text-white" trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: heading }]} />}
-    <h1 class="type-heading-1 text-white">{heading}</h1>
-    <p class="type-subheading mt-4 max-w-2xl text-white">{text}</p>
+<section class="relative isolate overflow-hidden bg-indigo text-white" data-component="insights-hero">
+  <BrandmarkRings tone="white" class="absolute -end-32 -bottom-48 -z-10 size-[24rem] sm:size-[34rem] lg:-end-16 lg:-bottom-56 lg:size-[44rem]" />
+  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32">
+    <Heading class="type-heading-1 text-5xl text-white sm:text-6xl lg:text-7xl">{heading}</Heading>
+    <p class="type-subheading mt-6 max-w-2xl text-white lg:text-2xl">{text}</p>
   </div>
 </section>
+{breadcrumb && <Breadcrumb band trail={[...parents, { label: heading }]} />}
