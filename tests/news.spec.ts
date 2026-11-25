@@ -71,6 +71,20 @@ test.describe('News', () => {
     await expect(page).toHaveURL(`${NEWS}?pillar=hybrid-workforce&industry=technology`);
     await expect(page.getByRole('group', { name: 'Pillar' }).getByRole('button', { name: 'Hybrid Workforce' })).toHaveAttribute('aria-pressed', 'true');
     await expect(card(page, flexIndex)).toBeVisible();
+
+    // A live page of filtered posts is the same page of our filtered posts.
+    await page.goto(`${NEWS}page/4/?a_services=hybrid-workforce&pages=2`);
+    await expect(page).toHaveURL(`${NEWS}?pillar=hybrid-workforce&page=2`);
+    await expect(page.getByRole('navigation', { name: 'News pages, filtered' }).getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+    await expect(card(page, flexIndex)).toBeHidden();
+  });
+
+  test('a filter value no button offers falls back to All', async ({ page }) => {
+    await page.goto(`${NEWS}?a_services=investments-sustainable-transformation`);
+    await expect(page.getByRole('group', { name: 'Pillar' }).getByRole('button', { name: 'All' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(cards(page)).toHaveCount(PER_PAGE);
+    await expect(page.getByRole('status')).toHaveText(`${postFiles.length} Blog Posts`);
+    await expect(page).toHaveURL(NEWS);
   });
 
   test('filters by Pillar across every page, and pages through the matches', async ({ page }) => {
@@ -96,10 +110,21 @@ test.describe('News', () => {
     await expect(cards(page)).toHaveCount(PER_PAGE);
     await expect(card(page, flexIndex)).toBeHidden();
     expect(await cards(page).locator('h2').allTextContents()).not.toEqual(firstPage);
+    await expect(page).toHaveURL(/\?pillar=hybrid-workforce&page=2$/);
     await filtered.getByRole('button', { name: 'Last page' }).click();
     const lastFiltered = Math.ceil(hybridPosts / PER_PAGE);
     await expect(filtered.getByRole('button', { name: `Page ${lastFiltered}` })).toHaveAttribute('aria-current', 'page');
     await expect(cards(page)).toHaveCount(hybridPosts - (lastFiltered - 1) * PER_PAGE);
+
+    // The pressed control is now hidden, so focus moves to the count and the
+    // new page is announced.
+    await expect(filtered.getByRole('button', { name: 'Last page' })).toBeHidden();
+    await expect(page.locator('[data-count]')).toBeFocused();
+    await expect(page.locator('[data-page-status]')).toHaveText(`Page ${lastFiltered} of ${lastFiltered}`);
+    await filtered.getByRole('button', { name: 'First page' }).click();
+    await expect(filtered.getByRole('button', { name: 'First page' })).toBeHidden();
+    await expect(page.locator('[data-count]')).toBeFocused();
+    await expect(page.locator('[data-page-status]')).toHaveText(`Page 1 of ${lastFiltered}`);
 
     // All brings back this static page and its links.
     await pillars.getByRole('button', { name: 'All' }).click();

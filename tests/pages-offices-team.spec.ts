@@ -45,6 +45,12 @@ test('Our Team starts on Founders, filters by team and pages 8 at a time', async
   await pager.getByRole('button', { name: 'Last page' }).click();
   await expect(shown).toHaveCount(73 - 9 * 8);
   await expect(pager.getByRole('button', { name: 'Next page' })).toBeHidden();
+  // The pressed control is hidden now: focus moves to the count, and the page is announced.
+  await expect(page.locator('[data-team-count]')).toBeFocused();
+  await expect(page.locator('[data-team-directory] [data-page-status]')).toHaveText('Page 10 of 10');
+  await pager.getByRole('button', { name: 'First page' }).click();
+  await expect(page.locator('[data-team-count]')).toBeFocused();
+  await expect(page.locator('[data-team-directory] [data-page-status]')).toHaveText('Page 1 of 10');
 });
 
 test('a Team Member card links LinkedIn and email from icon buttons and opens the full bio', async ({ page }) => {

@@ -8,7 +8,8 @@
 // and an arrow box. Live fills a hovered tile with the Pillar colour under
 // white text, which fails WCAG AA (ADR-0002), so here a hovered or focused
 // tile turns white, takes the Pillar accent as its border and shows its
-// summary in Dark Grey.
+// summary in Dark Grey. The summary is otherwise visually hidden but still
+// read out as part of the link.
 import { Card } from '@/components/ui/card';
 import Icon from './Icon.astro';
 import { brandCard } from './card';
@@ -44,7 +45,7 @@ const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
               <img src={p.icon} alt="" width="100" height="100" loading="lazy" class="m-2.5 size-12 shrink-0 md:m-3 md:size-19" />
               <div class="grow md:grow-0">
                 <CardHeading class="text-lg font-semibold text-dark-grey">{p.label}</CardHeading>
-                <p class="type-caption mt-2 hidden md:group-hover:block md:group-focus-visible:block">{p.summary}</p>
+                <p class="type-caption sr-only md:group-hover:not-sr-only md:group-hover:mt-2 md:group-focus-visible:not-sr-only md:group-focus-visible:mt-2">{p.summary}</p>
               </div>
               <span aria-hidden="true" class="grid size-11 shrink-0 place-items-center bg-medium-grey/20 md:hidden">
                 <Icon name="arrow-up-right" class="size-4 rtl:-scale-x-100" />

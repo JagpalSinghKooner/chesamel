@@ -43,7 +43,9 @@ const filterButton =
       }
       <ToggleGroupItem value="all" class={filterButton}>All</ToggleGroupItem>
     </ToggleGroup>
-    <p class="type-caption mt-6" aria-live="polite" data-team-count>{members.length} people</p>
+    <p class="type-caption mt-6 scroll-mt-28" aria-live="polite" tabindex="-1" data-team-count>{members.length} people</p>
+    {/* Says "Page n of m" when the Pager changes the page. */}
+    <p aria-live="polite" class="sr-only" data-page-status></p>
     <ul class="mt-6 grid gap-x-6 gap-y-17.5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {
         members.map((member) => (
@@ -60,7 +62,7 @@ const filterButton =
 <script>
   import { createToggleGroup } from '@data-slot/toggle-group';
   import { followReadingDirection } from '../follow-reading-direction';
-  import { showPage, onPage } from '../pager';
+  import { showPage, onPage, afterPaging } from '../pager';
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-team-directory]')) {
     const filter = root.querySelector<HTMLElement>('[data-team-filter]')!;
@@ -68,14 +70,16 @@ const filterButton =
     const control = createToggleGroup(filter);
     followReadingDirection(filter);
     const cards = [...root.querySelectorAll<HTMLElement>('[data-teams]')];
-    const count = root.querySelector('[data-team-count]')!;
+    const count = root.querySelector<HTMLElement>('[data-team-count]')!;
+    const pageStatus = root.querySelector<HTMLElement>('[data-page-status]')!;
     const perPage = Number(root.dataset.perPage);
     let team = control.value[0];
     let page = 1;
+    let last = 1;
 
     function apply() {
       const matches = cards.filter((card) => team === 'all' || card.dataset.teams!.split(' ').includes(team));
-      const last = Math.max(1, Math.ceil(matches.length / perPage));
+      last = Math.max(1, Math.ceil(matches.length / perPage));
       page = Math.min(page, last);
       const shown = new Set(matches.slice((page - 1) * perPage, page * perPage));
       for (const card of cards) card.hidden = !shown.has(card);
@@ -94,7 +98,7 @@ const filterButton =
     onPage(pager, (n) => {
       page = n;
       apply();
-      root.scrollIntoView({ block: 'start' });
+      afterPaging(count, pageStatus, page, last);
     });
     apply();
   }

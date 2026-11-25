@@ -74,9 +74,11 @@ const filterButton = [
       ))
     }
   </div>
-  <p role="status" class:list={['type-caption mt-8', dark && 'text-off-white']} data-count>
+  <p role="status" tabindex="-1" class:list={['type-caption mt-8 scroll-mt-28', dark && 'text-off-white']} data-count>
     {`${total} ${total === 1 ? noun[0] : noun[1]}`}
   </p>
+  {/* Says "Page n of m" when the filtered Pager changes the page. */}
+  <p aria-live="polite" class="sr-only" data-page-status></p>
   <slot />
   {
     perPage && (
@@ -91,20 +93,25 @@ const filterButton = [
 <script>
   import { createToggleGroup } from '@data-slot/toggle-group';
   import { followReadingDirection } from './follow-reading-direction';
-  import { showPage, onPage } from './pager';
+  import { showPage, onPage, afterPaging } from './pager';
 
   for (const listing of document.querySelectorAll<HTMLElement>('[data-filtered-listing]')) {
     const filters = listing.querySelector<HTMLElement>('[data-filters]')!;
     const count = listing.querySelector<HTMLElement>('[data-count]')!;
+    const pageStatus = listing.querySelector<HTMLElement>('[data-page-status]')!;
     const items = [...listing.querySelectorAll<HTMLLIElement>('li[data-pillars]')];
     const { nounOne, nounMany } = listing.dataset;
     const perPage = Number(listing.dataset.perPage) || Math.max(items.length, 1);
     const staticPage = Number(listing.dataset.page) || 1;
     const staticPager = listing.querySelector<HTMLElement>('[data-static-pager]');
+    // Pager.astro hides a Pager with one page; that stays hidden.
+    const staticPagerHidden = staticPager?.hidden ?? true;
     const filteredPager = listing.querySelector<HTMLElement>('[data-filtered-pager]');
-    // The page of matches shown while a filter is chosen.
-    let filteredPage = 1;
     const params = new URLSearchParams(location.search);
+    // The page of matches shown while a filter is chosen; ?page=N keeps it in
+    // the address, so a filtered page can be shared.
+    let filteredPage = Math.max(1, parseInt(params.get('page') ?? '1', 10) || 1);
+    let last = 1;
     // Each filter's controller; Data Slot hands back the one it already made.
     const groups = [...filters.querySelectorAll<HTMLElement>('[data-filter]')].map((root) => ({
       key: root.dataset.filter!,
@@ -116,24 +123,36 @@ const filterButton = [
       const value = groups.find((g) => g.key === key)?.control.value[0];
       return value && value !== 'all' ? value : '';
     };
+    const filtered = () => groups.some((g) => chosen(g.key));
+
+    // The chosen filters, and the filtered page past page 1, in the address.
+    function remember() {
+      const url = new URL(location.href);
+      for (const g of groups) {
+        if (chosen(g.key)) url.searchParams.set(g.key, chosen(g.key));
+        else url.searchParams.delete(g.key);
+      }
+      if (filtered() && filteredPage > 1) url.searchParams.set('page', String(filteredPage));
+      else url.searchParams.delete('page');
+      history.replaceState(null, '', url);
+    }
 
     function apply() {
       const pillar = chosen('pillar');
       const industry = chosen('industry');
-      const filtered = Boolean(pillar || industry);
       const matches = items.filter((item) => {
         const pillars = item.dataset.pillars!.split(' ');
         const industries = item.dataset.industries!.split(' ').filter(Boolean);
         return (!pillar || pillars.includes(pillar)) && (!industry || industries.includes(industry));
       });
-      const last = Math.max(1, Math.ceil(matches.length / perPage));
+      last = Math.max(1, Math.ceil(matches.length / perPage));
       filteredPage = Math.min(filteredPage, last);
-      const current = filtered ? filteredPage : staticPage;
+      const current = filtered() ? filteredPage : staticPage;
       const shownItems = new Set(matches.slice((current - 1) * perPage, current * perPage));
       for (const item of items) item.hidden = !shownItems.has(item);
-      if (staticPager) staticPager.hidden = filtered;
+      if (staticPager) staticPager.hidden = filtered() || staticPagerHidden;
       if (filteredPager) {
-        if (filtered) showPage(filteredPager, current, last);
+        if (filtered()) showPage(filteredPager, current, last);
         else filteredPager.hidden = true;
       }
       count.textContent = `${matches.length} ${matches.length === 1 ? nounOne : nounMany}`;
@@ -143,31 +162,30 @@ const filterButton = [
       onPage(filteredPager, (n) => {
         filteredPage = n;
         apply();
-        listing.scrollIntoView({ block: 'start' });
+        remember();
+        afterPaging(count, pageStatus, filteredPage, last);
       });
     }
 
     for (const { key, root, control } of groups) {
       followReadingDirection(root);
+      // A value from the address that no button offers (an old or mistyped
+      // label) falls back to All.
       const initial = params.get(key);
-      if (initial) control.setValue(initial);
+      if (initial && root.querySelector(`[data-value="${CSS.escape(initial)}"]`)) control.setValue(initial);
       if (control.value.length === 0) control.setValue('all');
 
       root.addEventListener('toggle-group:change', () => {
         // Pressing the chosen button again would leave none pressed: keep All.
         if (control.value.length === 0) control.setValue('all');
-        const url = new URL(location.href);
-        for (const g of groups) {
-          if (chosen(g.key)) url.searchParams.set(g.key, chosen(g.key));
-          else url.searchParams.delete(g.key);
-        }
-        history.replaceState(null, '', url);
         filteredPage = 1;
         apply();
+        remember();
       });
     }
 
     filters.hidden = false;
     apply();
+    remember();
   }
 </script>

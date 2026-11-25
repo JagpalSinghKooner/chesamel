@@ -5,8 +5,12 @@
 // pages at /page/N/ and filters with `?pillar=` and `?industry=`. This runs
 // before the page draws and swaps one for the other: `?pages=1` goes to the
 // listing's own address, and a page past the end goes to the last page.
+// With a filter, live's page is a page of the matches, so it becomes
+// `?page=N` on the listing's own address, which FilteredListing reads.
 //
-// Inline, so the redirect happens before any other script.
+// An inline script at the top of the page's body: the browser runs it as
+// soon as it reaches it, before it draws the rest of the page or runs the
+// page's other scripts.
 interface Props {
   // The listing's address, such as /insights/blog/.
   base: string;
@@ -27,8 +31,15 @@ const { base, last } = Astro.props;
     // The live filters take a comma-separated list; ours take one value.
     if (live.pillar) query.set('pillar', live.pillar.split(',')[0]);
     if (live.industry) query.set('industry', live.industry.split(',')[0]);
-    const n = Math.min(Math.max(parseInt(live.pages ?? '1', 10) || 1, 1), last);
-    const path = live.pages === null ? location.pathname : n > 1 ? `${base}page/${n}/` : base;
+    const n = Math.max(parseInt(live.pages ?? '1', 10) || 1, 1);
+    let path = location.pathname;
+    if (live.pillar || live.industry) {
+      // A page of the filtered matches; FilteredListing keeps it in range.
+      if (live.pages !== null) path = base;
+      if (n > 1) query.set('page', String(n));
+    } else if (live.pages !== null) {
+      path = n > 1 ? `${base}page/${Math.min(n, last)}/` : base;
+    }
     const search = query.toString();
     location.replace(path + (search ? `?${search}` : '') + location.hash);
   })();

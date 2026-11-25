@@ -43,3 +43,13 @@ export function onPage(pager: HTMLElement, go: (page: number) => void) {
     go(Number(button.dataset.page ?? button.dataset.target));
   });
 }
+
+// After a button Pager changes the page: the pressed control may now be
+// hidden (Next onto the last page, First onto page 1), so focus moves to
+// `target` (the listing's count, given tabindex="-1"), the listing scrolls
+// to it, and the polite `status` region says "Page n of m".
+export function afterPaging(target: HTMLElement, status: HTMLElement, current: number, last: number) {
+  status.textContent = `Page ${current} of ${last}`;
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ block: 'start' });
+}
