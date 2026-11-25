@@ -15,6 +15,7 @@
 import { Button } from '@/components/ui/button';
 import { brandButton, focusOutline } from './button';
 import Logo from '../design-system/Logo.astro';
+import Icon from './Icon.astro';
 import { mainNav, contactLink, qatarLink } from '../data/site';
 
 interface Props {
@@ -46,7 +47,7 @@ const plain = [brandButton, focusOutline, 'text-sm transition-none focus-visible
       aria-controls={menuId}
       data-menu-toggle
     >
-      <svg aria-hidden="true" viewBox="0 0 16 12" class="h-3 w-4 fill-current"><path d="M0 0h16v2H0zM0 5h16v2H0zM0 10h16v2H0z" /></svg>
+      <Icon name="menu" class="size-4" stroke-width={3} />
       Menu
     </Button>
 
@@ -70,9 +71,7 @@ const plain = [brandButton, focusOutline, 'text-sm transition-none focus-visible
                     data-nav-toggle
                   >
                     <span class="underline decoration-transparent decoration-2 underline-offset-8 transition-colors duration-300 group-hover:decoration-current group-focus-visible:decoration-current group-aria-expanded:decoration-current">{section.label}</span>
-                    <svg aria-hidden="true" viewBox="0 0 10 6" class="h-1.5 w-2.5 fill-current transition-transform duration-300 group-aria-expanded:rotate-180">
-                      <path d="M0 0h10L5 6z" />
-                    </svg>
+                    <Icon name="triangle" class="size-2.5 rotate-180 transition-transform duration-300 group-aria-expanded:rotate-0" />
                   </button>
                   <ul
                     id={panelId}

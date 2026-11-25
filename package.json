@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "serve": "node scripts/serve-dist.ts",
     "check": "astro check",
+    "check:toolkit": "node scripts/check-toolkit.ts",
     "test": "playwright test",
     "inventory": "node scripts/url-inventory.ts",
     "import": "node scripts/import-wordpress/index.ts"

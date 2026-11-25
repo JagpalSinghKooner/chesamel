@@ -3,7 +3,10 @@
 // at. Hidden from search engines and the sitemap through src/noindex.mjs.
 import Base from '../layouts/Base.astro';
 import { colourGroups } from '../design-system/colours';
+import { pillars } from '../data/pillars';
 import Logo from '../design-system/Logo.astro';
+import Icon from '../components/Icon.astro';
+import { brandIcons, interfaceIcons, type IconName } from '../design-system/icons';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
@@ -100,6 +103,23 @@ const typeStyles = [
           </div>
         ))
       }
+      <div class="mt-10">
+        <h3 class="type-heading-3">Pillar accents</h3>
+        <p class="type-body mt-3 max-w-2xl">
+          Each Pillar, and its Services, has one secondary colour (ADR-0002), from <code>accent</code> in
+          <code>src/data/pillars.ts</code>. Only for small marks such as this bar, tag borders, dots and icons; the text
+          stays Black.
+        </p>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+          {pillars.map((p) => (
+            <li data-pillar-accent={p.name} class="flex items-center gap-3 border border-light-grey p-4 font-semibold text-black">
+              <span data-accent-bar aria-hidden="true" class="h-8 w-1" style={`background-color: var(--color-${p.accent})`} />
+              {p.name}
+              <code class="type-caption ms-auto font-normal">{p.accent}</code>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
 
     <section aria-labelledby="logos" class="mt-20" data-style-guide="logos">
@@ -129,6 +149,36 @@ const typeStyles = [
           <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant="brandmark" colour="indigo" height={48} /></span></div>
         </div>
       </div>
+    </section>
+
+    <section aria-labelledby="icons" class="mt-20" data-style-guide="icons">
+      <h2 id="icons" class="type-heading-2">Icons</h2>
+      <p class="type-body mt-3 max-w-2xl">
+        <code>Icon</code> Component, the only way to show an icon. Interface icons from Lucide, brand logos from Simple
+        Icons. They take the text colour, and are hidden from screen readers unless given a <code>label</code>.
+      </p>
+      {
+        [
+          { title: 'Interface', names: Object.keys(interfaceIcons) },
+          { title: 'Brands', names: Object.keys(brandIcons) },
+        ].map((group) => (
+          <div class="mt-10">
+            <h3 class="type-heading-3">{group.title}</h3>
+            <ul class="mt-4 grid grid-cols-3 gap-6 sm:grid-cols-4 lg:grid-cols-6">
+              {group.names.map((name) => (
+                <li class="flex flex-col items-center gap-2 border border-light-grey p-4 text-black">
+                  <Icon name={name as IconName} class="size-6" />
+                  <code class="type-caption">{name}</code>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <p class="type-caption mt-6 flex items-center gap-2">
+        With a label, for an icon that carries meaning on its own:
+        <Icon name="linkedin" label="LinkedIn" class="size-6 text-indigo" />
+      </p>
     </section>
 
     <section aria-labelledby="typography" class="mt-20">

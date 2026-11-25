@@ -1,0 +1,24 @@
+---
+// Icon: the only way to show an icon (ADR-0005, Toolkit). `name` picks one
+// from src/design-system/icons.ts, which also says whether it is drawn
+// filled. Colour comes from currentColor; size from the classes passed (24px
+// if none set it).
+//
+// Icons are decorative and hidden from screen readers, unless given a
+// `label`, which names the icon itself (not a link around it: a link gets its
+// own aria-label).
+import type { HTMLAttributes } from 'astro/types';
+import { icons, type IconName } from '../design-system/icons';
+
+interface Props extends Omit<HTMLAttributes<'svg'>, 'aria-label' | 'aria-hidden' | 'role' | 'name'> {
+  name: IconName;
+  label?: string;
+  'stroke-width'?: number;
+}
+
+const { name, label, ...rest } = Astro.props;
+const { svg: Svg, solid } = icons[name];
+const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' };
+---
+
+<Svg width="24" height="24" focusable="false" {...(solid && { fill: 'currentColor' })} {...rest} {...a11y} data-icon={name} />

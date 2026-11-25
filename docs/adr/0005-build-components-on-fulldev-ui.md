@@ -4,6 +4,30 @@ The Components are built on [Fulldev UI](https://ui.full.dev) (MIT, vanilla Astr
 
 **The brand wins (ADR-0002).** Fulldev's theme tokens (`--primary`, `--background`, `--border`, `--ring`, …) are mapped onto the brand tokens in `src/styles/global.css` and never point anywhere else. `--radius: 0` is the one setting for corners: every building block is square, and raising it rounds them all. There is no `.dark` theme. The few corners that were rounded before Fulldev (the header's controls, the footer's social links, the skip link, the style guide's logo panels) follow `--radius` too since #35, through `rounded-md` and `rounded-lg`, because the live site's controls are square. Where a Fulldev default and ADR-0002 disagree, ADR-0002 wins, either through the token mapping or through the classes a Component passes.
 
+## Toolkit
+
+One tool for each job (#41). Later tickets build only with these; anything else needs a new decision first.
+
+- **Icons:** the `Icon` Component (`src/components/Icon.astro`), the only way to show an icon. Interface icons come from Lucide (`@lucide/astro`); brand logos come from [Simple Icons](https://simpleicons.org), saved as SVG files in `src/design-system/icons/`. Every icon is listed by name in `src/design-system/icons.ts`. Icons are decorative (`aria-hidden`) unless given a `label`. Simple Icons has no Podchaser, so `podchaser` shows Lucide's podcast icon. The Chesamel logo is the `Logo` Component, not an icon, and the multi-colour Pillar illustrations in `public/images/pillars/` are images, not icons.
+- **Motion:** `data-reveal` in `Base.astro`, `tw-animate-css`, Embla through `Slider` and `Marquee`, and Data Slot. No GSAP, Motion One or other motion library.
+- **Sliders:** `Slider` / `SliderItem`, and `Marquee` for a strip that scrolls by itself.
+- **Accordions and tabs:** Fulldev `accordion` and `tabs`.
+- **Colour:** the brand tokens in `src/styles/global.css`, by name (`text-indigo`, `bg-off-white`, `var(--color-sky)`).
+- **Layout:** Tailwind's default breakpoints (sm 640, md 768, lg 1024, xl 1280, 2xl 1536) and its spacing and type scales. Live chesamel.com's px values are measured to learn the intent, then snapped to the nearest Tailwind class. Any multiple of 0.25rem is on the spacing scale (`min-h-136` is 34rem). No arbitrary values (`p-[13px]`, `size-[28rem]`, `min-[1000px]:`). The only exceptions are tokens already in `global.css`, such as `max-w-(--container-7xl)`, and expressions or percentages that no Tailwind class expresses (`max-h-[calc(100vh-5rem)]`, `lg:min-h-[min(56rem,100svh)]`, `basis-[85%]`).
+
+### Rules
+
+In `src/components/` and `src/layouts/`:
+
+- No inline `<svg>`. Use `Icon`, or a file in `src/design-system/` where it is the logo. `Icon` itself and `BrandmarkRings.astro`, whose rings animate one by one, are the exceptions.
+- No hex colours.
+- No `@keyframes` outside `src/styles/global.css`, `BrandmarkRings.astro` and `Hero.astro`.
+- No Tailwind arbitrary value for a size, spacing or breakpoint: `-[` followed by a number in `px`, `rem` or `em`, or `min-[` / `max-[`.
+
+The Fulldev copies in `src/components/ui/` are exempt from every rule, so they stay as delivered.
+
+`scripts/check-toolkit.ts` enforces the rules. It runs in `Build and test` (`npm run check:toolkit`, and again inside `npm test`) and prints each violation's file and line.
+
 ## Pinned version
 
 Fulldev UI **v0.26.0** (git tag `fulldev-ui@0.26.0`, 2026-10-26), style `base-vega`, from the registry in `components.json`. The shadcn CLI used was `shadcn@4.23.0`.

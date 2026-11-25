@@ -2,6 +2,8 @@
 // Taken from the live chesamel.com, minus its known defects: country links
 // that go nowhere and the admin "Edit Profile" link.
 
+import type { IconName } from '../design-system/icons';
+
 export interface Link {
   label: string;
   href: string;
@@ -75,10 +77,10 @@ export const legalLinks: Link[] = [
   { label: 'Modern Slavery Act', href: '/modern-slavery-statement/' },
 ];
 
-export const socialLinks = [
-  { label: 'Chesamel on YouTube', href: 'https://www.youtube.com/@ChesamelGroup', icon: '/images/social/youtube.svg' },
-  { label: 'Chesamel on Instagram', href: 'https://www.instagram.com/chesamel/', icon: '/images/social/instagram.svg' },
-  { label: 'Chesamel on LinkedIn', href: 'https://www.linkedin.com/company/chesamel-communications-llp', icon: '/images/social/linkedin.svg' },
+export const socialLinks: { label: string; href: string; icon: IconName }[] = [
+  { label: 'Chesamel on YouTube', href: 'https://www.youtube.com/@ChesamelGroup', icon: 'youtube' },
+  { label: 'Chesamel on Instagram', href: 'https://www.instagram.com/chesamel/', icon: 'instagram' },
+  { label: 'Chesamel on LinkedIn', href: 'https://www.linkedin.com/company/chesamel-communications-llp', icon: 'linkedin' },
 ];
 
 export const accreditations = [
