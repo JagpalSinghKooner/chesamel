@@ -18,16 +18,29 @@ async function expectListsEvery(page: Page, listing: string, collection: string)
 }
 
 test.describe('Podcasts', () => {
-  test('the listing links every episode, newest first, with its guest and where to listen', async ({ page }) => {
-    await expectListsEvery(page, '/insights/podcasts/', 'podcasts');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Podcast');
-    await expect(main(page).getByRole('link', { name: 'Listen now' })).toHaveAttribute('href', 'https://open.spotify.com/show/3vQMN7K3w5z6T23vDhipjt');
-
-    const episodes = main(page).getByRole('listitem').filter({ has: page.locator('time') });
-    await expect(episodes).toHaveCount(slugs('podcasts').length);
-    const dates = await episodes.locator('time').evaluateAll((ts) => ts.map((t) => t.getAttribute('datetime')!));
+  test('the listing pages through every episode, 3 a page, newest first, with its guest and where to listen', async ({ page }) => {
+    const pages = Math.ceil(slugs('podcasts').length / 3);
+    const hrefs: string[] = [];
+    const dates: string[] = [];
+    for (let n = 1; n <= pages; n++) {
+      await page.goto(n === 1 ? '/insights/podcasts/' : `/insights/podcasts/page/${n}/`);
+      const episodes = main(page).getByRole('listitem').filter({ has: page.locator('time') });
+      await expect(episodes).toHaveCount(n < pages ? 3 : slugs('podcasts').length - (pages - 1) * 3);
+      hrefs.push(...(await episodes.getByRole('heading').getByRole('link').evaluateAll((as) => as.map((a) => a.getAttribute('href')!))));
+      dates.push(...(await episodes.locator('time').evaluateAll((ts) => ts.map((t) => t.getAttribute('datetime')!))));
+      const pager = page.getByRole('navigation', { name: 'Podcast pages' });
+      await expect(pager.getByRole('link', { name: `Page ${n}` })).toHaveAttribute('aria-current', 'page');
+    }
+    expect(new Set(hrefs)).toEqual(new Set(slugs('podcasts').map((s) => `/podcasts/${s}/`)));
     expect(dates).toEqual([...dates].sort().reverse());
 
+    await page.goto('/insights/podcasts/?pages=2');
+    await expect(page).toHaveURL('/insights/podcasts/page/2/');
+
+    await page.goto('/insights/podcasts/');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Podcast');
+    await expect(main(page).getByRole('link', { name: 'Listen now' })).toHaveAttribute('href', 'https://open.spotify.com/show/3vQMN7K3w5z6T23vDhipjt');
+    const episodes = main(page).getByRole('listitem').filter({ has: page.locator('time') });
     const newest = episodes.first();
     await expect(newest.getByRole('heading')).toHaveText('Shaping Digital Transformation Across Industries');
     await expect(newest).toContainText('Eugene Pataliak');
@@ -72,6 +85,15 @@ test.describe('Reports', () => {
   test('the listing links every report', async ({ page }) => {
     await expectListsEvery(page, '/insights/reports/', 'reports');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Reports');
+  });
+
+  test('each Report card is a Black tile with an accent bar in its Pillar colour', async ({ page }) => {
+    await page.goto('/insights/reports/');
+    const agile = main(page).locator('[data-component="report-card"]', { hasText: 'Agile Marketing' });
+    await expect(agile).toHaveAttribute('href', '/reports/agile-marketing/');
+    await expect(agile).toHaveCSS('background-color', 'rgb(20, 30, 37)');
+    await expect(agile.locator('[data-accent-bar]')).toHaveCSS('background-color', 'rgb(255, 74, 125)');
+    await expect(agile).toContainText('/ read report');
   });
 
   test('a report page shows its intro and cover, and asks the reader to get in touch for the full report', async ({ page }) => {

@@ -1,5 +1,7 @@
 ---
 title: "Account Director"
+employer: "Chesamel Group"
+posted: "2026-10-19T13:47:34Z"
 hero: {"title":"Account Director","details":["Hybrid","Full-Time","London, UK"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4475431909/"}]}
 ---
 

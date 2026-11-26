@@ -28,8 +28,13 @@ import Slider from '../components/Slider.astro';
 import SliderItem from '../components/SliderItem.astro';
 import OfficeList from '../components/OfficeList.astro';
 import TeamCard from '../components/sections/TeamCard.astro';
+import Pager from '../components/Pager.astro';
+import ReportCard from '../components/ReportCard.astro';
+import CareerCard from '../components/CareerCard.astro';
+import { getNewest, addressOf } from '../content/insight-items';
+import { primaryPillar } from '../content/shared';
 import Sections from '../components/Sections.astro';
-import { getTeamMembers } from '../content/pages';
+import { getTeamMembers, getRoles, pageAddress } from '../content/pages';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
@@ -50,6 +55,8 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 const newestPosts = (await getBlogPosts()).slice(0, 6).map(summarisePost);
 const newestCaseStudies = (await getCaseStudies()).slice(0, 4).map(summariseCaseStudy);
 const [sampleIndustry] = await getIndustries();
+const [sampleReport] = await getNewest('reports');
+const [sampleRole] = await getRoles();
 
 // Each logo in each colour the guidelines permit, on a background that suits
 // it. The dashed outline shows the clear space built into the Component.
@@ -241,6 +248,10 @@ const typeStyles = [
     />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Blog Post card</h3>
     <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body mb-6 max-w-2xl">
+        The main label as a tag outlined in its Pillar accent, an arrow box, the title, date and reading time, and the
+        hero image. Hover or focus it: it turns white, the arrow box takes the accent and the image grows.
+      </p>
       <div class="max-w-sm"><BlogPostCard post={newestPosts[0]} headingLevel="h4" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Blog Post listing</h3>
@@ -250,8 +261,47 @@ const typeStyles = [
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Case Study card</h3>
     <div class="mx-auto max-w-5xl px-6">
-      <p class="type-body mb-6 max-w-2xl">Image, main Pillar, the client when known, and the title. Shown here with the newest Case Study.</p>
-      <div class="max-w-md"><CaseStudyCard caseStudy={newestCaseStudies[0]} headingLevel="h4" /></div>
+      <p class="type-body mb-6 max-w-2xl">
+        Horizontal from 768px, image on the left; stacked on phones. The main label as a tag outlined in its Pillar
+        accent, the client when known, the title and an arrow box. The second carries the “New” badge, as in Our
+        Work’s “Latest Work”.
+      </p>
+      <div class="grid gap-6 md:grid-cols-2">
+        <CaseStudyCard caseStudy={newestCaseStudies[0]} headingLevel="h4" />
+        <CaseStudyCard caseStudy={newestCaseStudies[1]} headingLevel="h4" isNew />
+      </div>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Report card</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body mb-6 max-w-2xl">A Black tile with an accent bar in the Report’s Pillar colour, the logo, the title and the cover cut into a circle.</p>
+      <div class="max-w-sm"><ReportCard href={addressOf(sampleReport)} title={sampleReport.data.title} image={sampleReport.data.image} pillar={primaryPillar(sampleReport.data)} headingLevel="h4" /></div>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Careers job card</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body mb-6 max-w-2xl">One open role, linking to its page. Hover or focus it: it turns Indigo with white text.</p>
+      <div class="max-w-sm">
+        <CareerCard
+          href={pageAddress(sampleRole)}
+          title={sampleRole.data.title}
+          details={sampleRole.data.hero.details}
+          employer={sampleRole.data.employer}
+          posted={sampleRole.data.posted}
+          headingLevel="h4"
+        />
+      </div>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Pager</h3>
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="type-body max-w-2xl">
+        Under News, Our Work, Podcast and Our Team. Links on a static listing, buttons where the listing pages in the
+        browser. Page 1 of 34, page 5 of 34 and the last page:
+      </p>
+      <Pager last={34} current={1} href={(n) => `#page-${n}`} label="Sample pager, page 1" />
+      <Pager last={34} current={5} href={(n) => `#page-${n}`} label="Sample pager, page 5" />
+      <Pager last={34} current={34} href={(n) => `#page-${n}`} label="Sample pager, last page" />
+      <div class="mt-10 bg-black px-6 pb-10">
+        <Pager last={11} current={2} href={(n) => `#page-${n}`} label="Sample pager on Black" tone="dark" class="pt-10" />
+      </div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Case Study slider</h3>
     <p class="type-body mx-auto mb-6 max-w-5xl px-6">

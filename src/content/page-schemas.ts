@@ -9,7 +9,7 @@
 
 import { z } from 'astro/zod';
 import { pillarSlugs, teamSlugs } from '../data/taxonomy';
-import { text, image } from './schema-parts';
+import { text, date, image } from './schema-parts';
 
 const link = z.object({ label: text, href: text });
 const heading = { eyebrow: text.optional(), heading: text };
@@ -81,7 +81,13 @@ const built = {
   sections: z.array(sectionSchema).default([]),
 };
 
-export const pageSchema = z.object(built);
+export const pageSchema = z.object({
+  ...built,
+  // An open role's employer and the day it was posted, for its card on
+  // Careers (#42). Imported from WordPress's career_employer and post date.
+  employer: text.optional(),
+  posted: date.optional(),
+});
 
 // One of the six service areas at /services/<file name>/.
 export const pillarSchema = z.object({

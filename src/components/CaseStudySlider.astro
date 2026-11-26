@@ -24,9 +24,11 @@ interface Props {
   headingLevel?: 'h2' | 'h3';
   // Keeps ids unique when a page shows more than one slider.
   id?: string;
+  // Marks every card "New", as Our Work's "Latest Work" does (#42).
+  markNew?: boolean;
 }
 
-const { caseStudies, heading, eyebrow, text, action, tone = 'dark', headingLevel: Heading = 'h2', id = 'case-study-slider' } = Astro.props;
+const { caseStudies, heading, eyebrow, text, action, tone = 'dark', headingLevel: Heading = 'h2', id = 'case-study-slider', markNew = false } = Astro.props;
 const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
 const dark = tone === 'dark';
 ---
@@ -45,7 +47,7 @@ const dark = tone === 'dark';
       {
         caseStudies.map((caseStudy) => (
           <SliderItem class="md:basis-1/2">
-            <CaseStudyCard caseStudy={caseStudy} headingLevel={CardHeading} />
+            <CaseStudyCard caseStudy={caseStudy} headingLevel={CardHeading} tone={tone} isNew={markNew} />
           </SliderItem>
         ))
       }

@@ -17,3 +17,11 @@ export const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 // "November 13, 2024", as the live site shows dates.
 export const formatDate = (date: Date) =>
   date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+
+// "19th Oct 2026", as the live Careers cards show the day a role was posted.
+export function formatShortDate(date: Date): string {
+  const day = date.getUTCDate();
+  const suffix = day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th';
+  const month = date.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+  return `${day}${suffix} ${month} ${date.getUTCFullYear()}`;
+}

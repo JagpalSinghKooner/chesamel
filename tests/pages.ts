@@ -6,6 +6,10 @@ export const pages = [
   '/style-guide/',
   // News and two Blog Posts: one post, one of the former news type.
   '/insights/blog/',
+  // Page 2 of each paged listing (#42).
+  '/insights/blog/page/2/',
+  '/insights/our-work/page/2/',
+  '/insights/podcasts/page/2/',
   '/flex-index-flexible-workforce-planning/',
   '/news/qatar-the-dawning-oasis-of-global-innovation/',
   // The Insights hub, and the Podcast, Webinar and Report listings with one of

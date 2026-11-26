@@ -1,4 +1,4 @@
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { test, expect, type Page } from '@playwright/test';
 
 // Blog Posts on disk: every one of them must be listed in News.
@@ -8,49 +8,149 @@ const postFiles = readdirSync(blogDir, { recursive: true, encoding: 'utf8' }).fi
 // Known posts, with their labels in the migrated content.
 const flexIndex = 'The Flex Index: A Working Tool for Workforce Composition'; // Hybrid Workforce, Technology
 const sayDoGap = 'The Marketing Say-Do Gap: The 2026 State of AI in B2B Marketing'; // Marketing Engine, Technology
-const responsibleTech = 'Shaping a Responsible Tech Strategy: Avoiding Innovation for Innovation’s Sake'; // Digital Transformation, no Industry
 
 const NEWS = '/insights/blog/';
+const PER_PAGE = 6;
+const lastPage = Math.ceil(postFiles.length / PER_PAGE);
+const allCards = (page: Page) => page.getByRole('main').locator('[data-component="blog-post-card"]');
 const cards = (page: Page) => page.getByRole('main').locator('[data-component="blog-post-card"]:visible');
 const card = (page: Page, title: string) => page.getByRole('main').getByRole('link', { name: title });
+const pager = (page: Page) => page.getByRole('navigation', { name: 'News pages', exact: true });
+const filteredPager = (page: Page) => page.getByRole('navigation', { name: 'News pages, filtered' });
+
+// The Pillar labels of every post, from the files, to know how many match.
+const labelsOf = (file: string) => readFileSync(new URL(file, blogDir), 'utf8').match(/^pillars: (.*)$/m)![1];
+const hybridPosts = postFiles.filter((f) => labelsOf(f).includes('"hybrid-workforce"')).length;
+const industriesOf = (file: string) => readFileSync(new URL(file, blogDir), 'utf8').match(/^industries: (.*)$/m)?.[1] ?? '';
+const technologyPosts = postFiles.filter((f) => industriesOf(f).includes('"technology"')).length;
 
 test.describe('News', () => {
-  test('lists every Blog Post, newest first', async ({ page }) => {
+  test('carries every Blog Post, newest first, and shows the six newest', async ({ page }) => {
     await page.goto(NEWS);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('News');
-    await expect(cards(page)).toHaveCount(postFiles.length);
+    await expect(allCards(page)).toHaveCount(postFiles.length);
+    await expect(cards(page)).toHaveCount(PER_PAGE);
     await expect(page.getByRole('status')).toHaveText(`${postFiles.length} Blog Posts`);
 
-    const dates = await cards(page).locator('time').evaluateAll((ts) => ts.map((t) => t.getAttribute('datetime')!));
+    const dates = await allCards(page).locator('time').evaluateAll((ts) => ts.map((t) => t.getAttribute('datetime')!));
     expect(dates).toEqual([...dates].sort().reverse());
   });
 
-  test('filters by Pillar', async ({ page }) => {
+  test('pages through the posts with real links, 6 a page', async ({ page }) => {
     await page.goto(NEWS);
+    const titles = await allCards(page).locator('h2').allTextContents();
+    const nav = pager(page);
+    await expect(nav.getByRole('link', { name: 'First page' })).toHaveCount(0);
+    await expect(nav.getByRole('link', { name: 'Previous page' })).toHaveCount(0);
+    await expect(nav.getByRole('link', { name: /^Page \d+$/ })).toHaveText(['1', '2', '3']);
+    await expect(nav.getByRole('link', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
+    await expect(nav.getByRole('link', { name: 'Last page' })).toHaveAttribute('href', `${NEWS}page/${lastPage}/`);
+
+    await nav.getByRole('link', { name: 'Next page' }).click();
+    await expect(page).toHaveURL(`${NEWS}page/2/`);
+    await expect(page).toHaveTitle(`News, page 2 of ${lastPage} | Chesamel`);
+    await expect(cards(page).locator('h2')).toHaveText(titles.slice(6, 12));
+    await expect(pager(page).getByRole('link', { name: 'Previous page' })).toHaveAttribute('href', NEWS);
+    await expect(pager(page).getByRole('link', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+
+    await page.goto(`${NEWS}page/${lastPage}/`);
+    await expect(cards(page).locator('h2')).toHaveText(titles.slice((lastPage - 1) * PER_PAGE));
+    await expect(pager(page).getByRole('link', { name: /^Page \d+$/ })).toHaveText([lastPage - 2, lastPage - 1, lastPage].map(String));
+    await expect(pager(page).getByRole('link', { name: 'Next page' })).toHaveCount(0);
+    await expect(pager(page).getByRole('link', { name: 'Last page' })).toHaveCount(0);
+  });
+
+  test("the live site's ?pages=N and filter addresses lead to the same posts", async ({ page }) => {
+    await page.goto(`${NEWS}?pages=2`);
+    await expect(page).toHaveURL(`${NEWS}page/2/`);
+    await page.goto(`${NEWS}page/3/?pages=1`);
+    await expect(page).toHaveURL(NEWS);
+    await page.goto(`${NEWS}?pages=999`);
+    await expect(page).toHaveURL(`${NEWS}page/${lastPage}/`);
+    await page.goto(`${NEWS}?a_services=hybrid-workforce&a_industries=technology`);
+    await expect(page).toHaveURL(`${NEWS}?pillar=hybrid-workforce&industry=technology`);
+    await expect(page.getByRole('group', { name: 'Pillar' }).getByRole('button', { name: 'Hybrid Workforce' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(card(page, flexIndex)).toBeVisible();
+
+    // A live page of filtered posts is the same page of our filtered posts.
+    await page.goto(`${NEWS}page/4/?a_services=hybrid-workforce&pages=2`);
+    await expect(page).toHaveURL(`${NEWS}?pillar=hybrid-workforce&page=2`);
+    await expect(page.getByRole('navigation', { name: 'News pages, filtered' }).getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+    await expect(card(page, flexIndex)).toBeHidden();
+  });
+
+  test('a filter value no button offers falls back to All', async ({ page }) => {
+    await page.goto(`${NEWS}?a_services=investments-sustainable-transformation`);
+    await expect(page.getByRole('group', { name: 'Pillar' }).getByRole('button', { name: 'All' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(cards(page)).toHaveCount(PER_PAGE);
+    await expect(page.getByRole('status')).toHaveText(`${postFiles.length} Blog Posts`);
+    await expect(page).toHaveURL(NEWS);
+  });
+
+  test('filters by Pillar across every page, and pages through the matches', async ({ page }) => {
+    await page.goto(`${NEWS}page/5/`);
     const pillars = page.getByRole('group', { name: 'Pillar' });
     await pillars.getByRole('button', { name: 'Hybrid Workforce' }).click();
 
     await expect(pillars.getByRole('button', { name: 'Hybrid Workforce' })).toHaveAttribute('aria-pressed', 'true');
     await expect(card(page, flexIndex)).toBeVisible();
     await expect(card(page, sayDoGap)).toBeHidden();
-    const shown = await cards(page).count();
-    expect(shown).toBeGreaterThan(0);
-    expect(shown).toBeLessThan(postFiles.length);
-    await expect(page.getByRole('status')).toHaveText(`${shown} Blog Posts`);
+    await expect(cards(page)).toHaveCount(PER_PAGE);
+    await expect(page.getByRole('status')).toHaveText(`${hybridPosts} Blog Posts`);
     await expect(page).toHaveURL(/\?pillar=hybrid-workforce$/);
 
+    // The static links give way to buttons that page through the matches.
+    await expect(pager(page)).toBeHidden();
+    const filtered = filteredPager(page);
+    await expect(filtered.getByRole('button', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
+    await expect(filtered.getByRole('button', { name: 'Previous page' })).toBeHidden();
+    const firstPage = await cards(page).locator('h2').allTextContents();
+    await filtered.getByRole('button', { name: 'Page 2' }).click();
+    await expect(filtered.getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+    await expect(cards(page)).toHaveCount(PER_PAGE);
+    await expect(card(page, flexIndex)).toBeHidden();
+    expect(await cards(page).locator('h2').allTextContents()).not.toEqual(firstPage);
+    await expect(page).toHaveURL(/\?pillar=hybrid-workforce&page=2$/);
+    await filtered.getByRole('button', { name: 'Last page' }).click();
+    const lastFiltered = Math.ceil(hybridPosts / PER_PAGE);
+    await expect(filtered.getByRole('button', { name: `Page ${lastFiltered}` })).toHaveAttribute('aria-current', 'page');
+    await expect(cards(page)).toHaveCount(hybridPosts - (lastFiltered - 1) * PER_PAGE);
+
+    // The pressed control is now hidden, so focus moves to the count and the
+    // new page is announced.
+    await expect(filtered.getByRole('button', { name: 'Last page' })).toBeHidden();
+    await expect(page.locator('[data-count]')).toBeFocused();
+    await expect(page.locator('[data-page-status]')).toHaveText(`Page ${lastFiltered} of ${lastFiltered}`);
+    await filtered.getByRole('button', { name: 'First page' }).click();
+    await expect(filtered.getByRole('button', { name: 'First page' })).toBeHidden();
+    await expect(page.locator('[data-count]')).toBeFocused();
+    await expect(page.locator('[data-page-status]')).toHaveText(`Page 1 of ${lastFiltered}`);
+
+    // All brings back this static page and its links.
     await pillars.getByRole('button', { name: 'All' }).click();
-    await expect(cards(page)).toHaveCount(postFiles.length);
+    await expect(cards(page)).toHaveCount(PER_PAGE);
+    await expect(pager(page).getByRole('link', { name: 'Page 5' })).toHaveAttribute('aria-current', 'page');
+    await expect(filteredPager(page)).toBeHidden();
   });
 
   test('filters by Industry; posts without an Industry show only while no Industry is chosen', async ({ page }) => {
     await page.goto(NEWS);
-    await expect(card(page, responsibleTech)).toBeVisible();
-
     await page.getByRole('group', { name: 'Industry' }).getByRole('button', { name: 'Technology' }).click();
+    await expect(page.getByRole('status')).toHaveText(`${technologyPosts} Blog Posts`);
     await expect(card(page, flexIndex)).toBeVisible();
     await expect(card(page, sayDoGap)).toBeVisible();
-    await expect(card(page, responsibleTech)).toBeHidden();
+    await page.getByRole('group', { name: 'Industry' }).getByRole('button', { name: 'All' }).click();
+    await expect(page.getByRole('status')).toHaveText(`${postFiles.length} Blog Posts`);
+  });
+
+  test('a card shows its Pillar tag in the accent, the date, the reading time and the hero image', async ({ page }) => {
+    await page.goto(NEWS);
+    const flex = card(page, flexIndex);
+    await expect(flex.locator('[data-tag]')).toHaveText('Hybrid Workforce');
+    await expect(flex.locator('[data-tag]')).toHaveCSS('border-top-color', 'rgb(255, 138, 84)');
+    await expect(flex.locator('time')).toHaveText('October 1, 2026');
+    await expect(flex).toContainText(/\d+ min/);
+    await expect(flex.locator('img')).toHaveAttribute('src', /^\/wp-content\/uploads\//);
   });
 
   test('combines both filters, and a filtered address can be shared', async ({ page }) => {
@@ -58,7 +158,6 @@ test.describe('News', () => {
     await expect(page.getByRole('group', { name: 'Pillar' }).getByRole('button', { name: 'Marketing Engine' })).toHaveAttribute('aria-pressed', 'true');
     await expect(card(page, sayDoGap)).toBeVisible();
     await expect(card(page, flexIndex)).toBeHidden();
-    await expect(card(page, responsibleTech)).toBeHidden();
   });
 
   test('works on a phone without sideways scrolling', async ({ page }) => {

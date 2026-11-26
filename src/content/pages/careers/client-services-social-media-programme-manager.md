@@ -1,5 +1,7 @@
 ---
 title: "Client Services & Social Media Programme Manager"
+employer: "Chesamel Group"
+posted: "2026-10-19T14:40:14Z"
 hero: {"title":"Client Services & Social Media Programme Manager","details":["Hybrid","Full-Time","London"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4477992658/"}]}
 ---
 

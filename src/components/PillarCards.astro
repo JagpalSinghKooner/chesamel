@@ -2,8 +2,19 @@
 // Pillar cards Component: the four Pillars as linked cards, beside an
 // optional introduction (the live homepage's "How we add value"). Each card is
 // a Fulldev Card (ADR-0005).
+//
+// As on live (#42): from 768px, square tiles two across with the
+// illustration over the name; on phones, rows with the illustration, the name
+// and an arrow box. Live fills a hovered tile with the Pillar colour under
+// white text, which fails WCAG AA (ADR-0002), so here a hovered or focused
+// tile turns white, takes the Pillar accent as its border and shows its
+// summary in Dark Grey. The summary is otherwise visually hidden but still
+// read out as part of the link.
 import { Card } from '@/components/ui/card';
+import Icon from './Icon.astro';
 import { brandCard } from './card';
+import { focusOutline } from './button';
+import { accentBorderOnOwnHover } from './accent';
 import { pillars } from '../data/pillars';
 
 interface Props {
@@ -16,18 +27,29 @@ const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
 
 <section class="bg-off-white" data-component="pillar-cards">
   <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-6 lg:py-28 lg:grid-cols-[3fr_2fr] lg:items-center">
-    <ul aria-label="Pillars" class="grid gap-4 sm:grid-cols-2">
+    <ul aria-label="Pillars" class="grid gap-5 md:grid-cols-2">
       {
         pillars.map((p) => (
           <li>
             <Card
               as="a"
               href={p.href}
-              class:list={[brandCard, 'group h-full items-center justify-center gap-4 border border-light-grey bg-white/40 px-6 py-12 text-center has-[>img:first-child]:pt-12 transition-colors hover:border-indigo hover:bg-white']}
+              class:list={[
+                brandCard,
+                focusOutline,
+                'group h-full flex-row items-center gap-5 border border-medium-grey/60 px-4 py-4.5 text-dark-grey transition-colors duration-300 hover:bg-white focus-visible:bg-white focus-visible:outline-indigo md:aspect-square md:flex-col md:justify-center md:text-center',
+                accentBorderOnOwnHover[p.accent],
+              ]}
+              data-component="pillar-card"
             >
-              <img src={p.icon} alt="" width="56" height="56" loading="lazy" />
-              <CardHeading class="font-semibold text-black">{p.label}</CardHeading>
-              <p class="type-caption">{p.summary}</p>
+              <img src={p.icon} alt="" width="100" height="100" loading="lazy" class="m-2.5 size-12 shrink-0 md:m-3 md:size-19" />
+              <div class="grow md:grow-0">
+                <CardHeading class="text-lg font-semibold text-dark-grey">{p.label}</CardHeading>
+                <p class="type-caption sr-only md:group-hover:not-sr-only md:group-hover:mt-2 md:group-focus-visible:not-sr-only md:group-focus-visible:mt-2">{p.summary}</p>
+              </div>
+              <span aria-hidden="true" class="grid size-11 shrink-0 place-items-center bg-medium-grey/20 md:hidden">
+                <Icon name="arrow-up-right" class="size-4 rtl:-scale-x-100" />
+              </span>
             </Card>
           </li>
         ))

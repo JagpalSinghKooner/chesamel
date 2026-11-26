@@ -11,6 +11,9 @@ export interface WxrItem {
   link: string;
   // GMT, as WordPress writes it: "2024-12-10 12:20:12".
   dateGmt: string;
+  // The same moment in the site's own time zone (wp:post_date), the date
+  // WordPress shows on the page.
+  dateLocal: string;
   creator: string;
   content: string;
   // The hand-written summary; Case Studies show it as the hero subtitle.
@@ -62,6 +65,7 @@ export function parseWxr(xml: string): Wxr {
       title: str(i.title),
       link: str(i.link),
       dateGmt: str(i['wp:post_date_gmt']),
+      dateLocal: str(i['wp:post_date']),
       creator: str(i['dc:creator']),
       content: i['content:encoded'] === undefined ? '' : String(i['content:encoded']),
       excerpt: str(i['excerpt:encoded']),

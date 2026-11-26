@@ -10,6 +10,17 @@
 // From 16.38.1, except two Simple Icons removed: LinkedIn from 13.21.0 and
 // Amazon Music from 14.15.0. Simple Icons has no Podchaser, so Podchaser
 // shows Lucide's podcast icon (issue #41).
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right';
+import Calendar from '@lucide/astro/icons/calendar';
+import ChevronDown from '@lucide/astro/icons/chevron-down';
+import ChevronLeft from '@lucide/astro/icons/chevron-left';
+import ChevronRight from '@lucide/astro/icons/chevron-right';
+import ChevronsLeft from '@lucide/astro/icons/chevrons-left';
+import ChevronsRight from '@lucide/astro/icons/chevrons-right';
+import Clock from '@lucide/astro/icons/clock';
+import Mail from '@lucide/astro/icons/mail';
+import MapPin from '@lucide/astro/icons/map-pin';
 import Menu from '@lucide/astro/icons/menu';
 import MicSignal from '@lucide/astro/icons/mic-signal';
 import Pause from '@lucide/astro/icons/pause';
@@ -37,6 +48,17 @@ const outline = (svg: IconEntry['svg']): IconEntry => ({ svg, solid: false });
 const solid = (svg: IconEntry['svg']): IconEntry => ({ svg, solid: true });
 
 export const interfaceIcons = {
+  'arrow-right': outline(ArrowRight),
+  'arrow-up-right': outline(ArrowUpRight),
+  calendar: outline(Calendar),
+  'chevron-down': outline(ChevronDown),
+  'chevron-left': outline(ChevronLeft),
+  'chevron-right': outline(ChevronRight),
+  'chevrons-left': outline(ChevronsLeft),
+  'chevrons-right': outline(ChevronsRight),
+  clock: outline(Clock),
+  mail: outline(Mail),
+  'map-pin': outline(MapPin),
   menu: outline(Menu),
   pause: solid(Pause),
   play: solid(Play),

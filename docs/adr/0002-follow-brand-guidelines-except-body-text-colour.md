@@ -18,3 +18,10 @@ Each Pillar, and every Service under it, gets one secondary colour:
 - Hybrid Workforce: Tiger (#FF8A54)
 
 It is used **only for small non-text accents**: tag borders, dots, icons and accent bars. Never as a fill behind text, and never as text colour. The live site fills Report tiles and hovered tags with these colours; we don't, because white text on them is 2.3 to 3.2:1 and fails WCAG AA. The mapping lives in `src/data/pillars.ts` as a token name (`accent`), never a hex value.
+
+The two further service areas a Blog Post or Case Study can be labelled with (GLOSSARY.md › Pillar) take **Sky**, as on the live site (#42):
+
+- AI & Machine Learning: Sky (#24ADEB)
+- BI & Data Analytics: Sky (#24ADEB)
+
+`labelAccents` in `src/data/pillars.ts` maps every label to its accent, and `src/components/accent.ts` turns an accent into full class names.

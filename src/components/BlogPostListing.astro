@@ -1,6 +1,8 @@
 ---
 // Blog Post listing with Pillar and Industry filters, as on the live News page.
-// The filters, count and filtering come from FilteredListing.
+// The filters, count, filtering and paging come from FilteredListing. With
+// `perPage`, every post is in the HTML but only page `page`'s show until a
+// filter is chosen (#42).
 import BlogPostCard from './BlogPostCard.astro';
 import FilteredListing from './FilteredListing.astro';
 import type { BlogPostSummary } from '../content/blog';
@@ -8,9 +10,13 @@ import type { BlogPostSummary } from '../content/blog';
 interface Props {
   posts: BlogPostSummary[];
   headingLevel?: 'h2' | 'h3' | 'h4';
+  perPage?: number;
+  page?: number;
+  pageHref?: (n: number) => string;
 }
 
-const { posts, headingLevel = 'h2' } = Astro.props;
+const { posts, headingLevel = 'h2', perPage, page = 1, pageHref } = Astro.props;
+const onPage = (i: number) => !perPage || Math.floor(i / perPage) + 1 === page;
 ---
 
 <div data-component="blog-post-listing">
@@ -21,11 +27,15 @@ const { posts, headingLevel = 'h2' } = Astro.props;
     ]}
     total={posts.length}
     noun={['Blog Post', 'Blog Posts']}
+    perPage={perPage}
+    page={page}
+    pageHref={pageHref}
+    pagerLabel="News pages"
   >
-    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
-        posts.map((post) => (
-          <li data-pillars={post.pillars.join(' ')} data-industries={post.industries.join(' ')}>
+        posts.map((post, i) => (
+          <li hidden={!onPage(i)} data-pillars={post.pillars.join(' ')} data-industries={post.industries.join(' ')}>
             <BlogPostCard post={post} headingLevel={headingLevel} />
           </li>
         ))

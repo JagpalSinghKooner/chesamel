@@ -1,35 +1,69 @@
 ---
-// Blog Post card: Pillar tag, title, date and reading time, linking to the
-// post. Built on Fulldev's Card (ADR-0005). The tag is Dark Grey `type-tag`,
-// not the live site's rose/tiger text: secondary colours are for small accents
-// only (ADR-0002).
-import { Card, CardContent } from '@/components/ui/card';
+// Blog Post card, as on the live site (#42): the main label as a tag with its
+// Pillar accent border, an arrow box, the title, the date and reading time,
+// and the hero image across the foot. Built on Fulldev's Card (ADR-0005).
+//
+// On hover or keyboard focus the card turns white, the tag border and the
+// arrow box take the Pillar accent and the image grows (not under reduced
+// motion). The live site also fills the tag and turns its text white, which
+// fails WCAG AA, so the text stays Dark Grey here (ADR-0002).
+import { Card } from '@/components/ui/card';
+import Icon from './Icon.astro';
+import ImagePlaceholder from './ImagePlaceholder.astro';
 import { focusOutline } from './button';
-import { brandCard, brandCardContent } from './card';
+import { brandCard } from './card';
+import { accentBorder, accentFillOnHover } from './accent';
 import type { BlogPostSummary } from '../content/blog';
 import { formatDate, isoDate, primaryPillar } from '../content/shared';
 import { pillarLabels } from '../data/taxonomy';
+import { labelAccents } from '../data/pillars';
 
 interface Props {
   post: BlogPostSummary;
-  headingLevel?: 'h2' | 'h3' | 'h4';
+  headingLevel?: 'h2' | 'h3' | 'h4' | 'h5';
 }
 
 const { post, headingLevel: Heading = 'h3' } = Astro.props;
+const label = primaryPillar(post);
+const accent = labelAccents[label];
 ---
 
 <Card
   as="a"
   href={post.address}
-  class:list={[brandCard, focusOutline, 'group h-full min-h-64 border border-light-grey bg-white/40 hover:border-indigo hover:bg-white transition-colors duration-300 focus-visible:outline-indigo']}
+  class:list={[
+    brandCard,
+    focusOutline,
+    'group h-full border border-light-grey bg-transparent text-dark-grey transition-colors duration-300 hover:bg-white focus-visible:bg-white focus-visible:outline-indigo',
+  ]}
   data-component="blog-post-card"
 >
-  <CardContent class:list={[brandCardContent, 'grow p-5']}>
-    <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[primaryPillar(post)]}</span>
-    <Heading class="type-heading-3 mt-6 text-xl leading-tight group-hover:underline group-focus-visible:underline">{post.title}</Heading>
-    <p class="type-caption mt-auto flex justify-between gap-4 pt-6">
-      <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
-      <span>{post.minutes} min read</span>
+  <div class="flex grow flex-col px-7 pt-7 pb-4">
+    <div class="flex items-start justify-between gap-5">
+      <span class:list={['border px-5 py-3 text-base leading-none font-medium', accentBorder[accent]]} data-tag>{pillarLabels[label]}</span>
+      <span aria-hidden="true" class:list={['grid size-11 shrink-0 place-items-center bg-light-grey/30 transition-colors duration-300', accentFillOnHover[accent]]} data-arrow-box>
+        <Icon name="arrow-up-right" class="size-4 rtl:-scale-x-100" />
+      </span>
+    </div>
+    <Heading class="mt-7 text-xl leading-tight font-semibold text-dark-grey">{post.title}</Heading>
+    <p class="mt-auto flex justify-between gap-4 pt-12 text-sm leading-none font-semibold">
+      <span class="flex items-center gap-1.5">
+        <Icon name="calendar" class="size-4.5 text-grey" />
+        <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
+      </span>
+      <span class="flex items-center gap-1.5">
+        <Icon name="clock" class="size-4.5 text-grey" />
+        {post.minutes} min
+      </span>
     </p>
-  </CardContent>
+  </div>
+  <div class="aspect-80/37 overflow-hidden">
+    {
+      post.image ? (
+        <img src={post.image.src} alt="" loading="lazy" class="size-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100" />
+      ) : (
+        <ImagePlaceholder />
+      )
+    }
+  </div>
 </Card>

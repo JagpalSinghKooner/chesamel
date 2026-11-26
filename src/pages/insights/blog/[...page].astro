@@ -1,0 +1,28 @@
+---
+// News: every Blog Post, filterable by Pillar and Industry, 6 a page (#42).
+// The live site serves News at /insights/blog/, so that address is kept;
+// later pages are /insights/blog/page/N/. Every page carries every post, so
+// the filters reach them all (FilteredListing).
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import InsightsHero from '../../../components/InsightsHero.astro';
+import BlogPostListing from '../../../components/BlogPostListing.astro';
+import ListingRedirect from '../../../components/ListingRedirect.astro';
+import { getBlogPosts, summarisePost } from '../../../content/blog';
+import { listings, pagePaths, pageHref, pageTitle } from '../../../content/paging';
+
+const { base: BASE, perPage: PER_PAGE } = listings.news;
+
+export const getStaticPaths = (async ({ paginate }) => pagePaths(paginate, await getBlogPosts(), listings.news.perPage)) satisfies GetStaticPaths;
+
+const { current, last } = Astro.props;
+const posts = (await getBlogPosts()).map(summarisePost);
+---
+
+<Base title={`${pageTitle('News', current, last)} | Chesamel`} description="The latest thoughts, updates, and helpful how-tos from Chesamel.">
+  <ListingRedirect base={BASE} last={last} />
+  <InsightsHero heading="News" text="The latest thoughts, updates, and helpful how-tos." />
+  <div class="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
+    <BlogPostListing posts={posts} perPage={PER_PAGE} page={current} pageHref={pageHref(BASE)} />
+  </div>
+</Base>
