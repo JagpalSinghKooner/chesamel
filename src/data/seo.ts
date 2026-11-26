@@ -7,9 +7,10 @@ export const siteName = 'Chesamel';
 // The logo live's structured data names.
 export const logo = { src: '/wp-content/uploads/2024/11/chesamel-c.svg', width: 47, height: 47 };
 
-// Shared when a page has no hero or card image of its own: live's default
-// share image.
-export const defaultShareImage = { src: '/wp-content/uploads/2024/11/Untitled-design-50.png', alt: 'Chesamel' };
+// Shared when a page has no hero or card image of its own: live's homepage
+// share image (Untitled-design-50.png) cut to 1200×630, the size social cards
+// show (Project Manager, #54).
+export const defaultShareImage = { src: '/images/share/chesamel.jpg', alt: '' };
 
 export const podcastSeries = { name: 'Chesamel Unplugged', href: '/insights/podcasts/' };
 

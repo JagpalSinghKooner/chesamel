@@ -48,7 +48,7 @@ test.describe('News', () => {
 
     await nav.getByRole('link', { name: 'Next page' }).click();
     await expect(page).toHaveURL(`${NEWS}page/2/`);
-    await expect(page).toHaveTitle(`News, page 2 of ${lastPage} | Chesamel`);
+    await expect(page).toHaveTitle(`Chesamel News: Insights on AI, Marketing & Tech, page 2 of ${lastPage}`);
     await expect(cards(page).locator('h2')).toHaveText(titles.slice(6, 12));
     await expect(pager(page).getByRole('link', { name: 'Previous page' })).toHaveAttribute('href', NEWS);
     await expect(pager(page).getByRole('link', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
@@ -174,7 +174,7 @@ test.describe('Blog Post page', () => {
     await card(page, flexIndex).click();
 
     await expect(page).toHaveURL(/\/flex-index-flexible-workforce-planning\/$/);
-    await expect(page).toHaveTitle('The Flex Index: A Working Tool for Workforce Composition | Chesamel');
+    await expect(page).toHaveTitle('The Flex Index: Flexible Workforce Planning | Chesamel');
     const main = page.getByRole('main');
     await expect(main.getByRole('heading', { level: 1 })).toHaveText(flexIndex);
     await expect(main.locator('time').first()).toHaveText('October 1, 2026');

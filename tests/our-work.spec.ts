@@ -97,7 +97,7 @@ test.describe('Case Study page', () => {
     await card(page, biFinance).click();
 
     await expect(page).toHaveURL(/\/case-studies\/business-intelligence-in-finance\/$/);
-    await expect(page).toHaveTitle(`${biFinance} | Chesamel`);
+    await expect(page).toHaveTitle(`${biFinance} | Specialists at Chesamel`);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(biFinance);
     const hero = page.locator('[data-case-study-hero]');
     await expect(hero).toContainText('/ BI & Data Analytics');
