@@ -1,36 +1,43 @@
 ---
 // Link styled as the live site's square button with a ↗ arrow, built on
 // Fulldev's Button (ADR-0005).
-// `tone` picks a pairing that passes WCAG AA contrast:
-//   dark: Black on light backgrounds    light: white with a border, on light backgrounds
-//   indigo: Indigo with white text       outline: white text with a border, on dark backgrounds
-// The live site's Lime buttons are Indigo here: Lime is for small accents only,
-// so it appears only on the arrow of the dark button.
+// `tone` picks a pairing that passes WCAG AA contrast (button.ts):
+//   cta: live's Lime call to action      primary: Indigo with white text
+//   dark: on light backgrounds           light: bordered, on light backgrounds
+//   outline: bordered, on dark backgrounds
+// Colours are theme roles (ADR-0006), so the brand palette turns the call to
+// action Indigo.
 //
 // Sizes follow the live site: 16px semibold text and 16px by 20px padding.
 // On hover the arrow nudges up and right, as on the live site; a keyboard
 // focus gets the same nudge plus a visible outline.
 import { Button } from '@/components/ui/button';
 import { brandButton, buttonTones, focusOutline, type ButtonTone } from './button';
+import { accentButton } from './accent';
+import type { PillarAccent } from '../data/pillars';
 
 interface Props {
   href: string;
   tone?: ButtonTone;
+  // The `accent` tone's Pillar.
+  accent?: PillarAccent;
 }
 
-const { href, tone = 'dark' } = Astro.props;
+const { href, tone = 'dark', accent } = Astro.props;
 
 const brand = 'gap-4 px-5 py-4 text-base leading-none duration-300';
-// The arrow's colour: a small accent, so Lime is allowed on Black.
+// The arrow's colour: live's Lime on the dark button, until hovered.
 const arrows = {
-  dark: 'text-lime',
-  light: 'text-indigo',
-  indigo: 'text-white',
+  cta: 'text-cta-arrow group-hover/button:text-current',
+  primary: 'text-current',
+  dark: 'text-detail group-hover/button:text-current',
+  light: 'text-emphasis group-hover/button:text-current',
   outline: 'text-current',
+  accent: 'text-current',
 };
 ---
 
-<Button as="a" href={href} class:list={[brandButton, focusOutline, brand, buttonTones[tone]]}>
+<Button as="a" href={href} class:list={[brandButton, focusOutline, brand, buttonTones[tone], tone === 'accent' && accent && accentButton[accent]]}>
   <slot />
   <span
     aria-hidden="true"

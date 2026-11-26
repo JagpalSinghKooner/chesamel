@@ -3,9 +3,9 @@
 // looping video, the heading whose middle word slides through `words`, the
 // buttons and, on wide screens, the "/ solutions" panel of Pillar links.
 //
-// The live heading colours each word in a secondary colour; here every word
-// sits on the Indigo marker, since secondary colours are for small accents only
-// (ADR-0002).
+// Each sliding word takes its own colour, as on live (Business Indigo,
+// Digital Sky, Marketing Rose, Workforce Tiger): theme roles (ADR-0006). The
+// brand palette sets the words white on an Indigo marker instead.
 //
 // The video: the live file is 7.5 MB (1920x1080). This one is re-encoded to
 // 1280x720 without sound, 1.5 MB, and is only fetched on screens 1024px and
@@ -20,9 +20,21 @@ import Icon from './Icon.astro';
 import type { ButtonAction } from './button';
 import { pillars } from '../data/pillars';
 
+// Each word's colour role, written out in full so Tailwind sees the classes.
+const wordColours = {
+  business: 'text-hero-word',
+  digital: 'text-hero-word-digital',
+  marketing: 'text-hero-word-marketing',
+  workforce: 'text-hero-word-workforce',
+};
+export interface HeroWord {
+  text: string;
+  tone: keyof typeof wordColours;
+}
+
 interface Props {
   before?: string;
-  words: [string, ...string[]];
+  words: [HeroWord, ...HeroWord[]];
   after?: string;
   headingLevel?: 'h1' | 'h2';
   image: { src: string; srcset?: string };
@@ -35,7 +47,12 @@ interface Props {
 const { before, words, after, headingLevel: Heading = 'h1', image, video, actions, solutions = false } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-black" data-component="hero" data-hero data-words={JSON.stringify(words)}>
+<section
+  class="relative isolate overflow-hidden bg-band-dark"
+  data-component="hero"
+  data-hero
+  data-words={JSON.stringify(words.map((w) => ({ text: w.text, colour: wordColours[w.tone] })))}
+>
   <img
     src={image.src}
     srcset={image.srcset}
@@ -46,11 +63,11 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
     data-hero-poster
   />
   {video && <template data-hero-video><video src={video} muted loop playsinline preload="auto" aria-hidden="true" class="absolute inset-0 -z-10 size-full object-cover"></video></template>}
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/50 to-black/10"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-scrim/80 via-scrim/50 to-scrim/10"></div>
   <div class="mx-auto flex min-h-136 max-w-7xl flex-col justify-center px-5 pt-28 pb-20 sm:px-6 lg:min-h-[min(56rem,100svh)] xl:pe-120">
-    <Heading class="type-heading-1 text-5xl text-white sm:text-7xl">
-      {before && <>{before}{' '}</>}<span class="relative inline-block overflow-hidden bg-indigo px-2 align-bottom"
-        ><span class="sr-only">{words[0]}</span><span aria-hidden="true" class="hero-word inline-block" data-hero-word>{words[0]}</span></span
+    <Heading class="type-heading-1 text-5xl text-inverse sm:text-7xl">
+      {before && <>{before}{' '}</>}<span class="relative inline-block overflow-hidden bg-highlight-marker px-2 align-bottom"
+        ><span class="sr-only">{words[0].text}</span><span aria-hidden="true" class:list={['hero-word inline-block', wordColours[words[0].tone]]} data-hero-word>{words[0].text}</span></span
       >{after && <><br />{after}</>}
     </Heading>
     <div class="mt-10 flex flex-wrap gap-3">
@@ -62,19 +79,19 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
     solutions && (
       <nav
         aria-label="Solutions"
-        class="absolute inset-y-0 end-0 hidden w-111 flex-col bg-black/60 pt-28 backdrop-blur-xl xl:flex"
+        class="absolute inset-y-0 end-0 hidden w-111 flex-col bg-scrim/60 pt-28 backdrop-blur-xl xl:flex"
       >
-        <p class="px-8 pb-6 text-mint">/ solutions</p>
+        <p class="px-8 pb-6 text-hero-eyebrow">/ solutions</p>
         <ul class="flex flex-1 flex-col">
           {pillars.map((p) => (
             <li class="flex flex-1">
               <a
                 href={p.href}
-                class="group flex flex-1 items-center gap-4 border-t border-white/10 px-8 py-4 font-bold text-white transition-colors duration-300 hover:bg-black/60 focus-visible:bg-black/60 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-white"
+                class="group flex flex-1 items-center gap-4 border-t border-inverse/10 px-8 py-4 font-bold text-inverse transition-colors duration-300 hover:bg-scrim/60 focus-visible:bg-scrim/60 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-inverse"
               >
                 <img src={p.icon} alt="" class="size-12" />
                 <span class="flex-1 transition-[padding] duration-300 group-hover:ps-1.5 group-focus-visible:ps-1.5">{p.label}</span>
-                <span aria-hidden="true" class="text-lime rtl:-scale-x-100">→</span>
+                <span aria-hidden="true" class="text-detail rtl:-scale-x-100">→</span>
               </a>
             </li>
           ))}
@@ -87,7 +104,7 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
     type="button"
     hidden
     aria-pressed="false"
-    class="absolute end-5 bottom-5 flex size-10 items-center justify-center border border-white/40 bg-black/40 text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:end-6 xl:end-115"
+    class="absolute end-5 bottom-5 flex size-10 items-center justify-center border border-inverse/40 bg-scrim/40 text-inverse transition-colors hover:bg-panel hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverse sm:end-6 xl:end-115"
     data-hero-pause
   >
     <span class="sr-only">Pause animation</span>
@@ -124,7 +141,7 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
 
     const pause = hero.querySelector<HTMLButtonElement>('[data-hero-pause]')!;
     const word = hero.querySelector<HTMLElement>('[data-hero-word]')!;
-    const words: string[] = JSON.parse(hero.dataset.words!);
+    const words: { text: string; colour: string }[] = JSON.parse(hero.dataset.words!);
 
     let video: HTMLVideoElement | undefined;
     const template = hero.querySelector<HTMLTemplateElement>('[data-hero-video]');
@@ -143,8 +160,10 @@ const { before, words, after, headingLevel: Heading = 'h1', image, video, action
       word.addEventListener(
         'animationend',
         () => {
+          word.classList.remove(words[index].colour);
           index = (index + 1) % words.length;
-          word.textContent = words[index];
+          word.textContent = words[index].text;
+          word.classList.add(words[index].colour);
           word.classList.replace('out', 'in');
         },
         { once: true },

@@ -22,7 +22,7 @@ const links = (Object.keys(names) as (keyof typeof names)[]).filter((k) => liste
     {
       links.map((l) => (
         <li>
-          <Button as="a" href={l.href} class:list={[brandButton, 'gap-0 border-light-grey bg-transparent px-3 py-1.5 text-black transition-none hover:border-indigo hover:bg-transparent']} rel="noopener">
+          <Button as="a" href={l.href} class:list={[brandButton, 'gap-0 border-border bg-transparent px-3 py-1.5 text-heading transition-none hover:border-primary hover:bg-transparent']} rel="noopener">
             {l.name}
             <span class="sr-only">: {episode}</span>
           </Button>

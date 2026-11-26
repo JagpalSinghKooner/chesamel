@@ -33,16 +33,34 @@ test('arbitrary sizes, spacing and breakpoints are caught', () => {
 });
 
 test('tokens and non-size arbitrary values are allowed', () => {
-  const good = 'max-w-(--container-7xl) text-[length:inherit] data-[state=active]:bg-white max-h-[calc(100vh-5rem)] min-h-136 max-w-7xl';
+  const good = 'max-w-(--container-7xl) text-[length:inherit] data-[state=active]:bg-panel max-h-[calc(100vh-5rem)] min-h-136 max-w-7xl';
   expect(rules('src/components/Card.astro', `<div class="${good}"></div>`)).toEqual([]);
 });
 
-test('files outside Components and layouts are not checked', () => {
-  expect(rules('src/pages/index.astro', '<svg></svg> #7342FF p-[13px]')).toEqual([]);
-  expect(rules('src/styles/global.css', '@keyframes spin {} #7342FF')).toEqual([]);
+test('a class that names a colour is caught anywhere in src/ (ADR-0006)', () => {
+  const bad = ['bg-indigo', 'text-white', 'hover:text-white/60', 'border-t-light-grey', 'from-black/80', 'outline-medium-grey', 'text-gray-500', 'bg-red-600'];
+  for (const cls of bad) {
+    expect(rules('src/pages/index.astro', `<div class="flex ${cls}"></div>`), cls).toEqual(['1:palette-class']);
+  }
 });
 
-test('our Components and layouts follow the Toolkit rules (ADR-0005)', async () => {
+test('theme roles are allowed', () => {
+  const good = 'bg-cta text-cta-foreground border-border text-heading bg-accent-marketing-fill hover:bg-inverse/10 decoration-step-underline bg-band-dark text-current';
+  expect(rules('src/components/Card.astro', `<div class="${good}"></div>`)).toEqual([]);
+});
+
+test('raw colour values are caught anywhere in src/, except theme.css', () => {
+  expect(rules('src/styles/global.css', 'a { color: #7342FF; background: rgb(20 31 38); }')).toEqual(['1:hex', '1:raw-colour']);
+  expect(rules('src/data/pillars.ts', "const c = 'rgba(0, 0, 0, 0.5)';")).toEqual(['1:raw-colour']);
+  expect(rules('src/styles/theme.css', '--cta: rgb(194 240 15); --page: #ffffff;')).toEqual([]);
+});
+
+test('outside Components and layouts, only the colour rules apply', () => {
+  expect(rules('src/pages/index.astro', '<svg></svg> p-[13px]')).toEqual([]);
+  expect(rules('src/styles/global.css', '@keyframes spin {}')).toEqual([]);
+});
+
+test('src/ follows the Toolkit rules (ADR-0005) and the colour rule (ADR-0006)', async () => {
   const found = await checkRepo();
   expect(found.map(formatViolation), 'run `npm run check:toolkit` for the list').toEqual([]);
 });

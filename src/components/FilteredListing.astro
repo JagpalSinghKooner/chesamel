@@ -47,8 +47,8 @@ const dark = tone === 'dark';
 // place of Fulldev's rounded grey toggle.
 const filterButton = [
   'h-auto min-w-0 cursor-pointer whitespace-normal border px-4 py-2 font-semibold transition-none hover:bg-transparent',
-  'data-[state=on]:border-indigo data-[state=on]:bg-indigo data-[state=on]:text-white data-[state=on]:hover:border-indigo data-[state=on]:hover:text-white',
-  dark ? 'border-dark-grey text-off-white hover:border-white hover:text-white' : 'border-medium-grey text-dark-grey hover:border-indigo hover:text-indigo',
+  'data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-inverse data-[state=on]:hover:border-primary data-[state=on]:hover:text-inverse',
+  dark ? 'border-border-on-dark text-body-on-dark hover:border-inverse hover:text-inverse' : 'border-border-strong text-body hover:border-primary hover:text-emphasis',
 ];
 ---
 
@@ -57,7 +57,7 @@ const filterButton = [
     {
       filters.map((g) => (
         <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline">
-          <p class:list={['type-tag w-24 shrink-0', dark && 'text-off-white']} aria-hidden="true">
+          <p class:list={['type-tag w-24 shrink-0', dark && 'text-body-on-dark']} aria-hidden="true">
             {g.label}
           </p>
           <ToggleGroup aria-label={g.label} defaultValue="all" data-filter={g.key} class="w-auto flex-wrap rounded-none">
@@ -74,7 +74,7 @@ const filterButton = [
       ))
     }
   </div>
-  <p role="status" tabindex="-1" class:list={['type-caption mt-8 scroll-mt-28', dark && 'text-off-white']} data-count>
+  <p role="status" tabindex="-1" class:list={['type-caption mt-8 scroll-mt-28', dark && 'text-body-on-dark']} data-count>
     {`${total} ${total === 1 ? noun[0] : noun[1]}`}
   </p>
   {/* Says "Page n of m" when the filtered Pager changes the page. */}

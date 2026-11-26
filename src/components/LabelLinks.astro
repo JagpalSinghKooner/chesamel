@@ -27,14 +27,14 @@ const groups = [
 
 {
   groups.map((g) => (
-    <aside aria-labelledby={g.id} class:list={[below && 'mt-16 border-t border-light-grey pt-8']} data-component="label-links">
+    <aside aria-labelledby={g.id} class:list={[below && 'mt-16 border-t border-border pt-8']} data-component="label-links">
       <h2 id={g.id} class="type-tag">
         {g.heading}
       </h2>
       <ul class:list={['mt-4 grid gap-3', below && 'sm:grid-cols-2']}>
         {g.links.map((l) => (
           <li>
-            <Button as="a" href={l.href} class:list={[brandButton, 'flex justify-between gap-4 border-light-grey bg-transparent px-4 py-5 text-[length:inherit] text-black transition-none hover:bg-off-white hover:text-black']}>
+            <Button as="a" href={l.href} class:list={[brandButton, 'flex justify-between gap-4 border-border bg-transparent px-4 py-5 text-[length:inherit] text-heading transition-none hover:bg-surface hover:text-heading']}>
               {l.label}
               <span class="type-caption shrink-0">
                 {g.cta} <span aria-hidden="true">↗</span>

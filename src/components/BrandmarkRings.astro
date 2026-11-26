@@ -3,25 +3,33 @@
 // watermark, as on the live site's heroes and calls to action. The paths are
 // the live site's animated-logo SVG.
 //
-// Permitted pairings only (guidelines page 9): Indigo rings on a light
-// background, white rings on Indigo or Black. The live site's pink, blue and
-// orange rings are Indigo here: secondary colours are for small accents only
-// (ADR-0002).
+// Colours are theme roles (ADR-0006), as on live: `on` names the background
+// the rings sit on, and `accent` draws them in a Pillar's accent instead, as
+// live's Pillar, Service and Insight heroes do (pink, blue, orange). The
+// brand palette keeps the guidelines' pairings (page 9): Indigo on light,
+// white on Indigo or Black.
 //
 // When the rings come into view they turn once in alternate directions and
 // then rest. The live rings turn for ever; stopping within 5 seconds means no
 // pause button is needed (WCAG 2.2.2). Under prefers-reduced-motion, or
 // without JavaScript, they stay still.
+import type { PillarAccent } from '../data/pillars';
+import { accentRings } from './accent';
+
 interface Props {
-  tone?: 'indigo' | 'white';
-  // Full strength, as on the live light heroes; otherwise a faint watermark.
-  solid?: boolean;
+  // light: a light hero (Contact)    indigo: an Indigo hero
+  // dark: the call-to-action band    band: a dark band inside a page
+  on?: 'light' | 'indigo' | 'dark' | 'band';
+  // A Pillar's accent, at full strength, in place of `on`'s colour.
+  accent?: PillarAccent;
   class?: string;
 }
-const { tone = 'indigo', solid = false, class: className } = Astro.props;
+const { on = 'light', accent, class: className } = Astro.props;
 const colours = {
-  indigo: solid ? 'text-indigo' : 'text-indigo/25',
-  white: solid ? 'text-white' : 'text-white/15',
+  light: 'text-rings-on-light',
+  indigo: 'text-rings-on-indigo',
+  dark: 'text-rings-on-dark',
+  band: 'text-rings-on-band',
 };
 ---
 
@@ -32,7 +40,8 @@ const colours = {
   fill="none"
   stroke-width="35"
   stroke-linecap="round"
-  class:list={['brandmark-rings pointer-events-none', colours[tone], className]}
+  class:list={['brandmark-rings pointer-events-none', accent ? accentRings[accent] : colours[on], className]}
+  data-rings={accent ?? on}
   data-component="brandmark-rings"
   data-motion
 >

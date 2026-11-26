@@ -148,6 +148,8 @@ test.describe('News', () => {
     const flex = card(page, flexIndex);
     await expect(flex.locator('[data-tag]')).toHaveText('Hybrid Workforce');
     await expect(flex.locator('[data-tag]')).toHaveCSS('border-top-color', 'rgb(255, 138, 84)');
+    // Live's Tiger text, darkened to pass AA (ADR-0006).
+    await expect(flex.locator('[data-tag]')).toHaveCSS('color', 'rgb(169, 92, 56)');
     await expect(flex.locator('time')).toHaveText('October 1, 2026');
     await expect(flex).toContainText(/\d+ min/);
     await expect(flex.locator('img')).toHaveAttribute('src', /^\/wp-content\/uploads\//);

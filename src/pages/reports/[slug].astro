@@ -25,13 +25,13 @@ const { Content } = await render(report);
     <div class="blog-body mt-10">
       <Content />
     </div>
-    <section aria-labelledby="download" class="mt-12 grid gap-8 border border-light-grey p-6 sm:grid-cols-[1fr_14rem] sm:p-8" data-report-download>
+    <section aria-labelledby="download" class="mt-12 grid gap-8 border border-border p-6 sm:grid-cols-[1fr_14rem] sm:p-8" data-report-download>
       <div class="flex flex-col">
         <p class="type-caption">/ explore report</p>
         <h2 id="download" class="type-heading-3 mt-2 text-2xl">Download Full Report</h2>
-        <p class="mt-4 text-dark-grey">Online download is coming soon. Get in touch and we'll send you the full report.</p>
+        <p class="mt-4 text-body">Online download is coming soon. Get in touch and we'll send you the full report.</p>
         <div class="mt-6">
-          <Button href="/contact/" tone="indigo">Request the full report</Button>
+          <Button href="/contact/" tone="primary">Request the full report</Button>
         </div>
       </div>
       <img src={image.src} alt={image.alt} class="w-full self-start" />

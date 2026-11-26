@@ -27,24 +27,24 @@ interface Props {
 const { href, title, details, employer, posted, headingLevel: Heading = 'h3' } = Astro.props;
 const [officeBased, employmentType, location] = details;
 const chips = [officeBased, employmentType].filter(Boolean);
-const hovered = 'group-hover:text-white group-focus-visible:text-white';
+const hovered = 'group-hover:text-inverse group-focus-visible:text-inverse';
 ---
 
 <a
   href={href}
   class:list={[
     focusOutline,
-    'group flex h-full flex-col gap-7 border border-grey/60 p-7.5 text-dark-grey transition-colors duration-300 hover:bg-indigo hover:text-white focus-visible:bg-indigo focus-visible:text-white focus-visible:outline-indigo',
+    'group flex h-full flex-col gap-7 border border-subtle/60 p-7.5 text-body transition-colors duration-300 hover:bg-primary hover:text-inverse focus-visible:bg-primary focus-visible:text-inverse focus-visible:outline-focus',
   ]}
   data-component="career-card"
 >
   <div class="flex items-center justify-between gap-7.5">
     {/* The logo carries its clear space as padding; the margin lines the mark up with the edge, as on live. */}
-    <span class="-m-2.5 group-hover:*:text-white group-focus-visible:*:text-white"><Logo variant="brandmark" colour="black" height={46} /></span>
+    <span class="-m-2.5 group-hover:*:text-inverse group-focus-visible:*:text-inverse"><Logo variant="brandmark" colour="black" height={46} /></span>
     {
       location && (
         <p class="flex items-center gap-2 text-base leading-none font-medium">
-          <Icon name="map-pin" class:list={['size-5 shrink-0 text-indigo', hovered]} />
+          <Icon name="map-pin" class:list={['size-5 shrink-0 text-emphasis', hovered]} />
           {location}
         </p>
       )
@@ -52,27 +52,27 @@ const hovered = 'group-hover:text-white group-focus-visible:text-white';
   </div>
   <div>
     {employer && <p class="mb-2 text-base leading-none font-medium">{employer}</p>}
-    <Heading class:list={['mb-5 text-2xl leading-8 font-semibold text-indigo', hovered]}>{title}</Heading>
+    <Heading class:list={['mb-5 text-2xl leading-8 font-semibold text-emphasis', hovered]}>{title}</Heading>
     {
       chips.length > 0 && (
         <ul class="flex flex-wrap gap-3">
           {chips.map((chip) => (
-            <li class="border border-transparent bg-indigo/10 px-5.5 py-4 text-base leading-none font-semibold group-hover:border-white/60 group-focus-visible:border-white/60">{chip}</li>
+            <li class="border border-transparent bg-primary/10 px-5.5 py-4 text-base leading-none font-semibold group-hover:border-inverse/60 group-focus-visible:border-inverse/60">{chip}</li>
           ))}
         </ul>
       )
     }
   </div>
   <div class="mt-auto flex items-center gap-7">
-    <span class="flex items-center gap-4 bg-indigo px-5.5 py-4 text-base leading-none font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-dark-grey group-focus-visible:bg-white group-focus-visible:text-dark-grey">
+    <span class="flex items-center gap-4 bg-primary px-5.5 py-4 text-base leading-none font-semibold text-inverse transition-colors duration-300 group-hover:bg-panel group-hover:text-body group-focus-visible:bg-panel group-focus-visible:text-body">
       Apply Now
-      <Icon name="arrow-up-right" class="size-4 group-hover:text-indigo group-focus-visible:text-indigo rtl:-scale-x-100" />
+      <Icon name="arrow-up-right" class="size-4 group-hover:text-emphasis group-focus-visible:text-emphasis rtl:-scale-x-100" />
     </span>
     {
       posted && (
         <p class="text-base font-medium leading-none">
           Posted:
-          <time datetime={isoDate(posted)} class:list={['mt-1 block leading-6 font-semibold text-indigo', hovered]}>
+          <time datetime={isoDate(posted)} class:list={['mt-1 block leading-6 font-semibold text-emphasis', hovered]}>
             {formatShortDate(posted)}
           </time>
         </p>

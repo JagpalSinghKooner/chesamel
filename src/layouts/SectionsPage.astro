@@ -8,6 +8,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import Sections from '../components/Sections.astro';
 import Form from '../components/Form.astro';
 import type { Page, Pillar, Service } from '../content/pages';
+import { labelAccents } from '../data/pillars';
+import type { PillarSlug } from '../data/taxonomy';
 
 interface Props {
   entry: Page | Pillar | Service;
@@ -22,10 +24,12 @@ const hasBody = (entry.body ?? '').trim().length > 0;
 // As on the live site: Pillars, Services, Contact and open roles have a light
 // hero, every other Page an Indigo one.
 const lightHero = entry.collection !== 'pages' || entry.id === 'contact' || entry.id.startsWith('careers/');
+// A Pillar's or Service's hero takes the Pillar accent (ADR-0006).
+const accent = entry.collection === 'pages' ? undefined : labelAccents[entry.id.split('/')[0] as PillarSlug];
 ---
 
 <Base title={documentTitle ?? `${title} | Chesamel`} description={description ?? hero.paragraphs[0] ?? hero.subtitle}>
-  <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} faintRings={entry.id === 'contact'}>
+  <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} accent={accent}>
     {entry.id === 'contact' && <Form slot="aside" kind="contact" />}
   </PageHero>
   <Breadcrumb band trail={[...trail, { label: title }]} />

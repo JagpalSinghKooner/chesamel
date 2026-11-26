@@ -9,5 +9,5 @@ interface Props {
 const { id, heading, eyebrow, dark = false } = Astro.props;
 ---
 
-{eyebrow && <p class:list={['font-subheading', dark && 'text-off-white']}>{eyebrow}</p>}
-<h2 id={id} class:list={['type-heading-2', eyebrow && 'mt-3', dark && 'text-white']}>{heading}</h2>
+{eyebrow && <p class:list={['font-subheading', dark && 'text-body-on-dark']}>{eyebrow}</p>}
+<h2 id={id} class:list={['type-heading-2', eyebrow && 'mt-3', dark && 'text-inverse']}>{heading}</h2>

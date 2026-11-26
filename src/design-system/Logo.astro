@@ -35,7 +35,8 @@ const variants = {
   brandmark: { Svg: Brandmark, clearSpace: 0.225 },
 };
 
-const colours = { white: 'text-white', black: 'text-black', indigo: 'text-indigo' };
+// Theme roles (ADR-0006), named for where each colour goes.
+const colours = { white: 'text-logo-on-dark', black: 'text-logo-on-light', indigo: 'text-logo-brand' };
 
 const { variant, colour, height } = Astro.props;
 const { Svg, clearSpace } = variants[variant];

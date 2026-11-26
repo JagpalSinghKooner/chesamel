@@ -8,7 +8,7 @@ type Props = { id: string; section: Extract<Section, { type: 'offices' }> };
 const { id, section } = Astro.props;
 ---
 
-<section aria-labelledby={id} class="bg-off-white">
+<section aria-labelledby={id} class="bg-surface">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
     <SectionHeading id={id} heading={section.heading} eyebrow={section.eyebrow} />
     {section.text && <p class="mt-4 max-w-3xl">{section.text}</p>}

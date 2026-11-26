@@ -26,10 +26,10 @@ const tiles = [
       {
         tiles.map((t) => (
           <li>
-            <Card as="a" href={t.href} class:list={[brandCard, 'group h-full min-h-48 border border-light-grey p-6 hover:border-indigo']}>
+            <Card as="a" href={t.href} class:list={[brandCard, 'group h-full min-h-48 border border-border p-6 hover:border-primary']}>
               <h3 class="type-heading-3 group-hover:underline">{t.title}</h3>
               <p class="type-caption mt-3">{t.eyebrow}</p>
-              <p class="mt-auto pt-6 text-sm font-semibold text-black">
+              <p class="mt-auto pt-6 text-sm font-semibold text-heading">
                 discover insights <span aria-hidden="true">↗</span>
               </p>
             </Card>

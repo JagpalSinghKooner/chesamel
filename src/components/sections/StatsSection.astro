@@ -6,13 +6,13 @@ type Props = { section: Extract<Section, { type: 'stats' }> };
 const { items } = Astro.props.section;
 ---
 
-<section data-component="section-stats" aria-label="Chesamel in numbers" class="border-b border-light-grey">
+<section data-component="section-stats" aria-label="Chesamel in numbers" class="border-b border-border">
   <dl class="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-5 py-14 sm:px-6 md:grid-cols-3 lg:grid-flow-col lg:grid-cols-none">
     {
       items.map((item) => (
         <div class="flex flex-col-reverse gap-2">
-          <dt class="font-subheading text-dark-grey">{item.label}</dt>
-          <dd class="type-heading-2 text-indigo">{item.value}</dd>
+          <dt class="font-subheading text-body">{item.label}</dt>
+          <dd class="type-heading-2 text-emphasis">{item.value}</dd>
         </div>
       ))
     }

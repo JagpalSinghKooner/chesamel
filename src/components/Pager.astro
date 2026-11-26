@@ -37,10 +37,10 @@ const dark = tone === 'dark';
 const control = [
   focusOutline,
   'grid size-11 place-items-center border text-base font-semibold transition-colors duration-300',
-  'aria-[current=page]:border-indigo aria-[current=page]:bg-indigo aria-[current=page]:text-white',
+  'aria-[current=page]:border-primary aria-[current=page]:bg-primary aria-[current=page]:text-inverse',
   dark
-    ? 'border-white/40 text-white hover:border-white focus-visible:outline-white'
-    : 'border-medium-grey/60 text-dark-grey hover:border-indigo hover:text-indigo focus-visible:outline-indigo',
+    ? 'border-inverse/40 text-inverse hover:border-inverse focus-visible:outline-inverse'
+    : 'border-border-strong/60 text-body hover:border-primary hover:text-emphasis focus-visible:outline-focus',
 ];
 // Mirrored in right-to-left pages, so the arrows point the reading way.
 const arrow = 'size-4 rtl:-scale-x-100';

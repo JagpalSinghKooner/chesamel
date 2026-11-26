@@ -31,7 +31,7 @@ An AI agent that carries out Change Requests on the site. Every Site Agent holds
 _Avoid_: Bot, AI, assistant
 
 **Design Brief**:
-The Designer's written spec for a change (which Components, which brand tokens, what layout, plus a rough mockup), posted in the ticket notes for the Developer to build from.
+The Designer's written spec for a change (which Components, which Theme roles, what layout, plus a rough mockup), posted in the ticket notes for the Developer to build from.
 _Avoid_: Mockup, design spec, handoff
 
 **Direct Edit**:
@@ -97,12 +97,20 @@ _Avoid_: Memory, rule, learning
 ## Design
 
 **Design System**:
-The single, authoritative definition of Chesamel's visual language: brand colours, typography, spacing, and every Component.
+The single, authoritative definition of Chesamel's visual language: colours and fonts (as Theme roles), typography, spacing, and every Component.
 _Avoid_: Style guide, theme, UI kit
 
 **Component**:
 A reusable, named building block of a page, such as a Pillar card, a hero, or a Case Study slider, defined in the Design System.
 _Avoid_: Block, widget, module, section
+
+**Theme role**:
+A named purpose a colour or font serves on the site, such as the call to action, headings or the footer, set once in `src/styles/theme.css` and used by every Component instead of a colour (ADR-0006).
+_Avoid_: Token, colour (for the role itself), Role (that is a Site Agent's job)
+
+**Palette**:
+One complete set of values for the Theme roles: `live` (copied from chesamel.com) or `brand` (from the brand guidelines). One line in `src/data/theme.ts` picks which the whole site uses.
+_Avoid_: Theme, colour scheme
 
 **Section**:
 One entry in the ordered list a Page, Pillar or Service is built from, such as stats, cards or a call to action. Each kind of Section is drawn by one Component, so a Content Editor can add, remove or reorder Sections without touching the design.

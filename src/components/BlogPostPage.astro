@@ -8,6 +8,8 @@ import LabelLinks from './LabelLinks.astro';
 import { readingMinutes, type BlogPost } from '../content/blog';
 import { formatDate, isoDate, primaryPillar } from '../content/shared';
 import { pillarLabels } from '../data/taxonomy';
+import { labelAccents } from '../data/pillars';
+import { accentText } from './accent';
 
 interface Props {
   post: BlogPost;
@@ -20,7 +22,7 @@ const { Content } = await render(post);
 <Base title={`${title} | Chesamel`} description={description}>
   <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
     <Breadcrumb trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'News', href: '/insights/blog/' }]} />
-    <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
+    <p class:list={['type-tag mt-8', accentText[labelAccents[primaryPillar(post.data)]]]}>{pillarLabels[primaryPillar(post.data)]}</p>
     <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
     <p class="type-caption mt-6 flex gap-6">
       <time datetime={isoDate(date)}>{formatDate(date)}</time>

@@ -1,12 +1,13 @@
 ---
 // Webinar card: image, main Pillar, title and a short link label,
 // linking to the item's page. Built on Fulldev's Card (ADR-0005) and styled
-// like the Blog Post card: the Pillar tag is Dark Grey, not the live service
-// colour (ADR-0002).
+// like the Blog Post card: the Pillar tag takes its accent (ADR-0006).
 import { Card, CardContent } from '@/components/ui/card';
 import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import { pillarLabels, type PillarSlug } from '../data/taxonomy';
+import { labelAccents } from '../data/pillars';
+import { accentTag } from './accent';
 
 interface Props {
   href: string;
@@ -21,18 +22,18 @@ interface Props {
 const { href, title, image, pillar, action, headingLevel: Heading = 'h3' } = Astro.props;
 ---
 
-<Card as="a" href={href} class:list={[brandCard, focusOutline, 'group h-full border border-light-grey bg-white hover:border-indigo transition-colors duration-300 focus-visible:outline-indigo']} data-component="insight-card">
+<Card as="a" href={href} class:list={[brandCard, focusOutline, 'group h-full border border-border bg-panel hover:border-primary transition-colors duration-300 focus-visible:outline-focus']} data-component="insight-card">
   {
     image ? (
       <div class="aspect-video overflow-hidden">
         <img src={image.src} alt="" class="size-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105" loading="lazy" />
       </div>
     ) : (
-      <div aria-hidden="true" class="aspect-video w-full bg-off-white" />
+      <div aria-hidden="true" class="aspect-video w-full bg-surface" />
     )
   }
   <CardContent class:list={[brandCardContent, 'grow p-5']}>
-    {pillar && <span class="type-tag self-start border border-light-grey px-3 py-1">{pillarLabels[pillar]}</span>}
+    {pillar && <span class:list={['type-tag self-start border px-3 py-1', accentTag[labelAccents[pillar]]]}>{pillarLabels[pillar]}</span>}
     <Heading class="type-heading-3 mt-5 text-xl leading-tight group-hover:underline group-focus-visible:underline">{title}</Heading>
     <p class="type-caption mt-auto pt-6">{action} <span aria-hidden="true">→</span></p>
   </CardContent>

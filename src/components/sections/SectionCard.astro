@@ -12,9 +12,9 @@ const { item, dark = false, as: Tag = 'li' } = Astro.props;
 const external = (href: string) => /^https?:/.test(href);
 ---
 
-<Tag class:list={['flex h-full flex-col gap-3 border-t pt-5', dark ? 'border-white/20' : 'border-light-grey']}>
+<Tag class:list={['flex h-full flex-col gap-3 border-t pt-5', dark ? 'border-inverse/20' : 'border-border']}>
   {item.image && <img src={item.image.src} alt={item.image.alt} loading="lazy" class="h-14 w-auto self-start" />}
-  <h3 class:list={['type-heading-3 text-xl', dark && 'text-white']}>
+  <h3 class:list={['type-heading-3 text-xl', dark && 'text-inverse']}>
     {
       item.href ? (
         <a
@@ -29,5 +29,5 @@ const external = (href: string) => /^https?:/.test(href);
       )
     }
   </h3>
-  {item.text && <p class:list={[dark && 'text-off-white']}>{item.text}</p>}
+  {item.text && <p class:list={[dark && 'text-body-on-dark']}>{item.text}</p>}
 </Tag>

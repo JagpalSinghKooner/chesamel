@@ -2,7 +2,10 @@
 // Private style-guide page: every Design System token, for designers to point
 // at. Hidden from search engines and the sitemap through src/noindex.mjs.
 import Base from '../layouts/Base.astro';
-import { colourGroups } from '../design-system/colours';
+import { roleGroups, paletteValues } from '../design-system/colours';
+import themeCss from '../styles/theme.css?raw';
+import { palette } from '../data/theme';
+import { accentFill } from '../components/accent';
 import { pillars } from '../data/pillars';
 import Logo from '../design-system/Logo.astro';
 import Icon from '../components/Icon.astro';
@@ -70,15 +73,18 @@ const logoExamples = [
 ] as const;
 
 const typeStyles = [
-  { cls: 'type-heading-1', spec: 'Heading 1: Figtree Medium, 56px, leading 100%, Black', sample: 'Believe it’s possible' },
-  { cls: 'type-heading-2', spec: 'Heading 2: Figtree Medium, 40px, leading 100%, Black', sample: 'Believe it’s possible' },
-  { cls: 'type-heading-3', spec: 'Heading 3: Figtree Medium, 28px, leading 100%, Black', sample: 'Believe it’s possible' },
-  { cls: 'type-subheading', spec: 'Subheading: DM Sans Regular, 20px, leading 145%, Indigo', sample: 'An agile collective of experts driving extraordinary growth.' },
-  { cls: 'type-body', spec: 'Body: Figtree Regular, 16px, leading 145%, Dark Grey', sample: 'We create innovative, bespoke solutions that fuel positive change. Together we challenge accepted ways of thinking to deliver transformative business outcomes.' },
-  { cls: 'type-tag', spec: 'Tag: Figtree SemiBold, 14px, tracking 0.04em, uppercase, Dark Grey', sample: 'Digital Transformation' },
-  { cls: 'type-caption', spec: 'Caption: Figtree Regular, 14px, Dark Grey', sample: 'Photo: the Chesamel team in London.' },
-  { cls: 'type-large-grey', spec: 'Large grey: Figtree Regular, 24px, Grey. Grey only at this size or larger.', sample: 'Be compassionate. Be brave. Be brilliant.' },
+  { cls: 'type-heading-1', spec: 'Heading 1: heading font, Medium, 56px (72px from 1024px), leading 100%, heading', sample: 'Believe it’s possible' },
+  { cls: 'type-heading-2', spec: 'Heading 2: heading font, Medium, 40px (52px from 1024px), leading 110%, heading', sample: 'Believe it’s possible' },
+  { cls: 'type-heading-3', spec: 'Heading 3: heading font, Medium, 28px (30px from 1024px), leading 110%, heading', sample: 'Believe it’s possible' },
+  { cls: 'type-subheading', spec: 'Subheading: subheading font (DM Sans in the brand palette), Regular, 20px, leading 145%, emphasis', sample: 'An agile collective of experts driving extraordinary growth.' },
+  { cls: 'type-body', spec: 'Body: body font, Regular, 16px, leading 145%, body', sample: 'We create innovative, bespoke solutions that fuel positive change. Together we challenge accepted ways of thinking to deliver transformative business outcomes.' },
+  { cls: 'type-tag', spec: 'Tag: body font, SemiBold, 14px, tracking 0.04em, uppercase, body', sample: 'Digital Transformation' },
+  { cls: 'type-caption', spec: 'Caption: body font, Regular, 14px, body', sample: 'Photo: the Chesamel team in London.' },
+  { cls: 'type-large', spec: 'Large: body font, Regular, 24px, subtle. The subtle role only at this size or larger.', sample: 'Be compassionate. Be brave. Be brilliant.' },
 ];
+// Both palettes' values, read from theme.css, the only place colours live.
+const live = paletteValues(themeCss, 'live');
+const brand = paletteValues(themeCss, 'brand');
 ---
 
 <Base title="Style guide | Chesamel">
@@ -88,25 +94,25 @@ const typeStyles = [
 
     <section aria-labelledby="colours" class="mt-16">
       <h2 id="colours" class="type-heading-2">Colours</h2>
+      <p class="type-body mt-3 max-w-3xl">
+        Every colour is a role in <code>src/styles/theme.css</code> (ADR-0006), filled by the palette that
+        <code>src/data/theme.ts</code> picks: <code>{palette}</code> now. Components name roles, never colours. Each
+        swatch shows the role in the palette in use, with both palettes' values.
+      </p>
       {
-        colourGroups.map((group) => (
+        roleGroups.map((group) => (
           <div class="mt-10">
             <h3 class="type-heading-3">{group.title}</h3>
-            <p class="type-body mt-3 max-w-2xl">{group.usage}</p>
-            <ul class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-              {group.colours.map((c) => (
-                <li data-colour={c.token} data-hex={c.hex}>
-                  <div
-                    data-swatch
-                    aria-hidden="true"
-                    class="h-24 rounded-lg border border-light-grey"
-                    style={`background-color: var(--color-${c.token})`}
-                  />
-                  <p class="type-body mt-2 font-semibold text-black">{c.name}</p>
-                  <p class="type-caption">{c.hex}</p>
-                  <p class="type-caption">
-                    <code>{c.token}</code>
+            <ul class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+              {group.roles.map((r) => (
+                <li data-colour={r.role}>
+                  <div data-swatch aria-hidden="true" class="h-24 rounded-lg border border-border" style={`background-color: var(--${r.role})`} />
+                  <p class="type-body mt-2 font-semibold text-heading">
+                    <code>{r.role}</code>
                   </p>
+                  <p class="type-caption">{r.use}</p>
+                  <p class="type-caption">live: {live[r.role]}</p>
+                  <p class="type-caption">brand: {brand[r.role]}</p>
                 </li>
               ))}
             </ul>
@@ -116,14 +122,13 @@ const typeStyles = [
       <div class="mt-10">
         <h3 class="type-heading-3">Pillar accents</h3>
         <p class="type-body mt-3 max-w-2xl">
-          Each Pillar, and its Services, has one secondary colour (ADR-0002), from <code>accent</code> in
-          <code>src/data/pillars.ts</code>. Only for small marks such as this bar, tag borders, dots and icons; the text
-          stays Black.
+          Each Pillar, and its Services, has one accent role, from <code>accent</code> in <code>src/data/pillars.ts</code>.
+          <code>src/components/accent.ts</code> turns it into classes for marks, tags, fills and rings.
         </p>
         <ul class="mt-6 grid gap-4 sm:grid-cols-2">
           {pillars.map((p) => (
-            <li data-pillar-accent={p.name} class="flex items-center gap-3 border border-light-grey p-4 font-semibold text-black">
-              <span data-accent-bar aria-hidden="true" class="h-8 w-1" style={`background-color: var(--color-${p.accent})`} />
+            <li data-pillar-accent={p.name} class="flex items-center gap-3 border border-border p-4 font-semibold text-heading">
+              <span data-accent-bar aria-hidden="true" class:list={['h-8 w-1', accentFill[p.accent]]} />
               {p.name}
               <code class="type-caption ms-auto font-normal">{p.accent}</code>
             </li>
@@ -144,8 +149,8 @@ const typeStyles = [
             <h3 class="type-heading-3">{l.title}</h3>
             <p class="type-caption mt-2">{l.note}</p>
             <div class="mt-4 flex flex-wrap gap-4">
-              <div class="rounded-lg bg-black p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant={l.variant} colour="white" height={48} /></span></div>
-              <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant={l.variant} colour="black" height={48} /></span></div>
+              <div class="rounded-lg bg-band-dark p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant={l.variant} colour="white" height={48} /></span></div>
+              <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant={l.variant} colour="black" height={48} /></span></div>
             </div>
           </div>
         ))
@@ -154,9 +159,9 @@ const typeStyles = [
         <h3 class="type-heading-3">Brandmark</h3>
         <p class="type-caption mt-2">Clear space: the corner circles on page 9 of the guidelines, about a quarter of its height.</p>
         <div class="mt-4 flex flex-wrap gap-4">
-          <div class="rounded-lg bg-indigo p-4"><span class="block outline-1 outline-dashed outline-white"><Logo variant="brandmark" colour="white" height={48} /></span></div>
-          <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant="brandmark" colour="black" height={48} /></span></div>
-          <div class="rounded-lg border border-light-grey bg-white p-4"><span class="block outline-1 outline-dashed outline-medium-grey"><Logo variant="brandmark" colour="indigo" height={48} /></span></div>
+          <div class="rounded-lg bg-primary p-4"><span class="block outline-1 outline-dashed outline-inverse"><Logo variant="brandmark" colour="white" height={48} /></span></div>
+          <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant="brandmark" colour="black" height={48} /></span></div>
+          <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant="brandmark" colour="indigo" height={48} /></span></div>
         </div>
       </div>
     </section>
@@ -176,7 +181,7 @@ const typeStyles = [
             <h3 class="type-heading-3">{group.title}</h3>
             <ul class="mt-4 grid grid-cols-3 gap-6 sm:grid-cols-4 lg:grid-cols-6">
               {group.names.map((name) => (
-                <li class="flex flex-col items-center gap-2 border border-light-grey p-4 text-black">
+                <li class="flex flex-col items-center gap-2 border border-border p-4 text-heading">
                   <Icon name={name as IconName} class="size-6" />
                   <code class="type-caption">{name}</code>
                 </li>
@@ -187,15 +192,17 @@ const typeStyles = [
       }
       <p class="type-caption mt-6 flex items-center gap-2">
         With a label, for an icon that carries meaning on its own:
-        <Icon name="linkedin" label="LinkedIn" class="size-6 text-indigo" />
+        <Icon name="linkedin" label="LinkedIn" class="size-6 text-emphasis" />
       </p>
     </section>
 
     <section aria-labelledby="typography" class="mt-20">
       <h2 id="typography" class="type-heading-2">Typography</h2>
       <p class="type-body mt-3 max-w-2xl">
-        Figtree for headings and body, DM Sans for subheadings, IBM Plex Sans Arabic for Arabic. Helvetica, then Arial,
-        when the brand fonts can't load. Body text is Dark Grey, not Grey (ADR-0002).
+        Font families are roles too (<code>--font-heading</code>, <code>--font-body</code>, <code>--font-subheading</code>,
+        <code>--font-arabic</code>): Figtree throughout in the live palette, DM Sans for subheadings in the brand palette,
+        IBM Plex Sans Arabic for Arabic. Helvetica, then Arial, when they can't load. Body text is the <code>body</code> role,
+        which passes WCAG AA (ADR-0006).
       </p>
       <ul class="mt-10 space-y-10">
         {
@@ -227,12 +234,17 @@ const typeStyles = [
     <Hero
       headingLevel="h2"
       before="Global"
-      words={['Business', 'Digital', 'Marketing', 'Workforce']}
+      words={[
+      { text: 'Business', tone: 'business' },
+      { text: 'Digital', tone: 'digital' },
+      { text: 'Marketing', tone: 'marketing' },
+      { text: 'Workforce', tone: 'workforce' },
+    ]}
       after="Transformation"
       image={{ src: '/images/hero-poster-960.webp' }}
       actions={[
         { label: 'What We Do', href: '/what-we-do/', tone: 'dark' },
-        { label: 'Our Work', href: '/insights/our-work/', tone: 'indigo' },
+        { label: 'Our Work', href: '/insights/our-work/', tone: 'primary' },
       ]}
     />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Pillar cards</h3>
@@ -245,7 +257,7 @@ const typeStyles = [
       heading="Want to transform your business?"
       text="Accelerate your business growth into a new age"
       actions={[
-        { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+        { label: 'What We Do', href: '/what-we-do/', tone: 'cta' },
         { label: 'Let’s Talk', href: '/contact/', tone: 'outline' },
       ]}
     />
@@ -276,7 +288,7 @@ const typeStyles = [
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Report card</h3>
     <div class="mx-auto max-w-5xl px-6">
-      <p class="type-body mb-6 max-w-2xl">A Black tile with an accent bar in the Report’s Pillar colour, the logo, the title and the cover cut into a circle.</p>
+      <p class="type-body mb-6 max-w-2xl">A tile filled with the Report’s Pillar accent, the logo, the title and the cover cut into a circle.</p>
       <div class="max-w-sm"><ReportCard href={addressOf(sampleReport)} title={sampleReport.data.title} image={sampleReport.data.image} pillar={primaryPillar(sampleReport.data)} headingLevel="h4" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Careers job card</h3>
@@ -302,7 +314,7 @@ const typeStyles = [
       <Pager last={34} current={1} href={(n) => `#page-${n}`} label="Sample pager, page 1" />
       <Pager last={34} current={5} href={(n) => `#page-${n}`} label="Sample pager, page 5" />
       <Pager last={34} current={34} href={(n) => `#page-${n}`} label="Sample pager, last page" />
-      <div class="mt-10 bg-black px-6 pb-10">
+      <div class="mt-10 bg-band-dark px-6 pb-10">
         <Pager last={11} current={2} href={(n) => `#page-${n}`} label="Sample pager on Black" tone="dark" class="pt-10" />
       </div>
     </div>
@@ -332,7 +344,7 @@ const typeStyles = [
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Page hero</h3>
     <p class="type-body mx-auto mb-6 max-w-5xl px-6">Tops every Page, Pillar and Service.</p>
     <PageHero title="Who We Are" paragraphs={['The Indigo tone, on most Pages.']} links={[{ label: 'Our Team', href: '/who-we-are/our-team/' }]} headingLevel="h4" />
-    <PageHero tone="light" title="Marketing Engine" paragraphs={['The light tone, on Pillars, Services, Contact and open roles.']} links={[{ label: "Let's Chat", href: '/contact/' }]} headingLevel="h4" />
+    <PageHero tone="light" accent="marketing" title="Marketing Engine" paragraphs={['The light tone, on Pillars, Services, Contact and open roles.']} links={[{ label: "Let's Chat", href: '/contact/' }]} headingLevel="h4" />
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Listing hero</h3>
     <p class="type-body mx-auto mb-6 max-w-5xl px-6">Tops the Insights hub, News, Our Work, Industries and the Podcast, Webinar and Report listings.</p>
     <InsightsHero heading="Insights" text="Check out our latest thoughts, business updates, and original content." breadcrumb={false} headingLevel="h4" />
@@ -341,10 +353,11 @@ const typeStyles = [
       The animated brandmark behind heroes and calls to action. The rings turn once as they come into view, then rest;
       under reduced motion they stay still.
     </p>
-    <div class="mx-auto grid max-w-5xl gap-4 px-6 sm:grid-cols-3">
-      <div class="bg-white p-6 outline-1 outline-light-grey"><BrandmarkRings solid class="mx-auto size-40" /></div>
-      <div class="bg-indigo p-6"><BrandmarkRings tone="white" class="mx-auto size-40" /></div>
-      <div class="bg-black p-6"><BrandmarkRings tone="white" class="mx-auto size-40" /></div>
+    <div class="mx-auto grid max-w-5xl gap-4 px-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="bg-surface p-6 outline-1 outline-border"><BrandmarkRings on="light" class="mx-auto size-40" /></div>
+      <div class="bg-surface p-6 outline-1 outline-border"><BrandmarkRings accent="marketing" class="mx-auto size-40" /></div>
+      <div class="bg-band-indigo p-6"><BrandmarkRings on="indigo" class="mx-auto size-40" /></div>
+      <div class="bg-band-dark p-6"><BrandmarkRings on="dark" class="mx-auto size-40" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Client logo strip</h3>
     <p class="type-body mx-auto mb-6 max-w-5xl px-6">Scrolls sideways with a pause button; still under reduced motion.</p>
@@ -356,7 +369,7 @@ const typeStyles = [
     <div class="mx-auto max-w-5xl px-6">
       <Slider label="Sample slider">
         {['One', 'Two', 'Three', 'Four', 'Five'].map((n) => (
-          <SliderItem class="sm:basis-1/2 lg:basis-1/3"><div class="flex h-40 items-center justify-center bg-off-white type-heading-3">{n}</div></SliderItem>
+          <SliderItem class="sm:basis-1/2 lg:basis-1/3"><div class="flex h-40 items-center justify-center bg-surface type-heading-3">{n}</div></SliderItem>
         ))}
       </Slider>
     </div>
@@ -405,16 +418,16 @@ const typeStyles = [
       success message and sends nothing yet (#48 sends it to HubSpot). Shown empty, with errors, and sent.
     </p>
     <div class="mx-auto grid max-w-5xl gap-4 px-6 lg:grid-cols-2" data-style-guide="contact-form">
-      <div class="bg-off-white p-6"><Form kind="contact" idPrefix="style-guide-contact" /></div>
-      <div class="bg-off-white p-6"><Form kind="contact" idPrefix="style-guide-contact-errors" preview="errors" /></div>
-      <div class="bg-off-white p-6"><Form kind="contact" idPrefix="style-guide-contact-success" preview="success" /></div>
+      <div class="bg-surface p-6"><Form kind="contact" idPrefix="style-guide-contact" /></div>
+      <div class="bg-surface p-6"><Form kind="contact" idPrefix="style-guide-contact-errors" preview="errors" /></div>
+      <div class="bg-surface p-6"><Form kind="contact" idPrefix="style-guide-contact-success" preview="success" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Newsletter form</h3>
     <p class="type-body mx-auto mb-6 max-w-5xl px-6">The newsletter band, then its form with errors, and sent.</p>
     <ConnectWithUs idPrefix="style-guide-newsletter" />
     <div class="mx-auto mt-4 grid max-w-5xl gap-4 px-6 lg:grid-cols-2" data-style-guide="newsletter-form">
-      <div class="bg-indigo p-6"><Form kind="newsletter" idPrefix="style-guide-newsletter-errors" preview="errors" /></div>
-      <div class="bg-indigo p-6"><Form kind="newsletter" idPrefix="style-guide-newsletter-success" preview="success" /></div>
+      <div class="bg-primary p-6"><Form kind="newsletter" idPrefix="style-guide-newsletter-errors" preview="errors" /></div>
+      <div class="bg-primary p-6"><Form kind="newsletter" idPrefix="style-guide-newsletter-success" preview="success" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
@@ -481,7 +494,7 @@ const typeStyles = [
             <CarouselContent>
               {['One', 'Two', 'Three'].map((n) => (
                 <CarouselItem>
-                  <div class="grid aspect-video place-items-center border border-light-grey bg-off-white">{n}</div>
+                  <div class="grid aspect-video place-items-center border border-border bg-surface">{n}</div>
                 </CarouselItem>
               ))}
             </CarouselContent>

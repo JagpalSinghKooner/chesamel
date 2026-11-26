@@ -1,0 +1,376 @@
+/*
+  The theme (ADR-0006): every colour and font family the site uses, as a
+  role-based CSS variable. Components name roles (bg-cta, text-heading), never
+  a colour, and this is the only file in src/ allowed a raw colour value
+  (`npm run check:toolkit` enforces it).
+
+  Two palettes fill the roles:
+    live   chesamel.com's look, measured with scripts/measure-live/ (default)
+    brand  the hex values of Chesamel-Brand-Guidelines.pdf (pages 13-16)
+  `palette` in src/data/theme.ts picks one, and Base.astro sets it as
+  <html data-palette="...">. Switching it switches the whole site.
+
+  The one exception to copying live is WCAG AA contrast: where live's pairing
+  fails, the role holds the nearest value that passes. Each is marked
+  "AA:" below with live's value, and listed in ADR-0006.
+
+  A new role needs a value in both palettes, a utility in the @theme block
+  at the end, and a line in src/design-system/colours.ts for the style guide.
+*/
+
+[data-palette="live"] {
+  /* Surfaces */
+  --page: rgb(245 245 245);
+  --surface: rgb(245 245 245);
+  --panel: rgb(255 255 255);
+  --band-dark: rgb(20 31 38);
+  --band-dark-raised: rgb(27 38 45);
+  --band-indigo: rgb(115 66 255);
+  --logo-strip: rgb(15 24 30);
+  --footer: rgb(12 17 23);
+  --scrim: rgb(20 31 38);
+
+  /* Text on light surfaces */
+  --heading: rgb(61 69 77);
+  /* The title on a Pillar's or Service's light hero. */
+  --hero-title: rgb(20 31 38);
+  /* AA: live's body text is rgb(127 132 140), 3.5:1 on its off-white. */
+  --body: rgb(60 70 77);
+  /* Large text (24px, or 18.7px bold, and up), icons and quiet lines. */
+  --subtle: rgb(127 132 140);
+  --emphasis: rgb(115 66 255);
+
+  /* Text on dark and coloured surfaces */
+  --inverse: rgb(255 255 255);
+  --body-on-dark: rgb(217 219 222);
+  /* AA: live uses rgb(127 132 140), 4.1:1 on the raised dark card. */
+  --muted-on-dark: rgb(134 139 147);
+  /* AA: live's small Lime labels on Indigo are rgb(194 240 15), 4.0:1. */
+  --label-on-indigo: rgb(224 247 131);
+  /* AA: live's text on Indigo is rgb(217 219 222), 3.8:1. */
+  --body-on-indigo: rgb(236 237 238);
+  /* The line under the call-to-action band's heading. */
+  --cta-band-text: rgb(194 240 15);
+
+  /* Footer */
+  --footer-text: rgb(139 149 161);
+  --footer-social: rgb(20 27 35);
+  --footer-heading: rgb(231 235 239);
+  --footer-rule: rgb(32 38 47);
+  --footer-marker: rgb(200 255 77);
+
+  /* Lines */
+  --border: rgb(217 219 222);
+  --border-strong: rgb(181 186 191);
+  --border-on-dark: rgb(61 69 77);
+  --focus: rgb(115 66 255);
+
+  /* Buttons. Each tone's fill, text, and hover. */
+  --cta: rgb(194 240 15);
+  --cta-foreground: rgb(61 69 77);
+  --cta-hover: rgb(255 255 255);
+  --cta-hover-foreground: rgb(20 31 38);
+  --cta-arrow: rgb(20 31 38);
+  --primary: rgb(115 66 255);
+  --primary-foreground: rgb(255 255 255);
+  --primary-hover: rgb(99 51 238);
+  --button-dark: rgb(20 31 38);
+  --button-dark-foreground: rgb(255 255 255);
+  --button-dark-hover: rgb(194 240 15);
+  --button-dark-hover-foreground: rgb(20 31 38);
+  --button-light: rgb(245 245 245);
+  --button-light-foreground: rgb(61 69 77);
+  --button-light-border: rgb(181 186 191);
+  --button-light-hover: rgb(255 255 255);
+  --button-light-hover-foreground: rgb(20 31 38);
+  --button-light-hover-border: rgb(255 255 255);
+  --button-outline-border: rgb(127 132 140);
+  --button-outline-hover: rgb(0 0 0);
+  --button-outline-hover-foreground: rgb(255 255 255);
+  /* Small marks: the arrow on dark buttons, the hero's solution arrows. */
+  --detail: rgb(194 240 15);
+  --error: rgb(255 74 125);
+  /* AA: live's form errors are white on rgb(255 74 125), 3.2:1. */
+  --error-fill: rgb(211 61 104);
+  --error-foreground: rgb(255 255 255);
+
+  /* Pillar accents (src/data/pillars.ts): marks, borders, rings, fills. */
+  --accent-digital: rgb(36 173 235);
+  --accent-marketing: rgb(255 74 125);
+  --accent-investment: rgb(28 178 128);
+  --accent-hybrid: rgb(255 138 84);
+  /* AA: live sets tag text in the accent itself, 2.1 to 3.0:1 on off-white. */
+  --accent-digital-text: rgb(25 120 164);
+  --accent-marketing-text: rgb(201 58 99);
+  --accent-investment-text: rgb(20 128 92);
+  --accent-hybrid-text: rgb(169 92 56);
+  /* AA: live fills tiles and tags with the accent under white text, 2.3 to 3.2:1. */
+  --accent-digital-fill: rgb(26 126 172);
+  --accent-marketing-fill: rgb(211 61 104);
+  --accent-investment-fill: rgb(21 134 97);
+  --accent-hybrid-fill: rgb(178 97 59);
+
+  /* Home: the hero's sliding words, on a marker in the brand palette only. */
+  --hero-word: rgb(115 66 255);
+  --hero-word-digital: rgb(36 173 235);
+  --hero-word-marketing: rgb(255 74 125);
+  --hero-word-workforce: rgb(255 138 84);
+  --highlight-marker: transparent;
+  --hero-eyebrow: rgb(0 208 132);
+  /* "What's holding your business back?": each step's closing words. */
+  /* AA: live's Indigo is rgb(115 66 255), 2.9:1 on the raised card at 30px. */
+  --step-1: rgb(118 70 255);
+  --step-2: rgb(28 178 128);
+  --step-3: rgb(223 115 240);
+  --step-underline: transparent;
+
+  /* The brandmark rings drawn large as a watermark (BrandmarkRings). */
+  --rings-on-indigo: rgb(255 255 255 / 0.05);
+  --rings-on-light: rgb(117 66 255 / 0.24);
+  --rings-on-dark: rgb(115 66 255);
+  --rings-on-band: rgb(255 255 255 / 0.1);
+
+  /* Logo colours the guidelines permit (Logo.astro). */
+  --logo-on-dark: rgb(255 255 255);
+  --logo-on-light: rgb(20 31 38);
+  --logo-brand: rgb(115 66 255);
+
+  /* Fonts. Live sets everything in Figtree. */
+  --font-heading: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
+  --font-body: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
+  --font-subheading: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
+  /* Loaded for Arabic characters only (unicode-range), so it sits second in
+     every stack and Latin characters keep the Latin face. */
+  --font-arabic: "IBM Plex Sans Arabic";
+}
+
+[data-palette="brand"] {
+  --page: #ffffff;
+  --surface: #eceded;
+  --panel: #ffffff;
+  --band-dark: #141e25;
+  --band-dark-raised: color-mix(in srgb, #ffffff 5%, #141e25);
+  --band-indigo: #7342ff;
+  --logo-strip: #eceded;
+  --footer: #141e25;
+  --scrim: #141e25;
+
+  --heading: #141e25;
+  --hero-title: #141e25;
+  /* AA: the guidelines' Grey #7f848c fails at body size (ADR-0002). */
+  --body: #3c464d;
+  --subtle: #7f848c;
+  --emphasis: #7342ff;
+
+  --inverse: #ffffff;
+  --body-on-dark: #eceded;
+  --muted-on-dark: #b5bbbe;
+  --label-on-indigo: #ffffff;
+  --body-on-indigo: #ffffff;
+  --cta-band-text: #eceded;
+
+  --footer-text: #eceded;
+  --footer-social: color-mix(in srgb, #ffffff 10%, #141e25);
+  --footer-heading: #ffffff;
+  --footer-rule: color-mix(in srgb, #ffffff 10%, #141e25);
+  --footer-marker: #c3f00f;
+
+  --border: #d9dbde;
+  --border-strong: #b5bbbe;
+  --border-on-dark: #3c464d;
+  --focus: #7342ff;
+
+  /* The guidelines keep Lime to small accents, so the call to action is Indigo. */
+  --cta: #7342ff;
+  --cta-foreground: #ffffff;
+  --cta-hover: #141e25;
+  --cta-hover-foreground: #ffffff;
+  --cta-arrow: #ffffff;
+  --primary: #7342ff;
+  --primary-foreground: #ffffff;
+  --primary-hover: #141e25;
+  --button-dark: #141e25;
+  --button-dark-foreground: #ffffff;
+  --button-dark-hover: #3c464d;
+  --button-dark-hover-foreground: #ffffff;
+  --button-light: #ffffff;
+  --button-light-foreground: #141e25;
+  --button-light-border: #d9dbde;
+  --button-light-hover: #ffffff;
+  --button-light-hover-foreground: #141e25;
+  --button-light-hover-border: #141e25;
+  --button-outline-border: color-mix(in srgb, #ffffff 40%, transparent);
+  --button-outline-hover: #ffffff;
+  --button-outline-hover-foreground: #141e25;
+  --detail: #c3f00f;
+  --error: #ff4a7d;
+  --error-fill: transparent;
+  --error-foreground: #3c464d;
+
+  --accent-digital: #24adeb;
+  --accent-marketing: #ff4a7d;
+  --accent-investment: #1cb280;
+  --accent-hybrid: #ff8a54;
+  /* The guidelines keep secondary colours off text (ADR-0002). */
+  --accent-digital-text: #3c464d;
+  --accent-marketing-text: #3c464d;
+  --accent-investment-text: #3c464d;
+  --accent-hybrid-text: #3c464d;
+  --accent-digital-fill: #141e25;
+  --accent-marketing-fill: #141e25;
+  --accent-investment-fill: #141e25;
+  --accent-hybrid-fill: #141e25;
+
+  --hero-word: #ffffff;
+  --hero-word-digital: #ffffff;
+  --hero-word-marketing: #ffffff;
+  --hero-word-workforce: #ffffff;
+  --highlight-marker: #7342ff;
+  --hero-eyebrow: #1cb280;
+  --step-1: #ffffff;
+  --step-2: #ffffff;
+  --step-3: #ffffff;
+  --step-underline: #7342ff;
+
+  --rings-on-indigo: color-mix(in srgb, #ffffff 15%, transparent);
+  --rings-on-light: color-mix(in srgb, #7342ff 25%, transparent);
+  --rings-on-dark: color-mix(in srgb, #ffffff 15%, transparent);
+  --rings-on-band: color-mix(in srgb, #ffffff 15%, transparent);
+
+  --logo-on-dark: #ffffff;
+  --logo-on-light: #141e25;
+  --logo-brand: #7342ff;
+
+  /* The guidelines: Figtree, with DM Sans for subheadings. */
+  --font-heading: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
+  --font-body: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
+  --font-subheading: "DM Sans Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic";
+}
+
+/*
+  Tailwind utilities for the roles: bg-page, text-heading, border-border,
+  font-subheading, ... Tailwind's own palette and fonts are cleared, so a
+  colour name such as bg-indigo or text-white produces nothing.
+*/
+@theme inline reference {
+  --color-*: initial;
+  --font-*: initial;
+
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-band-dark: var(--band-dark);
+  --color-band-dark-raised: var(--band-dark-raised);
+  --color-band-indigo: var(--band-indigo);
+  --color-logo-strip: var(--logo-strip);
+  --color-footer: var(--footer);
+  --color-scrim: var(--scrim);
+
+  --color-heading: var(--heading);
+  --color-hero-title: var(--hero-title);
+  --color-body: var(--body);
+  --color-subtle: var(--subtle);
+  --color-emphasis: var(--emphasis);
+  --color-inverse: var(--inverse);
+  --color-body-on-dark: var(--body-on-dark);
+  --color-muted-on-dark: var(--muted-on-dark);
+  --color-label-on-indigo: var(--label-on-indigo);
+  --color-body-on-indigo: var(--body-on-indigo);
+  --color-cta-band-text: var(--cta-band-text);
+
+  --color-footer-text: var(--footer-text);
+  --color-footer-social: var(--footer-social);
+  --color-footer-heading: var(--footer-heading);
+  --color-footer-rule: var(--footer-rule);
+  --color-footer-marker: var(--footer-marker);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-on-dark: var(--border-on-dark);
+  --color-focus: var(--focus);
+
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-hover-foreground: var(--cta-hover-foreground);
+  --color-cta-arrow: var(--cta-arrow);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-button-dark: var(--button-dark);
+  --color-button-dark-foreground: var(--button-dark-foreground);
+  --color-button-dark-hover: var(--button-dark-hover);
+  --color-button-dark-hover-foreground: var(--button-dark-hover-foreground);
+  --color-button-light: var(--button-light);
+  --color-button-light-foreground: var(--button-light-foreground);
+  --color-button-light-border: var(--button-light-border);
+  --color-button-light-hover: var(--button-light-hover);
+  --color-button-light-hover-foreground: var(--button-light-hover-foreground);
+  --color-button-light-hover-border: var(--button-light-hover-border);
+  --color-button-outline-border: var(--button-outline-border);
+  --color-button-outline-hover: var(--button-outline-hover);
+  --color-button-outline-hover-foreground: var(--button-outline-hover-foreground);
+  --color-detail: var(--detail);
+  --color-error: var(--error);
+  --color-error-fill: var(--error-fill);
+  --color-error-foreground: var(--error-foreground);
+
+  --color-accent-digital: var(--accent-digital);
+  --color-accent-marketing: var(--accent-marketing);
+  --color-accent-investment: var(--accent-investment);
+  --color-accent-hybrid: var(--accent-hybrid);
+  --color-accent-digital-text: var(--accent-digital-text);
+  --color-accent-marketing-text: var(--accent-marketing-text);
+  --color-accent-investment-text: var(--accent-investment-text);
+  --color-accent-hybrid-text: var(--accent-hybrid-text);
+  --color-accent-digital-fill: var(--accent-digital-fill);
+  --color-accent-marketing-fill: var(--accent-marketing-fill);
+  --color-accent-investment-fill: var(--accent-investment-fill);
+  --color-accent-hybrid-fill: var(--accent-hybrid-fill);
+
+  --color-hero-word: var(--hero-word);
+  --color-hero-word-digital: var(--hero-word-digital);
+  --color-hero-word-marketing: var(--hero-word-marketing);
+  --color-hero-word-workforce: var(--hero-word-workforce);
+  --color-highlight-marker: var(--highlight-marker);
+  --color-hero-eyebrow: var(--hero-eyebrow);
+  --color-step-1: var(--step-1);
+  --color-step-2: var(--step-2);
+  --color-step-3: var(--step-3);
+  --color-step-underline: var(--step-underline);
+
+  --color-rings-on-indigo: var(--rings-on-indigo);
+  --color-rings-on-light: var(--rings-on-light);
+  --color-rings-on-dark: var(--rings-on-dark);
+  --color-rings-on-band: var(--rings-on-band);
+
+  --color-logo-on-dark: var(--logo-on-dark);
+  --color-logo-on-light: var(--logo-on-light);
+  --color-logo-brand: var(--logo-brand);
+
+  /* Fulldev UI's theme tokens (ADR-0005), pointed at roles. */
+  --color-background: var(--page);
+  --color-foreground: var(--body);
+  --color-card: var(--panel);
+  --color-card-foreground: var(--body);
+  --color-popover: var(--panel);
+  --color-popover-foreground: var(--body);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--heading);
+  --color-muted: var(--surface);
+  --color-muted-foreground: var(--body);
+  --color-accent: var(--surface);
+  --color-accent-foreground: var(--heading);
+  --color-destructive: var(--error);
+  --color-input: var(--border-strong);
+  --color-ring: var(--focus);
+  /* Fulldev's dialog and sheet overlays are `bg-black/10` (vendored, ADR-0005). */
+  --color-black: var(--scrim);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-subheading: var(--font-subheading);
+  --font-arabic: var(--font-arabic);
+  --font-sans: var(--font-body);
+}

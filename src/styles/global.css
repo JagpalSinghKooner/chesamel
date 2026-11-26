@@ -10,54 +10,15 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@import "./theme.css";
+
 /*
-  Design System tokens, from Chesamel-Brand-Guidelines.pdf (pages 13-16).
-  Tailwind's default palette and fonts are cleared, so only brand values exist
-  as utilities (bg-indigo, text-dark-grey, font-subheading, ...).
-
-  Hex values follow the PDF's RGB values. Dark Grey is #3C464D and Medium Grey
-  is #B5BBBE; earlier docs had #3C404D and #B5B8BE by mistake.
-
-  Every hex here must also be listed in src/design-system/colours.ts, which the
-  style-guide page and its test read.
+  Colours and font families are roles, in theme.css (ADR-0006). This file
+  keeps the sizes and the rest of the Design System.
 
   "static" keeps every token as a CSS variable even when no utility uses it.
 */
 @theme static {
-  --color-*: initial;
-
-  /* Primary */
-  --color-indigo: #7342ff;
-
-  /* Black, greys and off-whites */
-  --color-black: #141e25;
-  --color-dark-grey: #3c464d;
-  --color-grey: #7f848c;
-  --color-medium-grey: #b5bbbe;
-  --color-light-grey: #d9dbde;
-  --color-white: #ffffff;
-  --color-off-white: #eceded;
-
-  /* Secondary, limited use only: small accents such as tags and icons. */
-  --color-fuchsia: #df73f0;
-  --color-mint: #1cb280;
-  --color-tiger: #ff8a54;
-  --color-rose: #ff4a7d;
-  --color-sky: #24adeb;
-
-  /* Accent, limited use only. */
-  --color-lime: #c3f00f;
-
-  /*
-    IBM Plex Sans Arabic is loaded with an Arabic-only unicode-range, so putting
-    it second in every stack gives Arabic characters the Arabic face and keeps
-    Latin characters (digits, brand names) in the brand font, whatever the
-    element's lang or utility classes.
-  */
-  --font-*: initial;
-  --font-sans: "Figtree Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
-  --font-subheading: "DM Sans Variable", "IBM Plex Sans Arabic", Helvetica, Arial, sans-serif;
-
   /*
     The live site's content column is 1280px wide. max-w-7xl wraps a 24px
     gutter on each side, so it is 1280px plus both gutters.
@@ -66,62 +27,15 @@
 }
 
 /*
-  Fulldev UI's theme tokens, mapped onto the brand tokens above (ADR-0005).
-  The brand wins over every Fulldev default (ADR-0002), so these only ever
-  point at brand colours.
-
-  --radius is the one setting for corners: 0 keeps every Fulldev building
-  block square. Raise it here to round them all at once.
-
-  There is no .dark theme: the site has no dark mode.
+  Fulldev UI's corners (ADR-0005). --radius is the one setting: 0 keeps every
+  Fulldev building block square. Raise it here to round them all at once.
+  Its colour tokens point at roles, in theme.css. There is no .dark theme.
 */
 :root {
   --radius: 0;
-
-  --background: var(--color-white);
-  /* Body text is Dark Grey, not the guidelines' Grey: ADR-0002. */
-  --foreground: var(--color-dark-grey);
-  --card: var(--color-white);
-  --card-foreground: var(--color-dark-grey);
-  --popover: var(--color-white);
-  --popover-foreground: var(--color-dark-grey);
-  --primary: var(--color-indigo);
-  --primary-foreground: var(--color-white);
-  --secondary: var(--color-off-white);
-  --secondary-foreground: var(--color-black);
-  /* Grey fails AA for small text, so muted text is Dark Grey too. */
-  --muted: var(--color-off-white);
-  --muted-foreground: var(--color-dark-grey);
-  --accent: var(--color-off-white);
-  --accent-foreground: var(--color-black);
-  --destructive: var(--color-rose);
-  --border: var(--color-light-grey);
-  --input: var(--color-medium-grey);
-  --ring: var(--color-indigo);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --font-heading: var(--font-sans);
-
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -132,9 +46,8 @@
 }
 
 /*
-  Body text is Dark Grey, not the guidelines' Grey: ADR-0002.
-  Grey fails WCAG AA below 24px (18.7px bold), so it is only for large text.
-  Small tags and captions use Dark Grey.
+  Body text is the `body` role, which passes WCAG AA at body size in both
+  palettes (ADR-0006); `subtle` is only for large text.
 
   The rest is Fulldev's base layer (from `add @fulldev/init`), less its
   `outline-ring/50` on every element: that would swap the browser's focus
@@ -146,7 +59,7 @@
     @apply border-border;
   }
   html {
-    @apply font-sans;
+    @apply font-body;
   }
   body {
     @apply bg-background text-foreground;
@@ -171,7 +84,7 @@
   font-weight: 500;
   font-size: 3.5rem;
   line-height: 1;
-  color: var(--color-black);
+  color: var(--heading);
   @media (width >= 64rem) {
     font-size: 4.5rem;
   }
@@ -181,7 +94,7 @@
   font-weight: 500;
   font-size: 2.5rem;
   line-height: 1.1;
-  color: var(--color-black);
+  color: var(--heading);
   @media (width >= 64rem) {
     font-size: 3.25rem;
   }
@@ -191,7 +104,7 @@
   font-weight: 500;
   font-size: 1.75rem;
   line-height: 1.1;
-  color: var(--color-black);
+  color: var(--heading);
   @media (width >= 64rem) {
     font-size: 1.875rem;
   }
@@ -202,14 +115,14 @@
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 1.45;
-  color: var(--color-indigo);
+  color: var(--emphasis);
 }
 
 @utility type-body {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.45;
-  color: var(--color-dark-grey);
+  color: var(--body);
 }
 
 /* "Optical kerning 40" in the guidelines is 40/1000 em of tracking. */
@@ -219,22 +132,22 @@
   line-height: 1.45;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-dark-grey);
+  color: var(--body);
 }
 
 @utility type-caption {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.45;
-  color: var(--color-dark-grey);
+  color: var(--body);
 }
 
-/* Grey is allowed here because the text is large enough to pass AA. */
-@utility type-large-grey {
+/* The subtle role is allowed here: the text is large enough to pass AA. */
+@utility type-large {
   font-weight: 400;
   font-size: 1.5rem;
   line-height: 1.45;
-  color: var(--color-grey);
+  color: var(--subtle);
 }
 
 /*
@@ -249,7 +162,7 @@
     margin-top: 2.5rem;
     font-weight: 500;
     line-height: 1.15;
-    color: var(--color-black);
+    color: var(--heading);
   }
   .blog-body h2 {
     font-size: 1.75rem;
@@ -261,7 +174,7 @@
     font-size: 1.125rem;
   }
   .blog-body a {
-    color: var(--color-indigo);
+    color: var(--emphasis);
     text-decoration: underline;
   }
   .blog-body ul {
@@ -276,10 +189,10 @@
     margin-top: 0.5rem;
   }
   .blog-body blockquote {
-    border-inline-start: 4px solid var(--color-indigo);
+    border-inline-start: 4px solid var(--emphasis);
     padding-inline-start: 1.25rem;
     font-size: 1.25rem;
-    color: var(--color-black);
+    color: var(--heading);
   }
   .blog-body img {
     height: auto;
@@ -290,12 +203,12 @@
     border-collapse: collapse;
   }
   .blog-body :is(th, td) {
-    border: 1px solid var(--color-light-grey);
+    border: 1px solid var(--border);
     padding: 0.5rem 0.75rem;
     text-align: start;
   }
   .blog-body hr {
-    border-color: var(--color-light-grey);
+    border-color: var(--border);
   }
   .blog-body iframe {
     width: 100%;

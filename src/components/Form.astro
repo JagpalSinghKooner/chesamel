@@ -4,14 +4,15 @@
 // valid submit shows the success message, and #48 fills in `sendForm`
 // (./form.ts) to post to HubSpot.
 //
-//   contact:    the Contact hero's form, on Off-White
+//   contact:    the Contact hero's form, on a light surface
 //   newsletter: the newsletter band's form, on Indigo
 //
 // Each label is hidden and the placeholder shows in the field, as on the live
-// site; screen readers still read the label. Errors and the success message
-// follow the brand (ADR-0002): live puts 10px white text on a Rose fill, which
-// fails WCAG AA, so here the text is Dark Grey (white on Indigo) at 12px, and
-// Rose (Lime on Indigo) only marks the field's border.
+// site; screen readers still read the label. Errors are white text on a Rose
+// fill, as on live, at 12px rather than live's 10px; the fill is the
+// `error-fill` role, darkened so the text passes WCAG AA (ADR-0006). The
+// field's border marks it too. The newsletter's fields fill at 5% white, not
+// live's 10%, under which white text fails AA (#11).
 //
 // Submit buttons start disabled and ./form.ts enables them, so without
 // JavaScript (or before it runs) a submit goes nowhere: the form has no method
@@ -39,18 +40,18 @@ const showErrors = preview === 'errors';
 
 const tone = indigo
   ? {
-      input: 'border-2 border-transparent bg-white/5 py-3.5 text-base leading-6 text-white placeholder:text-white aria-invalid:border-lime lg:text-lg lg:leading-7 focus-visible:outline-white',
-      error: 'text-white',
-      consent: 'bg-white/5 px-4.5 py-3.5 text-white',
-      checkbox: 'accent-black focus-visible:outline-white',
-      link: 'text-white',
+      input: 'border-2 border-transparent bg-inverse/5 py-3.5 text-base leading-6 text-inverse placeholder:text-inverse aria-invalid:border-detail lg:text-lg lg:leading-7 focus-visible:outline-inverse',
+      error: 'bg-error-fill px-2 py-1 text-inverse',
+      consent: 'bg-inverse/5 px-4.5 py-3.5 text-inverse',
+      checkbox: 'accent-button-dark focus-visible:outline-inverse',
+      link: 'text-inverse',
     }
   : {
-      input: 'border border-light-grey bg-black/2 py-3.5 text-lg leading-7 text-black placeholder:text-dark-grey aria-invalid:border-rose aria-invalid:ring-1 aria-invalid:ring-rose focus-visible:outline-indigo',
-      error: 'text-dark-grey',
-      consent: 'text-dark-grey',
-      checkbox: 'accent-indigo focus-visible:outline-indigo',
-      link: 'text-dark-grey',
+      input: 'border border-border bg-scrim/2 py-3.5 text-lg leading-7 text-heading placeholder:text-body aria-invalid:border-error aria-invalid:ring-1 aria-invalid:ring-error focus-visible:outline-focus',
+      error: 'bg-error-fill px-2 py-1 text-error-foreground',
+      consent: 'text-body',
+      checkbox: 'accent-primary focus-visible:outline-focus',
+      link: 'text-body',
     };
 
 // Splits a consent text around its linked word.
@@ -63,8 +64,8 @@ const label = parts(form.consent.label);
 const notes = form.consent.notes.map(parts);
 
 const submitClass = indigo
-  ? 'w-full justify-between gap-4 border-0 bg-black px-6.5 py-4 text-base leading-6 text-white hover:bg-dark-grey focus-visible:outline-white lg:text-lg lg:leading-7'
-  : 'w-full justify-center border-0 bg-indigo px-6.5 py-3.5 text-base leading-6 text-white hover:bg-black focus-visible:outline-indigo sm:w-56 sm:shrink-0 sm:text-lg sm:leading-7';
+  ? 'w-full justify-between gap-4 border-0 bg-button-dark px-6.5 py-4 text-base leading-6 text-button-dark-foreground transition-none hover:bg-button-dark-hover hover:text-button-dark-hover-foreground focus-visible:outline-inverse lg:text-lg lg:leading-7'
+  : 'w-full justify-center border-0 bg-primary px-6.5 py-3.5 text-base leading-6 text-primary-foreground hover:bg-primary-hover focus-visible:outline-focus sm:w-56 sm:shrink-0 sm:text-lg sm:leading-7';
 ---
 
 <form
@@ -86,7 +87,7 @@ const submitClass = indigo
             </label>
             <div class="relative">
               {indigo && field.required && (
-                <span aria-hidden="true" class="pointer-events-none absolute start-5 top-1/2 -translate-y-1/2 font-semibold text-lime lg:text-lg">
+                <span aria-hidden="true" class="pointer-events-none absolute start-5 top-1/2 -translate-y-1/2 font-semibold text-detail lg:text-lg">
                   *
                 </span>
               )}
@@ -115,7 +116,7 @@ const submitClass = indigo
         <div class="sm:col-start-2">
           <Button type="submit" disabled data-form-submit class:list={[brandButton, focusOutline, submitClass]}>
             {form.submitLabel}
-            <span aria-hidden="true" class="text-lime rtl:-scale-x-100">↗</span>
+            <span aria-hidden="true" class="text-detail group-hover/button:text-current rtl:-scale-x-100">↗</span>
           </Button>
         </div>
       )
@@ -167,7 +168,7 @@ const submitClass = indigo
   aria-live="polite"
   tabindex="-1"
   data-form-success
-  class:list={['grid gap-2 text-lg font-semibold', focusOutline, indigo ? 'text-white focus-visible:outline-white' : 'text-black focus-visible:outline-indigo']}
+  class:list={['grid gap-2 text-lg font-semibold', focusOutline, indigo ? 'text-inverse focus-visible:outline-inverse' : 'text-heading focus-visible:outline-focus']}
 >
   {preview === 'success' && form.success.map((p) => <p>{p}</p>)}
   <template>{form.success.map((p) => <p>{p}</p>)}</template>

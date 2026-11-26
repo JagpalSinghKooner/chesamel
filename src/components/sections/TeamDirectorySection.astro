@@ -22,11 +22,11 @@ const teams = Object.entries(teamLabels) as [TeamSlug, string][];
 const PER_PAGE = 8;
 const DEFAULT_TEAM: TeamSlug = 'founders';
 
-// The live site's square filter button: a 65% Medium Grey outline, Indigo
-// when pressed. Live's Grey text fails WCAG AA at 16px, so it is Dark Grey
-// (ADR-0002).
+// The live site's square filter button: a 65% border-strong outline, Indigo
+// when pressed. Live's grey text fails WCAG AA at 16px, so it is the body
+// role (ADR-0006).
 const filterButton =
-  'h-auto min-w-0 cursor-pointer whitespace-normal border border-medium-grey/65 px-5 py-3 text-base leading-none font-semibold text-dark-grey transition-colors hover:border-indigo hover:bg-transparent hover:text-indigo data-[state=on]:border-indigo data-[state=on]:bg-indigo data-[state=on]:text-white data-[state=on]:hover:text-white';
+  'h-auto min-w-0 cursor-pointer whitespace-normal border border-border-strong/65 px-5 py-3 text-base leading-none font-semibold text-body transition-colors hover:border-primary hover:bg-transparent hover:text-emphasis data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-inverse data-[state=on]:hover:text-inverse';
 ---
 
 <section aria-labelledby={id} data-team-directory data-per-page={PER_PAGE}>

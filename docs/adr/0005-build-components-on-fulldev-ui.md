@@ -2,7 +2,7 @@
 
 The Components are built on [Fulldev UI](https://ui.full.dev) (MIT, vanilla Astro and Tailwind v4) instead of being hand-built. Its source is copied into `src/components/ui/` through the shadcn registry (`npx shadcn add @fulldev/<name>`), never imported from an npm package, so every line is ours to read, patch and keep. Chesamel Components stay thin wrappers that pass the brand's classes to the Fulldev building blocks: button, card, breadcrumb, tabs, carousel, marquee, toggle group, navigation menu, sheet and accordion. We chose this so tested, accessible pieces replace hand-written markup and scripts, while the brand stays in charge.
 
-**The brand wins (ADR-0002).** Fulldev's theme tokens (`--primary`, `--background`, `--border`, `--ring`, …) are mapped onto the brand tokens in `src/styles/global.css` and never point anywhere else. `--radius: 0` is the one setting for corners: every building block is square, and raising it rounds them all. There is no `.dark` theme. The few corners that were rounded before Fulldev (the header's controls, the footer's social links, the skip link, the style guide's logo panels) follow `--radius` too since #35, through `rounded-md` and `rounded-lg`, because the live site's controls are square. Where a Fulldev default and ADR-0002 disagree, ADR-0002 wins, either through the token mapping or through the classes a Component passes.
+**The theme wins (ADR-0006, which superseded ADR-0002).** Fulldev's theme tokens (`--primary`, `--background`, `--border`, `--ring`, …) are mapped onto the theme roles in `src/styles/theme.css` and never point anywhere else. `--radius: 0` is the one setting for corners: every building block is square, and raising it rounds them all. There is no `.dark` theme. The few corners that were rounded before Fulldev (the header's controls, the footer's social links, the skip link, the style guide's logo panels) follow `--radius` too since #35, through `rounded-md` and `rounded-lg`, because the live site's controls are square. Where a Fulldev default and ADR-0006 disagree, ADR-0006 wins, either through the token mapping or through the classes a Component passes.
 
 ## Toolkit
 
@@ -12,7 +12,7 @@ One tool for each job (#41). Later tickets build only with these; anything else 
 - **Motion:** `data-reveal` in `Base.astro`, `tw-animate-css`, Embla through `Slider` and `Marquee`, and Data Slot. No GSAP, Motion One or other motion library.
 - **Sliders:** `Slider` / `SliderItem`, and `Marquee` for a strip that scrolls by itself.
 - **Accordions and tabs:** Fulldev `accordion` and `tabs`.
-- **Colour:** the brand tokens in `src/styles/global.css`, by name (`text-indigo`, `bg-off-white`, `var(--color-sky)`).
+- **Colour:** the theme roles in `src/styles/theme.css`, by role (`text-heading`, `bg-cta`, `border-accent-marketing`, `var(--band-dark)`), never a colour name or value (ADR-0006).
 - **Layout:** Tailwind's default breakpoints (sm 640, md 768, lg 1024, xl 1280, 2xl 1536) and its spacing and type scales. Live chesamel.com's px values are measured to learn the intent, then snapped to the nearest Tailwind class. Any multiple of 0.25rem is on the spacing scale (`min-h-136` is 34rem). No arbitrary values (`p-[13px]`, `size-[28rem]`, `min-[1000px]:`). The only exceptions are tokens already in `global.css`, such as `max-w-(--container-7xl)`, and expressions or percentages that no Tailwind class expresses (`max-h-[calc(100vh-5rem)]`, `lg:min-h-[min(56rem,100svh)]`, `basis-[85%]`).
 
 ### Rules
@@ -20,7 +20,7 @@ One tool for each job (#41). Later tickets build only with these; anything else 
 In `src/components/` and `src/layouts/`:
 
 - No inline `<svg>`. Use `Icon`, or a file in `src/design-system/` where it is the logo. `Icon` itself and `BrandmarkRings.astro`, whose rings animate one by one, are the exceptions.
-- No hex colours.
+- No hex colours (and, everywhere in `src/` outside `theme.css`, no `rgb()` or other colour value and no class naming a colour: ADR-0006).
 - No `@keyframes` outside `src/styles/global.css`, `BrandmarkRings.astro` and `Hero.astro`.
 - No Tailwind arbitrary value for a size, spacing or breakpoint: `-[` followed by a number in `px`, `rem` or `em`, or `min-[` / `max-[`.
 

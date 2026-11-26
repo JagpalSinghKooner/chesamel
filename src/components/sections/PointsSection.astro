@@ -11,19 +11,19 @@ const { heading, eyebrow, paragraphs, items, note, image, tone } = section;
 const dark = tone === 'dark';
 ---
 
-<section data-component="section-points" aria-labelledby={id} class:list={[dark && 'bg-black']}>
+<section data-component="section-points" aria-labelledby={id} class:list={[dark && 'bg-band-dark']}>
   <div class="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-6 lg:py-28 lg:grid-cols-[1fr_2fr]">
     <div>
       <SectionHeading id={id} heading={heading} eyebrow={eyebrow} dark={dark} />
-      {paragraphs.map((p) => <p class:list={['mt-6', dark && 'text-off-white']}>{p}</p>)}
+      {paragraphs.map((p) => <p class:list={['mt-6', dark && 'text-body-on-dark']}>{p}</p>)}
       {image && <img src={image.src} alt={image.alt} loading="lazy" class="mt-8 w-full" />}
     </div>
     <div>
       <ol class="grid gap-6">
         {
           items.map((item, i) => (
-            <li class:list={['flex gap-6 border-t pt-5', dark ? 'border-white/20 text-white' : 'border-light-grey']}>
-              <span class:list={['font-subheading', dark ? 'text-lime' : 'text-indigo']} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <li class:list={['flex gap-6 border-t pt-5', dark ? 'border-inverse/20 text-inverse' : 'border-border']}>
+              <span class:list={['font-subheading', dark ? 'text-detail' : 'text-emphasis']} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <span>{item}</span>
             </li>
           ))
@@ -32,7 +32,7 @@ const dark = tone === 'dark';
       {
         note && (
           <div class="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <p class:list={['type-subheading max-w-xl', dark && 'text-white']}>{note}</p>
+            <p class:list={['type-subheading max-w-xl', dark && 'text-inverse']}>{note}</p>
             <Button href="/contact/" tone={dark ? 'outline' : 'dark'}>Let's Chat</Button>
           </div>
         )
