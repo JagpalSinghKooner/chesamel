@@ -5,7 +5,8 @@ author: "Jessie"
 hero: {"src":"/wp-content/uploads/2026/11/Blog-Post.jpg","alt":"Business Resilience in Qatar Chesamel Roundtable"}
 pillars: ["investment-impact-transformation","hybrid-workforce","digital-transformation","marketing-engine"]
 industries: []
-description: "Explore lessons from Chesamel’s first Doha roundtable on business resilience in Qatar, digital transformation, workforce skills and long-term business growth."
+seoTitle: "Business Resilience in Qatar | Chesamel Roundtable"
+seoDescription: "Explore lessons from Chesamel’s first Doha roundtable on business resilience in Qatar, digital transformation, workforce skills and long-term business growth."
 ---
 
 ### Lessons from Chesamel’s first Resilience Roundtable

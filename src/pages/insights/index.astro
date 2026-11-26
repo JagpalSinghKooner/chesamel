@@ -7,6 +7,8 @@ import { brandCard } from '../../components/card';
 import Base from '../../layouts/Base.astro';
 import InsightsHero from '../../components/InsightsHero.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
+import { home } from '../../components/trails';
+import { pageMeta } from '../../lib/seo';
 
 const tiles = [
   { title: 'News', href: '/insights/blog/', eyebrow: '/ latest news, opinions, and how-tos' },
@@ -15,10 +17,11 @@ const tiles = [
   { title: 'Reports', href: '/insights/reports/', eyebrow: '/ in-depth research and analysis' },
   { title: 'Our Work', href: '/insights/our-work/', eyebrow: '/ some of our customer stories' },
 ];
+const trail = [home, { label: 'Insights' }];
 ---
 
-<Base title="Insights | Chesamel" description="Check out our latest thoughts, business updates, and original content.">
-  <InsightsHero heading="Insights" text="Check out our latest thoughts, business updates, and original content." parents={[{ label: 'Home', href: '/' }]} />
+<Base seo={{ ...pageMeta('/insights/'), breadcrumb: trail }}>
+  <InsightsHero heading="Insights" text="Check out our latest thoughts, business updates, and original content." trail={trail} />
   <section aria-labelledby="collection" class="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
     <p class="type-caption">/ delve deeper into our full range of insights</p>
     <h2 id="collection" class="type-heading-2 mt-2">Our Insights Collection</h2>

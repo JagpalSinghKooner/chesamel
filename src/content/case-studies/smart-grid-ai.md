@@ -6,6 +6,7 @@ objective: "To achieve self-consumption based solely on green energy by accurate
 image: {"src":"/wp-content/uploads/2024/11/Smart-Grid-AI-2.png","alt":""}
 pillars: ["investment-impact-transformation","ai-machine-learning"]
 industries: ["energy"]
+seoTitle: "Smart Grid AI | Chesamel"
 ---
 
 ### The Story

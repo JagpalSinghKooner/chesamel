@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/anger-angry-annoyed-987585-1.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "In a world where the customer is always right, feedback can make or break your brand. Find out how to why you should be quick to respond!"
+seoTitle: "Business Strategy | Responding To Social Media Feedback | Chesamel"
+seoDescription: "In a world where the customer is always right, feedback can make or break your brand. Find out how to why you should be quick to respond!"
 ---
 
 While social media has shaken up both the business strategy and the relationship between customers and brands in a particularly significant way, it has also brought some new potential issues which marketers and brands as a whole need to learn how to manage.  Brands have been gifted fast, responsive, targetable platforms, but customers have been gifted fast responsive and direct means to communicate their feedback very freely with businesses as they please.    So while getting the ‘we loved working with these guys’ tweet or Instagram share is great for morale, UGC and customer experience, the negative comments and complaints aren’t so great to receive; and, unfortunately, these are the ones which consumers are often more motivated to communicate. A business strategy planning for growth needs to acknowledge that a badly dealt with complaint could hinder growth long-term; it’s therefore so necessary that the team knows how to deal with them effectively.  We’ve pulled together a little help sheet so you can put your best foot forward and follow social media feedback best-practice!   

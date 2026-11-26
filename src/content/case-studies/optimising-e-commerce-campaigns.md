@@ -6,6 +6,7 @@ objective: "To optimise e-commerce campaigns by providing in-depth, accessible p
 image: {"src":"/wp-content/uploads/2024/11/Optimising-E-commerce-Campaigns-2.png","alt":""}
 pillars: ["marketing-engine","digital-transformation"]
 industries: []
+seoTitle: "Optimising E-commerce Campaigns | Chesamel"
 ---
 
 ### The Story

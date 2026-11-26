@@ -5,6 +5,7 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/07/Website-images-1.png","alt":""}
 pillars: ["digital-transformation"]
 industries: ["technology"]
+seoTitle: "Chesamel and Systango Announce Strategic Partnership to Deliver Human-First Digital Transformation at Speed and Scale | Chesamel"
 ---
 
 Chesamel, a London-based consultancy with deep expertise in go-to-market strategy, project delivery, and workforce enablement, has announced a strategic partnership with [Systango](https://www.systango.com/), a digital engineering firm specialising in scalable, AI-powered software solutions. The collaboration unites the unique strengths of both organisations: technical precision with consulting excellence. 

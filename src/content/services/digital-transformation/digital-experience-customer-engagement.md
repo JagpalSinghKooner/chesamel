@@ -1,9 +1,10 @@
 ---
 title: "Digital Experience and Customer Engagement"
-description: "Transform your digital presence with Chesamel's services, creating customer journeys across all digital touchpoints. Contact us today."
 hero: {"title":"Digital Experience and Customer Engagement","paragraphs":["Your digital experience is your first chance to make a positive impression on your customers.","Our tools are built to help you craft an engaging customer journey that will turn inquisitive users into loyal customers. From your app to your checkout, make sure that you show up in the best way for your audience."],"links":[{"label":"Get Started","href":"/contact/"}]}
 sections: [{"type":"cards","heading":"Related services","image":{"src":"/wp-content/uploads/2024/10/Digital-Digital-experience-.png","alt":""},"tone":"off-white","items":[{"heading":"Digital Strategy and Transformation","text":"Dive into digitalisation and develop your transformation roadmap.","href":"/services/bi-data-analytics/strategy-foundation/"},{"heading":"Emerging Technologies and Innovation","text":"Adopt technology like AI, ML, and IoT, simply and securely.","href":"/services/digital-transformation/emerging-technologies-innovation/"}]},{"type":"points","heading":"Our process","items":["We review your current digital experience for both strengths and setbacks, putting ourselves in the mind of your customer.","We design a digital journey that puts the user at the forefront, while being fully aligned with your brand and business goals.","With experts in web design, user experience, and more, we are on hand long after your go-live date to make any necessary optimisations."],"note":"We help you navigate digital change with strategy, innovation, and lasting growth."},{"type":"insights","heading":"Latest Insights","text":"Check out our latest thoughts and opinions.","pillar":"digital-transformation"},{"type":"cta","heading":"Want to transform your business?","text":"the journey starts with just a click."}]
 pillar: "digital-transformation"
 order: 1
+seoTitle: "Digital Experience & Customer Engagement | Chesamel"
+seoDescription: "Transform your digital presence with Chesamel's services, creating customer journeys across all digital touchpoints. Contact us today."
 ---
 

@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/04/Earth-Day.png","alt":""}
 pillars: ["investment-impact-transformation","hybrid-workforce"]
 industries: []
-description: "Discover what sustainable workplace transformation really means—and what it doesn't—this Earth Day 2025. Learn why true change starts with your people."
+seoTitle: "Earth Day 2025: What Sustainable Workplace Transformation Is & What It’s Not | Chesamel"
+seoDescription: "Discover what sustainable workplace transformation really means—and what it doesn't—this Earth Day 2025. Learn why true change starts with your people."
 ---
 
 By Aislín Johnston

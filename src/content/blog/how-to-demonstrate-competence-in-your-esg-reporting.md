@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/esg-reporting-jpeg.webp","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: ["energy"]
-description: "Learn how to establish clear ESG goals, collect reliable data, consistency, and engage stakeholders to enhance your ESG reporting competence at Chesamel."
+seoTitle: "How To Show Competence In Your ESG Reporting | Chesamel"
+seoDescription: "Learn how to establish clear ESG goals, collect reliable data, consistency, and engage stakeholders to enhance your ESG reporting competence at Chesamel."
 ---
 
 The [FCA](https://www.fca.org.uk/) now requires companies to disclose how they consider ESG risks and opportunities in their decision-making processes, as well as a prohibition on false or misleading ESG claims. Not only that, they also plan to establish a new ESG disclosure standard, which will require companies to provide consistent and comparable information on their ESG performance and risks. That’s why, if you want to be taken seriously, it's time to brush up on your reporting skills.

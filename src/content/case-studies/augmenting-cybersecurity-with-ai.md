@@ -6,7 +6,8 @@ objective: "To navigate limitations in data samples, including training for comp
 image: {"src":"/wp-content/uploads/2024/11/Augmenting-Cybersecurity-with-AI-2.png","alt":""}
 pillars: ["ai-machine-learning","digital-transformation"]
 industries: ["technology"]
-description: "Chesamel leverages AI to help a client navigate complex regulatory landscapes and achieve compliance across various frameworks. Visit this page for more info."
+seoTitle: "Enhancing Cybersecurity Compliance with AI | Chesamel"
+seoDescription: "Chesamel leverages AI to help a client navigate complex regulatory landscapes and achieve compliance across various frameworks. Visit this page for more info."
 ---
 
 ### The Story

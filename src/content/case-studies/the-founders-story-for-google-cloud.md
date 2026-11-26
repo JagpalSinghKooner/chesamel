@@ -6,7 +6,8 @@ objective: "To engage and build trust with startup founders and ecosystem player
 image: {"src":"/wp-content/uploads/2025/05/Screenshot-2025-05-08-at-12.07.33.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "Discover how Chesamel partnered with Google Cloud to deliver a 23-event series across EMEA designed to connect with startup founders and strengthen Google Cloud’s presence in key tech markets."
+seoTitle: "The Founder's Story for Google Cloud | Chesamel"
+seoDescription: "Discover how Chesamel partnered with Google Cloud to deliver a 23-event series across EMEA designed to connect with startup founders and strengthen Google Cloud’s presence in key tech markets."
 ---
 
 ## The Story

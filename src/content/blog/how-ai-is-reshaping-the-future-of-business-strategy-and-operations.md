@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/How-AI-is-Reshaping-The-Future-of-Business-Strategy-and-Operations.png","alt":""}
 pillars: ["ai-machine-learning"]
 industries: []
-description: "Explore how AI is revolutionizing business strategy and operations. This comprehensive guide delves into AI's impact on decision-making, efficiency, customer experience, and cost reduction. Learn how to leverage AI for a competitive edge and discover actionable steps to integrate AI into your business successfully."
+seoTitle: "How AI is Reshaping The Future of Business Strategy and Operations | Chesamel"
+seoDescription: "Explore how AI is revolutionizing business strategy and operations. This comprehensive guide delves into AI's impact on decision-making, efficiency, customer experience, and cost reduction. Learn how to leverage AI for a competitive edge and discover actionable steps to integrate AI into your business successfully."
 ---
 
 Artificial Intelligence (AI) is everywhere. Everyone’s talking about it. It's changing the way businesses operate and strategise. But it can be easy to feel like you are falling behind the crowd if you don’t keep up with the latest developments.

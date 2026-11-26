@@ -6,7 +6,8 @@ objective: "To support tournament visitors with timely, accurate answers to ques
 image: {"src":"/wp-content/uploads/2024/11/Boosting-Customer-Experience-with-Chatbots-2.png","alt":""}
 pillars: ["marketing-engine","ai-machine-learning"]
 industries: ["technology"]
-description: "Improved client interactions using structured data and chatbots on WhatsApp, building detailed customer profiles. Contact Chesamel today."
+seoTitle: "Boosting Customer Experience with Chatbots | Chesamel"
+seoDescription: "Improved client interactions using structured data and chatbots on WhatsApp, building detailed customer profiles. Contact Chesamel today."
 ---
 
 ### The Story

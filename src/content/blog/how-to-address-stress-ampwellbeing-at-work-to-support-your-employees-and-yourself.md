@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Chesamel-Unplugged-Thumbnail-1080x1080px-1.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "How To Address Stress and Wellbeing At Work To Support Your Employees (And Yourself) | Chesamel"
 ---
 
 Stress happens when we don't have clarity as to what will happen next. The pandemic was the extreme version of this; transforming the way we think about how work and life come together. Even though [52% of organisations](https://www.cipd.co.uk/Images/health-wellbeing-work-report-2022_tcm18-108440.pdf) have stepped up employee wellbeing support since the pandemic, there are still [76% of employees](https://championhealth.co.uk/insights/stress-statistics/) who report moderate-to-high levels of stress in the workplace (that’s really high).

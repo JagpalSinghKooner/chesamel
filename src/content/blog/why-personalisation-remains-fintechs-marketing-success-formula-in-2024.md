@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Untitled-design-14-1.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["finance"]
+seoTitle: "Why Personalisation Remains FinTech's Marketing Success Formula in 2024 | Chesamel"
 ---
 
 It’s been a tough year for FinTech. 

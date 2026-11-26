@@ -6,6 +6,7 @@ objective: "To improve visibility into sales and inventory data, while identifyi
 image: {"src":"/wp-content/uploads/2024/11/Increasing-informed-decisions-2.png","alt":""}
 pillars: ["bi-data-analytics"]
 industries: []
+seoTitle: "Increasing informed decisions | Chesamel"
 ---
 
 ### The Story

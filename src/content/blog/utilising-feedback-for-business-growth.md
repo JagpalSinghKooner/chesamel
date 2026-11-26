@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/unnamed-file.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Business growth comes from the ability to adapt and change, and this comes from satisfied customers, so how can you utilise feedback to grow your business?"
+seoTitle: "Utilising Feedback For Business Growth | Chesamel"
+seoDescription: "Business growth comes from the ability to adapt and change, and this comes from satisfied customers, so how can you utilise feedback to grow your business?"
 ---
 
 Of all the tools you can utilise for business growth, you should never underestimate the power of leveraging feedback; how can you make this work in your favour and put it towards the task of business growth?

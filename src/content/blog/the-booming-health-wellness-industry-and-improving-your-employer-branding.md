@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/brooke-lark-254998-unsplash.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: ["healthcare"]
-description: "Find how the growing health & wellness industry impacts employer branding and workforce strategy. Stay ahead with Chesamel's insights."
+seoTitle: "The Booming Health & Wellness Industry | Chesamel"
+seoDescription: "Find how the growing health & wellness industry impacts employer branding and workforce strategy. Stay ahead with Chesamel's insights."
 ---
 
 Health and wellness is a popular and thriving industry; how popular? It’s a $4.2 trillion business globally; back in 2014, it was triple the size of the worldwide pharmaceutical industry at the time. This industry has been growing for some time now but between then and 2017 it was growing at nearly double (6.4%) the rate of economic growth (3.5%), according to the [Global Wellness Institute](https://globalwellnessinstitute.org/industry-research/2018-global-wellness-economy-monitor/).  Employers need to be pinning this trend down and evaluating how they can incorporate the demand for this offering to enhance their employer branding. Scroll through your Instagram feed, your Twitter or, dare we say, flick through your magazine and you’ll be drowning in articles, ads and posts around health and wellness: yoga instructors, meditation tips, healthy eating manuals, spa retreats, ways to look after your mind, body and spirit -  and it’s no bad thing, these are all positive things, right? But why have we all and are still jumping on board the health and wellness bandwagon? It’s no phase, this one seems to be here to stay, with projected growth for at least the next five years.

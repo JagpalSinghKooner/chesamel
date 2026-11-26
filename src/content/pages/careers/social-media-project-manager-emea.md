@@ -3,6 +3,7 @@ title: "Social Media Project Manager- EMEA"
 employer: "Chesamel Group"
 posted: "2026-10-19T14:34:25Z"
 hero: {"title":"Social Media Project Manager- EMEA","details":["Remote","Contract","UK/EMEA"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4475443614/"}]}
+seoTitle: "Social Media Project Manager- EMEA | Chesamel"
 ---
 
 Collaborate with the Head of Social Media EMEA to align and execute the EMEA social strategy into targeted regional roadmaps, elevated content, and impactful outcomes. Combining high-level strategy with hands-on content evaluation and operational management, this role empowers local social media leads to drive exceptional results

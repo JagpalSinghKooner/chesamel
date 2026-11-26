@@ -5,6 +5,7 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/02/shutterstock_2594167021-scaled.jpg","alt":"Marketing when Discovery has Changed: The Shift From Volume to Relevance"}
 pillars: ["marketing-engine"]
 industries: ["technology"]
+seoTitle: "Marketing when Discovery has Changed: The Shift From Volume to Relevance | Chesamel"
 ---
 
 Marketing used to reward momentum. Publish more. Be everywhere. Scale output.

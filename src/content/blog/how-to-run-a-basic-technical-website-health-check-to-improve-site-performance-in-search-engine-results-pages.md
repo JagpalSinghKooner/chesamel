@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/j-kelly-brito-256889-unsplash.jpg","alt":""}
 pillars: ["bi-data-analytics"]
 industries: []
-description: "Running a technical website health check can help your search engine results page rankings. Learn more with our Digital Skills Training blog."
+seoTitle: "Digital Skills Training: Running A Technical Website Health Check | Chesamel"
+seoDescription: "Running a technical website health check can help your search engine results page rankings. Learn more with our Digital Skills Training blog."
 ---
 
 This [Digital Skills Training](/learn-with-chesamel/) blog is to help you run a technical website health check to improve your search performance. When taking a high-level view of search engine optimisation there are 3 main pillars to consider when building your visibility within the search engines.

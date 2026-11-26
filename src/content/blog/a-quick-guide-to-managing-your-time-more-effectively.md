@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/elena-koycheva-1053215-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "A few pointers for individuals looking to develop and master the art of time management as part of their workforce planning methods.|A few pointers for individuals looking to develop and master the art of time management as part of their workforce planning methods."
+seoTitle: "Workforce Planning Methods | Managing Time More Effectively | Chesamel|Workforce Planning Methods | Managing Time More Effectively | Chesamel"
+seoDescription: "A few pointers for individuals looking to develop and master the art of time management as part of their workforce planning methods.|A few pointers for individuals looking to develop and master the art of time management as part of their workforce planning methods."
 ---
 
 We’re not all born time keepers, and even if you are, a busy work and even personal life can really complicate time keeping. Finding a few tools to introduce to your team and your workforce planning methods could really help you and your team to keep on top of responsibilities and stress levels, and keep you on time for the things which matter.

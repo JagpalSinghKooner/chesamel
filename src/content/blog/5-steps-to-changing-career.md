@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Change-of-career-scaled-1.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "What are the 5 steps to changing career? If you had a gap in knowledge, eg. a digital skills gap - trainining could be a great step. Find out more here."
+seoTitle: "5 Steps to Changing Career | Chesamel"
+seoDescription: "What are the 5 steps to changing career? If you had a gap in knowledge, eg. a digital skills gap - trainining could be a great step. Find out more here."
 ---
 
 Guest Blogger, Evelyn Utterson: *"Evelyn is a Software Developer and Coding Coach based in Edinburgh. With a background in Career Guidance, and as a career changer herself, she is passionate about supporting others considering a move into tech or exploring other career ideas."*   Changing careers can be an exciting yet overwhelming time. Individual circumstances may affect how you approach making the switch, but it’s important to take as much time as you can and need to think your ideas through entirely and make sure you’re investing your time and energy in a path that really is right for you. And be realistic: Your dream job is out there, it just might take time to find it, and to achieve it! Here are five steps that could help you along the way:  

@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/business-coffee-computer-374006.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "Is Your Website Really User Friendly? | Chesamel"
 ---
 
 “Virtually all adults aged 16 to 34 years were recent internet users (99%)” ([*Office of National Statistics*](https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry/bulletins/internetusers/2017)*),* you’re not aiming for the one percent, you’re aiming for that lucrative possibility of 99%, you’re looking to capture the colossal potential audience out there scrolling through and tapping at their laptops, tablets and phones. It follows then that you must be providing not only the necessary and appropriate, but quality means for this eager audience to discover your brand and to find your products or services online.   Even SMEs should have a web presence in 2018 and according to GoDaddy, ‘60% of businesses with five employees or less simply aren’t moving forward in this digital era’.  While this is a majority, that still leaves you SMEs who are online with 40% to compete with - let’s make sure that website you have is a good one, let’s make sure it’s one of the best! ![User Friendly Website](/wp-content/uploads/2024/11/computer-social-media-digital-copy-1024x572.jpg)

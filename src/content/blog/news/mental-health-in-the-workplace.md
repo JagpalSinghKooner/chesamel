@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2024/11/tim-mossholder-bo3SHP58C3g-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Key strategies to support mental health in the workplace. Learn how to foster a positive, productive work environment with Chesamel's insights and team."
+seoTitle: "Mental Health In The Workplace | Chesamel"
+seoDescription: "Key strategies to support mental health in the workplace. Learn how to foster a positive, productive work environment with Chesamel's insights and team."
 ---
 
 ![mental health](/wp-content/uploads/2024/11/christin-hume-610U5teI5B4-unsplash-1024x683.jpg)

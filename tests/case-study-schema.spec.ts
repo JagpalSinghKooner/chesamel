@@ -32,9 +32,9 @@ const problems = (schema: typeof caseStudySchema | typeof industrySchema, data: 
   return result.success ? [] : result.error.issues.map((i) => i.path.join('.'));
 };
 
-test('a complete Case Study is accepted; client and description are optional', () => {
+test('a complete Case Study is accepted; client and the SEO fields are optional', () => {
   expect(problems(caseStudySchema, caseStudy)).toEqual([]);
-  expect(problems(caseStudySchema, { ...caseStudy, client: 'Google Cloud', description: 'Meta.' })).toEqual([]);
+  expect(problems(caseStudySchema, { ...caseStudy, client: 'Google Cloud', seoTitle: 'Title | Chesamel', seoDescription: 'Meta.' })).toEqual([]);
   expect(caseStudySchema.parse(caseStudy).date).toEqual(new Date('2024-11-13T16:46:25Z'));
 });
 

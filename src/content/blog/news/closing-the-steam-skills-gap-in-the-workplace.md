@@ -5,6 +5,7 @@ author: "tom"
 hero: {"src":"/wp-content/uploads/2024/11/louis-reed-747388-unsplash.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "Closing The STEAM Skills Gap In The Workplace | Chesamel"
 ---
 
 The UK currently ranks 16th out of 20 OECD (Organisation For The Economic Co-operation and Development) countries. The skills gap we’re working as a nation to close can be seen in the lacking STEAM skills that [40% of employers](https://publications.parliament.uk/pa/cm201617/cmselect/cmsctech/991/99106.htm) report difficulties in sourcing.

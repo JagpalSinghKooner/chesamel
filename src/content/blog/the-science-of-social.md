@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/accounting-apps-bookkeeper-273691-1.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "You may need digital skills training to create a successful social media strategy! Find out more about using social media as a marketing technique here."
+seoTitle: "The Science of Social | Chesamel"
+seoDescription: "You may need digital skills training to create a successful social media strategy! Find out more about using social media as a marketing technique here."
 ---
 
 > *This blog post has been written by our guest blogger, [David Green](https://twitter.com/davidrwgreen). David holds vast experience in digital marketing and has a background working with social media as well as email marketing and is currently a coach for the Google Digital Garage project.* 

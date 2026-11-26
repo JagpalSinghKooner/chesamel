@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/the-creative-exchange-336782-unsplash-e1554227690920.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "What is a Growth Marketing Agency and why would they be beneficial for your business growth and should you enage one to help you develop?"
+seoTitle: "Why Engaging a Growth Marketing Agency is a Good Idea | Chesamel"
+seoDescription: "What is a Growth Marketing Agency and why would they be beneficial for your business growth and should you enage one to help you develop?"
 ---
 
 Marketing might seem pretty easy these days with the unrestricted access to free marketing tools such as social media and the influx of influencer marketing that businesses tap into, so why would you need a specialist Growth Marketing Agency to help you grow your audience and grow your business?   Firstly, we hope as business professionals, you know that the above is nowhere near true. Marketing professionals are more and more needed as the mediums and tools which we use to connect with customers develop and grow to incorporate a higher volume of platforms to navigate both on and offline, and the customer journey develops and deepens with heightened levels of two-way interaction.

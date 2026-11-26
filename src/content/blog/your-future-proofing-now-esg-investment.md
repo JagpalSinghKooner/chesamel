@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-lucas-allmann-612892-scaled-1.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Understand the importance of ESG (Environmental, Social and Governance) in your business for investors and future-proofing your organisation."
+seoTitle: "Future-Proofing Now: ESG Investment | Chesamel"
+seoDescription: "Understand the importance of ESG (Environmental, Social and Governance) in your business for investors and future-proofing your organisation."
 ---
 
 Is Environmental, Social and Governance (ESG) a priority for your business?

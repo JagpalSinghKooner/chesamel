@@ -95,12 +95,11 @@ const items: FixtureItem[] = [
 
 const run = () => importServices(wxr(items));
 
-test('a Pillar becomes a file at its address, with its hero and description', () => {
+test('a Pillar becomes a file at its address, with its hero', () => {
   const pillar = run().pillars.find((p) => p.address === '/services/marketing-engine/')!;
   expect(pillar.file).toBe('src/content/pillars/marketing-engine.md');
   expect(pillar.data).toMatchObject({
     title: 'Marketing Engine',
-    description: 'Chesamel’s 360° marketing engine solutions.',
     hero: {
       title: 'Marketing Engine',
       paragraphs: ['We help organisations strengthen market presence.', 'From strategy to campaigns, Chesamel moves marketing forward.'],

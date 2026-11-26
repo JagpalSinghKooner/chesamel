@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/09/LEAP-KSA-Insights-Growth-Talent-and-Differentiation.png","alt":"Chesamel team discussing technology, talent and business growth at LEAP KSA"}
 pillars: ["digital-transformation"]
 industries: ["technology"]
-description: "What did LEAP KSA reveal about Saudi Arabia’s growth? Explore key insights on technology, talent retention and standing out in a crowded market."
+seoTitle: "LEAP KSA Insights: Growth, Talent and Differentiation"
+seoDescription: "What did LEAP KSA reveal about Saudi Arabia’s growth? Explore key insights on technology, talent retention and standing out in a crowded market."
 ---
 
 By [Yulia Porozova](https://www.linkedin.com/in/yulia-porozova-qatar/), Account and Business Development Manager, Chesamel

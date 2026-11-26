@@ -7,12 +7,15 @@ import InsightCard from '../../components/InsightCard.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
 import { getNewest, addressOf } from '../../content/insight-items';
 import { primaryPillar } from '../../content/shared';
+import { insightsTrail } from '../../components/trails';
+import { pageMeta } from '../../lib/seo';
 
 const webinars = await getNewest('webinars');
+const trail = insightsTrail({ label: 'Webinars' });
 ---
 
-<Base title="Webinars | Chesamel" description="Watch our latest panels, interviews, and discussions with industry experts.">
-  <InsightsHero heading="Webinars" text="Watch our latest panels, interviews, and discussions with industry experts." />
+<Base seo={{ ...pageMeta('/insights/webinars/'), breadcrumb: trail }}>
+  <InsightsHero heading="Webinars" text="Watch our latest panels, interviews, and discussions with industry experts." trail={trail} />
   <section aria-labelledby="archive" class="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
     <p class="type-caption">/ explore our</p>
     <h2 id="archive" class="type-heading-2 mt-2">Webinar Archive</h2>

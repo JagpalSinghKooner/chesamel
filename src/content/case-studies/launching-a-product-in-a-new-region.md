@@ -6,6 +6,7 @@ objective: "To conduct a sweeping D2C partnerships campaign with major players a
 image: {"src":"/wp-content/uploads/2024/11/Lauching-a-Product-in-a-New-Region-2.png","alt":""}
 pillars: ["digital-transformation","marketing-engine"]
 industries: []
+seoTitle: "Launching a Product in a New Region | Chesamel"
 ---
 
 ### The Story

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/business-growth-praise.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Praise isn't always the first feedback we're inclined to give, but it's the best kind we can give to nurture a positive company culture and business growth."
+seoTitle: "Why We Need Praise In The Workplace For Business Growth"
+seoDescription: "Praise isn't always the first feedback we're inclined to give, but it's the best kind we can give to nurture a positive company culture and business growth."
 ---
 
 Praise - most of us are better at receiving it than giving it. By acknowledging the benefits which praise can scatter throughout the working environment, the purpose of giving praise more freely becomes more glaringly apparent. How can we do our part to both improve the working environment and nurture business growth?   As management, team leaders and colleagues, we’re all in positions to both create the opportunity for, and experience the benefits of, consciously giving praise to the teams around us. Consider a thank you or well-done email, verbal praise for ideas in a meeting, a gesture which could be anything from a friendly coffee to a recommendation for a promotion. All of these acts are positive acts of praise which can create any or all of the following benefits to the workplace. When adapted as a company culture, that can be a powerful catalyst for business growth!  

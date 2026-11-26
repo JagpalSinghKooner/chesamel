@@ -30,8 +30,6 @@ export const isoDate = (item: WxrItem) => item.dateGmt.replace(' ', 'T') + 'Z';
 
 export const titleOf = (item: WxrItem) => decodeEntities(item.title);
 
-export const descriptionOf = (item: WxrItem) => decodeEntities(item.meta._yoast_wpseo_metadesc ?? '').trim();
-
 // The featured image, plus the live URL to download. Alt text is almost always
 // empty in WordPress; pages decide whether the image is decorative.
 export function featuredImage(wxr: Wxr, item: WxrItem): { image?: { src: string; alt: string }; url?: string } {

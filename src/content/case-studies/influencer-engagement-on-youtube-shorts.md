@@ -6,6 +6,7 @@ objective: "To promote YouTube Shorts and reach Gen Z through social media using
 image: {"src":"/wp-content/uploads/2024/11/Influencer-Engagement-on-YouTube-Shorts-2.png","alt":""}
 pillars: ["hybrid-workforce","marketing-engine"]
 industries: []
+seoTitle: "Influencer Engagement on YouTube Shorts | Chesamel"
 ---
 
 ### The Story

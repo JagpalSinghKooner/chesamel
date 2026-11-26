@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/paulette-wooten-223048-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "In light of comic releif, we're looking at how and why yo might want to introduce laughter to your workplace management techniques!"
+seoTitle: "Finding the Funny Bone in Your Workplace Management"
+seoDescription: "In light of comic releif, we're looking at how and why yo might want to introduce laughter to your workplace management techniques!"
 ---
 
 All week we’ve been consuming humour from all directions as the UK celebrates Comic Relief; Red Nose Day encourages us all, celebrities and the everyman alike, to not take themselves too seriously, to take a break from the humdrum and mix things up all in the name of Charity.  Breaking into workplace management, the targets and meeting-filled days, offices, workspaces and schools dress up or compete in competitions to raise money for Comic Relief and it feels good, doesn’t it?!   Laughter is so good for us, the benefits have been proven time and time again, so as managers and leaders, how can you introduce a little more of this into your workspace and if you’re still not sure there’s any mileage in it, why should you do it? 

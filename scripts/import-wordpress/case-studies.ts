@@ -46,7 +46,6 @@ export function importCaseStudies(source: WxrSource, { missingMedia = new Set() 
     for (const url of mediaUrls(item.content)) media.add(url);
 
     const client = clean(item.meta.client);
-    const description = clean(item.meta._yoast_wpseo_metadesc);
     caseStudies.push({
       address,
       file: `src/content${address.replace(/\/$/, '')}.md`,
@@ -62,7 +61,6 @@ export function importCaseStudies(source: WxrSource, { missingMedia = new Set() 
         }),
         pillars: pillarsOf(wxr, item.meta.service),
         industries: linkedSlugs(wxr, item.meta.industry, 'industries', industrySlugs),
-        ...(description && { description }),
       },
       body: withoutMissingImages(toMarkdown(flattenOneCellTables(item.content)), missingMedia, (image, alt) =>
         missingImages.push({ address, image, alt }),

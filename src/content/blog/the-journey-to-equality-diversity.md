@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-mentatdgt-2173508-1-scaled-1.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "A closer look at diversity and inclusion in the workplace. How are you creating diversity and inclusion & how we're doing it at Chesamel HQ."
+seoTitle: "The Journey to Equality, Inclusivity & Diversity: Never stop moving! | Chesamel"
+seoDescription: "A closer look at diversity and inclusion in the workplace. How are you creating diversity and inclusion & how we're doing it at Chesamel HQ."
 ---
 
 We want to talk about diversity, equality and inclusion, what it means to us and how we’re always reaching for this in the work we do.  In our agency, we work with people all day, every day, we work with our internal team, contractors, teams placed and managed in client organisations, with candidates looking for their next opportunity and of course our clients themselves.   Diversity and inclusion is a topic we’ve always held in high regard throughout our whole organisation and something we’re increasingly conscious of supporting and highlighting. One of the ways we do this, with the aim of creating a culture we can continue to be proud of long-term, is through our company values.

@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/CHESAMEL-49-scaled-1.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "Closing The Gender Divide: Exploring the Role of Technology in the Workforce | Chesamel"
 ---
 
 **![](https://lh4.googleusercontent.com/yX6wq3HLCI96g7EWBkk4VRJcMDl200cP6UDKUyyV3tbMMLSD4SJvX-akFlQgeAFqcD014iA1_7BxFwz3sJtF6BxwTaqKCpbWvLzK75u9HhB2iGaoOSOWNyPkEQZdIpG9cANwJIXKMHEKYriT6f7Zmwc)**

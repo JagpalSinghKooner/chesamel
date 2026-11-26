@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-ds-stories-9228390-1-scaled-1.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Learn what neurodiversity in the workplace means and how embracing neurological differences can drive innovation and inclusivity."
+seoTitle: "Understanding Neurodiversity In The Workplace | Chesamel"
+seoDescription: "Learn what neurodiversity in the workplace means and how embracing neurological differences can drive innovation and inclusivity."
 ---
 
 ## **What Is Neurodiversity?**

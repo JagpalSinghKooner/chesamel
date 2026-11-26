@@ -5,6 +5,7 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/09/igor-omilaev-MaGyGv5PI4g-unsplash-scaled.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "CMOs, It’s Time to Step Off the Sidelines | Chesamel"
 ---
 
 By Aislín Johnston

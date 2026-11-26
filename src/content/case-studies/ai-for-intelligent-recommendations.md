@@ -6,6 +6,7 @@ objective: "To deliver personalised messages to users with limited data availabi
 image: {"src":"/wp-content/uploads/2024/11/AI-for-Intelligent-Recommendations-2.png","alt":""}
 pillars: ["ai-machine-learning","marketing-engine"]
 industries: ["technology"]
+seoTitle: "AI for Intelligent Recommendations | Chesamel"
 ---
 
 ### The Story

@@ -9,6 +9,8 @@
 // The export holds personal data and is gitignored; it lives only on the
 // machine that runs the import. Re-running overwrites the imported files, so
 // once Content Editors start editing Blog Posts, don't re-run it over them.
+// Titles and meta descriptions aren't imported: `npm run seo:live` copies
+// what live renders (#54).
 //
 // Later importers (Case Studies, Pages) add their step to `main` below.
 

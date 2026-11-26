@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/05/MHAW-2025-1.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Burnout isn’t the benchmark for success. This Mental Health Awareness Week, we explore why passion, community, and balance matter more than ever."
+seoTitle: "Burnout Isn’t the Benchmark: Choose Passion, Community & Play | Chesamel"
+seoDescription: "Burnout isn’t the benchmark for success. This Mental Health Awareness Week, we explore why passion, community, and balance matter more than ever."
 ---
 
 By Aislín Johnston

@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Digital-Skills-For-The-Future-Of-Work@2x.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "Digital Skills For The Future Of Work | Chesamel"
 ---
 
 > *“An estimated* ***17.1 million (52%) people still lack the digital skills*** *required in the workplace.”*  

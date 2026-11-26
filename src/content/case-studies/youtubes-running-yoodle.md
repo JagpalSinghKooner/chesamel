@@ -6,6 +6,7 @@ objective: "To achieve 8 billion engagements through YouTube’s running communi
 image: {"src":"/wp-content/uploads/2024/11/Untitled-design-10.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "YouTube's Running Yoodle | Chesamel"
 ---
 
 ### The Story

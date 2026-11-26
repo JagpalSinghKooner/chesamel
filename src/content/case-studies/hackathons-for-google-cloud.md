@@ -7,7 +7,8 @@ client: "Google Cloud"
 image: {"src":"/wp-content/uploads/2025/10/GOOGLE-VALUE-SPRINT-12-scaled.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "We streamlined Google Cloud's GenAI Hackathon program, delivering 6 EMEA events that generated 300+ leads and strengthened strategic partnerships through custom co-branded experiences."
+seoTitle: "Hackathons for Google Cloud | Chesamel"
+seoDescription: "We streamlined Google Cloud's GenAI Hackathon program, delivering 6 EMEA events that generated 300+ leads and strengthened strategic partnerships through custom co-branded experiences."
 ---
 
 ### The Story

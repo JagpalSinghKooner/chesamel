@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Untitled-design-17.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: ["technology"]
+seoTitle: "Impact-Driven Business Intelligence: Chesamel's Approach to Data Analytics | Chesamel"
 ---
 
 ![](/wp-content/uploads/2024/11/uRNLzKCjSBetV6aFFviXQRfapQaAKvJilopZ_kKeYjGkFXmQsfBopob0EVkioFLKVvKeERxhXRRLsi306zk2FBDr0Z66P44xbTUYMM2VanL9Jn9lx0Uv_zrpnFZEuFg_-xcXfVAaks9495PoMlDiLlo.png)

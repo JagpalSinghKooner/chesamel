@@ -6,6 +6,7 @@ objective: "To consolidate the reporting process to be more concise, clear, and 
 image: {"src":"/wp-content/uploads/2024/11/Data-Centralisation-with-Looker-2.png","alt":""}
 pillars: ["digital-transformation"]
 industries: []
+seoTitle: "Data Centralisation with Looker | Chesamel"
 ---
 
 ### The Story

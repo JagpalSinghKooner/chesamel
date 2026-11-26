@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/louis-reed-747388-unsplash.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Developing STEAM skills is vital to closing the skills gap in the work place. Why are Science, Technology, Engineering, Arts & Maths skills in great demand?|Developing STEAM skills is vital to closing the skills gap in the work place. Why are Science, Technology, Engineering, Arts & Maths skills in great demand?"
+seoTitle: "Closing The STEAM Skills Gap In The Workplace | Chesamel|Closing The STEAM Skills Gap In The Workplace | Chesamel"
+seoDescription: "Developing STEAM skills is vital to closing the skills gap in the work place. Why are Science, Technology, Engineering, Arts & Maths skills in great demand?|Developing STEAM skills is vital to closing the skills gap in the work place. Why are Science, Technology, Engineering, Arts & Maths skills in great demand?"
 ---
 
 The UK currently ranks 16th out of 20 OECD (Organisation For The Economic Co-operation and Development) countries. The skills gap we’re working as a nation to close can be seen in the lacking STEAM skills that [40% of employers](https://publications.parliament.uk/pa/cm201617/cmselect/cmsctech/991/99106.htm) report difficulties in sourcing. #STEMSTEAM day is celebrated across social media and in schools across the country in November to encourage and educate the school children of all ages to take up these subjects, to enhance their interest and understanding of them, the skills they can learn and the careers that they might secure by following the a STEAM path.

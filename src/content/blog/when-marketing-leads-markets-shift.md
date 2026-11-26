@@ -5,6 +5,7 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/09/marketing-shifts.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "When Marketing Leads, Markets Shift | Chesamel"
 ---
 
 ## An ode to the power of brand-driven transformation.

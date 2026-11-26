@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Workplace-aerial-view-.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "Hire Externally or Promote Internally? | Chesamel"
 ---
 
 There’s no definitive right or wrong answer here, if you’re in the position of needing to make this decision and you are instinctively leaning toward one option, then perhaps stop and take a moment to evaluate why you you are and if, in fact, that’s the right decisions for you.   There are some, easy to fall into pitfalls when it comes to filling a position and the way in which you approach the situation will depend upon the kind of company culture you have nurtured.     While it may not be mandatory that you advertise the position internally first, you may find yourself dealing with a disgruntled workforce if they discover second hand that there is, or was, a position open within the company.  By giving current staff the opportunity to apply and fairly compete for the position, in the case that they are not selected, at least they were able try, plus they might surprise you!   That said, you equally want to avoid promoting internally due to blind loyalty or guilt, if no member of the current team is right for the position then feel free to hire externally to secure the right candidate for the job, for the benefit of the company.   ![Hiring Externally](/wp-content/uploads/2024/11/Hiring-sign-.jpg)

@@ -1,7 +1,6 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 title: Who We Are
-description: Learn More about Chesamel
 hero:
   title: Who We Are
   subtitle: Daring. Different. Disruptive
@@ -66,4 +65,6 @@ sections:
   - type: cta
     heading: Want to transform your business?
     text: The journey starts with just a click.
+seoTitle: "Chesamel | Experts Driving Innovation & Positive Change"
+seoDescription: "Learn More about Chesamel"
 ---

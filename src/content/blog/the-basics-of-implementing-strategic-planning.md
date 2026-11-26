@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/helloquence-5fNmWej4tAA-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Get startted with strategic planning for your organisation and reach the businesses goals and objectives with focused and streamlined operations."
+seoTitle: "Ace The Basics of Strategic Planning | Chesamel"
+seoDescription: "Get startted with strategic planning for your organisation and reach the businesses goals and objectives with focused and streamlined operations."
 ---
 
 In the interest of strategic planning month, we’re taking you back to the basics of strategizing for your organisation. Every business has some form of plan or business plan, however, without being strategic, all of that planning is much less like pay off.    So, let’s start with a definition of what we really mean by strategic planning; a clear understanding of what this is among management will help them to execute their strategy and to effectively communicate it throughout the organisation.    Strategic planning is an organisational management tool that is used to streamline and enhance operations within the business; it will draw on analysis from both in and outside of the business and help to form a plan for improvement which gives the organisation direction and strategy while effectively achieving business goals.   

@@ -6,7 +6,8 @@ objective: "To raise awareness of a new cross-border product and enhance engagem
 image: {"src":"/wp-content/uploads/2024/11/B2B-Marketing-for-eBay-2.png","alt":""}
 pillars: ["hybrid-workforce","marketing-engine"]
 industries: []
-description: "Chesamel's cross-border marketing campaign boosted eBay's engagement and revenue among SMBs and large businesses. Get in touch today for more."
+seoTitle: "B2B Marketing Success for eBay | Chesamel Case Study"
+seoDescription: "Chesamel's cross-border marketing campaign boosted eBay's engagement and revenue among SMBs and large businesses. Get in touch today for more."
 ---
 
 ### The Story

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/elena-koycheva-1054933-unsplash.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "Jump in and get to grips with Instagram stories, they're a briliant way to reach and engage with your audience, while reducing a digital skills gap."
+seoTitle: "How to tell stories with Instagram | Chesamel"
+seoDescription: "Jump in and get to grips with Instagram stories, they're a briliant way to reach and engage with your audience, while reducing a digital skills gap."
 ---
 
 Ryan Gaven, our Guest Blogger has provided us with a fantastic piece on effectively using Instagram stories - preventing a [digital skills gap](/learn-with-chesamel/) within your team! The stories feature on Instagram is one of its most popular features. You can utilise this to grow your brand, highlight products and engage your audience. Users tend to watch stories before scrolling through their timeline. This gives you an excellent opportunity to grab their attention and cut through the noise! However, you should not be under the impression that you’re the only one with this knowledge. You still need to work hard to grab those views!

@@ -6,6 +6,7 @@ objective: "To launch Google’s new Nest Cameras and Doorbells into the market 
 image: {"src":"/wp-content/uploads/2024/11/Google-Home-2.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "Google Home | Chesamel"
 ---
 
 ### The Story

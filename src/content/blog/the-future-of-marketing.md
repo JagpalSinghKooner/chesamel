@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/michal-kubalczyk-WecngmAT-KY-unsplash.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "To get your brand noticed, marketing is a must. However, what can we expect for the future of marketing? Find out more with Chesamel."
+seoTitle: "The Future Of Marketing | Chesamel"
+seoDescription: "To get your brand noticed, marketing is a must. However, what can we expect for the future of marketing? Find out more with Chesamel."
 ---
 
 Growing a business and aiding in the growth of other’s businesses through the means of marketing assistance ([among other things](/engaging-growth-marketing-specialists/)), relies on being acutely tuned to the shifts, trends and predictions of the marketing landscape as it evolves.  Through the advancement of technology, the demands of younger generations and changing social focuses and awarenesses, marketing, in all its forms has transformed at an accelerated pace already over recent years; this has brought opportunity but unavoidably negative impacts too, from which we can learn and course-correct.  Knowledge is power, it allows for planning and preparation, so we’re asking - ‘where is marketing headed in the next 2, 5, 10 or more years?’.   We anticipate that rather than 'changes' the industry will see marketing shift as follows:

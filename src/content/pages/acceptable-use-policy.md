@@ -1,7 +1,6 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 title: Acceptable Use Policy
-description: "Read on to see Chesamel's full Acceptable Use Policy. We are committed to providing a fair and quality service to our users."
 hero:
   title: Acceptable Use Policy
 sections:
@@ -9,6 +8,8 @@ sections:
   - type: cta
     heading: Want to transform your business?
     text: The journey starts with just a click.
+seoTitle: "Acceptable Use Policy | Chesamel"
+seoDescription: "Read on to see Chesamel's full Acceptable Use Policy. We are committed to providing a fair and quality service to our users."
 ---
 
 Every user of our services and [websites](/) agree to adhere to this, our Acceptable Use Policy. We do reserve the right to change the policy and it is your responsibility to ensure that you understand and adhere to the current policy.

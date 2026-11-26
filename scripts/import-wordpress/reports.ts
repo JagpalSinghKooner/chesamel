@@ -9,7 +9,7 @@ import { asWxr, type WxrSource } from './wxr.ts';
 import { toMarkdown, mediaUrls } from './html.ts';
 import { pillarsOf } from './labels.ts';
 import type { PillarSlug } from '../../src/data/taxonomy.ts';
-import { publishedOfType, addressOf, fileOf, isoDate, titleOf, descriptionOf, featuredImage, type ItemImport } from './insight-item.ts';
+import { publishedOfType, addressOf, fileOf, isoDate, titleOf, featuredImage, type ItemImport } from './insight-item.ts';
 
 export interface ReportData {
   title: string;
@@ -17,7 +17,6 @@ export interface ReportData {
   image?: { src: string; alt: string };
   pillars: PillarSlug[];
   hubspotFormId?: string;
-  description?: string;
 }
 
 const DOWNLOAD_BOX = /<!-- wp:group \{[^}]*"className":"download-report-section"/;
@@ -34,14 +33,12 @@ export function importReports(source: WxrSource): ItemImport<ReportData> {
     const intro = box === -1 ? item.content : item.content.slice(0, box);
     for (const u of mediaUrls(intro)) media.add(u);
     const hubspotFormId = item.content.match(FORM_ID)?.[1];
-    const description = descriptionOf(item);
     const data: ReportData = {
       title: titleOf(item),
       date: isoDate(item),
       ...(image && { image }),
       pillars: pillarsOf(wxr, item.meta.service),
       ...(hubspotFormId && { hubspotFormId }),
-      ...(description && { description }),
     };
     return { address, file: fileOf(address), data, body: toMarkdown(intro) };
   });

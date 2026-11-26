@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Stretching-at-desk-.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Employee wellbeing in the workforce planning model is important for employees to remain happy and motivated, Misha Cunningham looks at how."
+seoTitle: "How to Manage Employee Wellbeing? | Chesamel"
+seoDescription: "Employee wellbeing in the workforce planning model is important for employees to remain happy and motivated, Misha Cunningham looks at how."
 ---
 
 *Guest Blogger [Misha Cunningham](https://twitter.com/Xune101?lang=en):  “Misha is an entrepreneur and business owner, with a particular affinity towards eCommerce. He is the current Regional Team Leader on the Google Digital Garage project and loves using his digital wizardry to help existing business owners and startups alike. A staunch believer in the Law of Attraction, he believes we are all the sum total of our most dominating thoughts.”*

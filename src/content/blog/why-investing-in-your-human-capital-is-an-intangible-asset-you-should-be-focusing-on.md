@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-fauxels-3182767-scaled-1.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "Why investing in your human capital is an intangible asset you should be focusing on. | Chesamel"
 ---
 
 2022 is the year that your people become the undisputed champions of your organisation's success. 

@@ -6,7 +6,8 @@ objective: "To enhance existing hand-crafted asset allocation heuristics to impr
 image: {"src":"/wp-content/uploads/2024/11/AI-powered-Asset-Management-2.png","alt":""}
 pillars: ["ai-machine-learning","digital-transformation"]
 industries: ["technology"]
-description: "Discover how Chesamel partnered with a Japanese asset management firm to improve key metrics and launch a new investment product using AI solutions."
+seoTitle: "AI-powered Asset Management Case Study | Chesamel"
+seoDescription: "Discover how Chesamel partnered with a Japanese asset management firm to improve key metrics and launch a new investment product using AI solutions."
 ---
 
 ### The Story

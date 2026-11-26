@@ -3,6 +3,7 @@ title: "Client Services & Social Media Programme Manager"
 employer: "Chesamel Group"
 posted: "2026-10-19T14:40:14Z"
 hero: {"title":"Client Services & Social Media Programme Manager","details":["Hybrid","Full-Time","London"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4477992658/"}]}
+seoTitle: "Client Services & Social Media Programme Manager | Chesamel"
 ---
 
 You will build trusted client relationships, identify opportunities to grow existing accounts and lead the delivery of social media programmes. You’ll connect client ambitions with clear plans, the right specialists and measurable results.

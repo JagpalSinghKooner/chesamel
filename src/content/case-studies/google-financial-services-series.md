@@ -6,6 +6,7 @@ objective: "To showcase how Google Cloud's AI innovations empower financial inst
 image: {"src":"/wp-content/uploads/2026/03/Financial-Services-AI-3185.jpg","alt":"Google Financial Services Series"}
 pillars: ["marketing-engine"]
 industries: ["finance"]
+seoTitle: "Google Financial Services Series | Chesamel"
 ---
 
 Event Strategy, Production & Partner Experience

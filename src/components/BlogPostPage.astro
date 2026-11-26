@@ -5,21 +5,27 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import LabelLinks from './LabelLinks.astro';
-import { readingMinutes, type BlogPost } from '../content/blog';
+import { insightsTrail } from './trails';
+import { addressOf, readingMinutes, type BlogPost } from '../content/blog';
 import { formatDate, isoDate, primaryPillar } from '../content/shared';
 import { pillarLabels } from '../data/taxonomy';
+import { entryMeta } from '../lib/seo';
+import { absolute, article } from '../lib/structured-data';
 
 interface Props {
   post: BlogPost;
 }
 const { post } = Astro.props;
-const { title, date, hero, pillars, description } = post.data;
+const { title, date, hero, pillars } = post.data;
 const { Content } = await render(post);
+const meta = entryMeta(post);
+const trail = insightsTrail({ label: 'News', href: '/insights/blog/' });
+const posting = article('BlogPosting', { url: absolute(addressOf(post)), headline: title, description: meta.description, date, image: hero });
 ---
 
-<Base title={`${title} | Chesamel`} description={description}>
+<Base seo={{ ...meta, image: hero, type: 'article', breadcrumb: trail, schema: [posting] }}>
   <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
-    <Breadcrumb trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'News', href: '/insights/blog/' }]} />
+    <Breadcrumb trail={trail} />
     <p class="type-tag mt-8">{pillarLabels[primaryPillar(post.data)]}</p>
     <h1 class="type-heading-1 mt-3 text-4xl sm:text-5xl">{title}</h1>
     <p class="type-caption mt-6 flex gap-6">

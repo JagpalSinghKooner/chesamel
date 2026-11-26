@@ -6,6 +6,7 @@ objective: "To supercharge Google Cloud partners' cross-border sales efforts."
 image: {"src":"/wp-content/uploads/2024/11/Building-a-Pipeline-for-Google-Cloud-3.png","alt":""}
 pillars: ["hybrid-workforce","marketing-engine"]
 industries: []
+seoTitle: "Google Sales Blitz | Chesamel"
 ---
 
 ### The Story

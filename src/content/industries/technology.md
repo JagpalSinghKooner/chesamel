@@ -8,5 +8,6 @@ steps: [{"image":{"src":"/wp-content/uploads/2024/11/energy.png","alt":""},"head
 experience: {"eyebrow":"/ our industry experience","heading":"Streamlining technology strategies","paragraphs":["In an industry as fast-paced and crowded as technology, launching new products, entering new regions, and optimising processes can be challenging.","With our expertise in customer experience, marketing, and productivity-boosting solutions like AI and ML, we help tech providers modernise and simplify their business systems, so they can focus on what's important: the growth of their product or service."]}
 caseStudies: {"eyebrow":"/ stories from the tech sector","heading":"Our Work","text":"See how we power our technology clients."}
 relatedPosts: {"text":"Take a look at our latest content on the technology industry."}
+seoTitle: "Technology | Chesamel"
 ---
 

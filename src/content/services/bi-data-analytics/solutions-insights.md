@@ -1,9 +1,10 @@
 ---
 title: "Solution Development and Deployment"
-description: "Streamline your data with Chesamel's BI solutions. Centralised dashboards and reporting for efficient business intelligence. Learn more."
 hero: {"title":"Solution Development and Deployment","paragraphs":["Once you've established what and where your data is, help it tell a story with the right tools. By visualising your Buisiness Intelligence (BI) and using handy dashboards, you can optimise your operations for success as you grow."],"links":[{"label":"Get started","href":"/contact/"}]}
 sections: [{"type":"cards","heading":"Related services","image":{"src":"/wp-content/uploads/2024/10/BI-Solution-Dev.png","alt":""},"tone":"off-white","items":[{"heading":"Strategy and Foundation","text":"Build your framework for a data-first business, with simple and effective implementation.","href":"/services/bi-data-analytics/strategy-foundation/"},{"heading":"Advanced Analytics and Data Science","text":"Employ the latest innovation to scrutinise your business data and optimise your operations.","href":"/services/bi-data-analytics/advanced-analytics-enablement/"}]},{"type":"points","heading":"Our process","items":["We help you find and visualise your BI in the most efficient way for your team, creating centralised dashboards and making data reporting simple.","With data visualisation tools you can let your BI tell a story, giving you visibility of changes as they play out and the ability to adjust operations in real time.","Knowing where to store your BI is a challenge in itself. Our team is on hand with tools for data storage and deployment, so you can feel confident throughout implementation."],"note":"Transform data into insight, enabling smarter decisions and driving business success."},{"type":"insights","heading":"Latest Insights","text":"Check out our latest thoughts and opinions.","pillar":"bi-data-analytics"},{"type":"cta","heading":"Want to transform your business?","text":"the journey starts with just a click."}]
 pillar: "bi-data-analytics"
 order: 2
+seoTitle: "BI Solution Development and Deployment | Chesamel"
+seoDescription: "Streamline your data with Chesamel's BI solutions. Centralised dashboards and reporting for efficient business intelligence. Learn more."
 ---
 

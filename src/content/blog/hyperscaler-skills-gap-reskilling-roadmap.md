@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/08/The-hyperscaler-skills-gap-and-reskilling-scaled.jpg","alt":"Experienced engineer mentoring a technician in a data centre"}
 pillars: ["hybrid-workforce"]
 industries: ["technology"]
-description: "Explore the hyperscaler skills gap and a five-level reskilling roadmap designed to prepare your workforce for 2030."
+seoTitle: "Hyperscaler Skills Gap: A Reskilling Roadmap | Chesamel"
+seoDescription: "Explore the hyperscaler skills gap and a five-level reskilling roadmap designed to prepare your workforce for 2030."
 ---
 
 Most reskilling content is written to make leadership feel good. This is written to make workforce plans survive contact with 2030.

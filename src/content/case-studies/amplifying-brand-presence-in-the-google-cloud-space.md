@@ -6,7 +6,8 @@ objective: "To increase Netpremacy’s brand awareness as a world leader in Goog
 image: {"src":"/wp-content/uploads/2024/11/Amplifying-Brand-Presence-in-the-Google-Cloud-Space.png","alt":""}
 pillars: ["digital-transformation","marketing-engine"]
 industries: []
-description: "Find out how Chesamel elevated Netpremacy's brand recognition, solidifying its leadership in the Google Cloud ecosystem. Get in touch today."
+seoTitle: "Brand Presence in the Google Cloud Space | Space"
+seoDescription: "Find out how Chesamel elevated Netpremacy's brand recognition, solidifying its leadership in the Google Cloud ecosystem. Get in touch today."
 ---
 
 ### The Story

@@ -87,7 +87,6 @@ test('a careers item becomes a Page at its address, with its facts and the apply
   expect(role.file).toBe('src/content/pages/careers/account-director.md');
   expect(role.data).toEqual({
     title: 'Account Director',
-    description: 'Join Chesamel as an Account Director.',
     employer: 'Chesamel Group',
     posted: '2026-10-20T00:30:00Z',
     hero: {

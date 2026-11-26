@@ -6,7 +6,8 @@ objective: "To create a unique fan experience for the BRIT Awards, utilising You
 image: {"src":"/wp-content/uploads/2024/11/Elevating-Fan-Experiences-at-the-BRITs-2.png","alt":""}
 pillars: ["marketing-engine","hybrid-workforce"]
 industries: ["hospitality"]
-description: "Chesamel utilised YouTube Shorts and social media to create a unique fan experiences for The BRITs Awards. Get in touch today for more info."
+seoTitle: "Increasing Fan Engagement at The BRITs | Chesamel"
+seoDescription: "Chesamel utilised YouTube Shorts and social media to create a unique fan experiences for The BRITs Awards. Get in touch today for more info."
 ---
 
 ### The Story

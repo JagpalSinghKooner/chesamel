@@ -6,7 +6,8 @@ objective: "To visualise data to give a complete and real-time view of business 
 image: {"src":"/wp-content/uploads/2024/11/Visualising-data-in-real-time-2.png","alt":""}
 pillars: ["bi-data-analytics","digital-transformation"]
 industries: []
-description: "Chesamel's BI & Data Analytics services enhance business reporting through personalised data visualisations. Get in touch with us today."
+seoTitle: "Real-Time Data Visualisation Case Study | Chesamel"
+seoDescription: "Chesamel's BI & Data Analytics services enhance business reporting through personalised data visualisations. Get in touch with us today."
 ---
 
 ### The Story

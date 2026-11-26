@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/dfggtgh.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "“Leader” represents a much more positive leadership attitude than \"Boss\". Find out why their workforce planning techniques are better here."
+seoTitle: "The Essential Workforce Planning Techniques of a Good Leader | Chesamel"
+seoDescription: "“Leader” represents a much more positive leadership attitude than \"Boss\". Find out why their workforce planning techniques are better here."
 ---
 
 *Guest Blogger, Paulo da Costa: “Paulo has worked in Media, Marketing and Research for the past 18 years. He is also a qualified Life Coach. When he heard about the opportunity of working with Google as a Coach he ran to it and never looked back.”*  

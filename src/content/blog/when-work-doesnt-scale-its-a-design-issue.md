@@ -5,6 +5,7 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/04/When-Work-Doesnt-Scale-Its-a-Design-Issue-scaled.jpg","alt":"When Work Doesn’t Scale, It’s a Design Issue"}
 pillars: ["digital-transformation"]
 industries: ["technology"]
+seoTitle: "When Work Doesn’t Scale, It’s a Design Issue | Chesamel"
 ---
 
 Growth is harder to come by right now. Markets are tighter, scrutiny is higher, and teams are being asked to deliver more impact with greater consistency, often without a corresponding increase in resources.

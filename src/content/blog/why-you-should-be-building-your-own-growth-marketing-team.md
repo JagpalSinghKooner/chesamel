@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/stanislav-kondratiev-632497-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Do you have a Growth Marketing Team driving success and cultivating new business? It's something you may want to consider, here's how!"
+seoTitle: "Why You Should Be Building Your Own Growth Marketing Team | Chesamel"
+seoDescription: "Do you have a Growth Marketing Team driving success and cultivating new business? It's something you may want to consider, here's how!"
 ---
 
 Growth marketing includes rapid sourcing, connection, acquisition and retention of customers through marketing and re-marketing to existing customers. Engagement is what we’re really looking at when we discuss growth marketing and a growth marketing team can ensure that the focus is there in your company to do this effectively. In 2019 building a growth marketing team should at least be something you are aware of, if not planning on implementing or in the process of building. Your marketing department’s ultimate job is to grow your business, but your growth marketing team operates in a way which analyses the data and communicates and engages customers for longer-term retention and more invested interaction.  More traditional marketing forms take the approach of driving information to the consumer or (business in B2B) whereas growth marketing concentrates on testing variations of marketing campaigns, reacting to these results, providing valuable content and working with SEO, connecting the customer and continuing to drive value to them throughout the relationship with the brand to lengthen and strengthen it. To grow and strengthen your business, you’ll want to consider building your own growth marketing team to help you do it right, to lay the right foundations for your customer base.  We’ve already covered the why, but now the who:  

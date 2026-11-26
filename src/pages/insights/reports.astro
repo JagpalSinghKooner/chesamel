@@ -7,13 +7,16 @@ import ReportCard from '../../components/ReportCard.astro';
 import GetStartedCta from '../../components/GetStartedCta.astro';
 import { getNewest, addressOf } from '../../content/insight-items';
 import { primaryPillar } from '../../content/shared';
+import { insightsTrail } from '../../components/trails';
+import { pageMeta } from '../../lib/seo';
 
 const reports = await getNewest('reports');
 const text = 'Dive into our curated reports and get the latest marketing, ESG, workforce planning, and digital transformation insights.';
+const trail = insightsTrail({ label: 'Reports' });
 ---
 
-<Base title="Reports | Chesamel" description={text}>
-  <InsightsHero heading="Reports" text={text} />
+<Base seo={{ ...pageMeta('/insights/reports/'), breadcrumb: trail }}>
+  <InsightsHero heading="Reports" text={text} trail={trail} />
   <section aria-labelledby="reports" class="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
     <h2 id="reports" class="type-heading-2">Chesamel Reports</h2>
     <ul class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

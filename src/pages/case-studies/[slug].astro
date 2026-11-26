@@ -12,9 +12,12 @@ import Button from '../../components/Button.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import ClientLogos from '../../components/home/ClientLogos.astro';
 import CaseStudySlider from '../../components/CaseStudySlider.astro';
-import { getCaseStudies, related, summariseCaseStudy, type CaseStudy } from '../../content/case-studies';
+import { insightsTrail } from '../../components/trails';
+import { caseStudyAddress, getCaseStudies, related, summariseCaseStudy, type CaseStudy } from '../../content/case-studies';
 import { formatDate, isoDate, primaryPillar } from '../../content/shared';
 import { pillarLabels } from '../../data/taxonomy';
+import { entryMeta } from '../../lib/seo';
+import { absolute, article } from '../../lib/structured-data';
 
 export async function getStaticPaths() {
   const all = await getCaseStudies();
@@ -22,12 +25,15 @@ export async function getStaticPaths() {
 }
 
 const { caseStudy, all } = Astro.props as { caseStudy: CaseStudy; all: CaseStudy[] };
-const { title, date, excerpt, objective, pillars, industries, description } = caseStudy.data;
+const { title, date, excerpt, objective, image, pillars, industries } = caseStudy.data;
 const { Content } = await render(caseStudy);
 const OUR_WORK = '/insights/our-work/';
+const meta = entryMeta(caseStudy);
+const trail = insightsTrail({ label: 'Our Work', href: OUR_WORK }, { label: title });
+const story = article('Article', { url: absolute(caseStudyAddress(caseStudy)), headline: title, description: meta.description, date, image });
 ---
 
-<Base title={`${title} | Chesamel`} description={description ?? excerpt}>
+<Base seo={{ ...meta, image, type: 'article', breadcrumb: trail, schema: [story] }}>
   <section class="relative isolate overflow-hidden bg-off-white" data-case-study-hero>
     <BrandmarkRings solid class="absolute -end-32 -bottom-48 -z-10 size-[24rem] sm:size-[34rem] lg:-end-16 lg:-bottom-56 lg:size-[44rem]" />
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32">
@@ -36,10 +42,7 @@ const OUR_WORK = '/insights/our-work/';
       <p class="type-subheading mt-4 max-w-3xl">{excerpt}</p>
     </div>
   </section>
-  <Breadcrumb
-    band
-    trail={[{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: 'Our Work', href: OUR_WORK }, { label: title }]}
-  />
+  <Breadcrumb band trail={trail} />
   <article class="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 lg:py-20 lg:grid-cols-[1fr_2fr]">
     <div class="flex flex-col gap-10">
       <dl class="flex flex-col gap-8">

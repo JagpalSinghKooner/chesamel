@@ -6,7 +6,8 @@ objective: "To complement the Swatch MTV Playground and help emerging artists sh
 image: {"src":"/wp-content/uploads/2024/11/Swatch-MTV-Playground-2.png","alt":""}
 pillars: ["marketing-engine","hybrid-workforce"]
 industries: []
-description: "Swatch MTV Playground case study. In 2021, Chesamel assisted with the Swatch MTV Playground campaign. As part of our TPO, Chesamel were able.."
+seoTitle: "Swatch MTV Playground | Chesamel"
+seoDescription: "Swatch MTV Playground case study. In 2021, Chesamel assisted with the Swatch MTV Playground campaign. As part of our TPO, Chesamel were able.."
 ---
 
 ### The Story

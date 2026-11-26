@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/E2B3F939-B135-4A36-89D9-8DB06D1DC0C9.jpeg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Being transparent about your business may feel a little too vounerable, but it could be one of your best approaches to management & marketing."
+seoTitle: "Transparency: One Of Your Strongest Tools In Marketing & Management | Chesamel"
+seoDescription: "Being transparent about your business may feel a little too vounerable, but it could be one of your best approaches to management & marketing."
 ---
 
 What people are looking for in a brand has changed dramatically.  Both customers and employees want to associate with brands who have strong values, and embracing transparency is a sure step in the right direction to providing this.   *What do we mean by transparency? Open and honest, genuinely.*   If you take on the idea of transparency as a marketing tactic alone, your customers and especially employees are highly likely to see through this, causing the exact opposite effect.  This is a choice for the whole business, not for the marketing department alone, although it is a valuable tool to have as part of the marketing strategy.  

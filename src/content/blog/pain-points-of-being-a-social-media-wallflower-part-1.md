@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/green-flowers-on-white-texture_4460x4460.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "Social media can be a minefeild, not unlike finding friends at school. Guest blogger Kirsty Kirkhope helps you navigate social media management. (1 of 2)"
+seoTitle: "Pain-points Of Being Social Media Wallflower || Part 1"
+seoDescription: "Social media can be a minefeild, not unlike finding friends at school. Guest blogger Kirsty Kirkhope helps you navigate social media management. (1 of 2)"
 ---
 
 Sometimes it might feel like playing the social media marketing game is like being back at high school. You know that place where you felt awkward, like you didn’t fit in, and you’re surrounded by intimidating, shiny, happy, shouty people?  Well fear not. I’m here to tell you that it won’t last forever. You can get through it. Join me in figuring how with a solid marketing plan.   I’ve split the article into two parts, the first will focus on preparation and planning, the second will cover ways to understand and engage people online and showing your creativity.   

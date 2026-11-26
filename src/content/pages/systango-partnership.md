@@ -1,7 +1,6 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 title: Chesamel x Systango
-description: Chesamel and Systango unite to deliver human-first digital transformation that bridges technical innovation with accelerated adoption and measurable business outcomes.
 hero:
   title: Chesamel x Systango
   paragraphs:
@@ -39,4 +38,6 @@ sections:
   - type: cta
     heading: Want to get involved?
     text: Connect with us.
+seoTitle: "Systango Partnership | Chesamel"
+seoDescription: "Chesamel and Systango unite to deliver human-first digital transformation that bridges technical innovation with accelerated adoption and measurable business outcomes."
 ---

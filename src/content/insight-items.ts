@@ -16,6 +16,9 @@ export async function getNewest<C extends InsightCollection>(collection: C): Pro
   return items.sort(newestFirst);
 }
 
+// A Webinar's YouTube recording: its `video`, or the player in its body.
+export const recordingOf = (webinar: Webinar) => webinar.data.video ?? webinar.body?.match(/youtube(?:-nocookie)?\.com\/embed\/([\w-]{11})/)?.[1];
+
 // The first `max` characters of a Markdown body as plain text, for cards.
 export function excerpt(markdown: string, max = 220): string {
   const text = markdown

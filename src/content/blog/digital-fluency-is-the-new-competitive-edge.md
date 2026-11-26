@@ -5,6 +5,7 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/06/digital-fluency-1.png","alt":""}
 pillars: ["digital-transformation"]
 industries: []
+seoTitle: "Digital Fluency Is The New Competitive Edge | Chesamel"
 ---
 
 By Aislín Johnston

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/making-an-innovative-idea-global.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Offering a solution to a problem is often where a start-up idea begins. Here is an excellent example of a start-up that is disrupting on a global scale."
+seoTitle: "Making An Innovative Idea Global | Chesamel"
+seoDescription: "Offering a solution to a problem is often where a start-up idea begins. Here is an excellent example of a start-up that is disrupting on a global scale."
 ---
 
 Offering a solution to a problem is often where a start-up idea begins. To become a disruptor or offer a product or service that’s truly unique the idea has to be fresh, innovative and well-considered. In this article we’re going to take a quick look at an excellent example of a start-up that is disrupting on a global scale.

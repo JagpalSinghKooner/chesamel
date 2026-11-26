@@ -5,6 +5,7 @@ author: "tom"
 hero: {"src":"/wp-content/uploads/2024/11/AR-Headset-Blog-Image.png","alt":""}
 pillars: ["ai-machine-learning"]
 industries: []
+seoTitle: "Augmented Reality | Bridging Imagination With The Everyday | Chesamel"
 ---
 
 ***““What is real? How do you define 'real'? If you're talking about what you can feel, what you can smell, what you can taste and see, then 'real' is simply electrical signals interpreted by your brain,”” - Morpheus, The Matrix (1999).***

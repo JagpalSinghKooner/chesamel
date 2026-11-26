@@ -12,7 +12,6 @@ export interface BlogPostData {
   hero?: { src: string; alt: string };
   pillars: PillarSlug[];
   industries: IndustrySlug[];
-  description?: string;
 }
 
 export interface ImportedBlogPost {
@@ -55,7 +54,6 @@ export function importBlogPosts(source: WxrSource, { missingMedia = new Set() }:
     if (thumbnail?.attachmentUrl) media.add(thumbnail.attachmentUrl);
     for (const url of mediaUrls(item.content)) media.add(url);
 
-    const description = decodeEntities(item.meta._yoast_wpseo_metadesc ?? '').trim();
     posts.push({
       address,
       file: `src/content/blog${address.replace(/\/$/, '')}.md`,
@@ -66,7 +64,6 @@ export function importBlogPosts(source: WxrSource, { missingMedia = new Set() }:
         ...(hero && { hero }),
         pillars: pillarsOf(wxr, item.meta.service),
         industries: linkedSlugs(wxr, item.meta.industry, 'industries', industrySlugs),
-        ...(description && { description }),
       },
       body: withoutMissingImages(toMarkdown(item.content), missingMedia, (image, alt) =>
         missingImages.push({ address, image, alt }),

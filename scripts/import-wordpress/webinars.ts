@@ -4,7 +4,7 @@ import { asWxr, type WxrSource } from './wxr.ts';
 import { toMarkdown, mediaUrls, youtubeId } from './html.ts';
 import { pillarsOf, linkedSlugs } from './labels.ts';
 import { industrySlugs, type PillarSlug, type IndustrySlug } from '../../src/data/taxonomy.ts';
-import { publishedOfType, addressOf, fileOf, isoDate, titleOf, descriptionOf, featuredImage, type ItemImport } from './insight-item.ts';
+import { publishedOfType, addressOf, fileOf, isoDate, titleOf, featuredImage, type ItemImport } from './insight-item.ts';
 
 export interface WebinarData {
   title: string;
@@ -14,7 +14,6 @@ export interface WebinarData {
   image?: { src: string; alt: string };
   pillars: PillarSlug[];
   industries: IndustrySlug[];
-  description?: string;
 }
 
 export function importWebinars(source: WxrSource): ItemImport<WebinarData> {
@@ -29,7 +28,6 @@ export function importWebinars(source: WxrSource): ItemImport<WebinarData> {
     // The live site never shows webinar_url, so webinars with an empty body
     // show no video at all; here the recording is shown instead.
     const video = body.includes('<iframe') ? undefined : youtubeId(item.meta.webinar_url ?? '');
-    const description = descriptionOf(item);
     const data: WebinarData = {
       title: titleOf(item),
       date: isoDate(item),
@@ -37,7 +35,6 @@ export function importWebinars(source: WxrSource): ItemImport<WebinarData> {
       ...(image && { image }),
       pillars: pillarsOf(wxr, item.meta.service),
       industries: linkedSlugs(wxr, item.meta.industry, 'industries', industrySlugs),
-      ...(description && { description }),
     };
     return { address, file: fileOf(address), data, body };
   });

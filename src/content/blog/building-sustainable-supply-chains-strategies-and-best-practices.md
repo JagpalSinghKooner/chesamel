@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Building-Sustainable-Supply-Chains-Strategies-and-Best-Practices.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "Building Sustainable Supply Chains: Strategies and Best Practices | Chesamel"
 ---
 
 The demand for sustainability is unstoppable, driven by increasing consumer awareness and investor expectations. According to a PwC survey, 64% of global consumers are worried about sustainability and consumers are willing to pay a premium of 9.7% for sustainably produced goods​​. 

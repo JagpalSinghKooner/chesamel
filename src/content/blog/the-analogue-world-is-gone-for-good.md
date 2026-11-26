@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/07/IMG_0421-scaled-e1753098249312.jpeg","alt":""}
 pillars: ["digital-transformation"]
 industries: ["technology"]
-description: "At Google Cloud Summit London, the future felt closer than ever—but demos alone won’t drive digital transformation. Explore why strategy, people, and adoption models are the real keys to unlocking AI and ML at scale."
+seoTitle: "The Analogue World is Gone for Good | Chesamel"
+seoDescription: "At Google Cloud Summit London, the future felt closer than ever—but demos alone won’t drive digital transformation. Explore why strategy, people, and adoption models are the real keys to unlocking AI and ML at scale."
 ---
 
 This might attract some heat in the comments, but is it time to admit that the analogue world is gone for good? 

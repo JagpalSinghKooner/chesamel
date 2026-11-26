@@ -14,6 +14,8 @@ import ClientLogos from '../../components/home/ClientLogos.astro';
 import { getCaseStudies, getIndustries, summariseCaseStudy, type Industry } from '../../content/case-studies';
 import { getBlogPosts, summarisePost } from '../../content/blog';
 import type { IndustrySlug } from '../../data/taxonomy';
+import { home } from '../../components/trails';
+import { entryMeta } from '../../lib/seo';
 
 export async function getStaticPaths() {
   return (await getIndustries()).map((industry) => ({ params: { slug: industry.id }, props: { industry } }));
@@ -22,14 +24,15 @@ export async function getStaticPaths() {
 const { industry } = Astro.props as { industry: Industry };
 // Industry files are named after their slug.
 const slug = industry.id as IndustrySlug;
-const { title, subtitle, description, intro, steps, experience, caseStudies: work, relatedPosts } = industry.data;
+const { title, subtitle, card, intro, steps, experience, caseStudies: work, relatedPosts } = industry.data;
 const caseStudies = (await getCaseStudies()).filter((c) => c.data.industries.includes(slug)).slice(0, 3);
 const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(slug)).slice(0, 3);
+const trail = [home, { label: 'Industries', href: '/industries/' }, { label: title }];
 ---
 
-<Base title={`${title} Industry Solutions | Chesamel`} description={description ?? subtitle}>
+<Base seo={{ ...entryMeta(industry), image: card.image, breadcrumb: trail }}>
   <PageHero title={title} subtitle={subtitle} tone="light" />
-  <Breadcrumb band trail={[{ label: 'Home', href: '/' }, { label: 'Industries', href: '/industries/' }, { label: title }]} />
+  <Breadcrumb band trail={trail} />
   <section aria-labelledby="intro">
     <div class="mx-auto grid max-w-7xl gap-8 px-5 py-20 sm:px-6 lg:py-28 lg:grid-cols-2 lg:items-center">
       <div>

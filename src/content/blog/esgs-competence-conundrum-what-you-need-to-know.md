@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-pixabay-414837.jpeg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "ESG's Competence Conundrum: What You Need to Know | Chesamel"
 ---
 
 ESG (environmental, social, and governance) has come a long way over the last decade; [89% of companies now report on sustainability](https://www.globalreporting.org/media/m22dl3o0/gri-data-legend-sustainability-disclosure-database-profiling.pdf), up from 72% in 2013. But when something grows *too* fast, it is at risk of breaking - and after visiting the Bloomberg Event recently,we’ve discovered this is increasingly becoming the case.. Even though the amount of companies reporting is up, [57% of investment professionals](https://www.cfainstitute.org/-/media/documents/survey/future-of-sustainability.ashx) believe that ESG information is often inaccurate or misleading, while 47% believe that ESG ratings are not transparent enough. 

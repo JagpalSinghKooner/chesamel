@@ -3,6 +3,7 @@ title: "Account Based Marketing Manager (ABM)"
 employer: "Chesamel Group"
 posted: "2026-10-19T14:52:17Z"
 hero: {"title":"Account Based Marketing Manager (ABM)","details":["Remote","Full-Time","UK"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4479373046/"}]}
+seoTitle: "Account Based Marketing Manager (ABM) | Chesamel"
 ---
 
 Embedded through Chesamel Group within the EMEA Strategic Industries team, the Senior Account-Based Marketing (ABM) Manager will be responsible for developing and delivering personalised, high-impact ABM programmes that drive pipeline growth and deepen engagement across high-value enterprise accounts.

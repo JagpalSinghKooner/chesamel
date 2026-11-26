@@ -6,21 +6,28 @@ import Base from '../../layouts/Base.astro';
 import InsightHeader from '../../components/InsightHeader.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import VideoPlayer from '../../components/VideoPlayer.astro';
-import { getNewest, type Webinar } from '../../content/insight-items';
+import { insightsTrail } from '../../components/trails';
+import { addressOf, getNewest, recordingOf, type Webinar } from '../../content/insight-items';
 import { formatDate, isoDate, primaryPillar } from '../../content/shared';
+import { entryMeta } from '../../lib/seo';
+import { absolute, videoObject } from '../../lib/structured-data';
 
 export async function getStaticPaths() {
   return (await getNewest('webinars')).map((webinar) => ({ params: { slug: webinar.id }, props: { webinar } }));
 }
 
 const { webinar } = Astro.props as { webinar: Webinar };
-const { title, date, video, image, pillars, industries, description } = webinar.data;
+const { title, date, video, image, pillars, industries } = webinar.data;
 const { Content } = await render(webinar);
+const meta = entryMeta(webinar);
+const trail = insightsTrail({ label: 'Webinars', href: '/insights/webinars/' });
+const youtubeId = recordingOf(webinar);
+const recording = youtubeId && videoObject({ url: absolute(addressOf(webinar)), headline: title, description: meta.description, date, image, youtubeId });
 ---
 
-<Base title={`${title} | Chesamel`} description={description}>
+<Base seo={{ ...meta, image, type: 'article', breadcrumb: trail, schema: recording ? [recording] : [] }}>
   <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
-    <InsightHeader section={{ label: 'Webinars', href: '/insights/webinars/' }} pillar={primaryPillar(webinar.data)} title={title}>
+    <InsightHeader trail={trail} pillar={primaryPillar(webinar.data)} title={title}>
       <time datetime={isoDate(date)}>{formatDate(date)}</time>
     </InsightHeader>
     {

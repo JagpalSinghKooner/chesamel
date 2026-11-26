@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/clear-water-glass-reflecting-on-blue.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "How authentic is your marketing? Authenticity in marketing is one of the top demands from consumers when forming opinions on a brand."
+seoTitle: "How Authentic Is Your Marketing? | Chesamel"
+seoDescription: "How authentic is your marketing? Authenticity in marketing is one of the top demands from consumers when forming opinions on a brand."
 ---
 
 Authenticity in marketing, why is this something you need to be checking for, why should our marketing efforts need to be viewed as authentic?  Well, according to [Social Media Today](https://www.socialmediatoday.com/news/survey-reveals-how-consumers-really-judge-brand-authenticity-and-influence/549038/) ‘ 90% of consumers said that authenticity is important when deciding which brands they like and support.’ and you don’t ignore the majority of your customers!

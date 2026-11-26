@@ -5,6 +5,7 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/06/Chesamel-The-Algorithmic-Trap-1-1-scaled.jpg","alt":"AI Marketing Strategy and Brand Visibility"}
 pillars: ["marketing-engine","digital-transformation"]
 industries: ["technology"]
+seoTitle: "The Algorithmic Trap: Why Your AI Strategy is Making Your Brand Invisible | Chesamel"
 ---
 
 The biggest takeaway from the [Cannes Lions 2026 festival](https://www.canneslions.com/) isn't a new piece of technology. It is a warning.

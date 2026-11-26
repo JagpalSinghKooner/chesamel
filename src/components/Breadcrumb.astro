@@ -6,10 +6,11 @@
 // `band` gives it its own full-width strip with a rule under it, as below the
 // hero on Our Work, Industry and Case Study pages; otherwise it sits inline
 // in whatever holds it.
+import type { Trail } from './trails';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 
 interface Props {
-  trail: { label: string; href?: string }[];
+  trail: Trail;
   band?: boolean;
   class?: string;
 }

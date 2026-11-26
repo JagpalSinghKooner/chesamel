@@ -64,7 +64,6 @@ test('a published Industry keeps its address and the copy of each section of its
   expect(imported.data).toEqual({
     title: 'Finance',
     subtitle: 'Providing the right intelligence for business growth.',
-    description: 'Learn how Chesamel drives growth in the finance industry.',
     order: 2,
     card: {
       image: { src: '/wp-content/uploads/2024/10/b1f9e9.png', alt: '' },

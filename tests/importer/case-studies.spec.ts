@@ -50,7 +50,6 @@ test('a published Case Study keeps its address, labels, objective, excerpt and c
     image: { src: '/wp-content/uploads/2024/11/Finance-2.png', alt: '' },
     pillars: ['bi-data-analytics', 'digital-transformation'],
     industries: ['finance'],
-    description: 'Chesamel’s BI work.',
   });
   expect(cs.body).toBe('### The Story\n\nA financial services business wanted more.\n');
 });

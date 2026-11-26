@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/The-Sybarite.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: ["hospitality"]
-description: "Explore how businesses can implement sustainable practices to thrive in the evolving travel and tourism landscape. Contact Chesamel today."
+seoTitle: "How Businesses Can Adapt To Travel & Tourism | Chesamel"
+seoDescription: "Explore how businesses can implement sustainable practices to thrive in the evolving travel and tourism landscape. Contact Chesamel today."
 ---
 
 As we all become more conscious of environmental impacts, sustainable tourism has emerged as a crucial mind shift. Travel and tourism ESG is transforming the way the industry operates, with many businesses wondering how to make tourism sustainable. The ESG approach considers the entire experience, ensuring that the economic, social, and environmental impacts are managed responsibly. 
