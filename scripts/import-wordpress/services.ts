@@ -132,7 +132,7 @@ function readSection(c: Chunk, pillar: PillarSlug, wxr: Wxr, isLast: boolean): S
   }
   if (/capabilities|workstreams|^related services$/i.test(h)) {
     const image = firstImage(c.own) ?? c.leading;
-    return { type: 'cards', heading: h, ...(image && { image }), tone: 'off-white', items: cardItems(c.own) } as Section;
+    return { type: 'cards', heading: h, ...(image && { image }), tone: 'surface', items: cardItems(c.own) } as Section;
   }
   if (/exploratory assessment/i.test(h)) {
     const image = firstImage(c.own);

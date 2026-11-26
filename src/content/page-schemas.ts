@@ -26,7 +26,7 @@ const sectionTypes = [
     ...heading,
     text: text.optional(),
     image: image.optional(),
-    tone: z.enum(['light', 'off-white', 'dark']).default('light'),
+    tone: z.enum(['light', 'surface', 'dark']).default('light'),
     layout: z.enum(['grid', 'slider']).default('grid'),
     items: z.array(z.object({ heading: text, text: text.optional(), image: image.optional(), href: text.optional() })).min(1),
   }),

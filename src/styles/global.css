@@ -50,7 +50,7 @@
   palettes (ADR-0006); `subtle` is only for large text.
 
   The rest is Fulldev's base layer (from `add @fulldev/init`), less its
-  `outline-ring/50` on every element: that would swap the browser's focus
+  a half-strength ring outline on every element: that would swap the browser's focus
   outline for a faint Indigo one everywhere, which is a visible change and
   hard to see on Black.
 */

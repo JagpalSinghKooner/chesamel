@@ -21,9 +21,9 @@ const countries = ['USA', 'UK', 'Portugal', 'Sweden', 'Saudi Arabia'];
         <div class="mt-6"><Button href={contactLink.href} tone="primary">Get in Touch</Button></div>
       </div>
       <ul class="flex flex-wrap content-start gap-2 lg:max-w-md lg:justify-end">
-        {countries.map((c) => <li class="border border-inverse/15 px-3 py-1.5 text-sm text-body-on-dark">{c}</li>)}
+        {countries.map((c) => <li class="border border-chip-border-on-dark px-3 py-1.5 text-sm text-body-on-dark">{c}</li>)}
         <li>
-          <FulldevButton as="a" href={qatarLink.href} hreflang="ar" class:list={[brandButton, 'block border-inverse/40 bg-transparent px-3 py-1.5 text-inverse transition-none hover:bg-panel hover:text-heading']}>
+          <FulldevButton as="a" href={qatarLink.href} hreflang="ar" class:list={[brandButton, 'block border-control-border-on-dark bg-transparent px-3 py-1.5 text-inverse transition-none hover:bg-panel hover:text-heading']}>
             {qatarLink.label}{' '}<span aria-hidden="true">↗</span>
           </FulldevButton>
         </li>

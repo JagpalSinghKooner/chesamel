@@ -18,6 +18,8 @@ const browser = await chromium.launch();
 for (const path of process.argv.slice(2)) {
   for (const width of widths) {
     const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: process.env.MOTION ? 'no-preference' : 'reduce' });
+    // A cookie choice already made, so our consent bar doesn't cover the page.
+    await page.addInitScript(() => localStorage.setItem('chesamel-cookie-consent', JSON.stringify({ choice: 'rejected', at: Date.now() })));
     await page.goto(base + path, { waitUntil: 'networkidle', timeout: 60000 }).catch(() => {});
     await page.mouse.move(100, 100);
     await page.mouse.wheel(0, 50);

@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
 <footer class="bg-footer text-footer-text">
   <div class="mx-auto max-w-7xl px-5 py-12 sm:px-6">
     <a href="/" aria-label="Chesamel home" class="-ml-4 inline-block rounded-md focus-visible:outline-2 focus-visible:outline-inverse">
-      <Logo variant="tagline-lockup" colour="white" height={40} />
+      <Logo variant="tagline-lockup" tone="on-dark" height={40} />
     </a>
 
     <div class="mt-6 border-t border-footer-rule pt-6">
@@ -38,7 +38,7 @@ const year = new Date().getFullYear();
         {
           socialLinks.map((s) => (
             <li>
-              <Button as="a" href={s.href} aria-label={s.label} size="icon-sm" class="flex rounded-md border-0 bg-footer-social transition-none hover:bg-footer-rule focus-visible:bg-footer-rule active:not-aria-[haspopup]:translate-y-0">
+              <Button as="a" href={s.href} aria-label={s.label} size="icon-sm" class="flex rounded-md border-0 bg-footer-social transition-none hover:bg-footer-social-hover focus-visible:bg-footer-social-hover active:not-aria-[haspopup]:translate-y-0">
                 <Icon name={s.icon} class="size-4 text-detail" />
               </Button>
             </li>

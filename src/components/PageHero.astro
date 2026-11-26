@@ -4,7 +4,7 @@
 // Full-Time") and buttons, and the brandmark rings turning in its corner.
 //
 // Two tones, as on the live site:
-//   indigo: most Pages, white text and faint white rings
+//   brand:  most Pages, Indigo with white text and faint white rings
 //   light:  Pillars, Services, Contact and open roles. Pillars and Services
 //           pass their `accent`: the rings and the last button take it, as
 //           live's pink, blue and orange (ADR-0006).
@@ -19,25 +19,42 @@ interface Props {
   paragraphs?: string[];
   details?: string[];
   links?: { label: string; href: string }[];
-  tone?: 'indigo' | 'light';
+  tone?: 'brand' | 'light';
   // Light tone only: the Pillar accent of a Pillar or Service.
   accent?: PillarAccent;
+  // Live has no rings on an open role's hero.
+  rings?: boolean;
   // h1 on a page; lower where the hero is shown as a sample.
   headingLevel?: 'h1' | 'h4';
 }
-const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], tone = 'indigo', accent, headingLevel: Heading = 'h1' } = Astro.props;
-const indigo = tone === 'indigo';
+const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], tone = 'brand', accent, rings = true, headingLevel: Heading = 'h1' } = Astro.props;
+const indigo = tone === 'brand';
+// The buttons' tones: one stands out (`lead`, first or last) and the rest share a tone.
+const buttonTones = {
+  // An Indigo hero: an outline button, then dark ones.
+  brand: { lead: 'outline', rest: 'dark', leadIsLast: false },
+  // A Pillar's or Service's hero: light buttons, the last filled with its accent.
+  accent: { lead: 'accent', rest: 'light', leadIsLast: true },
+  // Any other light hero: Indigo, then light.
+  light: { lead: 'primary', rest: 'light', leadIsLast: false },
+} as const;
+const kind = buttonTones[indigo ? 'brand' : accent ? 'accent' : 'light'];
+const isLead = (i: number) => i === (kind.leadIsLast ? links.length - 1 : 0);
 // The `aside` slot sits beside the text from 1024px, under it on smaller
 // screens: Contact's form.
 const hasAside = Astro.slots.has('aside');
 ---
 
 <section data-component="page-hero" data-tone={tone} class:list={['relative isolate overflow-hidden', indigo ? 'bg-band-indigo text-inverse' : 'bg-surface']}>
-  <BrandmarkRings
-    on={indigo ? 'indigo' : 'light'}
-    accent={indigo ? undefined : accent}
-    class="absolute -end-32 -bottom-48 -z-10 size-96 opacity-90 sm:size-136 lg:-end-16 lg:-bottom-56 lg:size-176"
-  />
+  {
+    rings && (
+      <BrandmarkRings
+        on={indigo ? 'brand' : 'light'}
+        accent={indigo ? undefined : accent}
+        class="absolute -end-32 -bottom-48 -z-10 size-96 opacity-90 sm:size-136 lg:-end-16 lg:-bottom-56 lg:size-176"
+      />
+    )
+  }
   <div class:list={['mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32', hasAside && 'lg:grid lg:grid-cols-2 lg:items-center lg:gap-4']}>
     <div class="max-w-4xl">
       {eyebrow && <p class="font-subheading">{eyebrow}</p>}
@@ -49,13 +66,11 @@ const hasAside = Astro.slots.has('aside');
         links.length > 0 && (
           <div class="mt-10 flex flex-wrap gap-3">
             {links.map((link, i) => (
-              <Button
-                href={link.href}
-                tone={indigo ? (i === 0 ? 'outline' : 'dark') : accent ? (i === links.length - 1 ? 'accent' : 'light') : i === 0 ? 'primary' : 'light'}
-                accent={accent}
-              >
-                {link.label}
-              </Button>
+              isLead(i) && kind.lead === 'accent' && accent ? (
+                <Button href={link.href} tone="accent" accent={accent}>{link.label}</Button>
+              ) : (
+                <Button href={link.href} tone={isLead(i) && kind.lead !== 'accent' ? kind.lead : kind.rest}>{link.label}</Button>
+              )
             ))}
           </div>
         )

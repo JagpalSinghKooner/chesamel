@@ -2,7 +2,7 @@
 // The Chesamel logo, from Chesamel-Brand-Guidelines.pdf pages 8-11.
 //
 // Every variant draws with currentColor, so colour comes only from the
-// `colour` prop, which allows only the guidelines' permitted colours:
+// `tone` prop, which allows only the guidelines' permitted pairings:
 //   wordmark, lockup, tagline lockup: white (on Indigo or Black) or black (on white)
 //   brandmark: black or Indigo (on white), white (on Indigo or Black)
 // Choosing a background that suits the colour is the caller's job.
@@ -24,9 +24,12 @@ import Brandmark from './logos/brandmark.svg';
 import Lockup from './logos/lockup.svg';
 import TaglineLockup from './logos/tagline-lockup.svg';
 
+// `tone` names where the logo sits: on-dark (white, on Indigo or a dark band),
+// on-light (dark, on a light surface) or, for the brandmark only, brand
+// (Indigo, on a light surface).
 type Props =
-  | { variant: 'wordmark' | 'lockup' | 'tagline-lockup'; colour: 'white' | 'black'; height: number }
-  | { variant: 'brandmark'; colour: 'white' | 'black' | 'indigo'; height: number };
+  | { variant: 'wordmark' | 'lockup' | 'tagline-lockup'; tone: 'on-dark' | 'on-light'; height: number }
+  | { variant: 'brandmark'; tone: 'on-dark' | 'on-light' | 'brand'; height: number };
 
 const variants = {
   wordmark: { Svg: Wordmark, clearSpace: 13.276 / 17.933 },
@@ -35,19 +38,19 @@ const variants = {
   brandmark: { Svg: Brandmark, clearSpace: 0.225 },
 };
 
-// Theme roles (ADR-0006), named for where each colour goes.
-const colours = { white: 'text-logo-on-dark', black: 'text-logo-on-light', indigo: 'text-logo-brand' };
+// Theme roles (ADR-0006).
+const colours = { 'on-dark': 'text-logo-on-dark', 'on-light': 'text-logo-on-light', brand: 'text-logo-brand' };
 
-const { variant, colour, height } = Astro.props;
+const { variant, tone, height } = Astro.props;
 const { Svg, clearSpace } = variants[variant];
 const padding = Math.round(clearSpace * height);
 ---
 
 <span
-  class:list={['inline-block leading-none', colours[colour]]}
+  class:list={['inline-block leading-none', colours[tone]]}
   style={`padding: ${padding}px`}
   data-logo={variant}
-  data-logo-colour={colour}
+  data-logo-tone={tone}
   data-clear-space={padding}
 >
   {/* Decorative: wherever the logo links home, the link carries the name. */}

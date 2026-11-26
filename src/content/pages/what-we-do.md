@@ -70,7 +70,7 @@ sections:
     heading: + Why Us
     layout: slider
     text: Built for organisations that need clarity, speed, and execution without the overhead of a large consultancy. Chesamel combines specialist capability, practical delivery, and integrated support to help clients move from problem to action faster.
-    tone: off-white
+    tone: surface
     items:
       - { heading: We lead with knowledge, text: "We turn complexity into direction through strategic thinking, specialist expertise, and hands-on delivery.", image: { src: /wp-content/uploads/2024/12/knowledge.svg, alt: "" } }
       - { heading: We think people first, text: "We design around the realities of customers, teams, users, and stakeholders so solutions are more relevant and easier to adopt.", image: { src: /wp-content/uploads/2024/12/people-first.svg, alt: "" } }

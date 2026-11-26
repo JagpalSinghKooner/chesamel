@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-import { roleGroups, paletteValues } from '../src/design-system/colours';
+import { roleGroups, roleOf, paletteValues } from '../src/design-system/colours';
+import { themeRoles } from '../scripts/check-toolkit';
 import { palette } from '../src/data/theme';
 
 const themeCss = readFileSync(new URL('../src/styles/theme.css', import.meta.url), 'utf8');
@@ -45,8 +46,16 @@ test('style-guide page is absent from the sitemap', async ({ request }) => {
 
 test('both palettes fill the same roles, and the style guide lists every one', () => {
   expect(colourRoles(brand)).toEqual(colourRoles(live));
-  const listed = roleGroups.flatMap((g) => g.roles.map((r) => r.role)).sort();
+  const listed = roleGroups.flatMap((g) => g.roles.map(roleOf)).sort();
   expect(listed).toEqual(colourRoles(live));
+});
+
+test('every palette role has a utility in theme.css', () => {
+  const utilities = themeRoles(themeCss);
+  for (const role of colourRoles(live)) {
+    expect(utilities.has(role), role).toBe(true);
+    expect(themeCss, role).toContain(`--color-${role}: var(--${role});`);
+  }
 });
 
 test('the site uses the palette src/data/theme.ts picks', async ({ page }) => {
@@ -58,8 +67,8 @@ test('style-guide page renders every colour role in the live palette', async ({ 
   test.skip(palette !== 'live', 'checks the live palette');
   await page.goto('/style-guide/');
   for (const { roles } of roleGroups) {
-    for (const { role } of roles) {
-      const item = page.locator(`[data-colour="${role}"]`);
+    for (const role of roles.map(roleOf)) {
+      const item = page.locator(`[data-role="${role}"]`);
       await expect(item).toContainText(live[role]);
       await expect(item.locator('[data-swatch]'), role).toHaveCSS('background-color', computed(live[role]));
     }
@@ -96,15 +105,15 @@ test('style-guide page shows every logo in each permitted colour with its clear 
   // Clear space at 48px tall, worked out by hand from the guidelines:
   // wordmark: height of "c"; lockups: width of "ch"; brandmark: page 9's corner circles.
   const expected = {
-    wordmark: { colours: ['white', 'black'], padding: '36px' },
-    lockup: { colours: ['white', 'black'], padding: '27px' },
-    'tagline-lockup': { colours: ['white', 'black'], padding: '27px' },
-    brandmark: { colours: ['white', 'black', 'indigo'], padding: '11px' },
+    wordmark: { colours: ['on-dark', 'on-light'], padding: '36px' },
+    lockup: { colours: ['on-dark', 'on-light'], padding: '27px' },
+    'tagline-lockup': { colours: ['on-dark', 'on-light'], padding: '27px' },
+    brandmark: { colours: ['on-dark', 'on-light', 'brand'], padding: '11px' },
   };
   const section = page.locator('[data-style-guide="logos"]');
   for (const [variant, { colours, padding }] of Object.entries(expected)) {
     const shown = section.locator(`[data-logo="${variant}"]`);
-    expect((await shown.evaluateAll((els) => els.map((e) => e.getAttribute('data-logo-colour')))).sort()).toEqual([...colours].sort());
+    expect((await shown.evaluateAll((els) => els.map((e) => e.getAttribute('data-logo-tone')))).sort()).toEqual([...colours].sort());
     await expect(shown.first()).toHaveCSS('padding-top', padding);
   }
 });

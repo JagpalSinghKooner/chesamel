@@ -13,7 +13,6 @@ import { Card } from '@/components/ui/card';
 import Icon from './Icon.astro';
 import { brandCard } from './card';
 import { focusOutline } from './button';
-import { accentFillOnOwnHover } from './accent';
 import { pillars } from '../data/pillars';
 
 interface Props {
@@ -36,17 +35,18 @@ const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
               class:list={[
                 brandCard,
                 focusOutline,
-                'group h-full flex-row items-center gap-5 border border-border-strong/60 px-4 py-4.5 text-heading transition-colors duration-300 focus-visible:outline-focus md:aspect-square md:flex-col md:justify-center md:text-center',
-                accentFillOnOwnHover[p.accent],
+                'group h-full flex-row items-center gap-5 border border-border-soft px-4 py-4.5 text-heading transition-colors duration-300 focus-visible:outline-focus md:aspect-square md:flex-col md:justify-center md:text-center',
+                'hover:border-pillar-fill hover:bg-pillar-fill hover:text-inverse focus-visible:border-pillar-fill focus-visible:bg-pillar-fill focus-visible:text-inverse',
               ]}
               data-component="pillar-card"
+              data-accent={p.accent}
             >
               <img src={p.icon} alt="" width="100" height="100" loading="lazy" class="m-2.5 size-12 shrink-0 md:m-3 md:size-19" />
               <div class="grow md:grow-0">
                 <CardHeading class="text-lg font-semibold">{p.label}</CardHeading>
                 <p class="type-caption text-current sr-only md:group-hover:not-sr-only md:group-hover:mt-2 md:group-focus-visible:not-sr-only md:group-focus-visible:mt-2">{p.summary}</p>
               </div>
-              <span aria-hidden="true" class="grid size-11 shrink-0 place-items-center bg-border-strong/20 md:hidden">
+              <span aria-hidden="true" class="grid size-11 shrink-0 place-items-center bg-arrow-box-strong md:hidden">
                 <Icon name="arrow-up-right" class="size-4 rtl:-scale-x-100" />
               </span>
             </Card>

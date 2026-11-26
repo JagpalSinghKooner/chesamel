@@ -33,16 +33,16 @@ const plain = [brandButton, focusOutline, 'text-sm transition-none focus-visible
 ---
 
 <header
-  class:list={['z-20 text-inverse', overlay ? 'absolute inset-x-0 top-0 bg-scrim/40 backdrop-blur-md' : 'relative bg-band-dark']}
+  class:list={['z-20 text-inverse', overlay ? 'absolute inset-x-0 top-0 bg-header-overlay backdrop-blur-md' : 'relative bg-band-dark']}
   data-header
 >
   <div class="mx-auto flex min-h-18 max-w-7xl items-center justify-between gap-4 px-5 sm:px-6 lg:min-h-25">
     <a href="/" aria-label="Chesamel home" class="-ml-2 shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-inverse">
-      <Logo variant="lockup" colour="white" height={32} />
+      <Logo variant="lockup" tone="on-dark" height={32} />
     </a>
 
     <Button
-      class:list={[...plain, 'gap-2 rounded-md border-0 bg-inverse/10 px-4 py-2.5 text-inverse hover:bg-inverse/20 lg:hidden']}
+      class:list={[...plain, 'gap-2 rounded-md border-0 bg-control-on-dark px-4 py-2.5 text-inverse hover:bg-control-on-dark-hover lg:hidden']}
       aria-expanded="false"
       aria-controls={menuId}
       data-menu-toggle
@@ -62,7 +62,7 @@ const plain = [brandButton, focusOutline, 'text-sm transition-none focus-visible
             mainNav.map((section, i) => {
               const panelId = `${idPrefix}-nav-${i}`;
               return (
-                <li class="relative border-b border-inverse/10 lg:border-0">
+                <li class="relative border-b border-rule-on-dark lg:border-0">
                   <button
                     type="button"
                     class="group flex w-full items-center justify-between gap-1 py-4 text-base font-semibold lg:w-auto lg:px-3 lg:text-sm xl:text-base"
@@ -82,7 +82,7 @@ const plain = [brandButton, focusOutline, 'text-sm transition-none focus-visible
                       <li>
                         <a
                           href={link.href}
-                          class="block rounded-md px-3 py-2 text-base text-body-on-dark transition-[background-color,padding] duration-300 hover:bg-inverse/10 hover:ps-4 focus-visible:bg-inverse/10 focus-visible:ps-4 lg:text-sm lg:text-body lg:hover:bg-surface lg:focus-visible:bg-surface"
+                          class="block rounded-md px-3 py-2 text-base text-body-on-dark transition-[background-color,padding] duration-300 hover:bg-control-on-dark hover:ps-4 focus-visible:bg-control-on-dark focus-visible:ps-4 lg:text-sm lg:text-body lg:hover:bg-surface lg:focus-visible:bg-surface"
                         >
                           {link.label}
                         </a>
@@ -101,7 +101,7 @@ const plain = [brandButton, focusOutline, 'text-sm transition-none focus-visible
           as="a"
           href={qatarLink.href}
           hreflang="ar"
-          class:list={[...plain, 'gap-2 rounded-md border-0 bg-inverse/10 px-4 py-2.5 text-inverse hover:bg-inverse/20 focus-visible:bg-inverse/20']}
+          class:list={[...plain, 'gap-2 rounded-md border-0 bg-control-on-dark px-4 py-2.5 text-inverse hover:bg-control-on-dark-hover focus-visible:bg-control-on-dark-hover']}
         >
           {qatarLink.label}
           <span aria-hidden="true">↗</span>

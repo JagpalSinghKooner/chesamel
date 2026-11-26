@@ -36,7 +36,7 @@ sections:
   - type: cards
     heading: Our Approach
     layout: slider
-    tone: off-white
+    tone: surface
     items:
       - { heading: Planning, text: Gearing up for growth. With the right plan in place, we turn potential into progress with measurable results. }
       - { heading: Teamwork, text: Finding the right collaborators. Together, we bring out the best in each other, creating solutions that transform businesses. }

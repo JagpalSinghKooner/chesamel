@@ -34,13 +34,13 @@ const hovered = 'group-hover:text-inverse group-focus-visible:text-inverse';
   href={href}
   class:list={[
     focusOutline,
-    'group flex h-full flex-col gap-7 border border-subtle/60 p-7.5 text-body transition-colors duration-300 hover:bg-primary hover:text-inverse focus-visible:bg-primary focus-visible:text-inverse focus-visible:outline-focus',
+    'group flex h-full flex-col gap-7 border border-card-border p-7.5 text-body transition-colors duration-300 hover:bg-primary hover:text-inverse focus-visible:bg-primary focus-visible:text-inverse focus-visible:outline-focus',
   ]}
   data-component="career-card"
 >
   <div class="flex items-center justify-between gap-7.5">
     {/* The logo carries its clear space as padding; the margin lines the mark up with the edge, as on live. */}
-    <span class="-m-2.5 group-hover:*:text-inverse group-focus-visible:*:text-inverse"><Logo variant="brandmark" colour="black" height={46} /></span>
+    <span class="-m-2.5 group-hover:*:text-inverse group-focus-visible:*:text-inverse"><Logo variant="brandmark" tone="on-light" height={46} /></span>
     {
       location && (
         <p class="flex items-center gap-2 text-base leading-none font-medium">
@@ -57,7 +57,7 @@ const hovered = 'group-hover:text-inverse group-focus-visible:text-inverse';
       chips.length > 0 && (
         <ul class="flex flex-wrap gap-3">
           {chips.map((chip) => (
-            <li class="border border-transparent bg-primary/10 px-5.5 py-4 text-base leading-none font-semibold group-hover:border-inverse/60 group-focus-visible:border-inverse/60">{chip}</li>
+            <li class="border border-transparent bg-chip px-5.5 py-4 text-base leading-none font-semibold group-hover:border-chip-border-hover group-focus-visible:border-chip-border-hover">{chip}</li>
           ))}
         </ul>
       )
@@ -66,7 +66,7 @@ const hovered = 'group-hover:text-inverse group-focus-visible:text-inverse';
   <div class="mt-auto flex items-center gap-7">
     <span class="flex items-center gap-4 bg-primary px-5.5 py-4 text-base leading-none font-semibold text-inverse transition-colors duration-300 group-hover:bg-panel group-hover:text-body group-focus-visible:bg-panel group-focus-visible:text-body">
       Apply Now
-      <Icon name="arrow-up-right" class="size-4 group-hover:text-emphasis group-focus-visible:text-emphasis rtl:-scale-x-100" />
+      <Icon name="arrow-up-right" class="size-4 text-detail group-hover:text-emphasis group-focus-visible:text-emphasis rtl:-scale-x-100" />
     </span>
     {
       posted && (

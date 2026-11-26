@@ -40,17 +40,17 @@ const showErrors = preview === 'errors';
 
 const tone = indigo
   ? {
-      input: 'border-2 border-transparent bg-inverse/5 py-3.5 text-base leading-6 text-inverse placeholder:text-inverse aria-invalid:border-detail lg:text-lg lg:leading-7 focus-visible:outline-inverse',
+      input: 'border-2 border-transparent bg-field-on-indigo py-3.5 text-base leading-6 text-inverse placeholder:text-inverse aria-invalid:border-detail lg:text-lg lg:leading-7 focus-visible:outline-inverse',
       error: 'bg-error-fill px-2 py-1 text-inverse',
-      consent: 'bg-inverse/5 px-4.5 py-3.5 text-inverse',
-      checkbox: 'accent-button-dark focus-visible:outline-inverse',
+      consent: 'bg-field-on-indigo px-4.5 py-3.5 text-inverse',
+      checkbox: 'accent-checkbox-on-indigo focus-visible:outline-inverse',
       link: 'text-inverse',
     }
   : {
-      input: 'border border-border bg-scrim/2 py-3.5 text-lg leading-7 text-heading placeholder:text-body aria-invalid:border-error aria-invalid:ring-1 aria-invalid:ring-error focus-visible:outline-focus',
+      input: 'border border-border bg-field py-3.5 text-lg leading-7 text-heading placeholder:text-body aria-invalid:border-error aria-invalid:ring-1 aria-invalid:ring-error focus-visible:outline-focus',
       error: 'bg-error-fill px-2 py-1 text-error-foreground',
       consent: 'text-body',
-      checkbox: 'accent-primary focus-visible:outline-focus',
+      checkbox: 'accent-checkbox focus-visible:outline-focus',
       link: 'text-body',
     };
 
@@ -64,7 +64,7 @@ const label = parts(form.consent.label);
 const notes = form.consent.notes.map(parts);
 
 const submitClass = indigo
-  ? 'w-full justify-between gap-4 border-0 bg-button-dark px-6.5 py-4 text-base leading-6 text-button-dark-foreground transition-none hover:bg-button-dark-hover hover:text-button-dark-hover-foreground focus-visible:outline-inverse lg:text-lg lg:leading-7'
+  ? 'w-full justify-between gap-4 border-0 bg-button-dark px-6.5 py-4 text-base leading-6 text-button-dark-foreground hover:bg-button-dark-hover hover:text-button-dark-hover-foreground focus-visible:outline-inverse lg:text-lg lg:leading-7'
   : 'w-full justify-center border-0 bg-primary px-6.5 py-3.5 text-base leading-6 text-primary-foreground hover:bg-primary-hover focus-visible:outline-focus sm:w-56 sm:shrink-0 sm:text-lg sm:leading-7';
 ---
 

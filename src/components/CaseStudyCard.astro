@@ -17,7 +17,6 @@ import { Card } from '@/components/ui/card';
 import Icon from './Icon.astro';
 import { focusOutline } from './button';
 import { brandCard } from './card';
-import { accentFilledTag, accentFillOnHover } from './accent';
 import { pillarLabels } from '../data/taxonomy';
 import { labelAccents } from '../data/pillars';
 import type { CaseStudySummary } from '../content/case-studies';
@@ -47,6 +46,7 @@ const dark = tone === 'dark';
     dark ? 'border-border-on-dark focus-visible:outline-inverse' : 'border-border focus-visible:outline-focus',
   ]}
   data-component="case-study-card"
+  data-accent={accent}
 >
   <div class="aspect-2/1 shrink-0 overflow-hidden md:aspect-auto md:w-1/3">
     <img
@@ -59,14 +59,14 @@ const dark = tone === 'dark';
   <div class="flex grow flex-col justify-between gap-20 bg-panel p-7.5">
     <div class="flex flex-wrap items-start gap-3">
       {isNew && <span class="bg-primary px-5 py-3 text-base leading-none font-medium text-inverse" data-new>New</span>}
-      <span class:list={['border px-5 py-3 text-base leading-none font-medium', accentFilledTag[accent]]} data-tag>{pillarLabels[label]}</span>
+      <span class="border border-pillar-fill bg-pillar-fill px-5 py-3 text-base leading-none font-medium text-inverse" data-tag>{pillarLabels[label]}</span>
     </div>
     <div class="flex items-end justify-between gap-5">
       <div>
         {caseStudy.client && <p class="text-xl font-medium">/ {caseStudy.client}</p>}
         <Heading class="mt-1 text-xl leading-tight font-semibold text-heading">{caseStudy.title}</Heading>
       </div>
-      <span aria-hidden="true" class:list={['hidden size-11 shrink-0 place-items-center bg-border-strong/20 transition-colors duration-300 md:grid', accentFillOnHover[accent]]} data-arrow-box>
+      <span aria-hidden="true" class="hidden size-11 shrink-0 place-items-center bg-arrow-box-strong transition-colors duration-300 group-hover:bg-pillar group-focus-visible:bg-pillar md:grid" data-arrow-box>
         <Icon name="arrow-up-right" class="size-4 rtl:-scale-x-100" />
       </span>
     </div>

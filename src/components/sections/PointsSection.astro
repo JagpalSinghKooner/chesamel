@@ -22,7 +22,7 @@ const dark = tone === 'dark';
       <ol class="grid gap-6">
         {
           items.map((item, i) => (
-            <li class:list={['flex gap-6 border-t pt-5', dark ? 'border-inverse/20 text-inverse' : 'border-border']}>
+            <li class:list={['flex gap-6 border-t pt-5', dark ? 'border-divider-on-dark text-inverse' : 'border-border']}>
               <span class:list={['font-subheading', dark ? 'text-detail' : 'text-emphasis']} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <span>{item}</span>
             </li>

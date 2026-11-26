@@ -15,7 +15,7 @@ const { heading, eyebrow, text, image, tone, layout, items } = section;
 const dark = tone === 'dark';
 ---
 
-<section data-component="section-cards" aria-labelledby={id} class:list={[{ 'bg-band-dark': dark, 'bg-surface': tone === 'off-white' }]}>
+<section data-component="section-cards" aria-labelledby={id} class:list={[{ 'bg-band-dark': dark, 'bg-surface': tone === 'surface' }]}>
   <div class:list={['mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-6 lg:py-28', image && 'lg:grid-cols-[2fr_3fr]']}>
     {image && <img src={image.src} alt={image.alt} loading="lazy" class="hidden h-full w-full object-cover lg:block" />}
     <div class="min-w-0">

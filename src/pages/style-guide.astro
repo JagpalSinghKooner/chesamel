@@ -2,10 +2,9 @@
 // Private style-guide page: every Design System token, for designers to point
 // at. Hidden from search engines and the sitemap through src/noindex.mjs.
 import Base from '../layouts/Base.astro';
-import { roleGroups, paletteValues } from '../design-system/colours';
+import { roleGroups, roleOf, paletteValues } from '../design-system/colours';
 import themeCss from '../styles/theme.css?raw';
 import { palette } from '../data/theme';
-import { accentFill } from '../components/accent';
 import { pillars } from '../data/pillars';
 import Logo from '../design-system/Logo.astro';
 import Icon from '../components/Icon.astro';
@@ -105,14 +104,14 @@ const brand = paletteValues(themeCss, 'brand');
             <h3 class="type-heading-3">{group.title}</h3>
             <ul class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
               {group.roles.map((r) => (
-                <li data-colour={r.role}>
-                  <div data-swatch aria-hidden="true" class="h-24 rounded-lg border border-border" style={`background-color: var(--${r.role})`} />
+                <li data-role={roleOf(r)}>
+                  <div data-swatch aria-hidden="true" class:list={['h-24 rounded-lg border border-border', r.swatch]} />
                   <p class="type-body mt-2 font-semibold text-heading">
-                    <code>{r.role}</code>
+                    <code>{roleOf(r)}</code>
                   </p>
                   <p class="type-caption">{r.use}</p>
-                  <p class="type-caption">live: {live[r.role]}</p>
-                  <p class="type-caption">brand: {brand[r.role]}</p>
+                  <p class="type-caption">live: {live[roleOf(r)]}</p>
+                  <p class="type-caption">brand: {brand[roleOf(r)]}</p>
                 </li>
               ))}
             </ul>
@@ -123,12 +122,13 @@ const brand = paletteValues(themeCss, 'brand');
         <h3 class="type-heading-3">Pillar accents</h3>
         <p class="type-body mt-3 max-w-2xl">
           Each Pillar, and its Services, has one accent role, from <code>accent</code> in <code>src/data/pillars.ts</code>.
-          <code>src/components/accent.ts</code> turns it into classes for marks, tags, fills and rings.
+          Set it as <code>data-accent</code> and the <code>pillar</code>, <code>pillar-text</code> and <code>pillar-fill</code> utilities
+          inside take that Pillar's colours.
         </p>
         <ul class="mt-6 grid gap-4 sm:grid-cols-2">
           {pillars.map((p) => (
             <li data-pillar-accent={p.name} class="flex items-center gap-3 border border-border p-4 font-semibold text-heading">
-              <span data-accent-bar aria-hidden="true" class:list={['h-8 w-1', accentFill[p.accent]]} />
+              <span data-accent-bar data-accent={p.accent} aria-hidden="true" class="h-8 w-1 bg-pillar" />
               {p.name}
               <code class="type-caption ms-auto font-normal">{p.accent}</code>
             </li>
@@ -149,8 +149,8 @@ const brand = paletteValues(themeCss, 'brand');
             <h3 class="type-heading-3">{l.title}</h3>
             <p class="type-caption mt-2">{l.note}</p>
             <div class="mt-4 flex flex-wrap gap-4">
-              <div class="rounded-lg bg-band-dark p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant={l.variant} colour="white" height={48} /></span></div>
-              <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant={l.variant} colour="black" height={48} /></span></div>
+              <div class="rounded-lg bg-band-dark p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant={l.variant} tone="on-dark" height={48} /></span></div>
+              <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant={l.variant} tone="on-light" height={48} /></span></div>
             </div>
           </div>
         ))
@@ -159,9 +159,9 @@ const brand = paletteValues(themeCss, 'brand');
         <h3 class="type-heading-3">Brandmark</h3>
         <p class="type-caption mt-2">Clear space: the corner circles on page 9 of the guidelines, about a quarter of its height.</p>
         <div class="mt-4 flex flex-wrap gap-4">
-          <div class="rounded-lg bg-primary p-4"><span class="block outline-1 outline-dashed outline-inverse"><Logo variant="brandmark" colour="white" height={48} /></span></div>
-          <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant="brandmark" colour="black" height={48} /></span></div>
-          <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant="brandmark" colour="indigo" height={48} /></span></div>
+          <div class="rounded-lg bg-primary p-4"><span class="block outline-1 outline-dashed outline-inverse"><Logo variant="brandmark" tone="on-dark" height={48} /></span></div>
+          <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant="brandmark" tone="on-light" height={48} /></span></div>
+          <div class="rounded-lg border border-border bg-panel p-4"><span class="block outline-1 outline-dashed outline-border-strong"><Logo variant="brandmark" tone="brand" height={48} /></span></div>
         </div>
       </div>
     </section>
@@ -356,7 +356,7 @@ const brand = paletteValues(themeCss, 'brand');
     <div class="mx-auto grid max-w-5xl gap-4 px-6 sm:grid-cols-2 lg:grid-cols-4">
       <div class="bg-surface p-6 outline-1 outline-border"><BrandmarkRings on="light" class="mx-auto size-40" /></div>
       <div class="bg-surface p-6 outline-1 outline-border"><BrandmarkRings accent="marketing" class="mx-auto size-40" /></div>
-      <div class="bg-band-indigo p-6"><BrandmarkRings on="indigo" class="mx-auto size-40" /></div>
+      <div class="bg-band-indigo p-6"><BrandmarkRings on="brand" class="mx-auto size-40" /></div>
       <div class="bg-band-dark p-6"><BrandmarkRings on="dark" class="mx-auto size-40" /></div>
     </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Client logo strip</h3>
@@ -385,7 +385,7 @@ const brand = paletteValues(themeCss, 'brand');
     <Sections
       sections={[
         { type: 'stats', items: [{ value: '150+', label: '/ People' }, { value: '17+', label: '/ Operating Countries' }] },
-        { type: 'cards', heading: 'Our Approach', tone: 'off-white', layout: 'grid', items: [{ heading: 'Planning', text: 'Gearing up for growth.' }, { heading: 'Teamwork', text: 'Finding the right collaborators.' }] },
+        { type: 'cards', heading: 'Our Approach', tone: 'surface', layout: 'grid', items: [{ heading: 'Planning', text: 'Gearing up for growth.' }, { heading: 'Teamwork', text: 'Finding the right collaborators.' }] },
         {
           type: 'cards',
           heading: 'Why Us (as a slider)',

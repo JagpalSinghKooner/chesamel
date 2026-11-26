@@ -3,9 +3,9 @@
 //
 // `accent` names the Pillar's accent role (`--accent-digital`, ...) in
 // src/styles/theme.css (ADR-0006). A Pillar's Services share it.
-// src/components/accent.ts turns it into classes: the accent itself for marks,
-// borders and rings, and AA-safe `-text` and `-fill` roles for tag text and
-// fills under white text.
+// Set it as data-accent on an element, and the `pillar`, `pillar-text` and
+// `pillar-fill` utilities inside take that Pillar's mark, its AA-safe text
+// and its AA-safe fill under white text.
 import type { PillarSlug } from './taxonomy';
 
 export type PillarAccent = 'digital' | 'marketing' | 'investment' | 'hybrid';

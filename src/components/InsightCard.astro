@@ -7,7 +7,6 @@ import { focusOutline } from './button';
 import { brandCard, brandCardContent } from './card';
 import { pillarLabels, type PillarSlug } from '../data/taxonomy';
 import { labelAccents } from '../data/pillars';
-import { accentTag } from './accent';
 
 interface Props {
   href: string;
@@ -33,7 +32,7 @@ const { href, title, image, pillar, action, headingLevel: Heading = 'h3' } = Ast
     )
   }
   <CardContent class:list={[brandCardContent, 'grow p-5']}>
-    {pillar && <span class:list={['type-tag self-start border px-3 py-1', accentTag[labelAccents[pillar]]]}>{pillarLabels[pillar]}</span>}
+    {pillar && <span class="type-tag self-start border border-pillar px-3 py-1 text-pillar-text" data-accent={labelAccents[pillar]}>{pillarLabels[pillar]}</span>}
     <Heading class="type-heading-3 mt-5 text-xl leading-tight group-hover:underline group-focus-visible:underline">{title}</Heading>
     <p class="type-caption mt-auto pt-6">{action} <span aria-hidden="true">→</span></p>
   </CardContent>

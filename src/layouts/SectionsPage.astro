@@ -29,7 +29,7 @@ const accent = entry.collection === 'pages' ? undefined : labelAccents[entry.id.
 ---
 
 <Base title={documentTitle ?? `${title} | Chesamel`} description={description ?? hero.paragraphs[0] ?? hero.subtitle}>
-  <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} accent={accent}>
+  <PageHero {...hero} tone={lightHero ? 'light' : 'brand'} accent={accent} rings={!entry.id.startsWith('careers/')}>
     {entry.id === 'contact' && <Form slot="aside" kind="contact" />}
   </PageHero>
   <Breadcrumb band trail={[...trail, { label: title }]} />

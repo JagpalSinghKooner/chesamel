@@ -126,6 +126,7 @@
 
   /* The brandmark rings drawn large as a watermark (BrandmarkRings). */
   --rings-on-indigo: rgb(255 255 255 / 0.05);
+  /* Measured on live's Contact hero: 117, not Indigo's 115. */
   --rings-on-light: rgb(117 66 255 / 0.24);
   --rings-on-dark: rgb(115 66 255);
   --rings-on-band: rgb(255 255 255 / 0.1);
@@ -134,6 +135,60 @@
   --logo-on-dark: rgb(255 255 255);
   --logo-on-light: rgb(20 31 38);
   --logo-brand: rgb(115 66 255);
+
+  /* Tints and overlays: each a purpose of its own, so no component sets an opacity. */
+  /* The arrow box on a Blog Post card. */
+  --arrow-box: rgb(217 219 222 / 0.3);
+  /* The arrow box on Case Study cards and Pillar tiles. */
+  --arrow-box-strong: rgb(181 186 191 / 0.2);
+  /* Pillar tiles and the light Pager. */
+  --border-soft: rgb(181 186 191 / 0.6);
+  /* The team filter buttons. */
+  --filter-border: rgb(181 186 191 / 0.65);
+  /* The Careers card. */
+  --card-border: rgb(127 132 140 / 0.6);
+  /* The Careers card's fact chips. */
+  --chip: rgb(115 66 255 / 0.1);
+  /* Their outline on a hovered card. */
+  --chip-border-hover: rgb(255 255 255 / 0.6);
+  /* The Team Member card's icon buttons. */
+  --icon-button: rgb(115 66 255 / 0.2);
+  /* Rules between rows on dark: header menu, cookie bar, hero panel. */
+  --rule-on-dark: rgb(255 255 255 / 0.1);
+  /* Rules above list items and cards on a dark band. */
+  --divider-on-dark: rgb(255 255 255 / 0.2);
+  /* Country chips on "Where we are". */
+  --chip-border-on-dark: rgb(255 255 255 / 0.15);
+  /* Borders of small controls on dark: Pager, Slider, hero pause, Qatar. */
+  --control-border-on-dark: rgb(255 255 255 / 0.4);
+  /* The header's controls and menu links, and their hover. */
+  --control-on-dark: rgb(255 255 255 / 0.1);
+  /* Those controls, hovered. */
+  --control-on-dark-hover: rgb(255 255 255 / 0.2);
+  /* A Slider's progress track on dark. */
+  --track-on-dark: rgb(255 255 255 / 0.25);
+  /* The Contact form fields. */
+  --field: rgb(20 31 38 / 0.02);
+  /* AA: live's newsletter fields are 10% white, under which white text is 4.49:1 (#11). */
+  --field-on-indigo: rgb(255 255 255 / 0.05);
+  /* Checkboxes on light surfaces. */
+  --checkbox: rgb(115 66 255);
+  /* Checkboxes on Indigo. */
+  --checkbox-on-indigo: rgb(20 31 38);
+  /* The header over the homepage hero. */
+  --header-overlay: rgb(20 31 38 / 0.4);
+  /* The hero's "/ solutions" panel, and its links hovered. */
+  --overlay-on-image: rgb(20 31 38 / 0.6);
+  /* The hero's pause button. */
+  --overlay-control: rgb(20 31 38 / 0.4);
+  /* The shade over the hero's video, left to right. */
+  --hero-shade-start: rgb(20 31 38 / 0.8);
+  --hero-shade-middle: rgb(20 31 38 / 0.5);
+  --hero-shade-end: rgb(20 31 38 / 0.1);
+  /* The number box on the homepage's steps. */
+  --step-number: rgb(20 31 38 / 0.6);
+  /* A social tile, hovered. */
+  --footer-social-hover: rgb(32 38 47);
 
   /* Fonts. Live sets everything in Figtree. */
   --font-heading: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
@@ -241,11 +296,78 @@
   --logo-on-light: #141e25;
   --logo-brand: #7342ff;
 
+  /* Tints and overlays: each a purpose of its own, so no component sets an opacity. */
+  --arrow-box: color-mix(in srgb, #d9dbde 30%, transparent);
+  --arrow-box-strong: color-mix(in srgb, #b5bbbe 20%, transparent);
+  --border-soft: color-mix(in srgb, #b5bbbe 60%, transparent);
+  --filter-border: color-mix(in srgb, #b5bbbe 65%, transparent);
+  --card-border: color-mix(in srgb, #7f848c 60%, transparent);
+  --chip: color-mix(in srgb, #7342ff 10%, transparent);
+  --chip-border-hover: color-mix(in srgb, #ffffff 60%, transparent);
+  --icon-button: color-mix(in srgb, #7342ff 20%, transparent);
+  --rule-on-dark: color-mix(in srgb, #ffffff 10%, transparent);
+  --divider-on-dark: color-mix(in srgb, #ffffff 20%, transparent);
+  --chip-border-on-dark: color-mix(in srgb, #ffffff 15%, transparent);
+  --control-border-on-dark: color-mix(in srgb, #ffffff 40%, transparent);
+  --control-on-dark: color-mix(in srgb, #ffffff 10%, transparent);
+  --control-on-dark-hover: color-mix(in srgb, #ffffff 20%, transparent);
+  --track-on-dark: color-mix(in srgb, #ffffff 25%, transparent);
+  --field: color-mix(in srgb, #141e25 2%, transparent);
+  --field-on-indigo: color-mix(in srgb, #ffffff 5%, transparent);
+  --checkbox: #7342ff;
+  --checkbox-on-indigo: #141e25;
+  --header-overlay: color-mix(in srgb, #141e25 40%, transparent);
+  --overlay-on-image: color-mix(in srgb, #141e25 60%, transparent);
+  --overlay-control: color-mix(in srgb, #141e25 40%, transparent);
+  --hero-shade-start: color-mix(in srgb, #141e25 80%, transparent);
+  --hero-shade-middle: color-mix(in srgb, #141e25 50%, transparent);
+  --hero-shade-end: color-mix(in srgb, #141e25 10%, transparent);
+  --step-number: color-mix(in srgb, #141e25 60%, transparent);
+  --footer-social-hover: color-mix(in srgb, #ffffff 20%, #141e25);
+
   /* The guidelines: Figtree, with DM Sans for subheadings. */
   --font-heading: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
   --font-body: "Figtree Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
   --font-subheading: "DM Sans Variable", var(--font-arabic), Helvetica, Arial, sans-serif;
   --font-arabic: "IBM Plex Sans Arabic";
+}
+
+/*
+  A Pillar's accent, for whatever sits inside data-accent="...": its mark
+  (`pillar`), its text (`pillar-text`) and its fill under white text
+  (`pillar-fill`). Each points at the palette's roles above, so both palettes
+  fill it. `accent` in src/data/pillars.ts names the value.
+*/
+[data-accent="digital"] {
+  --pillar: var(--accent-digital);
+  --pillar-text: var(--accent-digital-text);
+  --pillar-fill: var(--accent-digital-fill);
+}
+[data-accent="marketing"] {
+  --pillar: var(--accent-marketing);
+  --pillar-text: var(--accent-marketing-text);
+  --pillar-fill: var(--accent-marketing-fill);
+}
+[data-accent="investment"] {
+  --pillar: var(--accent-investment);
+  --pillar-text: var(--accent-investment-text);
+  --pillar-fill: var(--accent-investment-fill);
+}
+[data-accent="hybrid"] {
+  --pillar: var(--accent-hybrid);
+  --pillar-text: var(--accent-hybrid-text);
+  --pillar-fill: var(--accent-hybrid-fill);
+}
+
+/*
+  Fulldev's copies (ADR-0005) also read some of its token names directly, as
+  var(--secondary) and the like, so those names point at roles too.
+*/
+[data-palette] {
+  --background: var(--page);
+  --foreground: var(--body);
+  --secondary: var(--surface);
+  --destructive: var(--error);
 }
 
 /*
@@ -348,6 +470,39 @@
   --color-logo-on-dark: var(--logo-on-dark);
   --color-logo-on-light: var(--logo-on-light);
   --color-logo-brand: var(--logo-brand);
+
+  --color-arrow-box: var(--arrow-box);
+  --color-arrow-box-strong: var(--arrow-box-strong);
+  --color-border-soft: var(--border-soft);
+  --color-filter-border: var(--filter-border);
+  --color-card-border: var(--card-border);
+  --color-chip: var(--chip);
+  --color-chip-border-hover: var(--chip-border-hover);
+  --color-icon-button: var(--icon-button);
+  --color-rule-on-dark: var(--rule-on-dark);
+  --color-divider-on-dark: var(--divider-on-dark);
+  --color-chip-border-on-dark: var(--chip-border-on-dark);
+  --color-control-border-on-dark: var(--control-border-on-dark);
+  --color-control-on-dark: var(--control-on-dark);
+  --color-control-on-dark-hover: var(--control-on-dark-hover);
+  --color-track-on-dark: var(--track-on-dark);
+  --color-field: var(--field);
+  --color-field-on-indigo: var(--field-on-indigo);
+  --color-checkbox: var(--checkbox);
+  --color-checkbox-on-indigo: var(--checkbox-on-indigo);
+  --color-header-overlay: var(--header-overlay);
+  --color-overlay-on-image: var(--overlay-on-image);
+  --color-overlay-control: var(--overlay-control);
+  --color-hero-shade-start: var(--hero-shade-start);
+  --color-hero-shade-middle: var(--hero-shade-middle);
+  --color-hero-shade-end: var(--hero-shade-end);
+  --color-step-number: var(--step-number);
+  --color-footer-social-hover: var(--footer-social-hover);
+
+  /* The Pillar accent of the nearest [data-accent] (below). */
+  --color-pillar: var(--pillar);
+  --color-pillar-text: var(--pillar-text);
+  --color-pillar-fill: var(--pillar-fill);
 
   /* Fulldev UI's theme tokens (ADR-0005), pointed at roles. */
   --color-background: var(--page);

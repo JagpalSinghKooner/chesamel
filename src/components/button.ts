@@ -28,12 +28,12 @@ export const buttonTones: Record<ButtonTone, string> = {
   light:
     'border-button-light-border bg-button-light text-button-light-foreground hover:border-button-light-hover-border hover:bg-button-light-hover hover:text-button-light-hover-foreground focus-visible:outline-heading',
   outline: 'border-button-outline-border bg-transparent text-inverse hover:bg-button-outline-hover hover:text-button-outline-hover-foreground focus-visible:outline-inverse',
-  // The fill comes from accentButton (accent.ts).
-  accent: 'border-0 text-inverse hover:bg-button-dark hover:text-button-dark-foreground focus-visible:outline-heading',
+  // The fill is the Pillar's, from the Button's data-accent (theme.css).
+  accent: 'border-0 bg-pillar-fill text-inverse hover:bg-button-dark hover:text-button-dark-foreground focus-visible:outline-heading',
 };
 
 export interface ButtonAction {
   label: string;
   href: string;
-  tone: ButtonTone;
+  tone: Exclude<ButtonTone, 'accent'>;
 }

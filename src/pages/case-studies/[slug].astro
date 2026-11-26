@@ -16,7 +16,6 @@ import { getCaseStudies, related, summariseCaseStudy, type CaseStudy } from '../
 import { formatDate, isoDate, primaryPillar } from '../../content/shared';
 import { pillarLabels } from '../../data/taxonomy';
 import { labelAccents } from '../../data/pillars';
-import { accentText } from '../../components/accent';
 
 export async function getStaticPaths() {
   const all = await getCaseStudies();
@@ -36,8 +35,8 @@ const accent = labelAccents[primaryPillar(caseStudy.data)];
     <BrandmarkRings accent={accent} class="absolute -end-32 -bottom-48 -z-10 size-[24rem] sm:size-[34rem] lg:-end-16 lg:-bottom-56 lg:size-[44rem]" />
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32">
       <h1 class="type-heading-1 max-w-4xl text-4xl text-hero-title sm:text-5xl">{title}</h1>
-      <p class:list={['type-tag mt-6', accentText[accent]]}>/ {pillarLabels[primaryPillar(caseStudy.data)]}</p>
-      <p class="type-subheading mt-4 max-w-3xl">{excerpt}</p>
+      <p class="type-tag mt-6 text-pillar-text" data-accent={accent}>/ {pillarLabels[primaryPillar(caseStudy.data)]}</p>
+      <p class="type-subheading mt-4 max-w-3xl text-body">{excerpt}</p>
     </div>
   </section>
   <Breadcrumb
