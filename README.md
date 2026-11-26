@@ -1,6 +1,6 @@
 # #52 screenshots: live (left) and ours (right)
 
-Taken headless with scripts/measure-live/shots.mjs and compare.py, reduced motion on, at 1440 and 390. Layout differences are #43 and #44; this PR changes colours only.
+Taken headless with scripts/measure-live/shots.mjs (cookie choice pre-set) and compare.py, reduced motion on, at 1440 and 390. Layout differences are #43 and #44; this PR changes colours only.
 
 ## acceptable-use-policy_1440
 ![acceptable-use-policy_1440_0.jpg](acceptable-use-policy_1440_0.jpg)
@@ -10,7 +10,6 @@ Taken headless with scripts/measure-live/shots.mjs and compare.py, reduced motio
 ![acceptable-use-policy_390_0.jpg](acceptable-use-policy_390_0.jpg)
 ![acceptable-use-policy_390_1.jpg](acceptable-use-policy_390_1.jpg)
 ![acceptable-use-policy_390_2.jpg](acceptable-use-policy_390_2.jpg)
-![acceptable-use-policy_390_3.jpg](acceptable-use-policy_390_3.jpg)
 
 ## careers_1440
 ![careers_1440_0.jpg](careers_1440_0.jpg)
@@ -95,7 +94,6 @@ Taken headless with scripts/measure-live/shots.mjs and compare.py, reduced motio
 ![industries_390_9.jpg](industries_390_9.jpg)
 ![industries_390_10.jpg](industries_390_10.jpg)
 ![industries_390_11.jpg](industries_390_11.jpg)
-![industries_390_12.jpg](industries_390_12.jpg)
 
 ## industries_finance_1440
 ![industries_finance_1440_0.jpg](industries_finance_1440_0.jpg)
@@ -157,7 +155,6 @@ Taken headless with scripts/measure-live/shots.mjs and compare.py, reduced motio
 ## insights_webinars_390
 ![insights_webinars_390_0.jpg](insights_webinars_390_0.jpg)
 ![insights_webinars_390_1.jpg](insights_webinars_390_1.jpg)
-![insights_webinars_390_2.jpg](insights_webinars_390_2.jpg)
 
 ## podcasts_stress-awareness-at-work_1440
 ![podcasts_stress-awareness-at-work_1440_0.jpg](podcasts_stress-awareness-at-work_1440_0.jpg)
@@ -212,7 +209,6 @@ Taken headless with scripts/measure-live/shots.mjs and compare.py, reduced motio
 ![what-we-do_390_2.jpg](what-we-do_390_2.jpg)
 ![what-we-do_390_3.jpg](what-we-do_390_3.jpg)
 ![what-we-do_390_4.jpg](what-we-do_390_4.jpg)
-![what-we-do_390_5.jpg](what-we-do_390_5.jpg)
 
 ## who-we-are_1440
 ![who-we-are_1440_0.jpg](who-we-are_1440_0.jpg)
