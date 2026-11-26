@@ -83,6 +83,10 @@ Cloudflare Pages builds the repo through its Git integration (build command `npm
 - Every push to `main` deploys the live site.
 - Every pull request gets its own **Preview** deployment, linked from the pull request's checks.
 
+Environment variables, set in the Cloudflare Pages project (never in the repo):
+
+- `CLOUDFLARE_WEB_ANALYTICS_TOKEN`: the Cloudflare Web Analytics site token. When set, every page loads the analytics beacon; when unset (local builds, tests), none is rendered.
+
 GitHub Actions (`.github/workflows/ci.yml`) runs the type check and tests on every pull request and on `main`.
 
 ## Working on this repo

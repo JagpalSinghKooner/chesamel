@@ -3,6 +3,9 @@ import '../styles/global.css';
 import { isNoindex } from '../noindex.mjs';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import { CLOUDFLARE_WEB_ANALYTICS_TOKEN } from 'astro:env/server';
+import { cloudflareBeacon } from '../lib/consent';
 
 interface Props {
   title: string;
@@ -13,6 +16,8 @@ interface Props {
 
 const { title, description, overlayHeader = false } = Astro.props;
 const noindex = isNoindex(Astro.url.pathname);
+// Cookieless, so it runs for every visitor without consent (#12).
+const beacon = cloudflareBeacon(CLOUDFLARE_WEB_ANALYTICS_TOKEN);
 ---
 
 <!doctype html>
@@ -23,6 +28,7 @@ const noindex = isNoindex(Astro.url.pathname);
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {beacon && <script is:inline defer {...beacon}></script>}
     <script is:inline>
       // Set before first paint so revealed Sections never flash. Visitors who
       // ask for less motion, or have no JavaScript, see everything still.
@@ -35,6 +41,7 @@ const noindex = isNoindex(Astro.url.pathname);
       class="sr-only z-50 rounded-md bg-white px-4 py-2 font-semibold text-black focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >Skip to content</a
     >
+    <CookieBanner />
     <Header overlay={overlayHeader} />
     <main id="main" tabindex="-1">
       <slot />
