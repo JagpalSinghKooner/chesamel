@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-polina-zimmerman-3958396-scaled-1.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "Mental Health At Work | Chesamel"
 ---
 
 October 10th, each year marks #WorldMentalHealthDay.

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/kaleidico-754504-unsplash.jpg","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "Google Coach Paulo da Costa's blog offers a great Google Digital Skills Training insight into the common mistakes of SEO. Learn more about SEO here."
+seoTitle: "Google Digital Skills Training: Common SEO Mistakes | Chesamel"
+seoDescription: "Google Coach Paulo da Costa's blog offers a great Google Digital Skills Training insight into the common mistakes of SEO. Learn more about SEO here."
 ---
 
 #### *Guest Blogger, Paulo da Costa: “Paulo has worked in Media, Marketing and Research for the past 18 years. He is also a qualified Life Coach. When he heard about the opportunity of working with Google as a Coach he ran to it and never looked back.”*

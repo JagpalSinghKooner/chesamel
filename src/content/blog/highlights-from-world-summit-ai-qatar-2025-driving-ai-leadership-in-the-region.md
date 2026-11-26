@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/12/World-Summit-AI-–-Qatar-2025-5-scaled.jpg","alt":""}
 pillars: ["ai-machine-learning","bi-data-analytics"]
 industries: ["technology"]
+seoTitle: "Highlights from World Summit AI – Qatar 2025 — Driving AI Leadership in the Region | Chesamel"
 ---
 
 The [**World Summit AI – Qatar 2025**](https://qatar.worldsummit.ai/) brought the global AI community together right here in Doha, elevating local and international conversations about the future of artificial intelligence. As attendees, the Chesmael team gained valuable perspectives from discussions that spanned AI governance frameworks, sovereign infrastructure strategies, and applied AI innovation across sectors.

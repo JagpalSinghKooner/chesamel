@@ -2,7 +2,6 @@
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 # The people come from src/content/team/.
 title: Our Team
-description: Chesamel's agile team of digital pioneers, marketing champions, and workforce specialists, united to deliver transformative business solutions.
 hero:
   title: Our Team
   subtitle: Meet our incredibly talented people
@@ -21,4 +20,6 @@ sections:
   - type: cta
     heading: Want to transform your business?
     text: the journey starts with just a click.
+seoTitle: "Meet Chesamel's Expert Team | Chesamel"
+seoDescription: "Chesamel's agile team of digital pioneers, marketing champions, and workforce specialists, united to deliver transformative business solutions."
 ---

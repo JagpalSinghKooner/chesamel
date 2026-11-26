@@ -14,7 +14,8 @@
     "check:toolkit": "node scripts/check-toolkit.ts",
     "test": "playwright test",
     "inventory": "node scripts/url-inventory.ts",
-    "import": "node scripts/import-wordpress/index.ts"
+    "import": "node scripts/import-wordpress/index.ts",
+    "seo:live": "node scripts/seo-from-live.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",

@@ -1,0 +1,61 @@
+---
+// Seo Component: everything in the <head> that search engines, social cards
+// and AI assistants read (#54). Title, meta description, canonical, Open
+// Graph, Twitter card and one JSON-LD @graph: the Organization, WebSite and
+// WebPage on every page, its BreadcrumbList when it shows a breadcrumb, then
+// whatever the page adds (a BlogPosting, a Service…). Base.astro renders it
+// from the `seo` each page passes.
+//
+// Pages hidden from search (src/noindex.mjs) get `noindex` and no canonical.
+import { isNoindex } from '../noindex.mjs';
+import type { Trail } from './trails';
+import { getOffices } from '../content/pages';
+import { defaultShareImage, siteName } from '../data/seo';
+import { absolute, breadcrumbList, graph, organization, webPage, website, type Node } from '../lib/structured-data';
+
+export interface Props {
+  title: string;
+  description: string;
+  // The page's hero or card image; live's default share image when absent.
+  image?: { src: string; alt: string };
+  // `article` for Insights.
+  type?: 'website' | 'article';
+  // The trail the page's Breadcrumb shows (trails.ts).
+  breadcrumb?: Trail;
+  // JSON-LD nodes particular to this page.
+  schema?: Node[];
+  // Every language version of this page, this one included, for hreflang (#14).
+  alternates?: { lang: string; href: string }[];
+}
+
+const { title, description, image, type = 'website', breadcrumb, schema = [], alternates = [] } = Astro.props;
+const noindex = isNoindex(Astro.url.pathname);
+const url = absolute(Astro.url.pathname);
+const shareImage = image ?? defaultShareImage;
+
+const jsonLd = graph([
+  organization(await getOffices()),
+  website(),
+  webPage({ url, title, description, image, hasBreadcrumb: !!breadcrumb }),
+  ...(breadcrumb ? [breadcrumbList(breadcrumb, url)] : []),
+  ...schema,
+]);
+// "<" escaped, so no text in the data can close the script early.
+const jsonLdText = JSON.stringify(jsonLd).replaceAll('<', '\\u003c');
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={url} />}
+{alternates.map((alternate) => <link rel="alternate" hreflang={alternate.lang} href={absolute(alternate.href)} />)}
+
+<meta property="og:site_name" content={siteName} />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={absolute(shareImage.src)} />
+{shareImage.alt && <meta property="og:image:alt" content={shareImage.alt} />}
+<meta name="twitter:card" content="summary_large_image" />
+
+<script type="application/ld+json" is:inline set:html={jsonLdText} />

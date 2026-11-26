@@ -6,6 +6,7 @@ objective: "To improve demand forecast accuracy and decrease inventory and finan
 image: {"src":"/wp-content/uploads/2024/11/Inventory-Intelligence-2.png","alt":""}
 pillars: ["ai-machine-learning","digital-transformation"]
 industries: ["technology"]
+seoTitle: "Inventory Intelligence | Chesamel"
 ---
 
 ### The Story

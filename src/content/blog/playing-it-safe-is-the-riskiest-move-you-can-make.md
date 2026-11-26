@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/10/public-domain-vectors-gmNWNuxKsRc-unsplash-scaled.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: ["technology"]
+seoTitle: "Playing It Safe Is The Riskiest Move You Can Make | Chesamel"
 ---
 
 Because B2B brands have to stand out. 

@@ -6,7 +6,8 @@ objective: "To manage logistics and enhance the attendee experience for Google C
 image: {"src":"/wp-content/uploads/2024/11/Google-Clouds-London-Partner-Receptions-2.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["hospitality"]
-description: "Chesamel organised Google Cloud's London Partner Receptions, connecting 400 professionals across Telco, Manufacturing, and Financial sectors."
+seoTitle: "Google Cloud's London Partner Receptions | Chesamel"
+seoDescription: "Chesamel organised Google Cloud's London Partner Receptions, connecting 400 professionals across Telco, Manufacturing, and Financial sectors."
 ---
 
 ### The Story

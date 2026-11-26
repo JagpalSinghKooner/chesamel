@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/IWD-blog.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "Women in Business: A Journey Towards Equity and Empowerment | Chesamel"
 ---
 
 Reflecting on Women's History Month and International Women's Day, we're reminded of both the progress made and the hurdles that still exist for women in the world of business. Despite advancements, women continue to confront the gender pay gap, underrepresentation in leadership, and unique challenges in fields like STEM and technology. 

@@ -6,7 +6,8 @@ objective: "To augment the quality of training models and create an effective da
 image: {"src":"/wp-content/uploads/2024/11/AI-driven-Biomedicine-2.png","alt":""}
 pillars: ["ai-machine-learning","digital-transformation"]
 industries: ["technology"]
-description: "Learn how Chesamel increases biomedical datasets with generative AI, leading to improved research outcomes and insights in the field of biomedicine."
+seoTitle: "AI-driven Biomedicine | Chesamel's Generative AI Case Study"
+seoDescription: "Learn how Chesamel increases biomedical datasets with generative AI, leading to improved research outcomes and insights in the field of biomedicine."
 ---
 
 ### The Story

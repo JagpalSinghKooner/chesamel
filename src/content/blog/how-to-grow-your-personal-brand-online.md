@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Branding-.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "How do you grow a personal brand online? Where do you distribute? Do you need a digital skills course for social media etc? Learn more here."
+seoTitle: "How To Grow Your Personal Brand Online | Chesamel"
+seoDescription: "How do you grow a personal brand online? Where do you distribute? Do you need a digital skills course for social media etc? Learn more here."
 ---
 
 *Guest Blogger Mate Borka: "Mate spent the last three years working marketing part-time and ran his own agency for 6 months.  He specialises in Social Media, Branding and Facebook Ads and also does photography mainly focusing on food and landscape imagery."* 

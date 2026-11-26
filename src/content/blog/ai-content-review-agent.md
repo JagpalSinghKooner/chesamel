@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/08/Chesamel-Innovation-Lab-10-Minutes-to-10-Seconds-scaled.png","alt":"Chesamel AI content review agent providing localisation recommendations"}
 pillars: ["digital-transformation"]
 industries: ["technology"]
-description: "See how Chesamel built an AI content review agent that cuts market localisation reviews from 10 minutes to 10 seconds."
+seoTitle: "AI Content Review Agent: 10 Minutes to 10 Seconds"
+seoDescription: "See how Chesamel built an AI content review agent that cuts market localisation reviews from 10 minutes to 10 seconds."
 ---
 
 Content review is one of those places where good work can lose momentum.

@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/The-Future-of-Leadership-Building-an-Agile-and-Resilient-Team-Structure.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "The Future of Leadership: Building an Agile and Resilient Team Structure | Chesamel"
 ---
 
 If ​agile organisations are 70% more likely to be in the top quartile of organisational health, businesses must adapt quickly or they risk crumbling under the pressure of modern employee needs: flexibility, freedom, hybrid working, and a better work-life balance.

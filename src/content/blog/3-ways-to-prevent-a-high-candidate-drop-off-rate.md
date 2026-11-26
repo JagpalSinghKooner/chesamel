@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Colourful-candidtaes-applications-copy.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "3 Ways to Prevent A High Candidate Drop Off Rate | Chesamel"
 ---
 
 Although unemployment may be experiencing a lovely prolonged low, candidate availability is reportedly on a bit of a low too, meaning employers looking for the candidates they desire might struggle and find themselves fishing from a slightly smaller pool. Realistically this means that all of the candidates who do apply, you'll want to hold on to until you've made your final decision; candidate drop of rate is something you'll want to keep to a minimum, but how?

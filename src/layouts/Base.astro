@@ -1,21 +1,20 @@
 ---
 import '../styles/global.css';
-import { isNoindex } from '../noindex.mjs';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
+import Seo, { type Props as SeoProps } from '../components/Seo.astro';
 import { CLOUDFLARE_WEB_ANALYTICS_TOKEN } from 'astro:env/server';
 import { cloudflareBeacon } from '../lib/consent';
 
 interface Props {
-  title: string;
-  description?: string;
+  // The page's title, description, image and structured data (Seo.astro).
+  seo: SeoProps;
   // The header lies over a full-height hero (the homepage).
   overlayHeader?: boolean;
 }
 
-const { title, description, overlayHeader = false } = Astro.props;
-const noindex = isNoindex(Astro.url.pathname);
+const { seo, overlayHeader = false } = Astro.props;
 // Cookieless, so it runs for every visitor without consent (#12).
 const beacon = cloudflareBeacon(CLOUDFLARE_WEB_ANALYTICS_TOKEN);
 ---
@@ -25,9 +24,7 @@ const beacon = cloudflareBeacon(CLOUDFLARE_WEB_ANALYTICS_TOKEN);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <Seo {...seo} />
     {beacon && <script is:inline defer {...beacon}></script>}
     <script is:inline>
       // Set before first paint so revealed Sections never flash. Visitors who

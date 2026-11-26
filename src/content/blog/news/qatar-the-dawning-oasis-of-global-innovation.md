@@ -5,7 +5,8 @@ author: "Graham Jones"
 hero: {"src":"/wp-content/uploads/2024/11/visit-qatar-ggB-yB154qM-unsplash-scaled-2-jpg.webp","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "Learn how Qatar is emerging as a leader in global innovation, driving digital transformation and economic growth. Read more from our team."
+seoTitle: "Qatar: The Dawning Oasis of Global Innovation | Chesamel"
+seoDescription: "Learn how Qatar is emerging as a leader in global innovation, driving digital transformation and economic growth. Read more from our team."
 ---
 
 Hayyakom! 

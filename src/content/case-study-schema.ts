@@ -3,7 +3,7 @@
 
 import { z } from 'astro/zod';
 import { pillarSlugs, industrySlugs } from '../data/taxonomy';
-import { text, date, image } from './schema-parts';
+import { text, date, image, seo } from './schema-parts';
 
 export const caseStudySchema = z.object({
   title: text,
@@ -19,7 +19,7 @@ export const caseStudySchema = z.object({
   // The first Pillar is the one cards and the hero show.
   pillars: z.array(z.enum(pillarSlugs)).min(1),
   industries: z.array(z.enum(industrySlugs)).default([]),
-  description: z.string().optional(),
+  ...seo,
 });
 
 export type CaseStudyData = z.infer<typeof caseStudySchema>;
@@ -28,7 +28,7 @@ export type CaseStudyData = z.infer<typeof caseStudySchema>;
 export const industrySchema = z.object({
   title: text,
   subtitle: text,
-  description: z.string().optional(),
+  ...seo,
   // Position of the Industry's card wherever all five are shown.
   order: z.number().int(),
   card: z.object({ image, summary: text }),

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/large-group-standing-in-office.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "How can you icrease your staff retention and ower your staff turnover? We're looking at ways you can keep your workforce growing and developing!"
+seoTitle: "Staff Retention Is An Art, Master It! | Chesamel"
+seoDescription: "How can you icrease your staff retention and ower your staff turnover? We're looking at ways you can keep your workforce growing and developing!"
 ---
 
 High staff turn over and low staff retention is a management and HR nightmare; it cultivates more work, increased expense and can be stifling for company growth as the new candidates start from scratch once again, staggering project development.   While constant new injections of talent are a positive thing for a company to experience as the diversity of the team evolves and therefore so does the skillset and experience of the team, the idea is that this experience and skill set will stay and develop with the company - or most of it at least!   Losing talent frequently is a sure sign that something is up, and it’s time to look at what can be done from your side of the table to reduce the frequency and increase staff retention.   Overall happy, content and fulfiled staff are more likely to stay with a company.  Richard Branson is a huge advocate for putting staff first, and let’s face it, Virgin isn’t a bad example to follow.  His take on this is that to ‘[put staff first, your customer second and shareholders third](https://www.inc.com/eric-schurenberg/sir-richard-branson-put-your-staff-first-customers-second-and-shareholders-third.html)’ will create a happy workforce who provide a better service to your customers, however the secondary benefit of putting staff first and creating a happy workforce, is that they are more likely to remain in your employment, where they’re happy.    

@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/09/jardel-vieira-QkgCyRhbMs4-unsplash-scaled.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "Two Jobs, One Salary: 2025’s Unexpected Workplace Trend | Chesamel"
 ---
 
 By Aislín Johnston

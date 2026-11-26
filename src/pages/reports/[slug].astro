@@ -7,21 +7,27 @@ import Base from '../../layouts/Base.astro';
 import InsightHeader from '../../components/InsightHeader.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
 import Button from '../../components/Button.astro';
-import { getNewest, type Report } from '../../content/insight-items';
+import { insightsTrail } from '../../components/trails';
+import { addressOf, getNewest, type Report } from '../../content/insight-items';
 import { primaryPillar } from '../../content/shared';
+import { entryMeta } from '../../lib/seo';
+import { absolute, article } from '../../lib/structured-data';
 
 export async function getStaticPaths() {
   return (await getNewest('reports')).map((report) => ({ params: { slug: report.id }, props: { report } }));
 }
 
 const { report } = Astro.props as { report: Report };
-const { title, image, pillars, description } = report.data;
+const { title, date, image, pillars } = report.data;
 const { Content } = await render(report);
+const meta = entryMeta(report);
+const trail = insightsTrail({ label: 'Reports', href: '/insights/reports/' });
+const story = article('Article', { url: absolute(addressOf(report)), headline: title, description: meta.description, date, image });
 ---
 
-<Base title={`${title} | Chesamel`} description={description}>
+<Base seo={{ ...meta, image, type: 'article', breadcrumb: trail, schema: [story] }}>
   <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
-    <InsightHeader section={{ label: 'Reports', href: '/insights/reports/' }} pillar={primaryPillar(report.data)} title={title} />
+    <InsightHeader trail={trail} pillar={primaryPillar(report.data)} title={title} />
     <div class="blog-body mt-10">
       <Content />
     </div>

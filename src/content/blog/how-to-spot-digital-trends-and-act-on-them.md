@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/How-to-Spot-digital-trends-.jpg","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "Spotting digital trends can help you to be more effective in your business and marketing, discover how with Digital Garage coach, Misha."
+seoTitle: "How to Spot Digital Trends And Act On Them | Chesamel"
+seoDescription: "Spotting digital trends can help you to be more effective in your business and marketing, discover how with Digital Garage coach, Misha."
 ---
 
 ### Digital Trends

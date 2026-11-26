@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Next24_Blog_blank_2-03.max-2500x2500-1.jpg","alt":""}
 pillars: ["ai-machine-learning"]
 industries: ["technology"]
-description: "Locate groundbreaking AI advancements from Google Cloud Next '24 in Las Vegas, highlighting transformative technologies shaping the future. Click here for more info."
+seoTitle: "Google Cloud Next '24: AI Innovations Unveiled in Vegas"
+seoDescription: "Locate groundbreaking AI advancements from Google Cloud Next '24 in Las Vegas, highlighting transformative technologies shaping the future. Click here for more info."
 ---
 
 This past week, Vegas hosted the 2024 Google Cloud Next event, where Google Cloud unveiled a series of groundbreaking innovations aimed at revolutionising business and everyday life through AI. Our CEO, [John Cofie](https://www.linkedin.com/in/johncofie/), had the opportunity to attend and get a good look at what’s in store.

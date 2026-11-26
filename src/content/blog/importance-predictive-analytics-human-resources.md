@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-photo-186464.jpeg","alt":""}
 pillars: ["bi-data-analytics"]
 industries: []
-description: "Predictive Analytics in HR is still a new trend with huge potential. Read here some ways of how predictive analytics could help HR leaders shape talent operations."
+seoTitle: "Importance of Predictive Analytics in Human Resources | Chesamel"
+seoDescription: "Predictive Analytics in HR is still a new trend with huge potential. Read here some ways of how predictive analytics could help HR leaders shape talent operations."
 ---
 
 What is Predictive Analytics? *"Predictive Analytics is a broad term describing a variety of statistical and analytical techniques used to develop models that predict future events or behaviours."* Charles Nyce, [Predictive Analytics White Paper](http://www.hedgechatter.com/wp-content/uploads/2014/09/predictivemodelingwhitepaper.pdf), 2007 Predictive Analytics and machine learning are disrupting a range of functions within a business and human resources is not an exception. By quantifying human capital, organisations are able to better predict future trends and make stronger and well-informed decisions. A lot of organisations have already started leveraging on large employee data-sets for the same reasons. Here are some ways predictive analytics could help HR leaders shape talent operations.

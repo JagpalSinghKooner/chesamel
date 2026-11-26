@@ -6,6 +6,7 @@ objective: "To increase new market opportunities for Cloudscene by refining and 
 image: {"src":"/wp-content/uploads/2024/11/Targeted-Marketing-for-Cloudscene-3.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "Targeted Marketing for Cloudscene | Chesamel"
 ---
 
 ### The Story

@@ -6,6 +6,7 @@ objective: "To showcase how Google Cloud's AI innovations empower financial inst
 image: {"src":"/wp-content/uploads/2026/02/Partner-Kickstart-4495-2.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: ["finance"]
+seoTitle: "Google Partnership Kickstart 2026 @ Wembley | Chesamel"
 ---
 
 Event Production & Experience

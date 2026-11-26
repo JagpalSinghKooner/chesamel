@@ -5,7 +5,8 @@ author: "Sarah Richardson"
 hero: {"src":"/wp-content/uploads/2024/12/Marketing-Resolutions-for-2025-Building-Trust-in-a-Distracted-World.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "Strategies to overcome misinformation, overstimulation, and privacy concerns in 2025. Learn how Chesamel helps brands foster genuine consumer connections."
+seoTitle: "Marketing Resolutions for 2025 | Building Trust | Chesamel"
+seoDescription: "Strategies to overcome misinformation, overstimulation, and privacy concerns in 2025. Learn how Chesamel helps brands foster genuine consumer connections."
 ---
 
 Trust used to be something brands could count on once they delivered a reliable product or service. But today, trust is no longer a default setting. With misinformation, overstimulation, and privacy concerns on the rise, consumer trust is at an all-time low.

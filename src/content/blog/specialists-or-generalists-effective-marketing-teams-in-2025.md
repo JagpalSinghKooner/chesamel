@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/01/Balancing-Generalists-and-Specialists-Building-an-Effective-Marketing-Team-for-2025.png","alt":""}
 pillars: ["marketing-engine","hybrid-workforce"]
 industries: []
-description: "Should marketing teams focus on specialists or generalists in 2025? The pros and cons of each approach to build a performing team."
+seoTitle: "Specialists vs. Generalists | Building Marketing Teams | Chesamel"
+seoDescription: "Should marketing teams focus on specialists or generalists in 2025? The pros and cons of each approach to build a performing team."
 ---
 
 Remember when hiring a marketing team meant finding an “affordable” social media manager who could do it all? Write the copy, build the strategy, analyse the data, and maybe even fix the printer? Those days are long gone. Today, businesses face a different kind of challenge: deciding whether to hire marketing generalists, specialists, or a combination of both.

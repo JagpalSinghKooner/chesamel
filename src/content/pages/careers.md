@@ -2,7 +2,6 @@
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 # The open roles are the Pages in careers/.
 title: Careers
-description: Browse the Chesamel Jobs page to find your next role! Explore new career opportunites with a quick hiring process.
 hero:
   title: Careers
   subtitle: Do your best work with brilliant people.
@@ -32,4 +31,6 @@ sections:
   - type: cta
     heading: Want to get involved?
     text: Connect with us.
+seoTitle: "Careers | Chesamel"
+seoDescription: "Browse the Chesamel Jobs page to find your next role! Explore new career opportunites with a quick hiring process."
 ---

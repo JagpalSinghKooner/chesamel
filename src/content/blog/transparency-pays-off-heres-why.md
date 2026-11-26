@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/10/Sustainability-week-2025.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "ESG transparency drives profitability: Learn how ethical reporting reduces capital costs, builds investor trust, and strengthens your bottom line."
+seoTitle: "Transparency Pays Off, Here's Why | Chesamel"
+seoDescription: "ESG transparency drives profitability: Learn how ethical reporting reduces capital costs, builds investor trust, and strengthens your bottom line."
 ---
 
 ## How Ethical ESG Reporting Strengthens and Stabilises the Bottom Line.

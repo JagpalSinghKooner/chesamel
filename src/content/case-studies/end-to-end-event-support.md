@@ -6,7 +6,8 @@ objective: "To support the execution of four strategic customer events for Googl
 image: {"src":"/wp-content/uploads/2024/11/Building-a-Pipeline-for-Google-Cloud-3.png","alt":""}
 pillars: ["hybrid-workforce","marketing-engine"]
 industries: ["hospitality"]
-description: "Chesamel provides end-to-end event support, including workforce solutions and marketing, to make for easy and impactful events. Contact us today."
+seoTitle: "Comprehensive Event Support Services | Chesamel"
+seoDescription: "Chesamel provides end-to-end event support, including workforce solutions and marketing, to make for easy and impactful events. Contact us today."
 ---
 
 ### The Story

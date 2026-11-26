@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/09/From-AI-Pilot-Fatigue-to-Production-Grade-Agentic-Operations.jpg","alt":"Five gates for moving agentic AI from pilot to production"}
 pillars: ["digital-transformation"]
 industries: ["technology"]
-description: "Why do enterprise AI pilots fail to deliver value? Discover five practical requirements for moving agentic AI from experimentation into production."
+seoTitle: "AI Pilot to Production: Building Agentic AI Operations"
+seoDescription: "Why do enterprise AI pilots fail to deliver value? Discover five practical requirements for moving agentic AI from experimentation into production."
 ---
 
 There is a number every board should have pinned above the AI budget line. MIT’s NANDA initiative, in The GenAI Divide: State of AI in Business 2025, examined more than 300 enterprise deployments and found 95% delivered no measurable P&L impact ([fortune.com via Yahoo](https://finance.yahoo.com/news/mit-report-95-generative-ai-105412686.html)), against an estimated $30–40 billion of enterprise spend ([forbes.com](https://www.forbes.com/sites/andreahill/2025/08/21/why-95-of-ai-pilots-fail-and-what-business-leaders-should-do-instead/)). Gartner, from a different direction, predicts over 40% of agentic initiatives will be cancelled by the end of 2027 ([gartner.com](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027)) on grounds of cost, unclear value, and weak risk controls.

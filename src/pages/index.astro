@@ -10,9 +10,10 @@ import LatestInsights from '../components/home/LatestInsights.astro';
 import ConnectWithUs from '../components/home/ConnectWithUs.astro';
 import WhereWeAre from '../components/home/WhereWeAre.astro';
 import { contactLink } from '../data/site';
+import { pageMeta } from '../lib/seo';
 ---
 
-<Base title="Chesamel | Global Business Transformation" overlayHeader>
+<Base seo={pageMeta('/')} overlayHeader>
   <Hero
     before="Global"
     words={['Business', 'Digital', 'Marketing', 'Workforce']}

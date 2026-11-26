@@ -6,7 +6,8 @@ objective: "To minimise inefficiencies in the prior authorisation process and de
 image: {"src":"/wp-content/uploads/2024/11/Simplifying-Healthcare-Processing-2.png","alt":""}
 pillars: ["ai-machine-learning","digital-transformation"]
 industries: ["healthcare"]
-description: "Chesamel enhanced healthcare efficiency by simplifying authorisation processes, leading to improved patient care and operational excellence. Get in touch today."
+seoTitle: "Simplifying Healthcare Processing Stories | Chesamel"
+seoDescription: "Chesamel enhanced healthcare efficiency by simplifying authorisation processes, leading to improved patient care and operational excellence. Get in touch today."
 ---
 
 ### The Story

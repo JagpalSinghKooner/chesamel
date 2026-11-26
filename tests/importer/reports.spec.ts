@@ -55,7 +55,6 @@ test('a published report becomes a Report at its original address: its intro is 
     image: { src: '/wp-content/uploads/2024/11/Agile-Marketing.jpg', alt: '' },
     pillars: ['marketing-engine'],
     hubspotFormId: '8b98f465-751c-4bac-a9e2-5fa99ad21572',
-    description: 'Find how agile marketing transforms business success.',
   });
   expect(report.body).toBe('Dive into our latest white paper, breaking down Agile Marketing.\n\nWe’re here to discuss:\n');
   expect(media).toEqual(['https://chesamel.com/wp-content/uploads/2024/11/Agile-Marketing.jpg']);

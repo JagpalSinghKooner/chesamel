@@ -4,6 +4,7 @@
 import { z } from 'astro/zod';
 import { pillarSlugs, industrySlugs } from '../data/taxonomy';
 import { inPublic } from './in-public';
+import { seo } from './schema-parts';
 
 export const blogPostSchema = z.object({
   title: z.string().trim().min(1),
@@ -17,7 +18,7 @@ export const blogPostSchema = z.object({
     .optional(),
   pillars: z.array(z.enum(pillarSlugs)).min(1),
   industries: z.array(z.enum(industrySlugs)).default([]),
-  description: z.string().optional(),
+  ...seo,
 });
 
 export type BlogPostData = z.infer<typeof blogPostSchema>;

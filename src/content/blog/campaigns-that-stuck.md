@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/10/vectorelements-sdwWlL_SJsA-unsplash-scaled.png","alt":""}
 pillars: ["hybrid-workforce","marketing-engine"]
 industries: ["technology"]
+seoTitle: "Campaigns That Stuck | Chesamel"
 ---
 
 By [Aislín Johnston](https://www.linkedin.com/in/aislinjohnston/)

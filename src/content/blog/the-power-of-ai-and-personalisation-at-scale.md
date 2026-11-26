@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/05/The-Power-of-AI-and-Personalisation-at-Scale-image.png","alt":""}
 pillars: ["marketing-engine","ai-machine-learning"]
 industries: []
-description: "Transform your marketing with AI-powered personalisation: boost engagement 20%, lift conversions 15%, and reduce churn 8%. Learn how Chesamel helps brands create tailored customer experiences at scale."
+seoTitle: "The Power of AI and Personalisation at Scale | Chesamel"
+seoDescription: "Transform your marketing with AI-powered personalisation: boost engagement 20%, lift conversions 15%, and reduce churn 8%. Learn how Chesamel helps brands create tailored customer experiences at scale."
 ---
 
 By Aislín Johnston

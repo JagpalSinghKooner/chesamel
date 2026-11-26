@@ -21,7 +21,9 @@ import ClientLogos from '../../../components/home/ClientLogos.astro';
 import ConnectWithUs from '../../../components/home/ConnectWithUs.astro';
 import ListingRedirect from '../../../components/ListingRedirect.astro';
 import { getCaseStudies, getIndustries, summariseCaseStudy } from '../../../content/case-studies';
-import { listings, pagePaths, pageHref, pageTitle } from '../../../content/paging';
+import { insightsTrail } from '../../../components/trails';
+import { listings, pagePaths, pageHref } from '../../../content/paging';
+import { pageMeta, pagedMeta } from '../../../lib/seo';
 
 const { base: BASE, perPage: PER_PAGE } = listings.ourWork;
 
@@ -30,11 +32,12 @@ export const getStaticPaths = (async ({ paginate }) => pagePaths(paginate, await
 const { current, last } = Astro.props;
 const caseStudies = (await getCaseStudies()).map(summariseCaseStudy);
 const industries = await getIndustries();
+const trail = insightsTrail({ label: 'Our Work' });
 ---
 
-<Base title={`${pageTitle('Our Work', current, last)} | Chesamel`} description="See our latest customer stories and learn how we turn our solutions into results.">
+<Base seo={{ ...pagedMeta(pageMeta(BASE), current, last), breadcrumb: trail }}>
   <ListingRedirect base={BASE} last={last} />
-  <InsightsHero heading="Our Work" text="See our latest customer stories and learn how we turn our solutions into results." />
+  <InsightsHero heading="Our Work" text="See our latest customer stories and learn how we turn our solutions into results." trail={trail} />
   <section aria-labelledby="catalogue" class="bg-black">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <h2 id="catalogue" class="type-heading-2 mb-10 text-white">Our catalogue</h2>

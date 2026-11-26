@@ -1,0 +1,34 @@
+{
+  "/": {
+    "title": "Chesamel | Driving Business Transformation & Growth",
+    "description": "Chesamel delivers workforce solutions to enable business transformation. Discover our full range of recruitment and marketing services..."
+  },
+  "/industries/": {
+    "title": "Chesamel Industries | Tech, Health, Finance, Hospitality, More",
+    "description": "Utilise our expertise across key industries, including technology, energy, finance, healthcare, and hospitality. Contact our team for more information."
+  },
+  "/insights/": {
+    "title": "Chesamel Insights: Analysis on Marketing & Digital Trends | Chesamel",
+    "description": "Chesamel's latest insights, reports, and webinars, offering expert commentary on marketing, digital transformation, and talent acquisition strategies."
+  },
+  "/insights/blog/": {
+    "title": "Chesamel News: Insights on AI, Marketing & Tech",
+    "description": "Chesamel's blog for expert insights on AI, marketing strategies, and technological advancements driving business transformation. See our blog posts here."
+  },
+  "/insights/our-work/": {
+    "title": "Our Work on Marketing & Digital Projects | Chesamel",
+    "description": "Chesamel's impactful work in marketing, digital transformation, and workforce solutions, drives innovation for forward-thinking brands. Get in touch today."
+  },
+  "/insights/podcasts/": {
+    "title": "Chesamel Podcast | Insights on Digital & Workforce Trends",
+    "description": "Tune into Chesamel's podcast for expert insights on digital transformation, workforce trends, and business growth. Listen now for interesting discussions."
+  },
+  "/insights/reports/": {
+    "title": "Reports and Whitepapers | Business Analysis | Chesamel",
+    "description": "Chesamel's in-depth reports for expert insights on business strategy, and workforce trends. Stay ahead with data-driven analysis from our team at Chesamel."
+  },
+  "/insights/webinars/": {
+    "title": "Our Webinars | Panels & Industry Insights | Chesamel",
+    "description": "Chesamel's latest webinars feature discussions with industry experts. Stay informed with panels, interviews, and more from our team of specialists."
+  }
+}

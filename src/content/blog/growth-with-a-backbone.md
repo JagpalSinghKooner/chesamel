@@ -5,7 +5,8 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2024/12/Making-Sense-of-Agility-in-Business-Transformation.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Discover how purpose-driven organisations fuel growth, resilience, and loyalty. Learn how Chesamel helps embed purpose into ESG, strategy, and culture."
+seoTitle: "Growth with a Backbone | ESG Solutions | Chesamel"
+seoDescription: "Discover how purpose-driven organisations fuel growth, resilience, and loyalty. Learn how Chesamel helps embed purpose into ESG, strategy, and culture."
 ---
 
 By Aislin Johnston

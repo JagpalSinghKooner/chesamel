@@ -6,7 +6,8 @@ objective: "To empower Google Cloud partners across Europe to drive Gemini adopt
 image: {"src":"/wp-content/uploads/2025/08/genAI@work.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "Chesamel enabled Google Cloud partners across Europe to drive Gemini adoption through localised content, events, and targeted lead generation."
+seoTitle: "GenAI at Work - Partner Event Series | Chesamel"
+seoDescription: "Chesamel enabled Google Cloud partners across Europe to drive Gemini adoption through localised content, events, and targeted lead generation."
 ---
 
 ## The Story

@@ -6,7 +6,8 @@ objective: "To recruit a team of international specialists to support the Blue O
 image: {"src":"/wp-content/uploads/2024/11/Building-a-Global-Team-for-Strategic-Impact-2.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Chesamel partnered with Malaysia Blue Ocean Strategy Institute to assemble international talent, delivering cost-effective solutions. Contact us."
+seoTitle: "Building a Global Team for Strategic Impact | Chesamel"
+seoDescription: "Chesamel partnered with Malaysia Blue Ocean Strategy Institute to assemble international talent, delivering cost-effective solutions. Contact us."
 ---
 
 ### The Story

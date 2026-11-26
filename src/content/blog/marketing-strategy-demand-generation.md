@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/behzad-ghaffarian-5JcdQfzR_YA-unsplash.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "We're analysing marketing strategy to get the best results possibl for business growth, demand generation can improve the quality of leads and customers."
+seoTitle: "Demand Generation | Marketing Strategy | Chesamel"
+seoDescription: "We're analysing marketing strategy to get the best results possibl for business growth, demand generation can improve the quality of leads and customers."
 ---
 
 Let’s talk about demand generation. What is it all about?  Well, quite simply, as it says on the tin, this is generating demand for your business.   In some cases this demand may be just under the surface, in other cases, it’s there ready for you to satisfy or you may have to create and craft this demand from nearly nothing; however it happens in the end, it starts with a comprehensive and integrated approach to sourcing customers.  And let’s be clear, demand generation not just ‘marketing’, its a business and marketing strategy which the whole team needs to understand - both the purpose and the process.  Involving all departments, and headed up by sales and marketing, initiate a meeting of minds to lay out your plan of attack; all departments do need to at least know what the approach to demand generation and ultimately securing leads will be, if not be vocal in the planning stages.  All departments have their own perspectives on the business’ successes and failings and insight into client satisfaction, therefore their ideas on how demand should and could be generated should be valued and heard.  

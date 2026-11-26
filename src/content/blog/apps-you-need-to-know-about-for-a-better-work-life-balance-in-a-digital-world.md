@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Using-Apps_Work-Life-Balance-.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Our world is fast paced, busy, exciting and demanding. Work demands more and more of our brain power and focus but we’re also surrounded by the ‘Friyay’ mentality and mindfulness reminders, telling us to promptly switch off for the weekend."
+seoTitle: "Best Apps for A Better Work-Life Balance In A Digital World"
+seoDescription: "Our world is fast paced, busy, exciting and demanding. Work demands more and more of our brain power and focus but we’re also surrounded by the ‘Friyay’ mentality and mindfulness reminders, telling us to promptly switch off for the weekend."
 ---
 
 Our world is fast paced, busy, exciting and demanding. Work demands more and more of our brain power and focus but we’re also surrounded by the ‘Friyay’ mentality and mindfulness reminders, telling us to promptly switch off for the weekend.  The declining state of our mental health as a country is largely due to the day to day stresses we ‘manage’ and often inflict on ourselves. Our phones and devices link us intimately with our workload and offer a little incentive or the possibility of truly turning off. The ultimate work-life balance is what we all strive for, but it is a tricky one to crack. However, the answer might actually be right there in the palm of your hand. So, let's use the devices that are connecting us so zealously with our emails and allow them to bring some much-needed organisation and downtime.  

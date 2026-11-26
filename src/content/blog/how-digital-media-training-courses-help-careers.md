@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Digital-Media-Training-Courses-Can-For-Your-Career.jpg","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "Wondering how online learning and digital media training courses could develop your marketing and digital media career? Here's how with Misha Cunningham."
+seoTitle: "Digital Media Training Courses Can Progress Your Career | Chesamel"
+seoDescription: "Wondering how online learning and digital media training courses could develop your marketing and digital media career? Here's how with Misha Cunningham."
 ---
 
 It’s that time of year where many of us are taking a moment to reflect on where we are and where we want to go. You may be asking yourself where you next opportunity lies and training can be a great way to explore this. Digital media training courses and [development opportunities](/learning-zone/) might be provided by your current employer, but not all have the resources or expertise to give you all the training you might desire to hit your next career target.   If you’re asking yourself how digital media training courses might help you or if you need to invest your time here, then simply put, can you afford not to?!  

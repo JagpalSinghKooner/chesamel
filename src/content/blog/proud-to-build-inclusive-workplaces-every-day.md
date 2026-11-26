@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/06/inclusive-workplace-2025.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Discover how Chesamel is redefining workplace inclusion through daily actions, honest data, and continuous improvement. Backed by employee feedback, we’re building a culture where everyone feels valued and empowered."
+seoTitle: "Proud to Build Inclusive Workplaces Every Day | Chesamel"
+seoDescription: "Discover how Chesamel is redefining workplace inclusion through daily actions, honest data, and continuous improvement. Backed by employee feedback, we’re building a culture where everyone feels valued and empowered."
 ---
 
 By Aislin Johnston

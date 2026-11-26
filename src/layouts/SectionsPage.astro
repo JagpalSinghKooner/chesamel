@@ -7,27 +7,45 @@ import PageHero from '../components/PageHero.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Sections from '../components/Sections.astro';
 import Form from '../components/Form.astro';
-import type { Page, Pillar, Service } from '../content/pages';
+import { getOffices, getTeamMembers, type Page, type Pillar, type Service } from '../content/pages';
+import type { Trail } from '../components/trails';
+import { entryMeta } from '../lib/seo';
+import { absolute, jobPosting, person, service, type Node } from '../lib/structured-data';
 
 interface Props {
   entry: Page | Pillar | Service;
-  trail: { label: string; href?: string }[];
-  // The <title>; the page's title with " | Chesamel" when not given.
-  documentTitle?: string;
+  // The trail above this page, which it ends.
+  trail: Trail;
 }
-const { entry, trail, documentTitle } = Astro.props;
-const { title, description, hero, sections } = entry.data;
+const { entry, trail: parents } = Astro.props;
+const { title, hero, sections } = entry.data;
 const { Content } = await render(entry);
 const hasBody = (entry.body ?? '').trim().length > 0;
 // As on the live site: Pillars, Services, Contact and open roles have a light
 // hero, every other Page an Indigo one.
-const lightHero = entry.collection !== 'pages' || entry.id === 'contact' || entry.id.startsWith('careers/');
+const isRole = entry.collection === 'pages' && entry.id.startsWith('careers/');
+const lightHero = entry.collection !== 'pages' || entry.id === 'contact' || isRole;
+const meta = entryMeta(entry);
+const trail = [...parents, { label: title }];
+
+// What the page is about, for its JSON-LD: a Pillar or Service offered, an
+// open role, or the Team Members the team directory shows.
+async function schemaOf(): Promise<Node[]> {
+  const url = absolute(Astro.url.pathname);
+  if (entry.collection !== 'pages') return [service({ url, name: title, description: meta.description })];
+  if (isRole && entry.data.posted) {
+    const role = { url, title, description: entry.rendered?.html ?? meta.description, posted: entry.data.posted, details: hero.details };
+    return [jobPosting(role, await getOffices())];
+  }
+  if (sections.some((section) => section.type === 'teamDirectory')) return (await getTeamMembers()).map(person);
+  return [];
+}
 ---
 
-<Base title={documentTitle ?? `${title} | Chesamel`} description={description ?? hero.paragraphs[0] ?? hero.subtitle}>
+<Base seo={{ ...meta, breadcrumb: trail, schema: await schemaOf() }}>
   <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} faintRings={entry.id === 'contact'}>
     {entry.id === 'contact' && <Form slot="aside" kind="contact" />}
   </PageHero>
-  <Breadcrumb band trail={[...trail, { label: title }]} />
+  <Breadcrumb band trail={trail} />
   <Sections sections={sections} hasBody={hasBody}><Content /></Sections>
 </Base>

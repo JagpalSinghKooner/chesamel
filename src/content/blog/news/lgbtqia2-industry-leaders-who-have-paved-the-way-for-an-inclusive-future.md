@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-markus-spiske-2027059-scaled-1.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Inspiring LGBTQIA2+ leaders who have driven change, fostering inclusivity and innovation across industries. Read more from Chesamel's blog today."
+seoTitle: "LGBTQIA2+ Leaders Shaping an Inclusive Future| Chesamel"
+seoDescription: "Inspiring LGBTQIA2+ leaders who have driven change, fostering inclusivity and innovation across industries. Read more from Chesamel's blog today."
 ---
 
 Chesamel pledges itself as Human and Brave as only two of our values, we strive to be a welcoming, human and inclusive organisation. Throughout Pride Month, we hope to be a platform for the message of inclusivity and diversity in the workplace and the industries we work with, supporting and promoting LBGTQAI2+ leaders and pioneers.

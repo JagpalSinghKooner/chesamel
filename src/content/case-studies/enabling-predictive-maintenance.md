@@ -6,7 +6,8 @@ objective: "To develop a predictive maintenance solution that enhances collected
 image: {"src":"/wp-content/uploads/2024/11/Enabling-predictive-maintenance-2.png","alt":""}
 pillars: ["ai-machine-learning","bi-data-analytics"]
 industries: []
-description: "Chesamel's predictive maintenance solutions optimise data collection and boost efficiency across various vessel types. Contact our team for more."
+seoTitle: "Increasing Efficiency with Predictive Maintenance | Chesamel"
+seoDescription: "Chesamel's predictive maintenance solutions optimise data collection and boost efficiency across various vessel types. Contact our team for more."
 ---
 
 ### The Story

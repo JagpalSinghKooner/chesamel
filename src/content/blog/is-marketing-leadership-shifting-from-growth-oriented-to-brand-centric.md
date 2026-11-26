@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Is-Marketing-Leadership-Shifting-From-Growth-Oriented-to-Brand-Centric-2.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "See the shift from growth-focused to brand-centric marketing leadership. Discover why brands now prioritise authenticity, privacy, and long-term value."
+seoTitle: "Is Marketing Shifting From Growth-Oriented to Brand-Centric? | Chesamel"
+seoDescription: "See the shift from growth-focused to brand-centric marketing leadership. Discover why brands now prioritise authenticity, privacy, and long-term value."
 ---
 
 ![Is Marketing Leadership Shifting From Growth Oriented to Brand Centric 2](/wp-content/uploads/2024/11/Is-Marketing-Leadership-Shifting-From-Growth-Oriented-to-Brand-Centric-2-1024x576.png)

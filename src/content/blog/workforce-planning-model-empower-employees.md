@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/rawpixel-973137-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Spring forward into the New Year with a strong workforce planning model which empowers your employees for the year ahead."
+seoTitle: "A Workforce Planning Model To Empower Employees In The New Year | Chesamel"
+seoDescription: "Spring forward into the New Year with a strong workforce planning model which empowers your employees for the year ahead."
 ---
 
 How can you empower your employees to take on the New Year with gusto, to feel empowered to bring new ideas into the fold and push forward with them? It starts with your workforce planning model, with your leadership and the effect that you can have on your employees. Leading your employees in the vein that you’d wish them to perform is key to coaxing the performance you desire, so your changes and choices start close to home. Doing this in the New Year can be difficult, minds are generally a little slow after the festive break, following a routine of eating, drinking and sleeping, an overdose of TV and plenty of leisurely activities, carried out at your own pace. Getting back into the working mindset never-mind hitting the ground running, doesn’t come easily to us all; your workforce planning model should be there to help you to help your employees cope with this transition back to a productive, proactive working approach!

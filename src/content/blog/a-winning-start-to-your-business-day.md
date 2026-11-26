@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/aziz-acharki-2fgnVgsm5uM-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "How you start your morning can set the tone for the whole day, so how do you start yours? Learn from some of the best, how to start your business day well!"
+seoTitle: "A Winning Start To Your Business Day"
+seoDescription: "How you start your morning can set the tone for the whole day, so how do you start yours? Learn from some of the best, how to start your business day well!"
 ---
 
 Getting your working week off to a flying start can begin with one really great Monday. Monday mornings can be fragile, vulnerable to any small factor threatening to knock us off keel, but we know you’re prepared to keep yourself from falling victim to these traps and wobbles; and to give you a little helping hand we’ve got some recommendations from the very best in their game. Dos and don’ts to start your business day with the best!     

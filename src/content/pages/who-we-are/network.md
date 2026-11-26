@@ -1,7 +1,6 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 title: Our Network
-description: Explore The Chesamel Network. Our network is made up of several organisations within the UK. Discover our range of services today, our team are here to help.
 hero:
   title: Our Network
   paragraphs:
@@ -50,4 +49,6 @@ sections:
   - type: cta
     heading: Want to transform your business?
     text: It all starts with a single step, or in this case, just one click.
+seoTitle: "Expert Talent & Network Solutions | Chesamel"
+seoDescription: "Explore The Chesamel Network. Our network is made up of several organisations within the UK. Discover our range of services today, our team are here to help."
 ---

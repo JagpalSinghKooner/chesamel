@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/11/85909172-4bb9-43c5-ae62-c8a52fb8c143.jpg","alt":""}
 pillars: ["hybrid-workforce","ai-machine-learning"]
 industries: []
+seoTitle: "Big Business, Small Thinking: Agentforce | Chesamel"
 ---
 
 By [Aislín Johnston](https://www.linkedin.com/in/aislinjohnston/)

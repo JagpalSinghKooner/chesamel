@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/02/WEF-Davos-2026-1.jpg","alt":"WEF Davos 2026"}
 pillars: ["ai-machine-learning","bi-data-analytics"]
 industries: ["technology"]
-description: "Davos 2026, the World Economic Forum Annual Meeting, focused on AI adoption, cyber resilience, and workforce delivery under uncertainty."
+seoTitle: "Davos 2026 Recap: Less Talk, More Delivery | Chesamel %"
+seoDescription: "Davos 2026, the World Economic Forum Annual Meeting, focused on AI adoption, cyber resilience, and workforce delivery under uncertainty."
 ---
 
 Davos 2026, the  [World Economic Forum Annual Meeting](https://www.weforum.org/meetings/world-economic-forum-annual-meeting-2026/), delivered its predictable headline moments. The speeches that dominate the news cycle, the quotes that get clipped and debated within minutes. Mark Carney’s warning about a more fractured global order, followed by Donald Trump’s forceful economic messaging, took a large share of the attention.

@@ -6,6 +6,7 @@ objective: "To showcase how Google Cloud’s smarter use of data can drive susta
 image: {"src":"/wp-content/uploads/2024/11/Bringing-Sustainability-to-Life-for-Google-Cloud-2.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "Bringing Sustainability to Life for Google Cloud | Chesamel"
 ---
 
 ### The Story

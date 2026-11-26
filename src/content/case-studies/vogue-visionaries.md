@@ -6,6 +6,7 @@ objective: "To create a masterclass series offering users the ability to learn f
 image: {"src":"/wp-content/uploads/2024/11/Vogue-Visionaries-2.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "Vogue Visionaries | Chesamel"
 ---
 
 ### The Story

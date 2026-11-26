@@ -5,6 +5,7 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/01/The-Digital-Transformation-for-SMEs-Achieving-More-with-Less.png","alt":""}
 pillars: ["digital-transformation"]
 industries: []
+seoTitle: "Digital Transformation for SMEs: Achieving More with Less | Chesamel"
 ---
 
 Digital transformation doesn't have to mean massive, expensive overhauls. For SMEs, the key is implementing digital transformations that deliver the most impact for the least investment. But, this is easier said than done, especially when you’re trying to keep pace with larger competitors who can more readily invest in digital transformation. 

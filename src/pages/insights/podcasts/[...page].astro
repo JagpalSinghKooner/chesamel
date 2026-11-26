@@ -14,7 +14,9 @@ import CaseStudySlider from '../../../components/CaseStudySlider.astro';
 import { getCaseStudies, summariseCaseStudy } from '../../../content/case-studies';
 import Pager from '../../../components/Pager.astro';
 import ListingRedirect from '../../../components/ListingRedirect.astro';
-import { listings, pagePaths, pageHref, pageTitle } from '../../../content/paging';
+import { insightsTrail } from '../../../components/trails';
+import { listings, pagePaths, pageHref } from '../../../content/paging';
+import { pageMeta, pagedMeta } from '../../../lib/seo';
 
 const { base: BASE, perPage: PER_PAGE } = listings.podcasts;
 
@@ -26,11 +28,12 @@ const podcasts = (await getNewest('podcasts')).slice((current - 1) * PER_PAGE, c
 const customerStories = ['elevating-fan-experiences-at-the-brits', 'b2b-marketing-for-ebay', 'augmenting-cybersecurity-with-ai'];
 const caseStudies = await getCaseStudies();
 const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)!).map(summariseCaseStudy);
+const trail = insightsTrail({ label: 'Podcast' });
 ---
 
-<Base title={`${pageTitle('Podcast', current, last)} | Chesamel`} description="Listen to the latest episodes in our podcast series, Chesamel Unplugged.">
+<Base seo={{ ...pagedMeta(pageMeta(BASE), current, last), breadcrumb: trail }}>
   <ListingRedirect base={BASE} last={last} />
-  <InsightsHero heading="Podcast" text="Listen to the latest episodes in our podcast series, Chesamel Unplugged." />
+  <InsightsHero heading="Podcast" text="Listen to the latest episodes in our podcast series, Chesamel Unplugged." trail={trail} />
   <section class="bg-black">
     <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-5 py-12 sm:px-6">
       <h2 class="type-heading-2 text-white">Listen to Chesamel Unplugged</h2>

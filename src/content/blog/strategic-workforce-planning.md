@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/campaign-creators-771723-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "What exactly do we mean by strategic workforce planning and can you analyse your business to apply it and reap the rewards?"
+seoTitle: "Strategic Workforce Planning & How To Apply It! | Chesamel"
+seoDescription: "What exactly do we mean by strategic workforce planning and can you analyse your business to apply it and reap the rewards?"
 ---
 
 Strategic workforce planning; perhaps it’s a term you’ve heard bandied around the office or used in meetings, maybe you’ve even used it yourself without fully understanding what it is.  What do we mean when we speak about strategic workforce planning and what can it bring to your business, your team and, let’s face it, more importantly, you?  

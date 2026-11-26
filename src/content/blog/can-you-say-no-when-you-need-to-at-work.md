@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/kai-pilger-395931-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "How and when can you say no? Saying no at work is difficult, but we often need to, so here's when and how to do so..."
+seoTitle: "Can You Say ‘No’ When You Need To At Work? | Chesamel"
+seoDescription: "How and when can you say no? Saying no at work is difficult, but we often need to, so here's when and how to do so..."
 ---
 
 Making positive impressions is important to most of us, whether we’d like to admit it or not, in our social lives, our relationships, with new people and, of course, in the workplace.  Part of our fundamental need to fit in and make that good impression is pleasing your colleagues, managers, bosses and even subordinates. But it’s equally important to know when you need to say no. The fear that there will be consequences is often too much of a persuasion to just say ‘yes’. Saying no at work isn't easy, for some less than others, but how do you handle saying no effectively in the workplace?  

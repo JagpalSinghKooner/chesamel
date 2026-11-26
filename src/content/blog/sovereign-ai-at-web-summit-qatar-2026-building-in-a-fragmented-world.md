@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/02/Web-Summit-Qatar-2026.jpg","alt":"Web Summit Qatar 2026"}
 pillars: ["ai-machine-learning","bi-data-analytics"]
 industries: ["technology"]
-description: "At Web Summit Qatar 2026 in Doha, the panel “Sovereign AI: Building technology in a fragmented world” landed on a simple reality."
+seoTitle: "Sovereign AI at Web Summit Qatar 2026: Building in a Fragmented World | Chesamel %"
+seoDescription: "At Web Summit Qatar 2026 in Doha, the panel “Sovereign AI: Building technology in a fragmented world” landed on a simple reality."
 ---
 
 ## Key Takeaways (quick read)

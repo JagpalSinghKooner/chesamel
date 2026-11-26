@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/nick-morrison-325805-unsplash.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Find effective methods to boost employee well-being in your workspace. Chesamel offers practical tips to create a more productive work environment."
+seoTitle: "Workplace Wellbeing: Simple Strategies by Chesamel"
+seoDescription: "Find effective methods to boost employee well-being in your workspace. Chesamel offers practical tips to create a more productive work environment."
 ---
 
 Whether you work from bustling coffee shops or a corporate cubicle, it has never been more important to consider your wellbeing during your working day. Incorporating wellness into your daily routine will undoubtedly increase productivity, creativity and make you a whole lot happier while you work. Take a look at our workforce planning methods for improving your wellbeing from your desk.

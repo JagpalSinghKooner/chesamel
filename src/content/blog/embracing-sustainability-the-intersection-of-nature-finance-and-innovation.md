@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Embracing-Sustainability-The-Intersection-of-Nature-Finance-and-Innovation-1.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "Embracing Sustainability: The Intersection of Nature, Finance, and Innovation | Chesamel"
 ---
 
 After a year where the urgency of addressing environmental, social, and governance (ESG) issues is evidently escalating, our recent webinar, "The Role of Finance, Technology & Innovation Ahead of COP28," presented invaluable insights. Hosted by [Charlie Eyeington](https://www.linkedin.com/in/charlieeyeington/) and [Maximilian Rossi](https://www.linkedin.com/in/maximilian-rossi/) of Chesamel, the event featured [Dan Sherrard-Smith](https://www.linkedin.com/in/dan-sherrard-smith/) from [Mother Tree](https://www.mymothertree.com/) and [Holly McKinlay](https://www.linkedin.com/in/hollymckinlay/) of [WWF-UK](https://www.wwf.org.uk/), who shared their profound expertise in sustainable practices and strategic communications.

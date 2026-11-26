@@ -397,5 +397,11 @@
     "expect": "redirect",
     "to": "/services/investment-impact-transformation/environmental-sustainability/",
     "why": "Doubled address on live serving the same Service."
+  },
+  {
+    "path": "/consumer-driven-sustainability-how-marketing-can-lead-the-change-2/",
+    "expect": "redirect",
+    "to": "/consumer-driven-sustainability-how-marketing-can-lead-the-change/",
+    "why": "Duplicate of the original post, with the same title, on live. Project Manager decision on #54."
   }
 ]

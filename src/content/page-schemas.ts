@@ -9,7 +9,7 @@
 
 import { z } from 'astro/zod';
 import { pillarSlugs, teamSlugs } from '../data/taxonomy';
-import { text, date, image } from './schema-parts';
+import { text, date, image, seo } from './schema-parts';
 
 const link = z.object({ label: text, href: text });
 const heading = { eyebrow: text.optional(), heading: text };
@@ -76,7 +76,7 @@ const hero = z.object({
 
 const built = {
   title: text,
-  description: z.string().optional(),
+  ...seo,
   hero,
   sections: z.array(sectionSchema).default([]),
 };

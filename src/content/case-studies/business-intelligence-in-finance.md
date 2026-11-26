@@ -6,7 +6,8 @@ objective: "To consolidate and analyse a financial services company's data."
 image: {"src":"/wp-content/uploads/2024/11/Business-Intelligence-in-Finance-3.png","alt":""}
 pillars: ["bi-data-analytics"]
 industries: ["finance"]
-description: "Chesamel's Business Intelligence solutions help financial services turn data into actionable insights for smarter decisions and growth. Visit our page for insights."
+seoTitle: "Business Intelligence in Finance | Specialists at Chesamel"
+seoDescription: "Chesamel's Business Intelligence solutions help financial services turn data into actionable insights for smarter decisions and growth. Visit our page for insights."
 ---
 
 ### The Story

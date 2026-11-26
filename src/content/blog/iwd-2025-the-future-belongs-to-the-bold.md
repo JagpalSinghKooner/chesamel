@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/03/IWD-2025-WEBSITE-BANNER.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Accelerating action in business, leadership, and gender equality. Read more about how we are transforming industries while championing female leadership, breaking barriers, and driving real change. The future won’t wait—neither will we. #AccelerateAction"
+seoTitle: "IWD 2025: The Future Belongs to the Bold | Chesamel"
+seoDescription: "Accelerating action in business, leadership, and gender equality. Read more about how we are transforming industries while championing female leadership, breaking barriers, and driving real change. The future won’t wait—neither will we. #AccelerateAction"
 ---
 
 **[The theme of "Accelerate Action"](https://www.internationalwomensday.com/Theme) guides the future we’re building — in business, in society, and in leadership.**

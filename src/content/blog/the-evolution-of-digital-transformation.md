@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Screenshot-2023-02-17-at-16.14.11.png","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "The evolution of digital transformation spans the 1970s to today. See how the internet and pandemic shaped strategies for business success."
+seoTitle: "The Evolution of Digital Transformation | Chesamel"
+seoDescription: "The evolution of digital transformation spans the 1970s to today. See how the internet and pandemic shaped strategies for business success."
 ---
 
 The evolution of [digital transformation](/services/digital-evolution/) has been unfolding since the 1970s, shaping how businesses adapt. From the rise of the internet, e-commerce, social media and cloud technology, this shift continues to redefine how organisations operate.

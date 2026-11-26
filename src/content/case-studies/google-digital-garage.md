@@ -6,6 +6,7 @@ objective: "To coordinate and manage installations and sessions for the Google D
 image: {"src":"/wp-content/uploads/2024/11/Google-Digital-Garage-2.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "Google Digital Garage | Chesamel"
 ---
 
 ### The Story

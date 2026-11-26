@@ -6,6 +6,7 @@ objective: "To develop an app that streamlines the booking and driver management
 image: {"src":"/wp-content/uploads/2024/11/Optimising-Employee-and-Visitor-Transport-Management-2.png","alt":""}
 pillars: ["digital-transformation"]
 industries: []
+seoTitle: "Optimising Employee and Visitor Transport Management | Chesamel"
 ---
 
 ### The Story

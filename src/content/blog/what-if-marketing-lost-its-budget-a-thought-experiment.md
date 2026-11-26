@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/11/nigel-hoare-WnSQPg8MIbQ-unsplash-scaled.png","alt":""}
 pillars: ["marketing-engine","hybrid-workforce"]
 industries: []
+seoTitle: "What If Marketing Lost Its Budget: A Thought Experiment | Chesamel"
 ---
 
 By [Aislín Johnston](https://www.linkedin.com/in/aislinjohnston/)

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-pixabay-532192-scaled.jpeg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Learn how CGI & Chesamel's partnership enhances ESG & CSR strategies, driving impactful change for businesses and communities. Read more from us today."
+seoTitle: "CGI x Chesamel Partner to enhance ESG and CSR | Chesamel"
+seoDescription: "Learn how CGI & Chesamel's partnership enhances ESG & CSR strategies, driving impactful change for businesses and communities. Read more from us today."
 ---
 
 We're excited to be partnering with CGI to strengthen our ESG and CSR strategic focus. Our collaboration will provide new agile ways of integrating and up-skilling stakeholders around the digital transformation journey and how our embedded team of specialist consultants can support them. 

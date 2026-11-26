@@ -5,19 +5,18 @@
 // site.
 import Breadcrumb from './Breadcrumb.astro';
 import BrandmarkRings from './BrandmarkRings.astro';
+import type { Trail } from './trails';
 
 interface Props {
   heading: string;
   text: string;
-  // The breadcrumb above this page; Home / Insights by default. Omit with
-  // `breadcrumb={false}` on the hub itself.
-  parents?: { label: string; href: string }[];
-  breadcrumb?: boolean;
+  // The breadcrumb strip below, ending with this page; none when omitted.
+  trail?: Trail;
   // h1 on a page; lower where the hero is shown as a sample.
   headingLevel?: 'h1' | 'h4';
 }
 
-const { heading, text, parents = [{ label: 'Home', href: '/' }, { label: 'Insights', href: '/insights/' }], breadcrumb = true, headingLevel: Heading = 'h1' } = Astro.props;
+const { heading, text, trail, headingLevel: Heading = 'h1' } = Astro.props;
 ---
 
 <section class="relative isolate overflow-hidden bg-indigo text-white" data-component="insights-hero">
@@ -27,4 +26,4 @@ const { heading, text, parents = [{ label: 'Home', href: '/' }, { label: 'Insigh
     <p class="type-subheading mt-6 max-w-2xl text-white lg:text-2xl">{text}</p>
   </div>
 </section>
-{breadcrumb && <Breadcrumb band trail={[...parents, { label: heading }]} />}
+{trail && <Breadcrumb band trail={trail} />}

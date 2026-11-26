@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/04/GC-Next.png","alt":""}
 pillars: ["digital-transformation","ai-machine-learning"]
 industries: []
-description: "AI is transforming business fast. Chesamel's CEO shares why digital transformation is urgent—and how to prepare for a future that won’t wait."
+seoTitle: "Google Cloud NEXT 2025: Change is a Non-Negotiable | Chesamel"
+seoDescription: "AI is transforming business fast. Chesamel's CEO shares why digital transformation is urgent—and how to prepare for a future that won’t wait."
 ---
 
 by John N. Cofie - Founder & CEO

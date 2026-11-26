@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/10/Partner-Enablement-The-Risk-First-Engine.jpg","alt":"Partner risk scorecard covering messaging, scope, pricing, escalation and content."}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "Improve partner enablement with a practical risk scorecard. Spot messaging gaps, set clear expectations and help partners build buyer trust at every stage."
+seoTitle: "Partner Enablement: Reduce Risk and Build Buyer Trust"
+seoDescription: "Improve partner enablement with a practical risk scorecard. Spot messaging gaps, set clear expectations and help partners build buyer trust at every stage."
 ---
 
 Somewhere today, a partner is describing your product to a buyer you will never meet. The question that should keep commercial leaders awake is simple: are they describing the product you actually sell?

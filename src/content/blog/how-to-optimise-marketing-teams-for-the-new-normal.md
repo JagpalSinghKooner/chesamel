@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/How-To-Optimise-Marketing-Teams-for-the-New-Normal.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "How To Optimise Marketing Teams for the New Normal | Chesamel"
 ---
 
 Marketing has changed. Brands once dictated what was "cool” (think Apple with the iPhone), today, individuals shape trends. This shift places a greater responsibility on marketing teams to understand and connect with their audiences. And as debates around in-office, hybrid, or fully remote work continue, the focus on what makes a team truly effective has often been overshadowed. 

@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/05/AWS-Summit.png","alt":""}
 pillars: ["digital-transformation","ai-machine-learning"]
 industries: ["technology"]
-description: "Explore key takeaways from AWS Summit 2025 and what they mean for businesses adopting AI and cloud at scale. Insights from Chesamel’s Roberto Sanha."
+seoTitle: "Reimagining Innovation: Reflections from the AWS Summit 2025 | Chesamel"
+seoDescription: "Explore key takeaways from AWS Summit 2025 and what they mean for businesses adopting AI and cloud at scale. Insights from Chesamel’s Roberto Sanha."
 ---
 
 **By [Roberto Sanha](https://www.linkedin.com/in/robertosanha/)** 

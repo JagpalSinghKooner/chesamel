@@ -1,0 +1,8 @@
+# Response headers, applied by Cloudflare Pages (#54).
+# Previews and the project's own pages.dev address are never indexed: only
+# https://chesamel.com is. The custom domain matches neither rule.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

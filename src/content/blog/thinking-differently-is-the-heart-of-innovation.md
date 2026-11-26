@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/03/Neurodiversity-Blog.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Discover why embracing neurodiversity is the future of innovation. Explore how AI and technology can break down barriers, empower diverse minds, and inclusive workplaces."
+seoTitle: "Thinking Differently is the Heart of Innovation | Chesamel"
+seoDescription: "Discover why embracing neurodiversity is the future of innovation. Explore how AI and technology can break down barriers, empower diverse minds, and inclusive workplaces."
 ---
 
 Every breakthrough that changed the world - from electricity to the internet, artificial intelligence to space exploration - came from people who dared to think differently.

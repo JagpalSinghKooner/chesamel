@@ -6,7 +6,8 @@ objective: "To align sales and marketing efforts, driving brand impact and sales
 image: {"src":"/wp-content/uploads/2024/11/Event-Steerco-with-Google-Cloud-UKI-1.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["hospitality"]
-description: "Learn how Chesamel empowered Google Cloud's UK&I presence with a scalable, ROI-driven event model, enhancing regional engagement and brand visibility."
+seoTitle: "Event Steerco with Google Cloud UK&I | Chesamel"
+seoDescription: "Learn how Chesamel empowered Google Cloud's UK&I presence with a scalable, ROI-driven event model, enhancing regional engagement and brand visibility."
 ---
 
 ### The Story

@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/rawpixel-678092-unsplash-2.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "There has been a lot of research highlighting the benefits of diverse teams in the Workforce Planning Model. Find out the results here."
+seoTitle: "Workforce Planning Model: Benefits Of Diverse Teams | Chesamel"
+seoDescription: "There has been a lot of research highlighting the benefits of diverse teams in the Workforce Planning Model. Find out the results here."
 ---
 
 *Guest Blogger, [Lina Poka](https://twitter.com/linap?lang=en):  “Lina* *built a very successful marketing career in Toronto, Canada before moving to Edinburgh and holds a BBA & an MBA from the prestigious Schulich School of Business at York University in Toronto, Canada; and for the past six years Lina has run her own marketing consulting company.  Lina’s career has enabled her to manage teams of up to 50 people, build numerous websites and apps with millions of visitors & downloads, work on a project for the 2010 Vancouver Olympics, broker deals with huge American & Canadian retailers and receive numerous international marketing awards.”*   There has been a lot of research highlighting the benefits of diverse teams in the [Workforce Planning Model](/learn-with-chesamel/).  

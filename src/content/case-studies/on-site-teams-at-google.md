@@ -6,6 +6,7 @@ objective: "To provide a versatile workforce solution, ensuring efficient projec
 image: {"src":"/wp-content/uploads/2024/11/On-site-teams-at-Google-2.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
+seoTitle: "On-site teams at Google | Chesamel"
 ---
 
 ### The Story

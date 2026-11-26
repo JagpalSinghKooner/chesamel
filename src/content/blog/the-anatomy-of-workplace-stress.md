@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/04/Stress-Awareness-Piece.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Discover the deeper causes of workplace stress and why quick fixes aren't enough. Learn how organisations can create human-first cultures that prioritise wellbeing."
+seoTitle: "The Anatomy of Workplace Stress | Chesamel"
+seoDescription: "Discover the deeper causes of workplace stress and why quick fixes aren't enough. Learn how organisations can create human-first cultures that prioritise wellbeing."
 ---
 
 Did you know April is Stress Awareness Month? 

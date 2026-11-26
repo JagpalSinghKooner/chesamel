@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/best-healthcare-digital-marketing-tools-jpg.png","alt":""}
 pillars: ["marketing-engine"]
 industries: ["healthcare"]
-description: "Chesamel navigates complex healthcare marketing challenges, implementing strategies to drive effective transformation. Contact us today for more information."
+seoTitle: "Marketing Transformation in Healthcare | Chesamel"
+seoDescription: "Chesamel navigates complex healthcare marketing challenges, implementing strategies to drive effective transformation. Contact us today for more information."
 ---
 
 ![](https://lh4.googleusercontent.com/bGEngOGZB0T7IRDYkII6JnZlrvM_DS24DNpHbMKR-jsjRq9MGQ7IC_21etz3IA65pdxnROW-73YfpQrv7mZaPI4DEysKGedyvO1-iezV4jpxpzVrvlp1HuySvgju6FV19QQ465QM61iXgQESGCnbdvA)

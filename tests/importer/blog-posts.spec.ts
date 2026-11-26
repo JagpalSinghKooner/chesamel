@@ -31,7 +31,6 @@ test('a published post becomes a Blog Post at its original address', () => {
     hero: { src: '/wp-content/uploads/2024/12/hero.png', alt: 'A ship at sea' },
     pillars: ['digital-transformation'],
     industries: ['technology'],
-    description: 'Avoid innovation for its own sake.',
   });
   expect(post.body).toBe('Remember when **adopting** tech was easy?\n');
 });

@@ -5,7 +5,8 @@ author: "Sarah Richardson"
 hero: {"src":"/wp-content/uploads/2024/12/Building-a-Responsible-Tech-Strategy-Avoiding-Innovation-for-Innovations-Sake-1.png","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "How to align technology with business goals, ensuring purposeful innovation that delivers measurable value. Learn more today."
+seoTitle: "Shaping a Responsible Tech Strategy | Chesamel Insights"
+seoDescription: "How to align technology with business goals, ensuring purposeful innovation that delivers measurable value. Learn more today."
 ---
 
 Remember when adopting new technology meant upgrading to faster computers or installing a new office suite? Those days are long gone. Now, buzzwords like AI, blockchain, and IoT dominate conversations, and businesses often feel the pressure to jump on the latest trends. But here’s the truth: not every innovation is worth chasing.

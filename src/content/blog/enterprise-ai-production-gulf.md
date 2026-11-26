@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/07/Untitled-design-1.png","alt":""}
 pillars: ["digital-transformation","bi-data-analytics"]
 industries: ["technology"]
-description: "Most enterprise AI plans in Saudi Arabia and Qatar never reach production. The four reasons why, and the delivery model that closes the gap."
+seoTitle: "Why Enterprise AI Stalls Before Production in the Gulf"
+seoDescription: "Most enterprise AI plans in Saudi Arabia and Qatar never reach production. The four reasons why, and the delivery model that closes the gap."
 ---
 
 *Practical lessons from 18 years working with Google, now applied to enterprise AI delivery in Saudi Arabia and Qatar.*

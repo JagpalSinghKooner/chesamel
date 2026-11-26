@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/Social-Media-success.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "Guest Blogger, Lina Poka gives us some digital skills training on the best social media management tools for getting on top."
+seoTitle: "The 10 Best Social Media Management Tools | Chesamel"
+seoDescription: "Guest Blogger, Lina Poka gives us some digital skills training on the best social media management tools for getting on top."
 ---
 
 *Guest Blogger, [Lina Poka](https://twitter.com/linap?lang=en):  “Lina* *built a very successful marketing career in Toronto, Canada before moving to Edinburgh and holds a BBA & an MBA from the prestigious Schulich School of Business at York University in Toronto, Canada; and for the past six years Lina has run her own marketing consulting company.  Lina’s career has enabled her to manage teams of up to 50 people, build numerous websites and apps with millions of visitors & downloads, work on a project for the 2010 Vancouver Olympics, broker deals with huge American & Canadian retailers and receive numerous international marketing awards.”*

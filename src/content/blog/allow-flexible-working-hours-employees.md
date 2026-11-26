@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-photo-306533.jpeg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "The ‘9 to 5’ working hour model has now become monotonous and inconvenient. Read here the major reasons why employers are offering flexible working hours."
+seoTitle: "Why Allow Flexible Working Hours? | Chesamel"
+seoDescription: "The ‘9 to 5’ working hour model has now become monotonous and inconvenient. Read here the major reasons why employers are offering flexible working hours."
 ---
 
 The buzz around flexible working hours is there for a reason. With a major chunk of the [global workforce transitioning into millennials](/managing-millennial-workplace-onboarding-retention/), we are seeing interesting employment trends like never before. It would be wrong to think that such changes are stemming purely from a generational gap. Technological advances have paved the path to new ways of working which we could not fathom a few years back. With newer ways of communication, we now have abundant collaborative options to work together in virtual teams. Both employees and employers are realising that the archaic '9 to 5' working hour model is not just monotonous but also inconvenient. We could go on and on listing advantages of offering flexible working hours to employees but here are three key reasons.

@@ -1,7 +1,6 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 title: What We Do
-description: Utilise Chesamel's services in marketing, digital transformation, workforce solutions, and skills development, tailored to drive your business growth.
 hero:
   title: What We Do
   links:
@@ -86,4 +85,6 @@ sections:
   - type: cta
     heading: Want to transform your business?
     text: The journey starts with clearer priorities and the right next step. Whether you start with an exploratory assessment or need longer-term support across one or more pillars, we help you move from strategy to execution with confidence and less friction.
+seoTitle: "Chesamel | Marketing, Digital & Workforce Solutions"
+seoDescription: "Utilise Chesamel's services in marketing, digital transformation, workforce solutions, and skills development, tailored to drive your business growth."
 ---

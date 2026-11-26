@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/12/Making-Sense-of-Agility-in-Business-Transformation.png","alt":""}
 pillars: ["digital-transformation","marketing-engine","hybrid-workforce"]
 industries: []
-description: "Learn how strategic agility enables businesses to adapt amidst constant change. Find key principles for successful transformation. Get in touch with us, today."
+seoTitle: "Understanding Agility in Business Transformation | Chesamel"
+seoDescription: "Learn how strategic agility enables businesses to adapt amidst constant change. Find key principles for successful transformation. Get in touch with us, today."
 ---
 
 Remember when "agility" simply meant being quick on your feet? Since the [Agile Manifesto’s](https://agilemanifesto.org/) release in 2001, the term has become a cornerstone of business conversations. But somewhere along the way, its meaning has become muddled… overused, often undefined, and stretched to fit every context.

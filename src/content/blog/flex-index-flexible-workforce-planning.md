@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/10/Banner-3-Direction-1-2nd-sep-26.jpg","alt":"flexible workforce planning"}
 pillars: ["hybrid-workforce"]
 industries: ["technology"]
-description: "Use the Flex Index to assess workload, hiring speed, skills and vacancy costs, and find the right mix of permanent and flexible staff for each team."
+seoTitle: "The Flex Index: Flexible Workforce Planning | Chesamel"
+seoDescription: "Use the Flex Index to assess workload, hiring speed, skills and vacancy costs, and find the right mix of permanent and flexible staff for each team."
 ---
 
 The flexible-versus-permanent staffing debate has been running for twenty years and has produced almost nothing an operator can use on a Tuesday. So here is a tool instead.

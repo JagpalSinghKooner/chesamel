@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/10/AI-Adoption-in-Marketing-Closing-the-Say-Do-Gap.jpg","alt":"AI Adoption in Marketing Closing the Say-Do Gap"}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "AI adoption in marketing needs more than new tools. Learn how clear data ownership, practical workflows and measurable outcomes help close the Say-Do Gap."
+seoTitle: "AI Adoption in Marketing: Closing the Say-Do Gap"
+seoDescription: "AI adoption in marketing needs more than new tools. Learn how clear data ownership, practical workflows and measurable outcomes help close the Say-Do Gap."
 ---
 
 Eighty per cent of marketers say they feel pressure to adopt AI.  

@@ -5,6 +5,7 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/pexels-christina-morillo-1181715.jpeg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "The surprising link between Capex, Opex, and success in people-focused businesses. | Chesamel"
 ---
 
 Managing Capex and Opex in today’s economic climate isn’t easy, that’s for sure. With high inflation, supply chain disruptions, and contagious strikes impacting businesses across the globe, juggling your expenditure is a challenge. But for people-focused businesses like [Chesamel](https://bit.ly/446e3te), the perspective is slightly different. I'll take you through managing Capex and Opex in a  people-focused business and provide real-world examples of how companies can leverage these expenditures. 

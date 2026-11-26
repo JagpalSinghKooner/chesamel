@@ -6,6 +6,7 @@ objective: "To showcase how Google Cloud's AI innovations empower financial inst
 image: {"src":"/wp-content/uploads/2025/10/0071_Google-Cloud-FSI-5763.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: ["finance"]
+seoTitle: "Financial Services Community Inaugural Event | Chesamel"
 ---
 
 ### The Story

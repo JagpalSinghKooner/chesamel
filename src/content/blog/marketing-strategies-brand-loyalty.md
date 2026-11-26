@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/joshua-coleman-fXls-tVemno-unsplash.jpg","alt":""}
 pillars: ["marketing-engine"]
 industries: []
-description: "Brand loyalty means something different today than it did 30 years ago, we interact with brands in a different way, so how do brands need to change too?"
+seoTitle: "Marketing Strategies | Brand Loyalty | Chesamel"
+seoDescription: "Brand loyalty means something different today than it did 30 years ago, we interact with brands in a different way, so how do brands need to change too?"
 ---
 
 In the good old days, there was less competition for customer’s attention and for their loyalty to the brand. With fewer brands in competition, it was easier for marketers to keep both the attention and loyalty of their customers; this brand loyalty was often strong and long lasting, you might even say a little blind. A long-standing, household name is a difficult habit to break, and as marketing evolved and modernised, it became more and more possible for brands to interact with consumers in new ways to strengthen this loyalty.  Logically this should mean that brand loyalty is now stronger than ever, however, the supposed decline in brand loyalty has been a hot topic of discussion over the last couple of years. So what is the truth? Are we actually less loyal now that we once were or has brand loyalty just evolved? With so many factors to explore, we need to consider that consumers now have so many more options in terms of brands to connect with and more knowledge about their brand choices before they make their decisions.  

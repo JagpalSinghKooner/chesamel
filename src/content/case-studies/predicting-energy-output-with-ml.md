@@ -6,7 +6,8 @@ objective: "To achieve self-consumption based only on green energy by using mach
 image: {"src":"/wp-content/uploads/2024/11/Predicting-Energy-Output-with-Machine-Learning-2.png","alt":""}
 pillars: ["investment-impact-transformation","ai-machine-learning"]
 industries: ["energy"]
-description: "Chesamel leverages machine learning to accurately predict energy output, increasing sustainability in the energy sector. Contact us today."
+seoTitle: "Predicting Energy Output with Machine Learning | Chesamel"
+seoDescription: "Chesamel leverages machine learning to accurately predict energy output, increasing sustainability in the energy sector. Contact us today."
 ---
 
 ### The Story

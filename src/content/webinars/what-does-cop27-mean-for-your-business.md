@@ -5,5 +5,6 @@ video: "fKUzKM9mY40"
 image: {"src":"/wp-content/uploads/2024/11/image-132.png","alt":""}
 pillars: ["bi-data-analytics","investment-impact-transformation"]
 industries: ["technology"]
+seoTitle: "What Does COP27 Mean For Your Business? | Chesamel"
 ---
 

@@ -6,6 +6,7 @@ objective: "To enhance account acquisition and growth, driving strategic initiat
 image: {"src":"/wp-content/uploads/2024/11/Building-a-Pipeline-for-Google-Cloud-3.png","alt":""}
 pillars: ["marketing-engine"]
 industries: []
+seoTitle: "Building a Pipeline for Google Cloud | Chesamel"
 ---
 
 ### The Story

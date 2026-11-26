@@ -1,7 +1,6 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
 title: Our Culture
-description: Chesamel's supportive workspace with monthly socials, where 87% of employees say it's a great place to work. Visit our page today for more information.
 hero:
   title: Our Culture
   subtitle: Take a look at what makes us who we are
@@ -61,4 +60,6 @@ sections:
   - type: cta
     heading: Want to get involved?
     text: connect with us.
+seoTitle: "Culture | Chesamel"
+seoDescription: "Chesamel's supportive workspace with monthly socials, where 87% of employees say it's a great place to work. Visit our page today for more information."
 ---

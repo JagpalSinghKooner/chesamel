@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/markus-spiske-1198338-unsplash.jpg","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Learning and development is an increasingly a priority within a business, and it starts with changing to a pro learning and development culture."
+seoTitle: "Changing Business Cultures for Learning and Development | Chesamel"
+seoDescription: "Learning and development is an increasingly a priority within a business, and it starts with changing to a pro learning and development culture."
 ---
 
 Why is it even important that you build a culture which champions learning and development?  While this might seem a ridiculous question to some, it is, unfortunately, a fact that many businesses, who have failed to move forward with a view for real growth and progression will ask upon seeing a title such as this one.  Is learning and development not upon the individual, to upskill themselves and maintain themselves as the most desirable candidates to progress through their career? Well yes, but also no. There is now a responsibility for businesses to become a source of upskilling.  Training and development opportunities need to come from businesses for a range of reasons, which benefit a much bigger picture than just the candidates.  

@@ -122,7 +122,6 @@ export function importIndustries(source: WxrSource): IndustryImport {
       if (!card?.summary) throw new Unreadable('no card in the Industries Grid block');
       const page = readPage(item.content);
       const cardImage = image(card.imageToken, 'the card');
-      const description = decodeEntities(item.meta._yoast_wpseo_metadesc ?? '').trim();
       for (const src of [cardImage.src, ...page.steps.map((s) => s.image.src)]) media.add(`https://chesamel.com${src}`);
       industries.push({
         address,
@@ -130,7 +129,6 @@ export function importIndustries(source: WxrSource): IndustryImport {
         data: {
           title,
           subtitle: page.subtitle,
-          ...(description && { description }),
           order: card.order,
           card: { image: cardImage, summary: card.summary },
           intro: page.intro,

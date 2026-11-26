@@ -4,7 +4,8 @@ date: "2021-10-13T14:21:20Z"
 author: "seoworks"
 pillars: ["marketing-engine"]
 industries: []
-description: "Programmatic marketing is a term used to describe the automated process of buying, selling and serving ad space in real time."
+seoTitle: "Programmatic Marketing: What can it do for my business? | Chesamel"
+seoDescription: "Programmatic marketing is a term used to describe the automated process of buying, selling and serving ad space in real time."
 ---
 
 Programmatic marketing, another coveted buzzword in the world of marketing, shrouded in big promises for success, efficiency and ROI. But can it really deliver on these claims, or is it a case of over-promising and under-delivering?

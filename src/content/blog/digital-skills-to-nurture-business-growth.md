@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/luca-florio-rAaAuFwCf4M-unsplash.jpg","alt":""}
 pillars: ["digital-transformation"]
 industries: []
-description: "Business growth can't be predicted by one determining factor, however, the progression of digital skills will have a significant impact on the near future."
+seoTitle: "Digital Skills To Nurture Business Growth | Chesamel"
+seoDescription: "Business growth can't be predicted by one determining factor, however, the progression of digital skills will have a significant impact on the near future."
 ---
 
 The growth of a business is propelled by the employees of which it constitutes. Businesses who do not invest time, money and resources into digitalising their operations, upskilling their staff and ensuring their teams are sufficiently digitally literate will fall behind. Digital advancements are sweeping workplaces, whipping up their operating systems, sales management, recruitment processes and communication lines; those who don’t keep up will get left behind and will certainly not be engaged for business growth.  This applies to businesses as a whole and individuals too. For businesses, this increases the opportunity for growth, development and ultimately success; for individuals, harnessing digital skills increases job prospects and decreases the threat of automation!  While not all roles are in need of digital skills, an increasing amount are and a recent study by the European Commission found that in 2017 even traditionally manual roles such as building workers also require basic digital skills [(50% of workplaces)](https://ec.europa.eu/digital-single-market/en/news/new-report-shows-digital-skills-are-required-all-types-jobs)  

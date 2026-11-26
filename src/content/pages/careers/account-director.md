@@ -3,6 +3,7 @@ title: "Account Director"
 employer: "Chesamel Group"
 posted: "2026-10-19T13:47:34Z"
 hero: {"title":"Account Director","details":["Hybrid","Full-Time","London, UK"],"links":[{"label":"Apply for this role","href":"https://www.linkedin.com/jobs/view/4475431909/"}]}
+seoTitle: "Account Director | Chesamel"
 ---
 
 We are looking for an experienced, commercially driven Account Director to lead and grow a portfolio of strategic client relationships. This is not simply an account management or delivery role. You will be responsible for developing senior client relationships, protecting and growing existing revenue, identifying new opportunities and expanding our relationships across client organisations.

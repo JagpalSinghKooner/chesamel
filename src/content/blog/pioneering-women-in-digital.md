@@ -5,7 +5,8 @@ author: "seoworks"
 hero: {"src":"/wp-content/uploads/2024/11/adult-american-asian-1061574.jpg","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
-description: "Google has been celebrating their #IAmRemarkable campaign. We too contributed blogs to women who have work in digital and have contributed to the evolution of digital."
+seoTitle: "Pioneering Women in Digital | Chesamel"
+seoDescription: "Google has been celebrating their #IAmRemarkable campaign. We too contributed blogs to women who have work in digital and have contributed to the evolution of digital."
 ---
 
 Digital roles are, unsurprisingly, still staggeringly under-filled by women.  According to Leigh Smyth, who is Head of Digital Inclusion at Lloyds Banking Group ‘[only 9.5% of students taking computer science A-Level courses are female](https://digileaders.com/women-in-technology/)’ and the number of women in the Uk in specialist technology roles is only at 17%. Although we’re making progress, we still have a long way to go in closing the gender gap in digital professions. With these stats, are we surprised that any, if not many, groundbreaking digital discoveries were made by women? Google has been celebrating their #IAmRemarkable campaign and as avid supporters and followers of this campaign, we too have been dedicating a few of our own blogs to the remarkable women who have and do work in digital or have contributed to the evolution of digital as we know it today, see our feature on Hedy Lamarr, without whom, we may not have the wifi we do today!

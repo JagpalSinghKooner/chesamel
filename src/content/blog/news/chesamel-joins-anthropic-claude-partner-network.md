@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/08/Copy-of-Untitled-1.png","alt":"Chesamel joins the Anthropic Claude Partner Network"}
 pillars: ["digital-transformation"]
 industries: ["technology"]
-description: "Chesamel joins the Anthropic Claude Partner Network, strengthening our ability to deliver scalable, responsible enterprise AI transformation."
+seoTitle: "Chesamel Joins the Anthropic Claude Partner Network"
+seoDescription: "Chesamel joins the Anthropic Claude Partner Network, strengthening our ability to deliver scalable, responsible enterprise AI transformation."
 ---
 
 We’re pleased to announce that Chesamel has officially joined the Anthropic Claude Partner Network.

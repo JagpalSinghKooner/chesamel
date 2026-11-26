@@ -5,7 +5,8 @@ author: "amalia"
 hero: {"src":"/wp-content/uploads/2025/01/The-Future-of-the-Workforce-2025-Trends-Shaping-the-Next-Decade-1.png","alt":""}
 pillars: ["hybrid-workforce"]
 industries: []
-description: "Key trends shaping the future of work, from digital transformation, to evolving skill demands. Stay ahead with Chesamel's expert insights from our specialists."
+seoTitle: "The Future of the Workforce | Trends & More | Chesamel"
+seoDescription: "Key trends shaping the future of work, from digital transformation, to evolving skill demands. Stay ahead with Chesamel's expert insights from our specialists."
 ---
 
 2024 was a landmark year for the workforce. Automation and AI propelled productivity to unprecedented heights, streamlining processes and enabling businesses to do more with less. While employees questioned the future of their roles, wondering how technology might reshape them.

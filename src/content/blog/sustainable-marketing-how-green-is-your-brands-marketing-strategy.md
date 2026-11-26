@@ -5,6 +5,7 @@ author: "Sarah Richardson"
 hero: {"src":"/wp-content/uploads/2024/12/Sustainable-Marketing-How-Green-is-Your-Brands-Marketing-Strategy.png","alt":""}
 pillars: ["investment-impact-transformation"]
 industries: []
+seoTitle: "Sustainable Marketing: How Green is Your Brand’s Marketing Strategy? | Chesamel"
 ---
 
 Remember when “going green” in marketing meant adding a leaf to your logo or using recyclable packaging? Those days are long gone. Today’s consumers are savvier than ever, looking for brands that back their environmental claims with real action.

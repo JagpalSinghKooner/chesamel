@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2024/11/uRNLzKCjSBetV6aFFviXQRfapQaAKvJilopZ_kKeYjGkFXmQsfBopob0EVkioFLKVvKeERxhXRRLsi306zk2FBDr0Z66P44xbTUYMM2VanL9Jn9lx0Uv_zrpnFZEuFg_-xcXfVAaks9495PoMlDiLlo.png","alt":""}
 pillars: ["digital-transformation","ai-machine-learning"]
 industries: ["technology"]
+seoTitle: "What to Automate and What to Leave Alone | Chesamel"
 ---
 
 An honest guide to using AI without diluting your brand. 

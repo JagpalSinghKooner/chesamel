@@ -3,11 +3,10 @@
 
 import { z } from 'astro/zod';
 import { pillarSlugs, industrySlugs } from '../data/taxonomy';
-import { text, date, image } from './schema-parts';
+import { text, date, image, seo } from './schema-parts';
 
 const title = text;
 const pillars = z.array(z.enum(pillarSlugs));
-const description = z.string().optional();
 
 export const podcastSchema = z.object({
   title,
@@ -24,7 +23,7 @@ export const podcastSchema = z.object({
     .refine((l) => Object.values(l).some(Boolean), 'Give at least one place to listen'),
   image: image.optional(),
   pillars: pillars.default([]),
-  description,
+  ...seo,
 });
 
 export const webinarSchema = z.object({
@@ -38,7 +37,7 @@ export const webinarSchema = z.object({
   image: image.optional(),
   pillars: pillars.default([]),
   industries: z.array(z.enum(industrySlugs)).default([]),
-  description,
+  ...seo,
 });
 
 export const reportSchema = z.object({
@@ -48,7 +47,7 @@ export const reportSchema = z.object({
   pillars: pillars.min(1),
   // The HubSpot form that sends the full report; forms are wired up separately.
   hubspotFormId: z.uuid().optional(),
-  description,
+  ...seo,
 });
 
 export type PodcastData = z.infer<typeof podcastSchema>;

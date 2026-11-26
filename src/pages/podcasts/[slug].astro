@@ -7,21 +7,27 @@ import Base from '../../layouts/Base.astro';
 import InsightHeader from '../../components/InsightHeader.astro';
 import ListenLinks from '../../components/ListenLinks.astro';
 import LabelLinks from '../../components/LabelLinks.astro';
-import { getNewest, type Podcast } from '../../content/insight-items';
+import { insightsTrail } from '../../components/trails';
+import { addressOf, getNewest, type Podcast } from '../../content/insight-items';
 import { formatDate, isoDate, primaryPillar } from '../../content/shared';
+import { entryMeta } from '../../lib/seo';
+import { absolute, podcastEpisode } from '../../lib/structured-data';
 
 export async function getStaticPaths() {
   return (await getNewest('podcasts')).map((podcast) => ({ params: { slug: podcast.id }, props: { podcast } }));
 }
 
 const { podcast } = Astro.props as { podcast: Podcast };
-const { title, date, guest, listen, image, pillars, description } = podcast.data;
+const { title, date, guest, listen, image, pillars } = podcast.data;
 const { Content } = await render(podcast);
+const meta = entryMeta(podcast);
+const trail = insightsTrail({ label: 'Podcast', href: '/insights/podcasts/' });
+const episode = podcastEpisode({ url: absolute(addressOf(podcast)), headline: title, description: meta.description, date, image, listen: Object.values(listen).filter((href) => href !== undefined) });
 ---
 
-<Base title={`${title} | Chesamel`} description={description}>
+<Base seo={{ ...meta, image, type: 'article', breadcrumb: trail, schema: [episode] }}>
   <article class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:py-20">
-    <InsightHeader section={{ label: 'Podcast', href: '/insights/podcasts/' }} pillar={primaryPillar(podcast.data)} title={title}>
+    <InsightHeader trail={trail} pillar={primaryPillar(podcast.data)} title={title}>
       <span>with our guest <strong class="font-semibold text-black">{guest}</strong></span>
       <time datetime={isoDate(date)}>{formatDate(date)}</time>
     </InsightHeader>

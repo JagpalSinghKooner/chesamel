@@ -5,7 +5,8 @@ author: "Faten Mjahed"
 hero: {"src":"/wp-content/uploads/2026/08/The-Post-Funnel-Playbook-Rebuilding-for-the-Signal-Cloud.jpg","alt":"Signal Cloud model showing B2B buyer intent beyond the traditional marketing funnel"}
 pillars: ["marketing-engine"]
 industries: ["technology"]
-description: "B2B buyers no longer move through a neat funnel. Discover the Signal Cloud model for reading intent and acting sooner."
+seoTitle: "B2B Buying Journey: Beyond the Funnel | Chesamel"
+seoDescription: "B2B buyers no longer move through a neat funnel. Discover the Signal Cloud model for reading intent and acting sooner."
 ---
 
 The funnel is fine. As a reporting convention, it still does its job: stages, conversion rates, a tidy chart for the board. The problem is that somewhere along the way we started mistaking the accounting system for the buyer’s actual behaviour, and the two have never looked less alike.

@@ -4,7 +4,7 @@ import { asWxr, type WxrSource } from './wxr.ts';
 import { toMarkdown, mediaUrls } from './html.ts';
 import { pillarsOf } from './labels.ts';
 import type { PillarSlug } from '../../src/data/taxonomy.ts';
-import { publishedOfType, addressOf, fileOf, isoDate, titleOf, descriptionOf, featuredImage, type ItemImport } from './insight-item.ts';
+import { publishedOfType, addressOf, fileOf, isoDate, titleOf, featuredImage, type ItemImport } from './insight-item.ts';
 
 export interface PodcastData {
   title: string;
@@ -14,7 +14,6 @@ export interface PodcastData {
   listen: { spotify?: string; amazon?: string; podcastAddict?: string; podchaser?: string };
   image?: { src: string; alt: string };
   pillars: PillarSlug[];
-  description?: string;
 }
 
 const PLATFORMS = { spotify: 'podcast_spotify', amazon: 'podcast_amazon', podcastAddict: 'podcast_podcastaddict', podchaser: 'podcast_podchase' } as const;
@@ -32,7 +31,6 @@ export function importPodcasts(source: WxrSource): ItemImport<PodcastData> {
       const link = item.meta[field]?.trim();
       if (link) listen[key as keyof typeof PLATFORMS] = link;
     }
-    const description = descriptionOf(item);
     const data: PodcastData = {
       title: titleOf(item),
       date: isoDate(item),
@@ -40,7 +38,6 @@ export function importPodcasts(source: WxrSource): ItemImport<PodcastData> {
       listen,
       ...(image && { image }),
       pillars: pillarsOf(wxr, item.meta.service),
-      ...(description && { description }),
     };
     return { address, file: fileOf(address), data, body: toMarkdown(item.content) };
   });

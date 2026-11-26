@@ -207,8 +207,7 @@ export function importServices(source: WxrSource): ServicesImport {
     try {
       const page = readPage(item.content, slug, wxr, (reason) => result.unreadable.push({ address, reason }));
       for (const src of JSON.stringify(page).match(/\/wp-content\/uploads\/[^"]+/g) ?? []) media.add(`https://chesamel.com${src}`);
-      const description = decodeEntities(item.meta._yoast_wpseo_metadesc ?? '').trim();
-      const common = { title: page.hero.title, ...(description && { description }), hero: page.hero, sections: page.sections };
+      const common = { title: page.hero.title, hero: page.hero, sections: page.sections };
       if (!service) {
         result.pillars.push({ address, file: `src/content/pillars/${slug}.md`, body: '', data: { ...common, order: PILLAR_ORDER.indexOf(slug) + 1 } });
       } else {

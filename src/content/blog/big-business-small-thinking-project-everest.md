@@ -5,6 +5,7 @@ author: "juan"
 hero: {"src":"/wp-content/uploads/2025/12/ftcms_08ad8f50-23ea-4067-b831-3674d67c0682.avif","alt":""}
 pillars: ["hybrid-workforce","digital-transformation"]
 industries: ["finance"]
+seoTitle: "Big Business, Small Thinking: Project Everest | Chesamel"
 ---
 
 How EY’s $100 Billion Bet Collapsed Under Its Own Weight
