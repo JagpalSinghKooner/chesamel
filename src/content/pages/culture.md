@@ -23,7 +23,7 @@ sections:
   - type: cards
     eyebrow: / benefits of working with us
     heading: Work Benefits
-    tone: off-white
+    tone: surface
     items:
       - { heading: Achieve your personal goals, text: "Enjoy flexible start/finish times, remote work options, and a cycle-to-work scheme to support your personal goals. Plus, take extra days off over Christmas to recharge.", image: { src: /wp-content/uploads/2024/10/Group-19.svg, alt: "" } }
       - { heading: Get ahead in your career, text: "As a fast-growing company, we offer incredible opportunities for ambitious, talented people to progress and develop. With private healthcare and a strong pension plan, we’re committed to supporting you as you advance.", image: { src: /wp-content/uploads/2024/10/Group-26.svg, alt: "" } }

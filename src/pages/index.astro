@@ -15,14 +15,19 @@ import { contactLink } from '../data/site';
 <Base title="Chesamel | Global Business Transformation" overlayHeader>
   <Hero
     before="Global"
-    words={['Business', 'Digital', 'Marketing', 'Workforce']}
+    words={[
+      { text: 'Business', tone: 'business' },
+      { text: 'Digital', tone: 'digital' },
+      { text: 'Marketing', tone: 'marketing' },
+      { text: 'Workforce', tone: 'workforce' },
+    ]}
     after="Transformation"
     image={{ src: '/images/hero-poster.webp', srcset: '/images/hero-poster-960.webp 960w, /images/hero-poster.webp 1920w' }}
     video="/video/hero.mp4"
     solutions
     actions={[
       { label: 'What We Do', href: '/what-we-do/', tone: 'dark' },
-      { label: 'Our Work', href: '/insights/our-work/', tone: 'indigo' },
+      { label: 'Our Work', href: '/insights/our-work/', tone: 'primary' },
     ]}
   />
   <ClientLogos />
@@ -42,7 +47,7 @@ import { contactLink } from '../data/site';
     heading="Want to transform your business?"
     text="Accelerate your business growth into a new age"
     actions={[
-      { label: 'What We Do', href: '/what-we-do/', tone: 'indigo' },
+      { label: 'What We Do', href: '/what-we-do/', tone: 'cta' },
       { ...contactLink, tone: 'outline' },
     ]}
   />

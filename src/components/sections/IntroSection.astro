@@ -18,7 +18,7 @@ const { heading, eyebrow, paragraphs, image, links } = section;
       {
         links.length > 0 && (
           <div class="mt-8 flex flex-wrap gap-3">
-            {links.map((link, i) => <Button href={link.href} tone={i === 0 ? 'indigo' : 'light'}>{link.label}</Button>)}
+            {links.map((link, i) => <Button href={link.href} tone={i === 0 ? 'primary' : 'light'}>{link.label}</Button>)}
           </div>
         )
       }

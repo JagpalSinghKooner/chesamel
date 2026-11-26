@@ -13,7 +13,7 @@ const { office, lead = false, headingLevel: Heading = 'h3' } = Astro.props;
 const tel = (phone: string) => `tel:${phone.replace(/[^+\d]/g, '')}`;
 ---
 
-<Card class:list={[brandCard, 'h-full border border-light-grey bg-white', lead && 'lg:flex-row']} data-office={office.data.country}>
+<Card class:list={[brandCard, 'h-full border border-border bg-panel', lead && 'lg:flex-row']} data-office={office.data.country}>
   {office.data.image && (
     <img src={office.data.image.src} alt={office.data.image.alt} loading="lazy" class:list={['aspect-[21/10] w-full object-cover', lead && 'lg:w-1/2']} />
   )}

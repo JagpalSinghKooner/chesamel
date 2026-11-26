@@ -31,9 +31,9 @@ const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)
 <Base title={`${pageTitle('Podcast', current, last)} | Chesamel`} description="Listen to the latest episodes in our podcast series, Chesamel Unplugged.">
   <ListingRedirect base={BASE} last={last} />
   <InsightsHero heading="Podcast" text="Listen to the latest episodes in our podcast series, Chesamel Unplugged." />
-  <section class="bg-black">
+  <section class="bg-band-dark">
     <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-5 py-12 sm:px-6">
-      <h2 class="type-heading-2 text-white">Listen to Chesamel Unplugged</h2>
+      <h2 class="type-heading-2 text-inverse">Listen to Chesamel Unplugged</h2>
       <Button href="https://open.spotify.com/show/3vQMN7K3w5z6T23vDhipjt" tone="outline">Listen now</Button>
     </div>
   </section>
@@ -43,7 +43,7 @@ const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)
     <ul class="mt-10 grid gap-6">
       {
         podcasts.map((p) => (
-          <li class="border border-light-grey p-6" data-component="podcast-card">
+          <li class="border border-border p-6" data-component="podcast-card">
             <h3 class="type-heading-3 text-2xl leading-tight">
               <a href={addressOf(p)} class="hover:underline">
                 {p.data.title}
@@ -51,7 +51,7 @@ const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)
             </h3>
             <p class="type-caption mt-3 flex flex-wrap gap-x-6 gap-y-1">
               <span>
-                with our guest <strong class="font-semibold text-black">{p.data.guest}</strong>
+                with our guest <strong class="font-semibold text-heading">{p.data.guest}</strong>
               </span>
               <time datetime={isoDate(p.data.date)}>{formatDate(p.data.date)}</time>
             </p>
@@ -68,7 +68,7 @@ const stories = customerStories.map((id) => caseStudies.find((c) => c.id === id)
   <CtaBlock
     heading="Feature on our podcast"
     text="Want to share your story, some business advice, or talk about a topic you're an expert in? We're always looking for new guests."
-    actions={[{ label: 'Get in Touch', href: '/contact/', tone: 'indigo' }]}
+    actions={[{ label: 'Get in Touch', href: '/contact/', tone: 'primary' }]}
   />
   <CaseStudySlider heading="Customer stories" action={{ label: 'View All', href: '/insights/our-work/' }} caseStudies={stories} />
 </Base>

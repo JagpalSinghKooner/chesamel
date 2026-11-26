@@ -19,12 +19,22 @@ A choice the ticket doesn't settle stops the work: `needs-info`, a comment with 
 
 The ticket is finished when its PR is merged with CI and the Preview green, every acceptance criterion is ticked, and the handoff is posted.
 
-Every PR that changes layout lists each changed Section with live chesamel.com's measured values (through Claude in Chrome, `getComputedStyle`, at 1440px and 390px wide) next to the Tailwind classes chosen, and marks each one "matches" or "approved deviation: <which>". For example:
+Every PR that changes layout or colour lists each changed Section with live chesamel.com's measured values (at 1440px and 390px wide) next to the Tailwind classes or theme roles chosen, and marks each one "matches" or "approved deviation: <which>". For example:
 
 | Section | Property | Live 1440 | Live 390 | Classes | |
 | --- | --- | --- | --- | --- | --- |
 | Page hero | padding-top | 120px | 80px | `pt-20 lg:pt-30` | matches |
 | Blog Post card | title size | 22px | 22px | `text-xl` (20px) | approved deviation: Tailwind scale |
+
+### Measuring live
+
+Measure live with the headless Playwright scripts in `scripts/measure-live/`, not by hand. They move the mouse and scroll first, since live's scripts wait for that. Output goes to `scripts/measure-live/out/` (ignored by git).
+
+- `node scripts/measure-live/measure.mjs /what-we-do/ /culture/`: each block's background, padding, flex and grid rows, and its text's size, weight and colour.
+- `node scripts/measure-live/colours.mjs /what-we-do/`: every colour the page uses, grouped as text (with the background behind it), fills, borders and SVG paint, with sample elements. Use it to give a new theme role its `live` value (ADR-0006).
+- `node scripts/measure-live/shots.mjs /what-we-do/`, then the same with `BASE=http://localhost:4321 TAG=ours`, then `python3 scripts/measure-live/compare.py what-we-do_1440 ours`: live and ours side by side, for the PR's screenshots.
+
+Every script takes `BASE` (default `https://chesamel.com`) and `WIDTHS` (default `1440,390`). Use Claude in Chrome only to spot-check one value, such as a hover state.
 
 1. List the tickets this one unblocks: `gh api repos/{owner}/{repo}/issues/<n>/dependencies/blocking --jq '.[].number'`.
 2. Post the handoff as a comment on the finished ticket and on each ticket it unblocks. Use this shape:

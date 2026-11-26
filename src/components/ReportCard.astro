@@ -1,17 +1,15 @@
 ---
-// Report card, as on the live Reports listing (#42): a Black tile with the
-// white wordmark top left, the brandmark top right, the white title,
-// "/ read report →", and the Report's cover as a circle cut off at the bottom
-// right. A bar along the top takes the accent of the Report's main label.
-// The live site fills the whole tile with that colour, which fails WCAG AA
-// under white text (ADR-0002), so here it is only the bar.
+// Report card, as on the live Reports listing (#42): a tile filled with the
+// accent of the Report's main label, with the white wordmark top left, the
+// brandmark top right, the white title, "/ read report →", and the Report's
+// cover as a circle cut off at the bottom right. The fill is the `-fill`
+// role, darkened from live's accent so white text passes WCAG AA (ADR-0006).
 //
 // On hover or keyboard focus the cover grows a little (not under reduced
 // motion). The cover is decorative: the title names the link.
 import Icon from './Icon.astro';
 import Logo from '../design-system/Logo.astro';
 import { focusOutline } from './button';
-import { accentFill } from './accent';
 import { labelAccents } from '../data/pillars';
 import type { PillarSlug } from '../data/taxonomy';
 
@@ -28,16 +26,16 @@ const { href, title, image, pillar, headingLevel: Heading = 'h3' } = Astro.props
 
 <a
   href={href}
-  class:list={[focusOutline, 'group relative isolate flex h-full min-h-65 flex-col gap-11 overflow-hidden bg-black pt-4 pe-4 pb-5.5 ps-7 text-white focus-visible:outline-indigo']}
+  class:list={[focusOutline, 'group relative isolate flex h-full min-h-65 flex-col gap-11 overflow-hidden bg-pillar-fill pt-4 pe-4 pb-5.5 ps-7 text-inverse focus-visible:outline-focus']}
+  data-accent={labelAccents[pillar]}
   data-component="report-card"
 >
-  <span aria-hidden="true" class:list={['absolute inset-x-0 top-0 h-1', accentFill[labelAccents[pillar]]]} data-accent-bar></span>
   {/* The logos carry their clear space as padding; the negative margins line their marks up with the edges, as on live. */}
   <div class="-mt-2 -me-2 flex items-start justify-between gap-3">
-    <span class="-ms-2.5"><Logo variant="wordmark" colour="white" height={14} /></span>
-    <Logo variant="brandmark" colour="white" height={40} />
+    <span class="-ms-2.5"><Logo variant="wordmark" tone="on-dark" height={14} /></span>
+    <Logo variant="brandmark" tone="on-dark" height={40} />
   </div>
-  <Heading class="w-1/2 text-xl leading-tight font-medium text-white">{title}</Heading>
+  <Heading class="w-1/2 text-xl leading-tight font-medium text-inverse">{title}</Heading>
   <p class="mt-auto flex items-center gap-4 text-sm leading-none font-medium">
     / read report
     <Icon name="arrow-right" class="size-5 rtl:-scale-x-100" />

@@ -10,10 +10,10 @@ const { id, section } = Astro.props;
 const industries = await getIndustries();
 ---
 
-<section aria-labelledby={id} class="bg-black">
+<section aria-labelledby={id} class="bg-band-dark">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
     <SectionHeading id={id} heading={section.heading} eyebrow={section.eyebrow} dark />
-    {section.text && <p class="mt-4 text-off-white">{section.text}</p>}
+    {section.text && <p class="mt-4 text-body-on-dark">{section.text}</p>}
     <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
       {industries.map((industry) => <li><IndustryCard industry={industry} tone="dark" /></li>)}
     </ul>

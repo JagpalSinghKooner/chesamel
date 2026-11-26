@@ -118,7 +118,7 @@ test('a Pillar page is read into Sections in the live order', () => {
       type: 'cards',
       heading: 'The capabilities behind Breakthrough Marketing',
       image: { src: '/wp-content/uploads/2024/10/image-213.png', alt: '' },
-      tone: 'off-white',
+      tone: 'surface',
       items: [
         { heading: 'Research & Data', text: 'Turn market data into a clear marketing direction.' },
         { heading: 'Branding', text: 'Create clearer positioning.' },
@@ -160,7 +160,7 @@ test('a Service is filed under its Pillar; its links skip the live redirects; pl
       type: 'cards',
       heading: 'Related Services',
       image: { src: '/wp-content/uploads/2024/10/image-213.png', alt: '' },
-      tone: 'off-white',
+      tone: 'surface',
       items: [
         { heading: 'Marketing Strategy and Planning', text: 'Get to know your customer in-depth.', href: '/services/marketing-engine/marketing-strategy-planning/' },
         { heading: 'Modern', text: 'A dedicated in-house creative agency.', href: 'https://modernworldwide.co/' },

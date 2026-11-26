@@ -33,13 +33,13 @@ const CardHeading = Heading === 'h2' ? 'h3' : 'h4';
 const dark = tone === 'dark';
 ---
 
-<section aria-labelledby={`${id}-heading`} class:list={['case-study-slider', dark ? 'bg-black' : 'bg-off-white']} data-component="case-study-slider">
+<section aria-labelledby={`${id}-heading`} class:list={['case-study-slider', dark ? 'bg-band-dark' : 'bg-surface']} data-component="case-study-slider">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div>
-        {eyebrow && <p class:list={['font-subheading', dark ? 'text-off-white' : 'text-dark-grey']}>{eyebrow}</p>}
-        <Heading id={`${id}-heading`} class:list={['type-heading-2 mt-3', dark && 'text-white']}>{heading}</Heading>
-        {text && <p class:list={['mt-4', dark ? 'text-off-white' : 'text-dark-grey']}>{text}</p>}
+        {eyebrow && <p class:list={['font-subheading', dark ? 'text-body-on-dark' : 'text-body']}>{eyebrow}</p>}
+        <Heading id={`${id}-heading`} class:list={['type-heading-2 mt-3', dark && 'text-inverse']}>{heading}</Heading>
+        {text && <p class:list={['mt-4', dark ? 'text-body-on-dark' : 'text-body']}>{text}</p>}
       </div>
       {action && <Button href={action.href} tone={dark ? 'outline' : 'light'}>{action.label}</Button>}
     </div>

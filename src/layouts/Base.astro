@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import { CLOUDFLARE_WEB_ANALYTICS_TOKEN } from 'astro:env/server';
 import { cloudflareBeacon } from '../lib/consent';
+import { palette } from '../data/theme';
 
 interface Props {
   title: string;
@@ -21,7 +22,7 @@ const beacon = cloudflareBeacon(CLOUDFLARE_WEB_ANALYTICS_TOKEN);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-palette={palette}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,10 +36,10 @@ const beacon = cloudflareBeacon(CLOUDFLARE_WEB_ANALYTICS_TOKEN);
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
     </script>
   </head>
-  <body class="bg-white">
+  <body>
     <a
       href="#main"
-      class="sr-only z-50 rounded-md bg-white px-4 py-2 font-semibold text-black focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      class="sr-only z-50 rounded-md bg-panel px-4 py-2 font-semibold text-heading focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >Skip to content</a
     >
     <CookieBanner />

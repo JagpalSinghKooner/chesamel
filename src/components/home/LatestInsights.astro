@@ -21,12 +21,12 @@ const filters = [
 const insights = (await getBlogPosts()).slice(0, 3).map(summarisePost);
 ---
 
-<section class="bg-off-white" aria-labelledby="latest-insights">
+<section class="bg-surface" aria-labelledby="latest-insights">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
       <h2 id="latest-insights" class="type-heading-2">Latest Insights</h2>
       <ul class="flex flex-wrap gap-2">
-        {filters.map((f) => <li><FulldevButton as="a" href={f.href} class:list={[brandButton, 'block border-light-grey bg-transparent px-3 py-2 text-inherit transition-none hover:border-dark-grey hover:bg-transparent hover:text-inherit']}>{f.label}</FulldevButton></li>)}
+        {filters.map((f) => <li><FulldevButton as="a" href={f.href} class:list={[brandButton, 'block border-border bg-transparent px-3 py-2 text-inherit transition-none hover:border-border-on-dark hover:bg-transparent hover:text-inherit']}>{f.label}</FulldevButton></li>)}
         <li><Button href="/insights/" tone="light">All Insights</Button></li>
       </ul>
     </div>

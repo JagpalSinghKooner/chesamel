@@ -12,3 +12,6 @@ playwright-report/
 
 # OS
 .DS_Store
+
+# Live measurements and screenshots (scripts/measure-live)
+scripts/measure-live/out/

@@ -1,14 +1,14 @@
 // The four Pillars as the homepage shows them. `label` is the live
 // homepage's wording, which differs from the Pillar names in GLOSSARY.md.
 //
-// `accent` is the Pillar's secondary colour token (ADR-0002, Pillar accents).
-// A Pillar's Services share it. Use it only for small non-text accents: tag
-// borders, dots, icons, accent bars. Never as a fill behind text and never
-// as text colour, since white text on these is 2.3 to 3.2:1 and fails
-// WCAG AA.
+// `accent` names the Pillar's accent role (`--accent-digital`, ...) in
+// src/styles/theme.css (ADR-0006). A Pillar's Services share it.
+// Set it as data-accent on an element, and the `pillar`, `pillar-text` and
+// `pillar-fill` utilities inside take that Pillar's mark, its AA-safe text
+// and its AA-safe fill under white text.
 import type { PillarSlug } from './taxonomy';
 
-export type PillarAccent = 'sky' | 'rose' | 'mint' | 'tiger';
+export type PillarAccent = 'digital' | 'marketing' | 'investment' | 'hybrid';
 
 export interface Pillar {
   name: string;
@@ -26,7 +26,7 @@ export const pillars: Pillar[] = [
     summary: 'Innovate your digital experience and strategy',
     href: '/services/digital-transformation/',
     icon: '/images/pillars/digital-transformation.svg',
-    accent: 'sky',
+    accent: 'digital',
   },
   {
     name: 'Marketing Engine',
@@ -34,7 +34,7 @@ export const pillars: Pillar[] = [
     summary: 'Turn potential buyers into loyal customers',
     href: '/services/marketing-engine/',
     icon: '/images/pillars/marketing-engine.svg',
-    accent: 'rose',
+    accent: 'marketing',
   },
   {
     name: 'Investment & Impact Transformation',
@@ -42,7 +42,7 @@ export const pillars: Pillar[] = [
     summary: 'Reduce your carbon footprint and increase your social impact',
     href: '/services/investment-impact-transformation/',
     icon: '/images/pillars/investment-impact-transformation.svg',
-    accent: 'mint',
+    accent: 'investment',
   },
   {
     name: 'Hybrid Workforce',
@@ -50,19 +50,19 @@ export const pillars: Pillar[] = [
     summary: 'Build your ultimate team of business advocates',
     href: '/services/hybrid-workforce/',
     icon: '/images/pillars/hybrid-workforce.svg',
-    accent: 'tiger',
+    accent: 'hybrid',
   },
 ];
 
 // The accent of every label an Insight can carry (its `pillars` field), for
 // tags and accent bars. The four Pillars take their own; AI & Machine
-// Learning and BI & Data Analytics take Sky, as on the live site (#42,
-// ADR-0002).
+// Learning and BI & Data Analytics take Digital Transformation's Sky, as on
+// the live site (#42, ADR-0006).
 export const labelAccents: Record<PillarSlug, PillarAccent> = {
-  'ai-machine-learning': 'sky',
-  'bi-data-analytics': 'sky',
-  'digital-transformation': 'sky',
-  'hybrid-workforce': 'tiger',
-  'investment-impact-transformation': 'mint',
-  'marketing-engine': 'rose',
+  'ai-machine-learning': 'digital',
+  'bi-data-analytics': 'digital',
+  'digital-transformation': 'digital',
+  'hybrid-workforce': 'hybrid',
+  'investment-impact-transformation': 'investment',
+  'marketing-engine': 'marketing',
 };

@@ -12,11 +12,11 @@ interface Props {
 const { eyebrow = '/ get the latest industry news, straight to your inbox', heading = 'Connect with us', idPrefix = 'newsletter' } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-indigo">
+<section class="relative isolate overflow-hidden bg-band-indigo">
   <div class="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-14 sm:px-6 lg:flex-row lg:items-center lg:gap-10 lg:py-18">
     <div class="lg:w-md lg:shrink-0">
-      <p class="font-subheading text-white">{eyebrow}</p>
-      <h2 class="type-heading-2 mt-3 text-white">{heading}</h2>
+      <p class="font-subheading text-label-on-indigo">{eyebrow}</p>
+      <h2 class="type-heading-2 mt-3 text-inverse">{heading}</h2>
     </div>
     <div class="lg:flex-1"><Form kind="newsletter" idPrefix={idPrefix} /></div>
   </div>

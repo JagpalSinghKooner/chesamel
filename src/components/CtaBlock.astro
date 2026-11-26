@@ -1,8 +1,7 @@
 ---
 // Call-to-action Component: a dark band with a heading, a line of text and
-// buttons, and the brandmark rings in its corner. The live rings are Indigo;
-// Indigo on Black is not a permitted brandmark pairing (guidelines page 9), so
-// they are white here.
+// buttons, and the brandmark rings in its corner, Indigo as on live (white in
+// the brand palette, whose guidelines don't pair Indigo with Black).
 import Button from './Button.astro';
 import BrandmarkRings from './BrandmarkRings.astro';
 import type { ButtonAction } from './button';
@@ -17,11 +16,11 @@ interface Props {
 const { heading, text, headingLevel: Heading = 'h2', actions } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-black" data-component="cta">
-  <BrandmarkRings tone="white" class="absolute -end-40 -bottom-56 -z-10 size-112 lg:-end-24 lg:-bottom-72 lg:size-160" />
+<section class="relative isolate overflow-hidden bg-band-dark" data-component="cta">
+  <BrandmarkRings on="dark" class="absolute -end-40 -bottom-56 -z-10 size-112 lg:-end-24 lg:-bottom-72 lg:size-160" />
   <div class="mx-auto max-w-3xl px-5 py-24 sm:px-6 sm:text-center lg:py-32">
-    <Heading class="type-heading-2 text-white">{heading}</Heading>
-    {text && <p class="mt-6 font-subheading text-lg text-off-white">{text}</p>}
+    <Heading class="type-heading-2 text-inverse">{heading}</Heading>
+    {text && <p class="mt-6 font-subheading text-lg text-cta-band-text">{text}</p>}
     <div class="mt-10 flex flex-wrap gap-3 sm:justify-center">
       {actions.map((a) => <Button href={a.href} tone={a.tone}>{a.label}</Button>)}
     </div>

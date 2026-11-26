@@ -34,24 +34,24 @@ const control = [
   focusOutline,
   'static my-0 size-11 shrink justify-center rounded-md bg-transparent text-[length:inherit] font-normal shadow-none transition-colors duration-300 disabled:cursor-default disabled:opacity-40',
   dark
-    ? 'border-white/40 text-white hover:border-white hover:bg-white hover:text-black focus-visible:outline-white'
-    : 'border-medium-grey text-black hover:border-black hover:bg-black hover:text-white focus-visible:outline-black',
+    ? 'border-control-border-on-dark text-inverse hover:border-inverse hover:bg-panel hover:text-heading focus-visible:outline-inverse'
+    : 'border-border-strong text-heading hover:border-heading hover:bg-band-dark hover:text-inverse focus-visible:outline-heading',
 ];
 ---
 
 <Carousel role="group" aria-labelledby={labelledby} aria-label={label} class:list={['slider', className]} data-component="slider" data-slider>
   <CarouselContent
     class="pb-4 group-data-[orientation=horizontal]/carousel:-ms-6"
-    viewportProps={{ tabindex: 0, class: 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo', 'data-native-scroll': '' }}
+    viewportProps={{ tabindex: 0, class: 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus', 'data-native-scroll': '' }}
   >
     <slot />
   </CarouselContent>
   <div class="mt-6 flex items-center justify-end gap-4" data-controls hidden>
-    <div aria-hidden="true" class:list={['h-0.5 w-full max-w-xs', dark ? 'bg-white/25' : 'bg-light-grey']}>
-      <div class:list={['h-full transition-[width] duration-300', dark ? 'bg-white' : 'bg-indigo']} data-progress></div>
+    <div aria-hidden="true" class:list={['h-0.5 w-full max-w-xs', dark ? 'bg-track-on-dark' : 'bg-border']}>
+      <div class:list={['h-full transition-[width] duration-300', dark ? 'bg-inverse' : 'bg-primary']} data-progress></div>
     </div>
     <CarouselPrevious aria-label="Previous" class:list={control}><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>←</span></CarouselPrevious>
-    <p class:list={['min-w-12 text-center text-sm font-semibold tabular-nums', dark ? 'text-white' : 'text-black']} data-slide-count></p>
+    <p class:list={['min-w-12 text-center text-sm font-semibold tabular-nums', dark ? 'text-inverse' : 'text-heading']} data-slide-count></p>
     <CarouselNext aria-label="Next" class:list={control}><span aria-hidden="true" class="inline-block rtl:-scale-x-100" data-arrow>→</span></CarouselNext>
   </div>
 </Carousel>

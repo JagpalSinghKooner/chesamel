@@ -15,7 +15,7 @@ sections:
     eyebrow: / bringing people together
     heading: Our Culture
     text: We're flexible, agile, and unique. We're also united by our values and shared passion to fuel positive change.
-    tone: off-white
+    tone: surface
     items:
       - { heading: Recognition, text: "We take the time to recognise and reward our employees for their work, both individually and as a team." }
       - { heading: Support, text: "We offer private healthcare and a comprehensive employee assistance programme, as well as our cycle to work scheme." }

@@ -13,7 +13,7 @@ const { id, section } = Astro.props;
 const { heading, eyebrow, paragraphs, items } = section;
 ---
 
-<section data-component="section-tabs" aria-labelledby={id} class="bg-off-white">
+<section data-component="section-tabs" aria-labelledby={id} class="bg-surface">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
     <SectionHeading id={id} heading={heading} eyebrow={eyebrow} />
     {paragraphs.map((p) => <p class="mt-6 max-w-3xl">{p}</p>)}
@@ -23,7 +23,7 @@ const { heading, eyebrow, paragraphs, items } = section;
           items.map((item, i) => (
             <TabsTrigger
               value={String(i)}
-              class="h-auto flex-none whitespace-normal rounded-none border-0 border-b-4 border-transparent px-4 py-3 font-subheading text-[length:inherit] font-normal text-inherit transition-none hover:text-inherit data-[state=active]:border-indigo data-[state=active]:bg-white data-[state=active]:text-inherit group-data-[variant=default]/tabs-list:data-[state=active]:shadow-none"
+              class="h-auto flex-none whitespace-normal rounded-none border-0 border-b-4 border-transparent px-4 py-3 font-subheading text-[length:inherit] font-normal text-inherit transition-none hover:text-inherit data-[state=active]:border-primary data-[state=active]:bg-panel data-[state=active]:text-inherit group-data-[variant=default]/tabs-list:data-[state=active]:shadow-none"
             >
               {item.title}
             </TabsTrigger>
@@ -32,7 +32,7 @@ const { heading, eyebrow, paragraphs, items } = section;
       </TabsList>
       {
         items.map((item, i) => (
-          <TabsContent value={String(i)} class="mt-8 grid flex-none gap-8 border-t-4 border-indigo bg-white p-8 text-[length:inherit] md:grid-cols-2">
+          <TabsContent value={String(i)} class="mt-8 grid flex-none gap-8 border-t-4 border-primary bg-panel p-8 text-[length:inherit] md:grid-cols-2">
             <div>
               <h3 class="type-heading-3 text-2xl">{item.title}</h3>
               {item.paragraphs.map((p) => <p class="mt-4">{p}</p>)}
@@ -43,7 +43,7 @@ const { heading, eyebrow, paragraphs, items } = section;
                 <div>
                   {item.listLabel && <p class="font-subheading">{item.listLabel}</p>}
                   <ul class="mt-4 grid gap-2">
-                    {item.list.map((entry) => <li class="border-b border-light-grey pb-2">{entry}</li>)}
+                    {item.list.map((entry) => <li class="border-b border-border pb-2">{entry}</li>)}
                   </ul>
                 </div>
               )

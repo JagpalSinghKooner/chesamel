@@ -20,12 +20,12 @@ const { member, headingLevel: Heading = 'h3', bio = false } = Astro.props;
 const { name, role, photo, linkedin, email } = member.data;
 const { Content } = await render(member);
 const hasBio = bio && (member.body ?? '').trim().length > 0;
-const iconButton = [focusOutline, 'grid size-14 place-items-center bg-indigo/20 text-indigo transition-colors duration-300 hover:bg-indigo hover:text-white focus-visible:outline-indigo'];
+const iconButton = [focusOutline, 'grid size-14 place-items-center bg-icon-button text-emphasis transition-colors duration-300 hover:bg-primary hover:text-inverse focus-visible:outline-focus'];
 ---
 
-<Card as="article" class:list={[brandCard, 'h-full gap-10 text-dark-grey']} data-component="team-card">
-  <div class="relative border border-medium-grey">
-    <img src={photo.src} alt="" loading="lazy" class="aspect-square w-full bg-off-white object-cover" />
+<Card as="article" class:list={[brandCard, 'h-full gap-10 text-body']} data-component="team-card">
+  <div class="relative border border-border-strong">
+    <img src={photo.src} alt="" loading="lazy" class="aspect-square w-full bg-surface object-cover" />
     {
       (linkedin || email) && (
         <div class="absolute start-3 bottom-3 flex gap-2.5">
@@ -44,8 +44,8 @@ const iconButton = [focusOutline, 'grid size-14 place-items-center bg-indigo/20 
     }
   </div>
   <div>
-    <Heading class="text-2xl leading-8 font-medium text-dark-grey">{name}</Heading>
-    <p class="mt-1 text-xl font-medium text-indigo">/ {role}</p>
+    <Heading class="text-2xl leading-8 font-medium text-body">{name}</Heading>
+    <p class="mt-1 text-xl font-medium text-emphasis">/ {role}</p>
     {
       hasBio && (
         <details class="group/bio mt-5">

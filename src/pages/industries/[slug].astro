@@ -42,15 +42,15 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
       </div>
     </div>
   </section>
-  <section aria-label="How we work" class="bg-black">
+  <section aria-label="How we work" class="bg-band-dark">
     <ol class="mx-auto grid max-w-7xl gap-6 px-5 py-20 sm:px-6 lg:py-28 md:grid-cols-3">
       {
         steps.map((step) => (
-          <li class="flex flex-col bg-indigo">
+          <li class="flex flex-col bg-band-indigo">
             <img src={step.image.src} alt={step.image.alt} loading="lazy" class="aspect-[4/3] w-full object-cover" />
             <div class="p-6">
-              <h3 class="type-heading-3 text-xl text-white">{step.heading}</h3>
-              <p class="mt-3 text-white">{step.text}</p>
+              <h3 class="type-heading-3 text-xl text-inverse">{step.heading}</h3>
+              <p class="mt-3 text-body-on-indigo">{step.text}</p>
             </div>
           </li>
         ))
@@ -62,7 +62,7 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
       <p class="font-subheading">{experience.eyebrow}</p>
       <h2 id="experience" class="type-heading-2 mt-3">{experience.heading}</h2>
       {experience.paragraphs.map((p) => <p class="mt-6">{p}</p>)}
-      <div class="mt-8"><Button href="/contact/" tone="indigo">Let's Chat</Button></div>
+      <div class="mt-8"><Button href="/contact/" tone="primary">Let's Chat</Button></div>
     </div>
   </section>
   <ClientLogos />
@@ -73,7 +73,7 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
     action={{ label: 'View All', href: `/insights/our-work/?industry=${slug}` }}
     caseStudies={caseStudies.map(summariseCaseStudy)}
   />
-  <section aria-labelledby="related-posts" class="bg-off-white">
+  <section aria-labelledby="related-posts" class="bg-surface">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
@@ -83,7 +83,7 @@ const posts = (await getBlogPosts()).filter((p) => p.data.industries.includes(sl
         </div>
         <div class="flex flex-wrap gap-3">
           <Button href="/insights/blog/" tone="light">View All</Button>
-          <Button href="/contact/" tone="indigo">Let's Chat</Button>
+          <Button href="/contact/" tone="primary">Let's Chat</Button>
         </div>
       </div>
       <ul class="mt-12 grid gap-4 md:grid-cols-3">

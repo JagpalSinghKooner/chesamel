@@ -36,7 +36,7 @@ const industries = await getIndustries();
       </p>
     </div>
   </section>
-  <section aria-labelledby="key-industries" class="bg-off-white">
+  <section aria-labelledby="key-industries" class="bg-surface">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
       <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
@@ -50,10 +50,10 @@ const industries = await getIndustries();
       </ul>
     </div>
   </section>
-  <section aria-labelledby="latest-work" class="bg-black">
+  <section aria-labelledby="latest-work" class="bg-band-dark">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-28">
-      <p class="font-subheading text-off-white">/ see our work in action</p>
-      <h2 id="latest-work" class="type-heading-2 mt-3 mb-10 text-white">Latest work</h2>
+      <p class="font-subheading text-body-on-dark">/ see our work in action</p>
+      <h2 id="latest-work" class="type-heading-2 mt-3 mb-10 text-inverse">Latest work</h2>
       <CaseStudyListing caseStudies={caseStudies} filters={['industry']} tone="dark" />
     </div>
   </section>

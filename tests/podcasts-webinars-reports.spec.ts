@@ -87,12 +87,13 @@ test.describe('Reports', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Reports');
   });
 
-  test('each Report card is a Black tile with an accent bar in its Pillar colour', async ({ page }) => {
+  test('each Report card is a tile filled with its Pillar accent, as on live', async ({ page }) => {
     await page.goto('/insights/reports/');
     const agile = main(page).locator('[data-component="report-card"]', { hasText: 'Agile Marketing' });
     await expect(agile).toHaveAttribute('href', '/reports/agile-marketing/');
-    await expect(agile).toHaveCSS('background-color', 'rgb(20, 30, 37)');
-    await expect(agile.locator('[data-accent-bar]')).toHaveCSS('background-color', 'rgb(255, 74, 125)');
+    // Marketing Engine's fill: live's Rose, darkened so white text passes AA (ADR-0006).
+    await expect(agile).toHaveAttribute('data-accent', 'marketing');
+    await expect(agile).toHaveCSS('background-color', 'rgb(211, 61, 104)');
     await expect(agile).toContainText('/ read report');
   });
 

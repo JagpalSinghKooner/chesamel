@@ -18,7 +18,7 @@ const { trail, band = false, class: className } = Astro.props;
 const last = trail.length - 1;
 ---
 
-<Breadcrumb aria-label="Breadcrumb" class:list={['type-caption lg:text-base', band && 'border-b border-light-grey', className]}>
+<Breadcrumb aria-label="Breadcrumb" class:list={['type-caption lg:text-base', band && 'border-b border-border bg-panel', className]}>
   {/* Text keeps the colour of whatever holds it (white on a dark hero). */}
   <BreadcrumbList class:list={['gap-2 text-[length:inherit] text-inherit sm:gap-2', band && 'mx-auto max-w-7xl px-5 py-4 sm:px-6 lg:py-5']}>
     {

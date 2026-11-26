@@ -3,25 +3,32 @@
 // watermark, as on the live site's heroes and calls to action. The paths are
 // the live site's animated-logo SVG.
 //
-// Permitted pairings only (guidelines page 9): Indigo rings on a light
-// background, white rings on Indigo or Black. The live site's pink, blue and
-// orange rings are Indigo here: secondary colours are for small accents only
-// (ADR-0002).
+// Colours are theme roles (ADR-0006), as on live: `on` names the background
+// the rings sit on, and `accent` draws them in a Pillar's accent instead, as
+// live's Pillar, Service and Insight heroes do (pink, blue, orange). The
+// brand palette keeps the guidelines' pairings (page 9): Indigo on light,
+// white on Indigo or Black.
 //
 // When the rings come into view they turn once in alternate directions and
 // then rest. The live rings turn for ever; stopping within 5 seconds means no
 // pause button is needed (WCAG 2.2.2). Under prefers-reduced-motion, or
 // without JavaScript, they stay still.
+import type { PillarAccent } from '../data/pillars';
+
 interface Props {
-  tone?: 'indigo' | 'white';
-  // Full strength, as on the live light heroes; otherwise a faint watermark.
-  solid?: boolean;
+  // light: a light hero (Contact)    brand: an Indigo hero
+  // dark: the call-to-action band    band: a dark band inside a page
+  on?: 'light' | 'brand' | 'dark' | 'band';
+  // A Pillar's accent, at full strength, in place of `on`'s colour.
+  accent?: PillarAccent;
   class?: string;
 }
-const { tone = 'indigo', solid = false, class: className } = Astro.props;
+const { on = 'light', accent, class: className } = Astro.props;
 const colours = {
-  indigo: solid ? 'text-indigo' : 'text-indigo/25',
-  white: solid ? 'text-white' : 'text-white/15',
+  light: 'text-rings-on-light',
+  brand: 'text-rings-on-indigo',
+  dark: 'text-rings-on-dark',
+  band: 'text-rings-on-band',
 };
 ---
 
@@ -32,14 +39,16 @@ const colours = {
   fill="none"
   stroke-width="35"
   stroke-linecap="round"
-  class:list={['brandmark-rings pointer-events-none', colours[tone], className]}
+  class:list={['brandmark-rings pointer-events-none', accent ? 'text-pillar' : colours[on], className]}
+  data-accent={accent}
+  data-rings={accent ?? on}
   data-component="brandmark-rings"
   data-motion
 >
-  <path class="ring-cw" stroke="currentColor" d="M600.145 834.816C640.666 819.674 678.074 798.149 711.145 771.464C802.017 698.14 860.145 585.858 860.145 460C860.145 239.086 681.058 60 460.145 60C239.231 60 60.1445 239.086 60.1445 460C60.1445 680.914 239.231 860 460.145 860C475.358 860 490.373 859.151 505.145 857.497" />
-  <path class="ring-cw" stroke="currentColor" d="M757.245 328.909C771.367 361.094 780.007 395.079 783.185 429.459C791.917 523.929 759.407 621.378 686.072 692.645C557.349 817.737 351.592 814.795 226.499 686.072C101.407 557.35 104.349 351.592 233.072 226.5C361.794 101.407 567.552 104.35 692.644 233.073C697.233 237.795 701.65 242.62 705.894 247.542" />
-  <path class="ring-ccw" stroke="currentColor" d="M394.946 218.012C261.58 253.747 182.434 390.832 218.17 524.198C253.905 657.565 390.989 736.71 524.356 700.975C657.722 665.239 736.868 528.155 701.133 394.789C680.773 318.808 627.519 260.425 560.798 230.859C536.516 220.099 510.451 213.156 483.539 210.569" />
-  <path class="ring-ccw" stroke="currentColor" d="M295.356 521.195C301.981 538.923 311.398 555.289 323.072 569.758C355.152 609.515 404.275 634.945 459.338 634.945C555.988 634.945 634.338 556.595 634.338 459.945C634.338 363.295 555.988 284.945 459.338 284.945C368.063 284.945 293.109 354.823 285.055 444" />
+  <path class="brandmark-cw" stroke="currentColor" d="M600.145 834.816C640.666 819.674 678.074 798.149 711.145 771.464C802.017 698.14 860.145 585.858 860.145 460C860.145 239.086 681.058 60 460.145 60C239.231 60 60.1445 239.086 60.1445 460C60.1445 680.914 239.231 860 460.145 860C475.358 860 490.373 859.151 505.145 857.497" />
+  <path class="brandmark-cw" stroke="currentColor" d="M757.245 328.909C771.367 361.094 780.007 395.079 783.185 429.459C791.917 523.929 759.407 621.378 686.072 692.645C557.349 817.737 351.592 814.795 226.499 686.072C101.407 557.35 104.349 351.592 233.072 226.5C361.794 101.407 567.552 104.35 692.644 233.073C697.233 237.795 701.65 242.62 705.894 247.542" />
+  <path class="brandmark-ccw" stroke="currentColor" d="M394.946 218.012C261.58 253.747 182.434 390.832 218.17 524.198C253.905 657.565 390.989 736.71 524.356 700.975C657.722 665.239 736.868 528.155 701.133 394.789C680.773 318.808 627.519 260.425 560.798 230.859C536.516 220.099 510.451 213.156 483.539 210.569" />
+  <path class="brandmark-ccw" stroke="currentColor" d="M295.356 521.195C301.981 538.923 311.398 555.289 323.072 569.758C355.152 609.515 404.275 634.945 459.338 634.945C555.988 634.945 634.338 556.595 634.338 459.945C634.338 363.295 555.988 284.945 459.338 284.945C368.063 284.945 293.109 354.823 285.055 444" />
 </svg>
 
 <style>
@@ -48,14 +57,14 @@ const colours = {
     transform-origin: center;
   }
   @media (prefers-reduced-motion: no-preference) {
-    .brandmark-rings[data-in-view] .ring-cw {
-      animation: ring-turn 4.5s cubic-bezier(0.25, 0.6, 0.3, 1) both;
+    .brandmark-rings[data-in-view] .brandmark-cw {
+      animation: brandmark-turn 4.5s cubic-bezier(0.25, 0.6, 0.3, 1) both;
     }
-    .brandmark-rings[data-in-view] .ring-ccw {
-      animation: ring-turn 4.5s cubic-bezier(0.25, 0.6, 0.3, 1) reverse both;
+    .brandmark-rings[data-in-view] .brandmark-ccw {
+      animation: brandmark-turn 4.5s cubic-bezier(0.25, 0.6, 0.3, 1) reverse both;
     }
   }
-  @keyframes ring-turn {
+  @keyframes brandmark-turn {
     from {
       transform: rotate(-360deg);
     }

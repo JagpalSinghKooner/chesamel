@@ -1,9 +1,10 @@
 ---
 // Case Study card, as on the live site (#42): horizontal from 768px, with the
 // image on the left third and the text on a white panel, at least 304px
-// tall, stacked with the image on top on phones. The main label is a tag outlined in its Pillar
-// accent (the live site fills it, which fails WCAG AA under white text:
-// ADR-0002), then the client when known, the title and an arrow box.
+// tall, stacked with the image on top on phones. The main label is a tag
+// filled with its Pillar accent under white text, as on live (the `-fill`
+// role, darkened to pass WCAG AA: ADR-0006), then the client when known, the
+// title and an arrow box.
 // Built on Fulldev's Card (ADR-0005).
 //
 // `isNew` adds the Indigo "New" badge the Our Work "Latest Work" slider shows
@@ -16,7 +17,6 @@ import { Card } from '@/components/ui/card';
 import Icon from './Icon.astro';
 import { focusOutline } from './button';
 import { brandCard } from './card';
-import { accentBorder, accentFillOnHover } from './accent';
 import { pillarLabels } from '../data/taxonomy';
 import { labelAccents } from '../data/pillars';
 import type { CaseStudySummary } from '../content/case-studies';
@@ -42,10 +42,11 @@ const dark = tone === 'dark';
   class:list={[
     brandCard,
     focusOutline,
-    'group h-full overflow-hidden border text-dark-grey md:min-h-76 md:flex-row',
-    dark ? 'border-dark-grey focus-visible:outline-white' : 'border-light-grey focus-visible:outline-indigo',
+    'group h-full overflow-hidden border text-body md:min-h-76 md:flex-row',
+    dark ? 'border-border-on-dark focus-visible:outline-inverse' : 'border-border focus-visible:outline-focus',
   ]}
   data-component="case-study-card"
+  data-accent={accent}
 >
   <div class="aspect-2/1 shrink-0 overflow-hidden md:aspect-auto md:w-1/3">
     <img
@@ -55,17 +56,17 @@ const dark = tone === 'dark';
       class="size-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
     />
   </div>
-  <div class="flex grow flex-col justify-between gap-20 bg-white p-7.5">
+  <div class="flex grow flex-col justify-between gap-20 bg-panel p-7.5">
     <div class="flex flex-wrap items-start gap-3">
-      {isNew && <span class="bg-indigo px-5 py-3 text-base leading-none font-medium text-white" data-new>New</span>}
-      <span class:list={['border px-5 py-3 text-base leading-none font-medium', accentBorder[accent]]} data-tag>{pillarLabels[label]}</span>
+      {isNew && <span class="bg-primary px-5 py-3 text-base leading-none font-medium text-inverse" data-new>New</span>}
+      <span class="border border-pillar-fill bg-pillar-fill px-5 py-3 text-base leading-none font-medium text-inverse" data-tag>{pillarLabels[label]}</span>
     </div>
     <div class="flex items-end justify-between gap-5">
       <div>
         {caseStudy.client && <p class="text-xl font-medium">/ {caseStudy.client}</p>}
-        <Heading class="mt-1 text-xl leading-tight font-semibold text-dark-grey">{caseStudy.title}</Heading>
+        <Heading class="mt-1 text-xl leading-tight font-semibold text-heading">{caseStudy.title}</Heading>
       </div>
-      <span aria-hidden="true" class:list={['hidden size-11 shrink-0 place-items-center bg-medium-grey/20 transition-colors duration-300 md:grid', accentFillOnHover[accent]]} data-arrow-box>
+      <span aria-hidden="true" class="hidden size-11 shrink-0 place-items-center bg-arrow-box-strong transition-colors duration-300 group-hover:bg-pillar group-focus-visible:bg-pillar md:grid" data-arrow-box>
         <Icon name="arrow-up-right" class="size-4 rtl:-scale-x-100" />
       </span>
     </div>
