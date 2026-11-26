@@ -1,6 +1,7 @@
 ---
 # Migrated by hand from the live page; `npm run import` doesn't touch it.
-# The offices come from src/content/offices/. The enquiry form arrives with #11.
+# The offices come from src/content/offices/. The enquiry form in the hero is
+# src/components/Form.astro, placed by src/layouts/SectionsPage.astro.
 title: Get in touch
 description: Get in touch with Chesamel for workforce solutions and business transformation services. Email us at enquiries@chesamel.com or call 0203 371 8331.
 hero:

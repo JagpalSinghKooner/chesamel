@@ -13,6 +13,8 @@ import Hero from '../components/Hero.astro';
 import ClientLogos from '../components/home/ClientLogos.astro';
 import PillarCards from '../components/PillarCards.astro';
 import CtaBlock from '../components/CtaBlock.astro';
+import Form from '../components/Form.astro';
+import ConnectWithUs from '../components/home/ConnectWithUs.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
 import BlogPostListing from '../components/BlogPostListing.astro';
 import { getBlogPosts, summarisePost } from '../content/blog';
@@ -396,6 +398,23 @@ const typeStyles = [
         },
       ]}
     />
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Contact form</h3>
+    <p class="type-body mx-auto mb-6 max-w-5xl px-6">
+      In the Contact hero. Each field is checked when it loses focus and again on submit; a valid submit shows the
+      success message and sends nothing yet (#48 sends it to HubSpot). Shown empty, with errors, and sent.
+    </p>
+    <div class="mx-auto grid max-w-5xl gap-4 px-6 lg:grid-cols-2" data-style-guide="contact-form">
+      <div class="bg-off-white p-6"><Form kind="contact" idPrefix="style-guide-contact" /></div>
+      <div class="bg-off-white p-6"><Form kind="contact" idPrefix="style-guide-contact-errors" preview="errors" /></div>
+      <div class="bg-off-white p-6"><Form kind="contact" idPrefix="style-guide-contact-success" preview="success" /></div>
+    </div>
+    <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Newsletter form</h3>
+    <p class="type-body mx-auto mb-6 max-w-5xl px-6">The newsletter band, then its form with errors, and sent.</p>
+    <ConnectWithUs idPrefix="style-guide-newsletter" />
+    <div class="mx-auto mt-4 grid max-w-5xl gap-4 px-6 lg:grid-cols-2" data-style-guide="newsletter-form">
+      <div class="bg-indigo p-6"><Form kind="newsletter" idPrefix="style-guide-newsletter-errors" preview="errors" /></div>
+      <div class="bg-indigo p-6"><Form kind="newsletter" idPrefix="style-guide-newsletter-success" preview="success" /></div>
+    </div>
     <h3 class="type-heading-3 mx-auto mt-12 mb-4 max-w-5xl px-6">Footer</h3>
     <Footer />
   </section>

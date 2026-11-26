@@ -6,6 +6,7 @@ import Base from './Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Sections from '../components/Sections.astro';
+import Form from '../components/Form.astro';
 import type { Page, Pillar, Service } from '../content/pages';
 
 interface Props {
@@ -24,7 +25,9 @@ const lightHero = entry.collection !== 'pages' || entry.id === 'contact' || entr
 ---
 
 <Base title={documentTitle ?? `${title} | Chesamel`} description={description ?? hero.paragraphs[0] ?? hero.subtitle}>
-  <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} faintRings={entry.id === 'contact'} />
+  <PageHero {...hero} tone={lightHero ? 'light' : 'indigo'} faintRings={entry.id === 'contact'}>
+    {entry.id === 'contact' && <Form slot="aside" kind="contact" />}
+  </PageHero>
   <Breadcrumb band trail={[...trail, { label: title }]} />
   <Sections sections={sections} hasBody={hasBody}><Content /></Sections>
 </Base>

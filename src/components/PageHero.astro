@@ -25,6 +25,9 @@ interface Props {
 }
 const { title, eyebrow, subtitle, paragraphs = [], details = [], links = [], tone = 'indigo', faintRings = false, headingLevel: Heading = 'h1' } = Astro.props;
 const indigo = tone === 'indigo';
+// The `aside` slot sits beside the text from 1024px, under it on smaller
+// screens: Contact's form.
+const hasAside = Astro.slots.has('aside');
 ---
 
 <section data-component="page-hero" data-tone={tone} class:list={['relative isolate overflow-hidden', indigo ? 'bg-indigo text-white' : 'bg-off-white']}>
@@ -33,7 +36,7 @@ const indigo = tone === 'indigo';
     solid={!indigo && !faintRings}
     class="absolute -end-32 -bottom-48 -z-10 size-96 opacity-90 sm:size-136 lg:-end-16 lg:-bottom-56 lg:size-176"
   />
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32">
+  <div class:list={['mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:py-32', hasAside && 'lg:grid lg:grid-cols-2 lg:items-center lg:gap-4']}>
     <div class="max-w-4xl">
       {eyebrow && <p class="font-subheading">{eyebrow}</p>}
       <Heading class:list={['type-heading-1 text-5xl sm:text-6xl lg:text-7xl', eyebrow && 'mt-3', indigo && 'text-white']}>{title}</Heading>
@@ -52,5 +55,6 @@ const indigo = tone === 'indigo';
         )
       }
     </div>
+    {hasAside && <div class="mt-12 lg:mt-0"><slot name="aside" /></div>}
   </div>
 </section>
